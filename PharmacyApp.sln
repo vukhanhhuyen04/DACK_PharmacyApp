@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyApp", "PharmacyApp\PharmacyApp.csproj", "{117FA48D-741D-488B-A57B-6B4D3826DE73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "PharmacyApp\GUI.csproj", "{117FA48D-741D-488B-A57B-6B4D3826DE73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{9481D306-65D2-4F4F-908C-AA440C0A9A1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{B206F992-0877-4709-957C-883B5C5A8523}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{117FA48D-741D-488B-A57B-6B4D3826DE73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{117FA48D-741D-488B-A57B-6B4D3826DE73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{117FA48D-741D-488B-A57B-6B4D3826DE73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9481D306-65D2-4F4F-908C-AA440C0A9A1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9481D306-65D2-4F4F-908C-AA440C0A9A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9481D306-65D2-4F4F-908C-AA440C0A9A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9481D306-65D2-4F4F-908C-AA440C0A9A1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B206F992-0877-4709-957C-883B5C5A8523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B206F992-0877-4709-957C-883B5C5A8523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B206F992-0877-4709-957C-883B5C5A8523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B206F992-0877-4709-957C-883B5C5A8523}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
