@@ -16,32 +16,32 @@ namespace PharmacyApp.Forms
         {
             InitializeComponent();
             this.AutoScaleMode = AutoScaleMode.Dpi;
-            flowLayoutPanel1.SizeChanged += (_, __) => CenterBrand();
-            flowLayoutPanel1.PerformLayout();
-          //  this.BeginInvoke((Action)(() => CenterBrand()));
-            btnSignUp.AutoRoundedCorners = false;
-            btnSignUp.Size = new Size(405, 50);
-            btnSignUp.Padding = new Padding(0, 3, 0, 1);
-            btnSignUp.TextOffset = new Point(0, 1);
+            //flowLayoutPanel1.SizeChanged += (_, __) => CenterBrand();
+         //   flowLayoutPanel1.PerformLayout();
+          ////  this.BeginInvoke((Action)(() => CenterBrand()));
+          //  btnSignUp.AutoRoundedCorners = false;
+          //  btnSignUp.Size = new Size(405, 50);
+          //  btnSignUp.Padding = new Padding(0, 3, 0, 1);
+          //  btnSignUp.TextOffset = new Point(0, 1);
 
             // 1) Flow host tự đo kích thước, không dùng size cố định
-            flowLayoutPanel1.AutoSize = true;
-            flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            flowLayoutPanel1.WrapContents = false;
-            flowLayoutPanel1.BackColor = Color.Transparent;
-            flowLayoutPanel1.Margin = new Padding(0);
-            flowLayoutPanel1.Padding = new Padding(0);
+            //flowLayoutPanel1.AutoSize = true;
+            //flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            //flowLayoutPanel1.WrapContents = false;
+            //flowLayoutPanel1.BackColor = Color.Transparent;
+            //flowLayoutPanel1.Margin = new Padding(0);
+            //flowLayoutPanel1.Padding = new Padding(0);
 
-            // 2) Hai label brand phải AutoSize
-            lblBrand.AutoSize = true;
-            lblBrandCare.AutoSize = true;
-            lblBrand.MaximumSize = new Size(0, 0);
-            lblBrandCare.MaximumSize = new Size(0, 0);
-            lblBrand.Margin = new Padding(0);
-            lblBrandCare.Margin = new Padding(0);
+            //// 2) Hai label brand phải AutoSize
+            //lblBrand.AutoSize = true;
+            //lblBrandCare.AutoSize = true;
+            //lblBrand.MaximumSize = new Size(0, 0);
+            //lblBrandCare.MaximumSize = new Size(0, 0);
+            //lblBrand.Margin = new Padding(0);
+            //lblBrandCare.Margin = new Padding(0);
 
-            // 3) Đặt flow lên trên mọi thứ trong card
-            flowLayoutPanel1.BringToFront();
+            //// 3) Đặt flow lên trên mọi thứ trong card
+            //flowLayoutPanel1.BringToFront();
 
             // Sóng ở sau – nội dung ở trước
             //shapeTop1.SendToBack();
@@ -65,10 +65,10 @@ namespace PharmacyApp.Forms
             lblBrandCare.BackColor = System.Drawing.Color.Transparent;
 
             // 2) Nút “Đăng kí” đủ cao và không hụt text
-            btnSignUp.AutoRoundedCorners = false;               // tránh bo góc làm hụt text
-            btnSignUp.Size = new System.Drawing.Size(405, 46);  // tăng chiều cao 44 -> 46 (hoặc 48)
-            btnSignUp.TextAlign = HorizontalAlignment.Center;
-            btnSignUp.TextOffset = new System.Drawing.Point(0, -1); // đẩy text lên 1px nếu thấy “đè”
+            //btnSignUp.AutoRoundedCorners = false;               // tránh bo góc làm hụt text
+            //btnSignUp.Size = new System.Drawing.Size(405, 46);  // tăng chiều cao 44 -> 46 (hoặc 48)
+            //btnSignUp.TextAlign = HorizontalAlignment.Center;
+            //btnSignUp.TextOffset = new System.Drawing.Point(0, -1); // đẩy text lên 1px nếu thấy “đè”
 
             // 3) LinkLabel đã AutoSize sẵn — canh giữa dưới nút
             linkLabel1.AutoSize = true;
@@ -79,21 +79,21 @@ namespace PharmacyApp.Forms
             //CenterLink();
             //this.Resize += (s, e) => { CenterBrand(); CenterLink(); };
         }
-        void CenterBrand()
-        {
-            var x = (card.ClientSize.Width - flowLayoutPanel1.Width) / 2;
-            var y = 20; // cách mép trên card 20px
-                        // chặn giá trị âm khi card nhỏ
-            if (x < 0) x = 0;
-            flowLayoutPanel1.Location = new Point(x, y);
-        }
+        //void CenterBrand()
+        //{
+        //    var x = (card.ClientSize.Width - //flowLayoutPanel1.Width) / 2;
+        //    var y = 20; // cách mép trên card 20px
+        //                // chặn giá trị âm khi card nhỏ
+        //    if (x < 0) x = 0;
+        //    flowLayoutPanel1.Location = new Point(x, y);
+        //}
 
 
 
 
         private void WireEvents()
         {
-            btnSignUp.Click += btnSignUp_Click;      // đảm bảo đã nối
+            btnSignUp1.Click += btnSignUp_Click;      // đảm bảo đã nối
             linkLabel1.Click += lnkLogin_Click;      // “Đăng nhập” 
         }
         private void lnkLogin_Click(object sender, EventArgs e)
@@ -101,22 +101,22 @@ namespace PharmacyApp.Forms
             this.DialogResult = DialogResult.Cancel; // hoặc OK, tuỳ bạn muốn xử lý gì ở Login
             this.Close();
         }
-        protected override void OnShown(EventArgs e)
-        {
-            base.OnShown(e);
+        //protected override void OnShown(EventArgs e)
+        //{
+        //    base.OnShown(e);
 
-            lblBrand.AutoSize = true;
-            lblBrandCare.AutoSize = true;
+        //    lblBrand.AutoSize = true;
+        //    lblBrandCare.AutoSize = true;
 
-            // canh giữa lần đầu
-            CenterBrand();
+        //    // canh giữa lần đầu
+        //    CenterBrand();
 
-            // canh lại mỗi khi kích thước thay đổi
-            this.Resize += (_, __) => CenterBrand();
-            card.SizeChanged += (_, __) => CenterBrand();
-            lblBrand.SizeChanged += (_, __) => CenterBrand();
-            lblBrandCare.SizeChanged += (_, __) => CenterBrand();
-        }
+        //    // canh lại mỗi khi kích thước thay đổi
+        //    this.Resize += (_, __) => CenterBrand();
+        //    card.SizeChanged += (_, __) => CenterBrand();
+        //    lblBrand.SizeChanged += (_, __) => CenterBrand();
+        //    lblBrandCare.SizeChanged += (_, __) => CenterBrand();
+        //}
 
         private void btnSignUp_Click(object sender, EventArgs e)
         {
@@ -190,6 +190,21 @@ namespace PharmacyApp.Forms
         }
 
         private void lblBrandCare_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblBrandCare_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblBrand_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSignUp_Click_1(object sender, EventArgs e)
         {
 
         }

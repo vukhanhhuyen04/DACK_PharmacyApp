@@ -260,9 +260,9 @@
             this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
             this.lblBrand.Location = new System.Drawing.Point(362, 557);
             this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(132, 52);
+            this.lblBrand.Size = new System.Drawing.Size(110, 52);
             this.lblBrand.TabIndex = 5;
-            this.lblBrand.Text = "pharma";
+            this.lblBrand.Text = "Eterna";
             // 
             // lblBrandCare
             // 
@@ -271,9 +271,9 @@
             this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
             this.lblBrandCare.Location = new System.Drawing.Point(491, 557);
             this.lblBrandCare.Name = "lblBrandCare";
-            this.lblBrandCare.Size = new System.Drawing.Size(73, 52);
+            this.lblBrandCare.Size = new System.Drawing.Size(79, 52);
             this.lblBrandCare.TabIndex = 6;
-            this.lblBrandCare.Text = "care";
+            this.lblBrandCare.Text = "Med";
             // 
             // borderlessForm
             // 

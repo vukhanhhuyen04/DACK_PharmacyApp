@@ -33,14 +33,9 @@
             this.shadow = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.shapeTop2 = new Guna.UI2.WinForms.Guna2Shapes();
             this.shapeTop3 = new Guna.UI2.WinForms.Guna2Shapes();
-            this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.sepTitle = new Guna.UI2.WinForms.Guna2Separator();
             this.card = new Guna.UI2.WinForms.Guna2Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblBrand = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblBrandCare = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.btnSignUp = new Guna.UI2.WinForms.Guna2Button();
             this.txtPass = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtNIC = new Guna.UI2.WinForms.Guna2TextBox();
@@ -51,8 +46,11 @@
             this.txtName = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnClose = new Guna.UI2.WinForms.Guna2ControlBox();
             this.btnMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.btnSignUp1 = new Guna.UI2.WinForms.Guna2Button();
+            this.lblBrand = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblBrandCare = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.card.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.grpRole.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +71,7 @@
             this.shapeTop2.PolygonSkip = 1;
             this.shapeTop2.Rotate = 0F;
             this.shapeTop2.Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse;
-            this.shapeTop2.Size = new System.Drawing.Size(1745, 420);
+            this.shapeTop2.Size = new System.Drawing.Size(1559, 420);
             this.shapeTop2.TabIndex = 4;
             this.shapeTop2.Text = "guna2Shapes3";
             this.shapeTop2.Zoom = 80;
@@ -90,27 +88,16 @@
             this.shapeTop3.PolygonSkip = 1;
             this.shapeTop3.Rotate = 0F;
             this.shapeTop3.Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse;
-            this.shapeTop3.Size = new System.Drawing.Size(1425, 270);
+            this.shapeTop3.Size = new System.Drawing.Size(1239, 270);
             this.shapeTop3.TabIndex = 5;
             this.shapeTop3.Text = "guna2Shapes3";
             this.shapeTop3.Zoom = 80;
             this.shapeTop3.Click += new System.EventHandler(this.guna2Shapes2_Click);
             // 
-            // lblTitle
-            // 
-            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(406, 88);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(128, 52);
-            this.lblTitle.TabIndex = 6;
-            this.lblTitle.Text = "Đăng kí";
-            // 
             // sepTitle
             // 
             this.sepTitle.FillColor = System.Drawing.Color.WhiteSmoke;
-            this.sepTitle.Location = new System.Drawing.Point(322, 146);
+            this.sepTitle.Location = new System.Drawing.Point(229, 146);
             this.sepTitle.Name = "sepTitle";
             this.sepTitle.Size = new System.Drawing.Size(300, 10);
             this.sepTitle.TabIndex = 7;
@@ -120,9 +107,10 @@
             this.card.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.card.BackColor = System.Drawing.Color.Transparent;
             this.card.BorderRadius = 10;
-            this.card.Controls.Add(this.flowLayoutPanel1);
+            this.card.Controls.Add(this.lblBrandCare);
+            this.card.Controls.Add(this.lblBrand);
             this.card.Controls.Add(this.linkLabel1);
-            this.card.Controls.Add(this.btnSignUp);
+            this.card.Controls.Add(this.btnSignUp1);
             this.card.Controls.Add(this.txtPass);
             this.card.Controls.Add(this.txtEmail);
             this.card.Controls.Add(this.txtNIC);
@@ -130,46 +118,12 @@
             this.card.Controls.Add(this.txtPhone);
             this.card.Controls.Add(this.txtName);
             this.card.FillColor = System.Drawing.Color.WhiteSmoke;
-            this.card.Location = new System.Drawing.Point(212, 193);
+            this.card.Location = new System.Drawing.Point(119, 193);
             this.card.Name = "card";
             this.card.ShadowDecoration.Enabled = true;
             this.card.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 6, 0, 12);
             this.card.Size = new System.Drawing.Size(520, 574);
             this.card.TabIndex = 8;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.lblBrand);
-            this.flowLayoutPanel1.Controls.Add(this.lblBrandCare);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(150, 39);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(220, 61);
-            this.flowLayoutPanel1.TabIndex = 12;
-            // 
-            // lblBrand
-            // 
-            this.lblBrand.AutoSize = false;
-            this.lblBrand.BackColor = System.Drawing.Color.Transparent;
-            this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
-            this.lblBrand.Location = new System.Drawing.Point(3, 3);
-            this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(135, 52);
-            this.lblBrand.TabIndex = 9;
-            this.lblBrand.Text = "pharma";
-            // 
-            // lblBrandCare
-            // 
-            this.lblBrandCare.AutoSize = false;
-            this.lblBrandCare.BackColor = System.Drawing.Color.Transparent;
-            this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.lblBrandCare.Location = new System.Drawing.Point(144, 3);
-            this.lblBrandCare.Name = "lblBrandCare";
-            this.lblBrandCare.Size = new System.Drawing.Size(73, 52);
-            this.lblBrandCare.TabIndex = 10;
-            this.lblBrandCare.Text = "care";
-            this.lblBrandCare.Click += new System.EventHandler(this.lblBrandCare_Click);
             // 
             // linkLabel1
             // 
@@ -181,22 +135,6 @@
             this.linkLabel1.TabIndex = 8;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Đăng nhập";
-            // 
-            // btnSignUp
-            // 
-            this.btnSignUp.BorderRadius = 6;
-            this.btnSignUp.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSignUp.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSignUp.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSignUp.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSignUp.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
-            this.btnSignUp.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSignUp.ForeColor = System.Drawing.Color.White;
-            this.btnSignUp.Location = new System.Drawing.Point(58, 478);
-            this.btnSignUp.Name = "btnSignUp";
-            this.btnSignUp.Size = new System.Drawing.Size(405, 44);
-            this.btnSignUp.TabIndex = 7;
-            this.btnSignUp.Text = "Đăng kí";
             // 
             // txtPass
             // 
@@ -359,7 +297,7 @@
             this.btnClose.FillColor = System.Drawing.Color.Transparent;
             this.btnClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
             this.btnClose.IconColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(880, 10);
+            this.btnClose.Location = new System.Drawing.Point(694, 10);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(35, 30);
             this.btnClose.TabIndex = 9;
@@ -371,22 +309,73 @@
             this.btnMinimize.FillColor = System.Drawing.Color.Transparent;
             this.btnMinimize.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
             this.btnMinimize.IconColor = System.Drawing.Color.White;
-            this.btnMinimize.Location = new System.Drawing.Point(829, 10);
+            this.btnMinimize.Location = new System.Drawing.Point(643, 10);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(35, 30);
             this.btnMinimize.TabIndex = 10;
             // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblTitle.Location = new System.Drawing.Point(306, 88);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(147, 50);
+            this.lblTitle.TabIndex = 11;
+            this.lblTitle.Text = "Đăng kí";
+            // 
+            // btnSignUp1
+            // 
+            this.btnSignUp1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSignUp1.BorderRadius = 6;
+            this.btnSignUp1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSignUp1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSignUp1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSignUp1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSignUp1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
+            this.btnSignUp1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSignUp1.ForeColor = System.Drawing.Color.White;
+            this.btnSignUp1.Location = new System.Drawing.Point(58, 478);
+            this.btnSignUp1.Name = "btnSignUp1";
+            this.btnSignUp1.Size = new System.Drawing.Size(405, 43);
+            this.btnSignUp1.TabIndex = 7;
+            this.btnSignUp1.Text = "Đăng kí";
+            // 
+            // lblBrand
+            // 
+            this.lblBrand.BackColor = System.Drawing.Color.Transparent;
+            this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
+            this.lblBrand.Location = new System.Drawing.Point(164, 24);
+            this.lblBrand.Name = "lblBrand";
+            this.lblBrand.Size = new System.Drawing.Size(110, 52);
+            this.lblBrand.TabIndex = 12;
+            this.lblBrand.Text = "Eterna";
+            // 
+            // lblBrandCare
+            // 
+            this.lblBrandCare.BackColor = System.Drawing.Color.Transparent;
+            this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
+            this.lblBrandCare.Location = new System.Drawing.Point(275, 24);
+            this.lblBrandCare.Name = "lblBrandCare";
+            this.lblBrandCare.Size = new System.Drawing.Size(79, 52);
+            this.lblBrandCare.TabIndex = 13;
+            this.lblBrandCare.Text = "Med";
+            // 
             // FrmRegister
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(22)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(945, 855);
+            this.ClientSize = new System.Drawing.Size(759, 855);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.card);
             this.Controls.Add(this.sepTitle);
-            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.shapeTop3);
             this.Controls.Add(this.shapeTop2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -395,7 +384,7 @@
             this.Text = "Sign Up";
             this.Load += new System.EventHandler(this.FrmRegister_Load);
             this.card.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.card.PerformLayout();
             this.grpRole.ResumeLayout(false);
             this.grpRole.PerformLayout();
             this.ResumeLayout(false);
@@ -410,22 +399,21 @@
         private Guna.UI2.WinForms.Guna2Shapes shapeTop3;
         private Guna.UI2.WinForms.Guna2Shapes shapeTop2;
         private Guna.UI2.WinForms.Guna2Separator sepTitle;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTitle;
         private Guna.UI2.WinForms.Guna2Panel card;
         private Guna.UI2.WinForms.Guna2TextBox txtPhone;
         private Guna.UI2.WinForms.Guna2TextBox txtName;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblBrand;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblBrandCare;
         private Guna.UI2.WinForms.Guna2GroupBox grpRole;
         private Guna.UI2.WinForms.Guna2RadioButton rdoAdmin;
         private Guna.UI2.WinForms.Guna2RadioButton rdoPharmacist;
         private Guna.UI2.WinForms.Guna2TextBox txtPass;
         private Guna.UI2.WinForms.Guna2TextBox txtEmail;
         private Guna.UI2.WinForms.Guna2TextBox txtNIC;
-        private Guna.UI2.WinForms.Guna2Button btnSignUp;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private Guna.UI2.WinForms.Guna2ControlBox btnMinimize;
         private Guna.UI2.WinForms.Guna2ControlBox btnClose;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label lblTitle;
+        private Guna.UI2.WinForms.Guna2Button btnSignUp1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblBrand;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblBrandCare;
     }
 }
