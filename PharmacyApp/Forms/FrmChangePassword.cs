@@ -36,5 +36,10 @@ namespace PharmacyApp.Forms
         {
 
         }
+
+        private void card_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

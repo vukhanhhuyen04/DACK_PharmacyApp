@@ -35,7 +35,10 @@
             this.shapeTop3 = new Guna.UI2.WinForms.Guna2Shapes();
             this.sepTitle = new Guna.UI2.WinForms.Guna2Separator();
             this.card = new Guna.UI2.WinForms.Guna2Panel();
+            this.lblBrandCare = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblBrand = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.btnSignUp1 = new Guna.UI2.WinForms.Guna2Button();
             this.txtPass = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtNIC = new Guna.UI2.WinForms.Guna2TextBox();
@@ -47,9 +50,6 @@
             this.btnClose = new Guna.UI2.WinForms.Guna2ControlBox();
             this.btnMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnSignUp1 = new Guna.UI2.WinForms.Guna2Button();
-            this.lblBrand = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblBrandCare = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.card.SuspendLayout();
             this.grpRole.SuspendLayout();
             this.SuspendLayout();
@@ -97,7 +97,7 @@
             // sepTitle
             // 
             this.sepTitle.FillColor = System.Drawing.Color.WhiteSmoke;
-            this.sepTitle.Location = new System.Drawing.Point(229, 146);
+            this.sepTitle.Location = new System.Drawing.Point(229, 162);
             this.sepTitle.Name = "sepTitle";
             this.sepTitle.Size = new System.Drawing.Size(300, 10);
             this.sepTitle.TabIndex = 7;
@@ -125,6 +125,28 @@
             this.card.Size = new System.Drawing.Size(520, 574);
             this.card.TabIndex = 8;
             // 
+            // lblBrandCare
+            // 
+            this.lblBrandCare.BackColor = System.Drawing.Color.Transparent;
+            this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
+            this.lblBrandCare.Location = new System.Drawing.Point(275, 24);
+            this.lblBrandCare.Name = "lblBrandCare";
+            this.lblBrandCare.Size = new System.Drawing.Size(79, 52);
+            this.lblBrandCare.TabIndex = 13;
+            this.lblBrandCare.Text = "Med";
+            // 
+            // lblBrand
+            // 
+            this.lblBrand.BackColor = System.Drawing.Color.Transparent;
+            this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
+            this.lblBrand.Location = new System.Drawing.Point(164, 24);
+            this.lblBrand.Name = "lblBrand";
+            this.lblBrand.Size = new System.Drawing.Size(110, 52);
+            this.lblBrand.TabIndex = 12;
+            this.lblBrand.Text = "Eterna";
+            // 
             // linkLabel1
             // 
             this.linkLabel1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -135,6 +157,24 @@
             this.linkLabel1.TabIndex = 8;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Đăng nhập";
+            // 
+            // btnSignUp1
+            // 
+            this.btnSignUp1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSignUp1.BorderRadius = 6;
+            this.btnSignUp1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSignUp1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSignUp1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSignUp1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSignUp1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
+            this.btnSignUp1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSignUp1.ForeColor = System.Drawing.Color.White;
+            this.btnSignUp1.Location = new System.Drawing.Point(58, 478);
+            this.btnSignUp1.Name = "btnSignUp1";
+            this.btnSignUp1.Size = new System.Drawing.Size(405, 43);
+            this.btnSignUp1.TabIndex = 7;
+            this.btnSignUp1.Text = "Đăng kí";
             // 
             // txtPass
             // 
@@ -297,7 +337,7 @@
             this.btnClose.FillColor = System.Drawing.Color.Transparent;
             this.btnClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
             this.btnClose.IconColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(694, 10);
+            this.btnClose.Location = new System.Drawing.Point(712, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(35, 30);
             this.btnClose.TabIndex = 9;
@@ -309,7 +349,7 @@
             this.btnMinimize.FillColor = System.Drawing.Color.Transparent;
             this.btnMinimize.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
             this.btnMinimize.IconColor = System.Drawing.Color.White;
-            this.btnMinimize.Location = new System.Drawing.Point(643, 10);
+            this.btnMinimize.Location = new System.Drawing.Point(671, 12);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(35, 30);
             this.btnMinimize.TabIndex = 10;
@@ -318,52 +358,13 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lblTitle.Location = new System.Drawing.Point(306, 88);
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Location = new System.Drawing.Point(306, 96);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(147, 50);
             this.lblTitle.TabIndex = 11;
             this.lblTitle.Text = "Đăng kí";
-            // 
-            // btnSignUp1
-            // 
-            this.btnSignUp1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSignUp1.BorderRadius = 6;
-            this.btnSignUp1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSignUp1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSignUp1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSignUp1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSignUp1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
-            this.btnSignUp1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSignUp1.ForeColor = System.Drawing.Color.White;
-            this.btnSignUp1.Location = new System.Drawing.Point(58, 478);
-            this.btnSignUp1.Name = "btnSignUp1";
-            this.btnSignUp1.Size = new System.Drawing.Size(405, 43);
-            this.btnSignUp1.TabIndex = 7;
-            this.btnSignUp1.Text = "Đăng kí";
-            // 
-            // lblBrand
-            // 
-            this.lblBrand.BackColor = System.Drawing.Color.Transparent;
-            this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
-            this.lblBrand.Location = new System.Drawing.Point(164, 24);
-            this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(110, 52);
-            this.lblBrand.TabIndex = 12;
-            this.lblBrand.Text = "Eterna";
-            // 
-            // lblBrandCare
-            // 
-            this.lblBrandCare.BackColor = System.Drawing.Color.Transparent;
-            this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.lblBrandCare.Location = new System.Drawing.Point(275, 24);
-            this.lblBrandCare.Name = "lblBrandCare";
-            this.lblBrandCare.Size = new System.Drawing.Size(79, 52);
-            this.lblBrandCare.TabIndex = 13;
-            this.lblBrandCare.Text = "Med";
+            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // FrmRegister
             // 

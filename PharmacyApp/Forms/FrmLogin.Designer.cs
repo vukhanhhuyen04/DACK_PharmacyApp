@@ -61,7 +61,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Shapes1.BorderThickness = 0;
             this.guna2Shapes1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(179)))), ((int)(((byte)(230)))));
-            this.guna2Shapes1.Location = new System.Drawing.Point(-70, -360);
+            this.guna2Shapes1.Location = new System.Drawing.Point(-69, -359);
+            this.guna2Shapes1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Shapes1.Name = "guna2Shapes1";
             this.guna2Shapes1.PolygonSkip = 1;
             this.guna2Shapes1.Rotate = 0F;
@@ -78,11 +79,12 @@
             this.guna2Shapes2.BorderThickness = 0;
             this.guna2Shapes2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(99)))), ((int)(((byte)(167)))));
             this.guna2Shapes2.Location = new System.Drawing.Point(-120, -300);
+            this.guna2Shapes2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Shapes2.Name = "guna2Shapes2";
             this.guna2Shapes2.PolygonSkip = 1;
             this.guna2Shapes2.Rotate = 0F;
             this.guna2Shapes2.Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse;
-            this.guna2Shapes2.Size = new System.Drawing.Size(1745, 440);
+            this.guna2Shapes2.Size = new System.Drawing.Size(1745, 441);
             this.guna2Shapes2.TabIndex = 1;
             this.guna2Shapes2.Text = "guna2Shapes2";
             this.guna2Shapes2.Zoom = 80;
@@ -94,6 +96,7 @@
             this.guna2Shapes3.BorderThickness = 0;
             this.guna2Shapes3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(99)))), ((int)(((byte)(167)))));
             this.guna2Shapes3.Location = new System.Drawing.Point(-120, -270);
+            this.guna2Shapes3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Shapes3.Name = "guna2Shapes3";
             this.guna2Shapes3.PolygonSkip = 1;
             this.guna2Shapes3.Rotate = 0F;
@@ -102,6 +105,7 @@
             this.guna2Shapes3.TabIndex = 2;
             this.guna2Shapes3.Text = "guna2Shapes3";
             this.guna2Shapes3.Zoom = 80;
+            this.guna2Shapes3.Click += new System.EventHandler(this.guna2Shapes3_Click);
             // 
             // lblTitle
             // 
@@ -110,6 +114,7 @@
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(380, 100);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(184, 52);
             this.lblTitle.TabIndex = 3;
@@ -119,7 +124,8 @@
             // sepTitle
             // 
             this.sepTitle.FillColor = System.Drawing.Color.WhiteSmoke;
-            this.sepTitle.Location = new System.Drawing.Point(322, 169);
+            this.sepTitle.Location = new System.Drawing.Point(323, 167);
+            this.sepTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.sepTitle.Name = "sepTitle";
             this.sepTitle.Size = new System.Drawing.Size(300, 2);
             this.sepTitle.TabIndex = 4;
@@ -136,10 +142,11 @@
             this.card.Controls.Add(this.txtEmail);
             this.card.FillColor = System.Drawing.Color.WhiteSmoke;
             this.card.Location = new System.Drawing.Point(212, 193);
+            this.card.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.card.Name = "card";
             this.card.ShadowDecoration.Enabled = true;
             this.card.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 6, 0, 12);
-            this.card.Size = new System.Drawing.Size(520, 312);
+            this.card.Size = new System.Drawing.Size(520, 313);
             this.card.TabIndex = 5;
             // 
             // btnLogin
@@ -152,7 +159,8 @@
             this.btnLogin.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(58, 211);
+            this.btnLogin.Location = new System.Drawing.Point(59, 210);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(405, 44);
             this.btnLogin.TabIndex = 3;
@@ -167,7 +175,8 @@
             this.chkRemember.CheckedState.BorderThickness = 0;
             this.chkRemember.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.chkRemember.ForeColor = System.Drawing.Color.DimGray;
-            this.chkRemember.Location = new System.Drawing.Point(204, 169);
+            this.chkRemember.Location = new System.Drawing.Point(204, 176);
+            this.chkRemember.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkRemember.Name = "chkRemember";
             this.chkRemember.Size = new System.Drawing.Size(121, 20);
             this.chkRemember.TabIndex = 2;
@@ -176,6 +185,7 @@
             this.chkRemember.UncheckedState.BorderRadius = 0;
             this.chkRemember.UncheckedState.BorderThickness = 0;
             this.chkRemember.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.chkRemember.CheckedChanged += new System.EventHandler(this.chkRemember_CheckedChanged);
             // 
             // txtPassword
             // 
@@ -190,7 +200,7 @@
             this.txtPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtPassword.Location = new System.Drawing.Point(58, 119);
+            this.txtPassword.Location = new System.Drawing.Point(59, 119);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
@@ -212,7 +222,7 @@
             this.txtEmail.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtEmail.Location = new System.Drawing.Point(58, 43);
+            this.txtEmail.Location = new System.Drawing.Point(59, 43);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.PlaceholderText = "Email của bạn";
@@ -225,7 +235,8 @@
             this.lnkSignUp.BackColor = System.Drawing.Color.Transparent;
             this.lnkSignUp.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnkSignUp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.lnkSignUp.Location = new System.Drawing.Point(270, 526);
+            this.lnkSignUp.Location = new System.Drawing.Point(269, 526);
+            this.lnkSignUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lnkSignUp.Name = "lnkSignUp";
             this.lnkSignUp.Size = new System.Drawing.Size(66, 25);
             this.lnkSignUp.TabIndex = 5;
@@ -237,6 +248,7 @@
             this.lnkForgot.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnkForgot.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
             this.lnkForgot.Location = new System.Drawing.Point(416, 526);
+            this.lnkForgot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lnkForgot.Name = "lnkForgot";
             this.lnkForgot.Size = new System.Drawing.Size(126, 25);
             this.lnkForgot.TabIndex = 6;
@@ -248,6 +260,7 @@
             this.lnkHelp.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnkHelp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
             this.lnkHelp.Location = new System.Drawing.Point(595, 526);
+            this.lnkHelp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lnkHelp.Name = "lnkHelp";
             this.lnkHelp.Size = new System.Drawing.Size(80, 25);
             this.lnkHelp.TabIndex = 7;
@@ -258,7 +271,8 @@
             this.lblBrand.BackColor = System.Drawing.Color.Transparent;
             this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
-            this.lblBrand.Location = new System.Drawing.Point(362, 557);
+            this.lblBrand.Location = new System.Drawing.Point(380, 558);
+            this.lblBrand.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblBrand.Name = "lblBrand";
             this.lblBrand.Size = new System.Drawing.Size(110, 52);
             this.lblBrand.TabIndex = 5;
@@ -269,7 +283,8 @@
             this.lblBrandCare.BackColor = System.Drawing.Color.Transparent;
             this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.lblBrandCare.Location = new System.Drawing.Point(491, 557);
+            this.lblBrandCare.Location = new System.Drawing.Point(488, 558);
+            this.lblBrandCare.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblBrandCare.Name = "lblBrandCare";
             this.lblBrandCare.Size = new System.Drawing.Size(79, 52);
             this.lblBrandCare.TabIndex = 6;
@@ -289,7 +304,8 @@
             this.btnMinimize.FillColor = System.Drawing.Color.Transparent;
             this.btnMinimize.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
             this.btnMinimize.IconColor = System.Drawing.Color.White;
-            this.btnMinimize.Location = new System.Drawing.Point(829, 10);
+            this.btnMinimize.Location = new System.Drawing.Point(857, 10);
+            this.btnMinimize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(35, 30);
             this.btnMinimize.TabIndex = 11;
@@ -300,7 +316,8 @@
             this.btnClose.FillColor = System.Drawing.Color.Transparent;
             this.btnClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
             this.btnClose.IconColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(880, 10);
+            this.btnClose.Location = new System.Drawing.Point(898, 10);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(35, 30);
             this.btnClose.TabIndex = 12;
@@ -325,6 +342,7 @@
             this.Controls.Add(this.guna2Shapes2);
             this.Controls.Add(this.guna2Shapes1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.FrmLogin_Load);

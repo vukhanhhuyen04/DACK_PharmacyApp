@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PharmacyApp.Forms
@@ -16,66 +11,107 @@ namespace PharmacyApp.Forms
         {
             InitializeComponent();
 
-            lnkSignUp.AutoSize = true;
-            lnkForgot.AutoSize = true;
-            lnkHelp.AutoSize = true;
-            lblBrand.AutoSize = true;
-            lblBrandCare.AutoSize = true;
-            // bỏ mọi giới hạn width/height (nếu có)
-            lnkSignUp.MaximumSize = new System.Drawing.Size(0, 0);
-            lnkForgot.MaximumSize = new System.Drawing.Size(0, 0);
-            lnkHelp.MaximumSize = new System.Drawing.Size(0, 0);
-            lblBrand.MaximumSize = new System.Drawing.Size(0, 0);
-            lblBrandCare.MaximumSize = new System.Drawing.Size(0, 0);
-
-            CenterBrand();
-            this.Resize += (s, e) => CenterBrand();
-
-            // canh giữa theo Form
-            void CenterLinks()
-            {
-                int totalWidth = lnkSignUp.Width + 12 + lnkForgot.Width + 12 + lnkHelp.Width;
-                int startX = (this.ClientSize.Width - totalWidth) / 2;
-                int y = card.Bottom + 20;
-
-                lnkSignUp.Location = new System.Drawing.Point(startX, y);
-                lnkForgot.Location = new System.Drawing.Point(lnkSignUp.Right + 12, y);
-                lnkHelp.Location = new System.Drawing.Point(lnkForgot.Right + 12, y);
-            }
-
-            CenterLinks();
-            this.Resize += (s, e) => CenterLinks();
+            // Các thiết lập an toàn cho Designer (không dùng null-forgiving, không C# 8)
+            if (lnkSignUp != null) { lnkSignUp.AutoSize = true; lnkSignUp.MaximumSize = new Size(0, 0); }
+            if (lnkForgot != null) { lnkForgot.AutoSize = true; lnkForgot.MaximumSize = new Size(0, 0); }
+            if (lnkHelp != null) { lnkHelp.AutoSize = true; lnkHelp.MaximumSize = new Size(0, 0); }
+            if (lblBrand != null) { lblBrand.AutoSize = true; lblBrand.MaximumSize = new Size(0, 0); }
+            if (lblBrandCare != null) { lblBrandCare.AutoSize = true; lblBrandCare.MaximumSize = new Size(0, 0); }
+            if (lblTitle != null) { lblTitle.AutoSize = true; lblTitle.MaximumSize = new Size(0, 0); }
 
             WireEvents();
-            this.AcceptButton = btnLogin;   // Enter = Login
-            lblTitle.AutoSize = true;             // đảm bảo tự nới kích thước
-            lblTitle.MaximumSize = new System.Drawing.Size(0, 0); // bỏ giới hạn width
-        }
-        private void CenterBrand()
-        {
-            int gap = 0; // nếu muốn cách 4–8 px: gap = 6;
-            int total = lblBrand.Width + gap + lblBrandCare.Width;
-            int x = (this.ClientSize.Width - total) / 2;
-            int y = lblBrand.Top; // hoặc: y = this.ClientSize.Height - 96;
 
-            lblBrand.Location = new System.Drawing.Point(x, y);
-            lblBrandCare.Location = new System.Drawing.Point(lblBrand.Right + gap, y);
+            // Khi mở trong Designer thì dừng tại đây để tránh lỗi preview
+            if (IsInDesigner()) return;
+
+            // Canh giữa sau khi form hiện và khi resize
+            this.Shown += delegate { CenterBrand(); CenterLinks(); };
+            this.Resize += delegate { CenterBrand(); CenterLinks(); };
         }
+
+        // Nhận biết đang ở Design-time (C# 7.3)
+        private bool IsInDesigner()
+        {
+            return DesignMode || LicenseManager.UsageMode == LicenseUsageMode.Designtime;
+        }
+
         private void WireEvents()
         {
-            lnkSignUp.Click += lnkSignUp_Click;
-            lnkForgot.Click += lnkForgot_Click;
-            lnkHelp.Click += lnkHelp_Click;
-            // btnLogin.Click đã nối sẵn trong Designer
-        }
-        private void sepTitle_Click(object sender, EventArgs e)
-        {
-
+            if (lnkSignUp != null) lnkSignUp.Click += lnkSignUp_Click;
+            if (lnkForgot != null) lnkForgot.Click += lnkForgot_Click;
+            if (lnkHelp != null) lnkHelp.Click += lnkHelp_Click;
+            if (btnLogin != null) this.AcceptButton = btnLogin; // Enter = Login
         }
 
-        private void txtPassword_TextChanged(object sender, EventArgs e)
+        // ---------- Căn giữa logo ----------
+        private void CenterBrand()
         {
+            if (lblBrand == null || lblBrandCare == null) return;
 
+            int gap = 0;
+            int total = Math.Max(0, lblBrand.Width) + gap + Math.Max(0, lblBrandCare.Width);
+            int x = (this.ClientSize.Width - total) / 2;
+            if (x < 0) x = 0;
+            int y = lblBrand.Top;
+
+            lblBrand.Location = new Point(x, y);
+            lblBrandCare.Location = new Point(lblBrand.Right + gap, y);
+        }
+
+        // ---------- Căn giữa 3 link dưới card ----------
+        private void CenterLinks()
+        {
+            if (lnkSignUp == null || lnkForgot == null || lnkHelp == null || card == null) return;
+
+            int gap = 12;
+            int totalWidth =
+                Math.Max(0, lnkSignUp.Width) +
+                gap +
+                Math.Max(0, lnkForgot.Width) +
+                gap +
+                Math.Max(0, lnkHelp.Width);
+
+            int startX = (this.ClientSize.Width - totalWidth) / 2;
+            if (startX < 0) startX = 0;
+            int y = card.Bottom + 20;
+
+            lnkSignUp.Location = new Point(startX, y);
+            lnkForgot.Location = new Point(lnkSignUp.Right + gap, y);
+            lnkHelp.Location = new Point(lnkForgot.Right + gap, y);
+        }
+
+        // ---------- Handlers UI (an toàn cho Designer) ----------
+        private void sepTitle_Click(object sender, EventArgs e) { }
+        private void txtPassword_TextChanged(object sender, EventArgs e) { }
+        private void FrmLogin_Load(object sender, EventArgs e) { }
+
+        // Designer báo thiếu: thêm stub cho sự kiện này
+        private void guna2Shapes3_Click(object sender, EventArgs e) { }
+
+        private void lnkSignUp_Click(object sender, EventArgs e)
+        {
+            using (var reg = new FrmRegister())
+            {
+                reg.StartPosition = FormStartPosition.CenterParent;
+                reg.ShowInTaskbar = false;
+                var result = reg.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    // txtEmail.Text = reg.RegisteredEmail; // nếu sau này có expose property
+                }
+            }
+        }
+
+        private void lnkForgot_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tính năng Quên mật khẩu sẽ được bổ sung.", "Thông báo",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void lnkHelp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Liên hệ quản trị viên hoặc bộ phận hỗ trợ.", "Trợ giúp",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -89,6 +125,7 @@ namespace PharmacyApp.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             try
             {
                 using (var conn = new System.Data.SqlClient.SqlConnection(Program.ConnStr))
@@ -106,13 +143,10 @@ namespace PharmacyApp.Forms
                             string fullName = reader["FullName"].ToString();
                             string role = reader["Role"].ToString();
 
-                            MessageBox.Show($"Xin chào {fullName} ({role})!", "Đăng nhập thành công",
+                            MessageBox.Show(
+                                string.Format("Xin chào {0} ({1})!", fullName, role),
+                                "Đăng nhập thành công",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            // Mở form chính nếu có
-                            // this.Hide();
-                            // new FrmMain().ShowDialog();
-                            // this.Close();
                         }
                         else
                         {
@@ -127,40 +161,11 @@ namespace PharmacyApp.Forms
                 MessageBox.Show("Lỗi: " + ex.Message, "Đăng nhập thất bại",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        
-        }
-        private void lnkSignUp_Click(object sender, EventArgs e)
-        {
-            using (var reg = new FrmRegister())
-            {
-                reg.StartPosition = FormStartPosition.CenterParent;
-                reg.ShowInTaskbar = false;              // gọn taskbar
-                var result = reg.ShowDialog(this);      // MỞ DẠNG MODAL - KHÔNG Hide login
-
-                if (result == DialogResult.OK)
-                {
-                    // (tuỳ chọn) điền sẵn email vừa đăng ký
-                    // txtEmail.Text = reg.RegisteredEmail;
-                }
-            }
         }
 
-        private void lnkForgot_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Tính năng Quên mật khẩu sẽ được bổ sung.", "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void lnkHelp_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Liên hệ quản trị viên hoặc bộ phận hỗ trợ.", "Trợ giúp",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-
-        private void FrmLogin_Load(object sender, EventArgs e)
+        private void chkRemember_CheckedChanged(object sender, EventArgs e)
         {
 
         }
-
     }
 }

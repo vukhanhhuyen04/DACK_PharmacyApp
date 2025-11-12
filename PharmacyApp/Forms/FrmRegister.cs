@@ -169,6 +169,7 @@ namespace PharmacyApp.Forms
         //    CenterLink();
         //    this.Resize += (s, _) => { CenterBrand(); CenterLink(); };
         //}
+        private void lblTitle_Click(object sender, EventArgs e) { }
         private void guna2Shapes1_Click(object sender, EventArgs e)
         {
 
