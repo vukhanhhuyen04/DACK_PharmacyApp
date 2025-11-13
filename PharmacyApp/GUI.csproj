@@ -99,6 +99,30 @@
     <Compile Include="UserControls\UC_Catalog.Designer.cs">
       <DependentUpon>UC_Catalog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UC_Dashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_Dashboard.Designer.cs">
+      <DependentUpon>UC_Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UC_POS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_POS.Designer.cs">
+      <DependentUpon>UC_POS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UC_Report.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_Report.Designer.cs">
+      <DependentUpon>UC_Report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UC_Staff.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_Staff.Designer.cs">
+      <DependentUpon>UC_Staff.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UC_Warehouse.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -132,6 +156,15 @@
     </Compile>
     <EmbeddedResource Include="UserControls\UC_Catalog.resx">
       <DependentUpon>UC_Catalog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_POS.resx">
+      <DependentUpon>UC_POS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Report.resx">
+      <DependentUpon>UC_Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Staff.resx">
+      <DependentUpon>UC_Staff.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_Warehouse.resx">
       <DependentUpon>UC_Warehouse.cs</DependentUpon>

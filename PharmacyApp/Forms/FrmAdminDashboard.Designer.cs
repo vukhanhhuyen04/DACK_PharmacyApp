@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pTop = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblBrandCare = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblBrand = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
@@ -77,6 +77,7 @@
             this.value1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.title1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.cap1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnPOS = new Guna.UI2.WinForms.Guna2Button();
             this.pTop.SuspendLayout();
             this.pSide.SuspendLayout();
             this.pContent.SuspendLayout();
@@ -98,7 +99,7 @@
             // 
             // pTop
             // 
-            this.pTop.Controls.Add(this.guna2HtmlLabel1);
+            this.pTop.Controls.Add(this.lblBrandCare);
             this.pTop.Controls.Add(this.lblBrand);
             this.pTop.Controls.Add(this.lblUserName);
             this.pTop.Controls.Add(this.btnLogout);
@@ -112,16 +113,17 @@
             this.pTop.Size = new System.Drawing.Size(1209, 69);
             this.pTop.TabIndex = 0;
             // 
-            // guna2HtmlLabel1
+            // lblBrandCare
             // 
-            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(121, -1);
-            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(79, 52);
-            this.guna2HtmlLabel1.TabIndex = 14;
-            this.guna2HtmlLabel1.Text = "Med";
+            this.lblBrandCare.BackColor = System.Drawing.Color.Transparent;
+            this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
+            this.lblBrandCare.Location = new System.Drawing.Point(121, -1);
+            this.lblBrandCare.Name = "lblBrandCare";
+            this.lblBrandCare.Size = new System.Drawing.Size(79, 52);
+            this.lblBrandCare.TabIndex = 14;
+            this.lblBrandCare.Text = "Med";
+            this.lblBrandCare.Click += new System.EventHandler(this.lblBrandCare_Click);
             // 
             // lblBrand
             // 
@@ -133,6 +135,7 @@
             this.lblBrand.Size = new System.Drawing.Size(110, 52);
             this.lblBrand.TabIndex = 13;
             this.lblBrand.Text = "Eterna";
+            this.lblBrand.Click += new System.EventHandler(this.lblBrand_Click);
             // 
             // lblUserName
             // 
@@ -217,6 +220,7 @@
             // 
             // pSide
             // 
+            this.pSide.Controls.Add(this.btnPOS);
             this.pSide.Controls.Add(this.btnProfile);
             this.pSide.Controls.Add(this.btnInventory);
             this.pSide.Controls.Add(this.btnRevenue);
@@ -340,6 +344,7 @@
             this.pContent.Controls.Add(this.row2);
             this.pContent.Controls.Add(this.row1);
             this.pContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pContent.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.pContent.Location = new System.Drawing.Point(200, 69);
             this.pContent.Name = "pContent";
             this.pContent.Padding = new System.Windows.Forms.Padding(18);
@@ -381,17 +386,17 @@
             // 
             // chartSales
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chartSales.ChartAreas.Add(chartArea6);
+            chartArea4.Name = "ChartArea1";
+            this.chartSales.ChartAreas.Add(chartArea4);
             this.chartSales.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend6.Name = "Legend1";
-            this.chartSales.Legends.Add(legend6);
+            legend4.Name = "Legend1";
+            this.chartSales.Legends.Add(legend4);
             this.chartSales.Location = new System.Drawing.Point(12, 39);
             this.chartSales.Name = "chartSales";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Sales";
-            this.chartSales.Series.Add(series6);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Sales";
+            this.chartSales.Series.Add(series4);
             this.chartSales.Size = new System.Drawing.Size(446, 277);
             this.chartSales.TabIndex = 14;
             this.chartSales.Text = "chart1";
@@ -405,7 +410,7 @@
             this.lblSalesTitle.Location = new System.Drawing.Point(12, 12);
             this.lblSalesTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblSalesTitle.Name = "lblSalesTitle";
-            this.lblSalesTitle.Size = new System.Drawing.Size(168, 27);
+            this.lblSalesTitle.Size = new System.Drawing.Size(446, 27);
             this.lblSalesTitle.TabIndex = 13;
             this.lblSalesTitle.Text = "Doanh số bán hàng";
             // 
@@ -426,30 +431,30 @@
             // 
             // gvTopProducts
             // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
-            this.gvTopProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvTopProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            this.gvTopProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvTopProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.gvTopProducts.ColumnHeadersHeight = 18;
             this.gvTopProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.gvTopProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvTopProducts.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvTopProducts.DefaultCellStyle = dataGridViewCellStyle12;
             this.gvTopProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvTopProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gvTopProducts.Location = new System.Drawing.Point(12, 39);
@@ -510,7 +515,7 @@
             this.lblTopTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTopTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblTopTitle.Name = "lblTopTitle";
-            this.lblTopTitle.Size = new System.Drawing.Size(169, 27);
+            this.lblTopTitle.Size = new System.Drawing.Size(457, 27);
             this.lblTopTitle.TabIndex = 14;
             this.lblTopTitle.Text = "Sản phẩm bán chạy";
             // 
@@ -567,11 +572,12 @@
             this.value4.BackColor = System.Drawing.Color.Transparent;
             this.value4.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.value4.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.value4.Location = new System.Drawing.Point(150, 7);
+            this.value4.Location = new System.Drawing.Point(141, 7);
             this.value4.Name = "value4";
             this.value4.Size = new System.Drawing.Size(41, 47);
             this.value4.TabIndex = 2;
             this.value4.Text = "12";
+            this.value4.Click += new System.EventHandler(this.value4_Click);
             // 
             // guna2HtmlLabel9
             // 
@@ -665,7 +671,7 @@
             this.value3.BackColor = System.Drawing.Color.Transparent;
             this.value3.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.value3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.value3.Location = new System.Drawing.Point(135, 7);
+            this.value3.Location = new System.Drawing.Point(129, 7);
             this.value3.Name = "value3";
             this.value3.Size = new System.Drawing.Size(41, 47);
             this.value3.TabIndex = 2;
@@ -716,7 +722,7 @@
             this.value1.BackColor = System.Drawing.Color.Transparent;
             this.value1.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.value1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.value1.Location = new System.Drawing.Point(124, 11);
+            this.value1.Location = new System.Drawing.Point(136, 11);
             this.value1.Name = "value1";
             this.value1.Size = new System.Drawing.Size(41, 47);
             this.value1.TabIndex = 2;
@@ -743,6 +749,27 @@
             this.cap1.TabIndex = 1;
             this.cap1.Text = "Thống Kê Dược Sĩ Đang Hoạt Động";
             this.cap1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnPOS
+            // 
+            this.btnPOS.BorderRadius = 8;
+            this.btnPOS.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnPOS.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnPOS.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnPOS.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnPOS.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPOS.FillColor = System.Drawing.Color.Thistle;
+            this.btnPOS.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnPOS.ForeColor = System.Drawing.Color.SteelBlue;
+            this.btnPOS.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.btnPOS.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnPOS.Location = new System.Drawing.Point(0, 220);
+            this.btnPOS.Name = "btnPOS";
+            this.btnPOS.Size = new System.Drawing.Size(200, 44);
+            this.btnPOS.TabIndex = 7;
+            this.btnPOS.Text = "Bán hàng (POS)";
+            this.btnPOS.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnPOS.Click += new System.EventHandler(this.btnPOS_Click);
             // 
             // FrmAdminDashboard
             // 
@@ -832,6 +859,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblBrand;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblBrandCare;
+        private Guna.UI2.WinForms.Guna2Button btnPOS;
     }
 }

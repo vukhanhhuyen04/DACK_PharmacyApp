@@ -24,8 +24,19 @@ namespace PharmacyApp.Forms
             _userId = userId;
             _fullName = fullName;
             _role = role;
+            lblBrand.Cursor = Cursors.Hand;
+            lblBrandCare.Cursor = Cursors.Hand;
 
             lblUserName.Text = fullName;   // ví dụ label trên góc phải
+        }
+        private void lblBrand_MouseEnter(object sender, EventArgs e)
+        {
+            lblBrand.ForeColor = Color.FromArgb(105, 196, 246); // xanh nhạt
+        }
+
+        private void lblBrand_MouseLeave(object sender, EventArgs e)
+        {
+            lblBrand.ForeColor = Color.White; // hoặc màu cũ
         }
 
 
@@ -54,6 +65,7 @@ namespace PharmacyApp.Forms
 
         private void lblBrandCare_Click(object sender, EventArgs e)
         {
+            ToggleContent();
 
         }
 
@@ -79,17 +91,41 @@ namespace PharmacyApp.Forms
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            //LoadPage(new UC_Staff());
+            LoadPage(new UC_Staff());
         }
 
         private void btnRevenue_Click(object sender, EventArgs e)
         {
-            //LoadPage(new UC_Report());
+            LoadPage(new UC_Report());
         }
 
         private void btnInventory_Click(object sender, EventArgs e)
         {
             LoadPage(new UC_Warehouse());
+        }
+
+        private void value4_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void ToggleContent()
+        {
+            pContent.Visible = !pContent.Visible;   // đổi trạng thái ẩn/hiện
+        }
+
+        private void lblBrand_Click(object sender, EventArgs e)
+        {
+            pContent.Visible = !pContent.Visible;
+        }
+
+        private void lblBrandCare_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPOS_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_POS());
         }
     }
 }
