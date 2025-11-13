@@ -63,6 +63,12 @@
     <Compile Include="Forms\FrmAdminDashboard.Designer.cs">
       <DependentUpon>FrmAdminDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmForgotPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmForgotPass.Designer.cs">
+      <DependentUpon>FrmForgotPass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,8 +93,23 @@
     <Compile Include="Security\PermissionGuard.cs" />
     <Compile Include="Security\PermissionService.cs" />
     <Compile Include="Services\InvoiceService.cs" />
+    <Compile Include="UserControls\UC_Catalog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_Catalog.Designer.cs">
+      <DependentUpon>UC_Catalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UC_Warehouse.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_Warehouse.Designer.cs">
+      <DependentUpon>UC_Warehouse.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\FrmAdminDashboard.resx">
       <DependentUpon>FrmAdminDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmForgotPass.resx">
+      <DependentUpon>FrmForgotPass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmChangePassword.resx">
       <DependentUpon>FrmChangePassword.cs</DependentUpon>
@@ -109,6 +130,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserControls\UC_Catalog.resx">
+      <DependentUpon>UC_Catalog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Warehouse.resx">
+      <DependentUpon>UC_Warehouse.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -126,5 +153,6 @@
   <ItemGroup>
     <None Include="Resources\logo.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

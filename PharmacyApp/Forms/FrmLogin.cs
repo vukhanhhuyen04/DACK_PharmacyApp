@@ -104,10 +104,22 @@ namespace PharmacyApp.Forms
             }
         }
 
+        // 👉 Sửa tại đây: mở form quên mật khẩu
         private void lnkForgot_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tính năng Quên mật khẩu sẽ được bổ sung.", "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            using (var forgot = new FrmForgotPass())
+            {
+                forgot.StartPosition = FormStartPosition.CenterParent;
+                forgot.ShowInTaskbar = false;
+                var result = forgot.ShowDialog(this);
+
+                if (result == DialogResult.OK)
+                {
+                    // Nếu sau này bạn muốn lấy email mới đặt lại để tự fill vào ô txtEmail
+                    // có thể thêm property trong FrmForgotPassword và gán tại đây.
+                    // txtEmail.Text = forgot.EmailUsed;
+                }
+            }
         }
 
         private void lnkHelp_Click(object sender, EventArgs e)
@@ -169,7 +181,7 @@ namespace PharmacyApp.Forms
             // Ẩn form Login
             this.Hide();
 
-            // Tạo dashboard (admin/pharmacist tùy bạn, ví dụ admin)
+            // Tạo dashboard (admin/pharmacist tuỳ bạn, ví dụ admin)
             var dash = new FrmAdminDashboard(userId, fullName, role);
 
             // Khi đóng dashboard thì đóng luôn login → thoát app
@@ -177,12 +189,10 @@ namespace PharmacyApp.Forms
 
             dash.Show();
         }
-    
 
-
-            private void chkRemember_CheckedChanged(object sender, EventArgs e)
-                {
-
-                  }
-             }
+        private void chkRemember_CheckedChanged(object sender, EventArgs e)
+        {
+            // TODO: nhớ mật khẩu nếu bạn muốn
+        }
+    }
 }

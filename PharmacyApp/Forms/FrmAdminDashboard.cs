@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmacyApp.UserControls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,6 +42,15 @@ namespace PharmacyApp.Forms
             gvTopProducts.Rows.Add("2", "Vitamin C 1000mg", "310");
             gvTopProducts.Rows.Add("3", "Panadol Extra", "280");
         }
+        private void LoadPage(UserControl uc)
+        {
+            uc.Dock = DockStyle.Fill;
+
+            pContent.Controls.Clear();
+            pContent.Controls.Add(uc);
+
+            uc.BringToFront();
+        }
 
         private void lblBrandCare_Click(object sender, EventArgs e)
         {
@@ -60,6 +70,26 @@ namespace PharmacyApp.Forms
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnCatalog_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_Catalog());
+        }
+
+        private void btnUsers_Click(object sender, EventArgs e)
+        {
+            //LoadPage(new UC_Staff());
+        }
+
+        private void btnRevenue_Click(object sender, EventArgs e)
+        {
+            //LoadPage(new UC_Report());
+        }
+
+        private void btnInventory_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_Warehouse());
         }
     }
 }
