@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -116,56 +118,71 @@ namespace PharmacyApp.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var email = txtEmail.Text.Trim();
-            var pass = txtPassword.Text;
+            string email = txtEmail.Text.Trim();
+            string pass = txtPassword.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(pass))
             {
-                MessageBox.Show("Vui lòng nhập Email và Mật khẩu.", "Thiếu thông tin",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập đầy đủ Email và Mật khẩu.",
+                    "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
-                using (var conn = new System.Data.SqlClient.SqlConnection(Program.ConnStr))
-                using (var cmd = new System.Data.SqlClient.SqlCommand("sp_User_Login", conn))
+                using (var conn = new SqlConnection(Program.ConnStr))
+                using (var cmd = new SqlCommand("sp_User_Login", conn))
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@Password", pass);
 
                     conn.Open();
-                    using (var reader = cmd.ExecuteReader())
+                    using (var rd = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if (!rd.Read())
                         {
-                            string fullName = reader["FullName"].ToString();
-                            string role = reader["Role"].ToString();
+                            // Không có bản ghi nào => sai tài khoản / mật khẩu
+                            MessageBox.Show("Sai Email hoặc Mật khẩu.",
+                                "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
 
-                            MessageBox.Show(
-                                string.Format("Xin chào {0} ({1})!", fullName, role),
-                                "Đăng nhập thành công",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Email hoặc mật khẩu không đúng.", "Lỗi đăng nhập",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        int userId = rd.GetInt32(rd.GetOrdinal("UserID"));
+                        string fullName = rd.GetString(rd.GetOrdinal("FullName"));
+                        string role = rd.GetString(rd.GetOrdinal("Role"));
+
+                        // ✅ Đăng nhập thành công → mở Dashboard
+                        OpenDashboard(userId, fullName, role);
                     }
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message, "Đăng nhập thất bại",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi kết nối CSDL:\n" + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void chkRemember_CheckedChanged(object sender, EventArgs e)
+        private void OpenDashboard(int userId, string fullName, string role)
         {
+            // Ẩn form Login
+            this.Hide();
 
+            // Tạo dashboard (admin/pharmacist tùy bạn, ví dụ admin)
+            var dash = new FrmAdminDashboard(userId, fullName, role);
+
+            // Khi đóng dashboard thì đóng luôn login → thoát app
+            dash.FormClosed += (s, e) => this.Close();
+
+            dash.Show();
         }
-    }
+    
+
+
+            private void chkRemember_CheckedChanged(object sender, EventArgs e)
+                {
+
+                  }
+             }
 }
