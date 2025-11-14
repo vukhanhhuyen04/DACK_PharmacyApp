@@ -223,5 +223,25 @@ namespace PharmacyApp.UserControls
         {
 
         }
+
+        private void pLeft_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnPay_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

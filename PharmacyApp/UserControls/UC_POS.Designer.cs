@@ -28,59 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pRoot = new Guna.UI2.WinForms.Guna2Panel();
-            this.pHeader = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtSearchProduct = new Guna.UI2.WinForms.Guna2TextBox();
-            this.lblStaffCaption = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblStaffName = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblDate = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.pLeft = new Guna.UI2.WinForms.Guna2Panel();
-            this.pRight = new Guna.UI2.WinForms.Guna2Panel();
-            this.cboCategory = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.gvProducts = new Guna.UI2.WinForms.Guna2DataGridView();
             this.colMaThuoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTenThuoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDonVi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGiaBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTonKho = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblCart = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.cboCategory = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.pRight = new Guna.UI2.WinForms.Guna2Panel();
+            this.pPayment = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
+            this.btnPay = new Guna.UI2.WinForms.Guna2Button();
+            this.pBank = new Guna.UI2.WinForms.Guna2Panel();
+            this.pbQr = new System.Windows.Forms.PictureBox();
+            this.pCash = new Guna.UI2.WinForms.Guna2Panel();
+            this.txtChange = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtCashGiven = new Guna.UI2.WinForms.Guna2TextBox();
+            this.cboPaymentMethod = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.txtTotal = new Guna.UI2.WinForms.Guna2TextBox();
             this.lvCart = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pPayment = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblTotalCaption = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtTotal = new Guna.UI2.WinForms.Guna2TextBox();
-            this.cboPaymentMethod = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.pCash = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblCashGiven = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtCashGiven = new Guna.UI2.WinForms.Guna2TextBox();
-            this.lblChange = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtChange = new Guna.UI2.WinForms.Guna2TextBox();
-            this.pBank = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.pbQr = new System.Windows.Forms.PictureBox();
-            this.btnPay = new Guna.UI2.WinForms.Guna2Button();
-            this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
-            this.lblPaymentMethod = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblCart = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.pHeader = new Guna.UI2.WinForms.Guna2Panel();
+            this.txtSearchProduct = new Guna.UI2.WinForms.Guna2TextBox();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblTotalCaption = new System.Windows.Forms.Label();
+            this.lblPaymentMethod = new System.Windows.Forms.Label();
+            this.lblCashGiven = new System.Windows.Forms.Label();
+            this.lblChange = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblStaffCaption = new System.Windows.Forms.Label();
+            this.lblStaffName = new System.Windows.Forms.Label();
+            this.lblDate = new System.Windows.Forms.Label();
             this.pRoot.SuspendLayout();
-            this.pHeader.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.pLeft.SuspendLayout();
-            this.pRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).BeginInit();
+            this.pRight.SuspendLayout();
             this.pPayment.SuspendLayout();
-            this.pCash.SuspendLayout();
             this.pBank.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbQr)).BeginInit();
+            this.pCash.SuspendLayout();
+            this.pHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // pRoot
@@ -94,86 +94,6 @@
             this.pRoot.Size = new System.Drawing.Size(1345, 959);
             this.pRoot.TabIndex = 0;
             // 
-            // pHeader
-            // 
-            this.pHeader.Controls.Add(this.lblDate);
-            this.pHeader.Controls.Add(this.lblStaffName);
-            this.pHeader.Controls.Add(this.lblStaffCaption);
-            this.pHeader.Controls.Add(this.txtSearchProduct);
-            this.pHeader.Controls.Add(this.lblTitle);
-            this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pHeader.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
-            this.pHeader.Location = new System.Drawing.Point(0, 0);
-            this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(1345, 70);
-            this.pHeader.TabIndex = 0;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(20, 20);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(201, 39);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Bán hàng (POS)";
-            // 
-            // txtSearchProduct
-            // 
-            this.txtSearchProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearchProduct.BorderRadius = 6;
-            this.txtSearchProduct.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSearchProduct.DefaultText = "";
-            this.txtSearchProduct.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtSearchProduct.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtSearchProduct.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSearchProduct.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSearchProduct.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearchProduct.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSearchProduct.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearchProduct.Location = new System.Drawing.Point(250, 18);
-            this.txtSearchProduct.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtSearchProduct.Name = "txtSearchProduct";
-            this.txtSearchProduct.PlaceholderText = "Tìm thuốc theo tên / mã...";
-            this.txtSearchProduct.SelectedText = "";
-            this.txtSearchProduct.Size = new System.Drawing.Size(722, 36);
-            this.txtSearchProduct.TabIndex = 1;
-            // 
-            // lblStaffCaption
-            // 
-            this.lblStaffCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblStaffCaption.BackColor = System.Drawing.Color.Transparent;
-            this.lblStaffCaption.ForeColor = System.Drawing.Color.White;
-            this.lblStaffCaption.Location = new System.Drawing.Point(1064, 18);
-            this.lblStaffCaption.Name = "lblStaffCaption";
-            this.lblStaffCaption.Size = new System.Drawing.Size(66, 18);
-            this.lblStaffCaption.TabIndex = 2;
-            this.lblStaffCaption.Text = "Nhân viên:";
-            // 
-            // lblStaffName
-            // 
-            this.lblStaffName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblStaffName.BackColor = System.Drawing.Color.Transparent;
-            this.lblStaffName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
-            this.lblStaffName.Location = new System.Drawing.Point(1180, 18);
-            this.lblStaffName.Name = "lblStaffName";
-            this.lblStaffName.Size = new System.Drawing.Size(62, 18);
-            this.lblStaffName.TabIndex = 3;
-            this.lblStaffName.Text = "Nguyễn A";
-            // 
-            // lblDate
-            // 
-            this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblDate.ForeColor = System.Drawing.Color.White;
-            this.lblDate.Location = new System.Drawing.Point(1064, 36);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(67, 18);
-            this.lblDate.TabIndex = 4;
-            this.lblDate.Text = "11/11/2025";
-            // 
             // tlpMain
             // 
             this.tlpMain.ColumnCount = 2;
@@ -186,76 +106,37 @@
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 1;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 626F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 889F));
             this.tlpMain.Size = new System.Drawing.Size(1345, 889);
             this.tlpMain.TabIndex = 1;
             // 
             // pLeft
             // 
             this.pLeft.BorderRadius = 8;
+            this.pLeft.Controls.Add(this.label1);
             this.pLeft.Controls.Add(this.gvProducts);
-            this.pLeft.Controls.Add(this.guna2HtmlLabel1);
             this.pLeft.Controls.Add(this.cboCategory);
             this.pLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pLeft.FillColor = System.Drawing.Color.White;
             this.pLeft.Location = new System.Drawing.Point(3, 3);
             this.pLeft.Name = "pLeft";
+            this.pLeft.Padding = new System.Windows.Forms.Padding(0, 60, 0, 0);
             this.pLeft.Size = new System.Drawing.Size(733, 883);
             this.pLeft.TabIndex = 0;
-            // 
-            // pRight
-            // 
-            this.pRight.Controls.Add(this.pPayment);
-            this.pRight.Controls.Add(this.lvCart);
-            this.pRight.Controls.Add(this.lblCart);
-            this.pRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pRight.Location = new System.Drawing.Point(742, 3);
-            this.pRight.Name = "pRight";
-            this.pRight.Size = new System.Drawing.Size(600, 883);
-            this.pRight.TabIndex = 1;
-            // 
-            // cboCategory
-            // 
-            this.cboCategory.BackColor = System.Drawing.Color.Transparent;
-            this.cboCategory.BorderRadius = 6;
-            this.cboCategory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCategory.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboCategory.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboCategory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cboCategory.ItemHeight = 30;
-            this.cboCategory.Items.AddRange(new object[] {
-            "Tất cả",
-            "Giảm đau",
-            "Hạ sốt",
-            "Vitamin"});
-            this.cboCategory.Location = new System.Drawing.Point(118, 10);
-            this.cboCategory.Name = "cboCategory";
-            this.cboCategory.Size = new System.Drawing.Size(200, 36);
-            this.cboCategory.TabIndex = 0;
-            // 
-            // guna2HtmlLabel1
-            // 
-            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(17, 28);
-            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(77, 18);
-            this.guna2HtmlLabel1.TabIndex = 1;
-            this.guna2HtmlLabel1.Text = "Nhóm thuốc:";
+            this.pLeft.Paint += new System.Windows.Forms.PaintEventHandler(this.pLeft_Paint);
             // 
             // gvProducts
             // 
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.White;
-            this.gvProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.gvProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gvProducts.ColumnHeadersHeight = 18;
             this.gvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.gvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -264,23 +145,23 @@
             this.colDonVi,
             this.colGiaBan,
             this.colTonKho});
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvProducts.DefaultCellStyle = dataGridViewCellStyle24;
-            this.gvProducts.Dock = System.Windows.Forms.DockStyle.Bottom;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvProducts.DefaultCellStyle = dataGridViewCellStyle3;
+            this.gvProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gvProducts.Location = new System.Drawing.Point(0, 52);
+            this.gvProducts.Location = new System.Drawing.Point(0, 60);
             this.gvProducts.Name = "gvProducts";
             this.gvProducts.ReadOnly = true;
             this.gvProducts.RowHeadersVisible = false;
             this.gvProducts.RowHeadersWidth = 51;
             this.gvProducts.RowTemplate.Height = 24;
-            this.gvProducts.Size = new System.Drawing.Size(733, 831);
+            this.gvProducts.Size = new System.Drawing.Size(733, 823);
             this.gvProducts.TabIndex = 2;
             this.gvProducts.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gvProducts.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -344,16 +225,208 @@
             this.colTonKho.Name = "colTonKho";
             this.colTonKho.ReadOnly = true;
             // 
-            // lblCart
+            // cboCategory
             // 
-            this.lblCart.BackColor = System.Drawing.Color.Transparent;
-            this.lblCart.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCart.Location = new System.Drawing.Point(0, 0);
-            this.lblCart.Name = "lblCart";
-            this.lblCart.Size = new System.Drawing.Size(600, 30);
-            this.lblCart.TabIndex = 2;
-            this.lblCart.Text = "Giỏ hàng";
+            this.cboCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboCategory.BackColor = System.Drawing.Color.Transparent;
+            this.cboCategory.BorderRadius = 6;
+            this.cboCategory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCategory.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboCategory.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboCategory.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cboCategory.ItemHeight = 30;
+            this.cboCategory.Items.AddRange(new object[] {
+            "Tất cả",
+            "Giảm đau",
+            "Hạ sốt",
+            "Vitamin"});
+            this.cboCategory.Location = new System.Drawing.Point(189, 12);
+            this.cboCategory.Name = "cboCategory";
+            this.cboCategory.Size = new System.Drawing.Size(200, 36);
+            this.cboCategory.TabIndex = 0;
+            // 
+            // pRight
+            // 
+            this.pRight.Controls.Add(this.pPayment);
+            this.pRight.Controls.Add(this.lvCart);
+            this.pRight.Controls.Add(this.lblCart);
+            this.pRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pRight.Location = new System.Drawing.Point(742, 3);
+            this.pRight.Name = "pRight";
+            this.pRight.Size = new System.Drawing.Size(600, 883);
+            this.pRight.TabIndex = 1;
+            // 
+            // pPayment
+            // 
+            this.pPayment.Controls.Add(this.lblPaymentMethod);
+            this.pPayment.Controls.Add(this.lblTotalCaption);
+            this.pPayment.Controls.Add(this.btnCancel);
+            this.pPayment.Controls.Add(this.btnPay);
+            this.pPayment.Controls.Add(this.pBank);
+            this.pPayment.Controls.Add(this.pCash);
+            this.pPayment.Controls.Add(this.cboPaymentMethod);
+            this.pPayment.Controls.Add(this.txtTotal);
+            this.pPayment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pPayment.FillColor = System.Drawing.Color.White;
+            this.pPayment.Location = new System.Drawing.Point(0, 282);
+            this.pPayment.Name = "pPayment";
+            this.pPayment.Size = new System.Drawing.Size(600, 601);
+            this.pPayment.TabIndex = 4;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BorderRadius = 8;
+            this.btnCancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnCancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(469, 438);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(110, 78);
+            this.btnCancel.TabIndex = 10;
+            this.btnCancel.Text = "Hủy hóa đơn";
+            // 
+            // btnPay
+            // 
+            this.btnPay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPay.BorderRadius = 8;
+            this.btnPay.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnPay.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnPay.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnPay.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnPay.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnPay.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnPay.ForeColor = System.Drawing.Color.White;
+            this.btnPay.Location = new System.Drawing.Point(469, 301);
+            this.btnPay.Name = "btnPay";
+            this.btnPay.Size = new System.Drawing.Size(110, 78);
+            this.btnPay.TabIndex = 9;
+            this.btnPay.Text = "Thanh toán";
+            this.btnPay.Click += new System.EventHandler(this.btnPay_Click_1);
+            // 
+            // pBank
+            // 
+            this.pBank.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pBank.Controls.Add(this.label2);
+            this.pBank.Controls.Add(this.pbQr);
+            this.pBank.Location = new System.Drawing.Point(15, 296);
+            this.pBank.Name = "pBank";
+            this.pBank.Size = new System.Drawing.Size(417, 220);
+            this.pBank.TabIndex = 8;
+            // 
+            // pbQr
+            // 
+            this.pbQr.Location = new System.Drawing.Point(110, 58);
+            this.pbQr.Name = "pbQr";
+            this.pbQr.Size = new System.Drawing.Size(130, 130);
+            this.pbQr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbQr.TabIndex = 5;
+            this.pbQr.TabStop = false;
+            // 
+            // pCash
+            // 
+            this.pCash.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pCash.Controls.Add(this.lblChange);
+            this.pCash.Controls.Add(this.lblCashGiven);
+            this.pCash.Controls.Add(this.txtChange);
+            this.pCash.Controls.Add(this.txtCashGiven);
+            this.pCash.Location = new System.Drawing.Point(15, 135);
+            this.pCash.Name = "pCash";
+            this.pCash.Size = new System.Drawing.Size(417, 130);
+            this.pCash.TabIndex = 7;
+            // 
+            // txtChange
+            // 
+            this.txtChange.BorderRadius = 6;
+            this.txtChange.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtChange.DefaultText = "";
+            this.txtChange.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtChange.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtChange.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtChange.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtChange.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtChange.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtChange.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtChange.Location = new System.Drawing.Point(238, 70);
+            this.txtChange.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtChange.Name = "txtChange";
+            this.txtChange.PlaceholderText = "0";
+            this.txtChange.ReadOnly = true;
+            this.txtChange.SelectedText = "";
+            this.txtChange.Size = new System.Drawing.Size(150, 30);
+            this.txtChange.TabIndex = 9;
+            this.txtChange.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtCashGiven
+            // 
+            this.txtCashGiven.BorderRadius = 6;
+            this.txtCashGiven.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtCashGiven.DefaultText = "";
+            this.txtCashGiven.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtCashGiven.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtCashGiven.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCashGiven.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCashGiven.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCashGiven.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtCashGiven.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCashGiven.Location = new System.Drawing.Point(238, 25);
+            this.txtCashGiven.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCashGiven.Name = "txtCashGiven";
+            this.txtCashGiven.PlaceholderText = "0";
+            this.txtCashGiven.ReadOnly = true;
+            this.txtCashGiven.SelectedText = "";
+            this.txtCashGiven.Size = new System.Drawing.Size(150, 30);
+            this.txtCashGiven.TabIndex = 7;
+            this.txtCashGiven.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // cboPaymentMethod
+            // 
+            this.cboPaymentMethod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboPaymentMethod.BackColor = System.Drawing.Color.Transparent;
+            this.cboPaymentMethod.BorderRadius = 6;
+            this.cboPaymentMethod.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPaymentMethod.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboPaymentMethod.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboPaymentMethod.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboPaymentMethod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cboPaymentMethod.ItemHeight = 30;
+            this.cboPaymentMethod.Items.AddRange(new object[] {
+            "Tiền mặt",
+            "Ngân hàng (QR)"});
+            this.cboPaymentMethod.Location = new System.Drawing.Point(367, 66);
+            this.cboPaymentMethod.Name = "cboPaymentMethod";
+            this.cboPaymentMethod.Size = new System.Drawing.Size(230, 36);
+            this.cboPaymentMethod.TabIndex = 6;
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTotal.BorderRadius = 6;
+            this.txtTotal.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTotal.DefaultText = "";
+            this.txtTotal.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtTotal.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtTotal.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTotal.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTotal.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTotal.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtTotal.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTotal.Location = new System.Drawing.Point(367, 11);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.PlaceholderText = "0";
+            this.txtTotal.ReadOnly = true;
+            this.txtTotal.SelectedText = "";
+            this.txtTotal.Size = new System.Drawing.Size(230, 30);
+            this.txtTotal.TabIndex = 4;
+            this.txtTotal.TextChanged += new System.EventHandler(this.txtTotal_TextChanged);
             // 
             // lvCart
             // 
@@ -403,225 +476,177 @@
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader5.Width = 100;
             // 
-            // pPayment
+            // lblCart
             // 
-            this.pPayment.Controls.Add(this.btnCancel);
-            this.pPayment.Controls.Add(this.btnPay);
-            this.pPayment.Controls.Add(this.lblTotalCaption);
-            this.pPayment.Controls.Add(this.pBank);
-            this.pPayment.Controls.Add(this.pCash);
-            this.pPayment.Controls.Add(this.cboPaymentMethod);
-            this.pPayment.Controls.Add(this.lblPaymentMethod);
-            this.pPayment.Controls.Add(this.txtTotal);
-            this.pPayment.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pPayment.FillColor = System.Drawing.Color.White;
-            this.pPayment.Location = new System.Drawing.Point(0, 288);
-            this.pPayment.Name = "pPayment";
-            this.pPayment.Size = new System.Drawing.Size(600, 595);
-            this.pPayment.TabIndex = 4;
+            this.lblCart.BackColor = System.Drawing.Color.Transparent;
+            this.lblCart.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblCart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCart.Location = new System.Drawing.Point(0, 0);
+            this.lblCart.Name = "lblCart";
+            this.lblCart.Size = new System.Drawing.Size(600, 30);
+            this.lblCart.TabIndex = 2;
+            this.lblCart.Text = "Giỏ hàng";
+            this.lblCart.Click += new System.EventHandler(this.lblCart_Click);
+            // 
+            // pHeader
+            // 
+            this.pHeader.Controls.Add(this.lblDate);
+            this.pHeader.Controls.Add(this.lblStaffName);
+            this.pHeader.Controls.Add(this.lblStaffCaption);
+            this.pHeader.Controls.Add(this.lblTitle);
+            this.pHeader.Controls.Add(this.txtSearchProduct);
+            this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pHeader.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.pHeader.Location = new System.Drawing.Point(0, 0);
+            this.pHeader.Name = "pHeader";
+            this.pHeader.Size = new System.Drawing.Size(1345, 70);
+            this.pHeader.TabIndex = 0;
+            // 
+            // txtSearchProduct
+            // 
+            this.txtSearchProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearchProduct.BorderRadius = 6;
+            this.txtSearchProduct.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSearchProduct.DefaultText = "";
+            this.txtSearchProduct.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtSearchProduct.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtSearchProduct.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSearchProduct.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSearchProduct.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtSearchProduct.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtSearchProduct.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtSearchProduct.Location = new System.Drawing.Point(311, 18);
+            this.txtSearchProduct.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtSearchProduct.Name = "txtSearchProduct";
+            this.txtSearchProduct.PlaceholderText = "Tìm thuốc theo tên / mã...";
+            this.txtSearchProduct.SelectedText = "";
+            this.txtSearchProduct.Size = new System.Drawing.Size(722, 36);
+            this.txtSearchProduct.TabIndex = 1;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblTitle.Location = new System.Drawing.Point(20, 16);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(223, 38);
+            this.lblTitle.TabIndex = 3;
+            this.lblTitle.Text = "Bán hàng (POS)";
             // 
             // lblTotalCaption
             // 
-            this.lblTotalCaption.AutoSize = false;
-            this.lblTotalCaption.BackColor = System.Drawing.Color.Transparent;
+            this.lblTotalCaption.AutoSize = true;
+            this.lblTotalCaption.BackColor = System.Drawing.Color.White;
             this.lblTotalCaption.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalCaption.Location = new System.Drawing.Point(20, 15);
+            this.lblTotalCaption.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTotalCaption.Location = new System.Drawing.Point(20, 13);
             this.lblTotalCaption.Name = "lblTotalCaption";
-            this.lblTotalCaption.Size = new System.Drawing.Size(225, 26);
-            this.lblTotalCaption.TabIndex = 3;
+            this.lblTotalCaption.Size = new System.Drawing.Size(225, 28);
+            this.lblTotalCaption.TabIndex = 5;
             this.lblTotalCaption.Text = "Tổng giá trị đơn hàng:";
-            this.lblTotalCaption.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtTotal
-            // 
-            this.txtTotal.BorderRadius = 6;
-            this.txtTotal.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTotal.DefaultText = "";
-            this.txtTotal.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtTotal.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtTotal.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtTotal.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtTotal.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTotal.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtTotal.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTotal.Location = new System.Drawing.Point(365, 11);
-            this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.PlaceholderText = "0";
-            this.txtTotal.ReadOnly = true;
-            this.txtTotal.SelectedText = "";
-            this.txtTotal.Size = new System.Drawing.Size(160, 30);
-            this.txtTotal.TabIndex = 4;
-            this.txtTotal.TextChanged += new System.EventHandler(this.txtTotal_TextChanged);
-            // 
-            // cboPaymentMethod
-            // 
-            this.cboPaymentMethod.BackColor = System.Drawing.Color.Transparent;
-            this.cboPaymentMethod.BorderRadius = 6;
-            this.cboPaymentMethod.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPaymentMethod.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboPaymentMethod.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboPaymentMethod.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboPaymentMethod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cboPaymentMethod.ItemHeight = 30;
-            this.cboPaymentMethod.Items.AddRange(new object[] {
-            "Tiền mặt",
-            "Ngân hàng (QR)"});
-            this.cboPaymentMethod.Location = new System.Drawing.Point(365, 58);
-            this.cboPaymentMethod.Name = "cboPaymentMethod";
-            this.cboPaymentMethod.Size = new System.Drawing.Size(160, 36);
-            this.cboPaymentMethod.TabIndex = 6;
-            // 
-            // pCash
-            // 
-            this.pCash.Controls.Add(this.txtChange);
-            this.pCash.Controls.Add(this.lblChange);
-            this.pCash.Controls.Add(this.txtCashGiven);
-            this.pCash.Controls.Add(this.lblCashGiven);
-            this.pCash.Location = new System.Drawing.Point(15, 136);
-            this.pCash.Name = "pCash";
-            this.pCash.Size = new System.Drawing.Size(417, 80);
-            this.pCash.TabIndex = 7;
-            // 
-            // lblCashGiven
-            // 
-            this.lblCashGiven.BackColor = System.Drawing.Color.Transparent;
-            this.lblCashGiven.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCashGiven.Location = new System.Drawing.Point(5, 5);
-            this.lblCashGiven.Name = "lblCashGiven";
-            this.lblCashGiven.Size = new System.Drawing.Size(154, 30);
-            this.lblCashGiven.TabIndex = 6;
-            this.lblCashGiven.Text = "Tiền khách đưa:";
-            // 
-            // txtCashGiven
-            // 
-            this.txtCashGiven.BorderRadius = 6;
-            this.txtCashGiven.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCashGiven.DefaultText = "";
-            this.txtCashGiven.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtCashGiven.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtCashGiven.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCashGiven.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCashGiven.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCashGiven.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtCashGiven.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCashGiven.Location = new System.Drawing.Point(238, 6);
-            this.txtCashGiven.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCashGiven.Name = "txtCashGiven";
-            this.txtCashGiven.PlaceholderText = "0";
-            this.txtCashGiven.ReadOnly = true;
-            this.txtCashGiven.SelectedText = "";
-            this.txtCashGiven.Size = new System.Drawing.Size(150, 30);
-            this.txtCashGiven.TabIndex = 7;
-            this.txtCashGiven.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lblChange
-            // 
-            this.lblChange.BackColor = System.Drawing.Color.Transparent;
-            this.lblChange.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChange.Location = new System.Drawing.Point(5, 45);
-            this.lblChange.Name = "lblChange";
-            this.lblChange.Size = new System.Drawing.Size(93, 30);
-            this.lblChange.TabIndex = 8;
-            this.lblChange.Text = "Tiền thối:";
-            // 
-            // txtChange
-            // 
-            this.txtChange.BorderRadius = 6;
-            this.txtChange.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtChange.DefaultText = "";
-            this.txtChange.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtChange.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtChange.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtChange.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtChange.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtChange.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtChange.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtChange.Location = new System.Drawing.Point(238, 44);
-            this.txtChange.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtChange.Name = "txtChange";
-            this.txtChange.PlaceholderText = "0";
-            this.txtChange.ReadOnly = true;
-            this.txtChange.SelectedText = "";
-            this.txtChange.Size = new System.Drawing.Size(150, 30);
-            this.txtChange.TabIndex = 9;
-            this.txtChange.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // pBank
-            // 
-            this.pBank.Controls.Add(this.pbQr);
-            this.pBank.Controls.Add(this.guna2HtmlLabel2);
-            this.pBank.Location = new System.Drawing.Point(15, 264);
-            this.pBank.Name = "pBank";
-            this.pBank.Size = new System.Drawing.Size(417, 220);
-            this.pBank.TabIndex = 8;
-            // 
-            // guna2HtmlLabel2
-            // 
-            this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(5, 5);
-            this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(258, 30);
-            this.guna2HtmlLabel2.TabIndex = 4;
-            this.guna2HtmlLabel2.Text = "Quét mã QR để thanh toán";
-            // 
-            // pbQr
-            // 
-            this.pbQr.Location = new System.Drawing.Point(110, 58);
-            this.pbQr.Name = "pbQr";
-            this.pbQr.Size = new System.Drawing.Size(130, 130);
-            this.pbQr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbQr.TabIndex = 5;
-            this.pbQr.TabStop = false;
-            // 
-            // btnPay
-            // 
-            this.btnPay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPay.BorderRadius = 8;
-            this.btnPay.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnPay.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnPay.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnPay.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnPay.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnPay.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnPay.ForeColor = System.Drawing.Color.White;
-            this.btnPay.Location = new System.Drawing.Point(438, 136);
-            this.btnPay.Name = "btnPay";
-            this.btnPay.Size = new System.Drawing.Size(110, 36);
-            this.btnPay.TabIndex = 9;
-            this.btnPay.Text = "Thanh toán";
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.BorderRadius = 8;
-            this.btnCancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnCancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnCancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnCancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(438, 243);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(110, 48);
-            this.btnCancel.TabIndex = 10;
-            this.btnCancel.Text = "Hủy hóa đơn";
             // 
             // lblPaymentMethod
             // 
-            this.lblPaymentMethod.AutoSize = false;
-            this.lblPaymentMethod.BackColor = System.Drawing.Color.Transparent;
+            this.lblPaymentMethod.AutoSize = true;
+            this.lblPaymentMethod.BackColor = System.Drawing.Color.White;
             this.lblPaymentMethod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPaymentMethod.Location = new System.Drawing.Point(20, 58);
+            this.lblPaymentMethod.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblPaymentMethod.Location = new System.Drawing.Point(20, 66);
             this.lblPaymentMethod.Name = "lblPaymentMethod";
-            this.lblPaymentMethod.Size = new System.Drawing.Size(225, 26);
-            this.lblPaymentMethod.TabIndex = 5;
+            this.lblPaymentMethod.Size = new System.Drawing.Size(250, 28);
+            this.lblPaymentMethod.TabIndex = 11;
             this.lblPaymentMethod.Text = "Phương thức thanh toán:";
-            this.lblPaymentMethod.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblPaymentMethod.Click += new System.EventHandler(this.lblPaymentMethod_Click);
+            // 
+            // lblCashGiven
+            // 
+            this.lblCashGiven.AutoSize = true;
+            this.lblCashGiven.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblCashGiven.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCashGiven.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblCashGiven.Location = new System.Drawing.Point(5, 27);
+            this.lblCashGiven.Name = "lblCashGiven";
+            this.lblCashGiven.Size = new System.Drawing.Size(163, 28);
+            this.lblCashGiven.TabIndex = 12;
+            this.lblCashGiven.Text = "Tiền khách đưa:";
+            // 
+            // lblChange
+            // 
+            this.lblChange.AutoSize = true;
+            this.lblChange.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblChange.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChange.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblChange.Location = new System.Drawing.Point(5, 72);
+            this.lblChange.Name = "lblChange";
+            this.lblChange.Size = new System.Drawing.Size(102, 28);
+            this.lblChange.TabIndex = 13;
+            this.lblChange.Text = "Tiền thối:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(19, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(135, 28);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Nhóm thuốc:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(9, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(267, 28);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Quét mã QR để thanh toán";
+            // 
+            // lblStaffCaption
+            // 
+            this.lblStaffCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStaffCaption.AutoSize = true;
+            this.lblStaffCaption.BackColor = System.Drawing.Color.Transparent;
+            this.lblStaffCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffCaption.ForeColor = System.Drawing.Color.White;
+            this.lblStaffCaption.Location = new System.Drawing.Point(1090, 12);
+            this.lblStaffCaption.Name = "lblStaffCaption";
+            this.lblStaffCaption.Size = new System.Drawing.Size(84, 20);
+            this.lblStaffCaption.TabIndex = 6;
+            this.lblStaffCaption.Text = "Nhân viên:";
+            this.lblStaffCaption.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // lblStaffName
+            // 
+            this.lblStaffName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStaffName.AutoSize = true;
+            this.lblStaffName.BackColor = System.Drawing.Color.Transparent;
+            this.lblStaffName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
+            this.lblStaffName.Location = new System.Drawing.Point(1207, 12);
+            this.lblStaffName.Name = "lblStaffName";
+            this.lblStaffName.Size = new System.Drawing.Size(79, 20);
+            this.lblStaffName.TabIndex = 7;
+            this.lblStaffName.Text = "Nguyễn A";
+            // 
+            // lblDate
+            // 
+            this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDate.AutoSize = true;
+            this.lblDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.ForeColor = System.Drawing.Color.White;
+            this.lblDate.Location = new System.Drawing.Point(1090, 34);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(95, 20);
+            this.lblDate.TabIndex = 8;
+            this.lblDate.Text = "11/11/2025";
             // 
             // UC_POS
             // 
@@ -631,20 +656,21 @@
             this.Name = "UC_POS";
             this.Size = new System.Drawing.Size(1345, 959);
             this.pRoot.ResumeLayout(false);
-            this.pHeader.ResumeLayout(false);
-            this.pHeader.PerformLayout();
             this.tlpMain.ResumeLayout(false);
             this.pLeft.ResumeLayout(false);
             this.pLeft.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).EndInit();
             this.pRight.ResumeLayout(false);
             this.pRight.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).EndInit();
             this.pPayment.ResumeLayout(false);
-            this.pCash.ResumeLayout(false);
-            this.pCash.PerformLayout();
+            this.pPayment.PerformLayout();
             this.pBank.ResumeLayout(false);
             this.pBank.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbQr)).EndInit();
+            this.pCash.ResumeLayout(false);
+            this.pCash.PerformLayout();
+            this.pHeader.ResumeLayout(false);
+            this.pHeader.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -653,16 +679,11 @@
 
         private Guna.UI2.WinForms.Guna2Panel pRoot;
         private Guna.UI2.WinForms.Guna2Panel pHeader;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTitle;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblStaffCaption;
         private Guna.UI2.WinForms.Guna2TextBox txtSearchProduct;
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private Guna.UI2.WinForms.Guna2Panel pLeft;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2ComboBox cboCategory;
         private Guna.UI2.WinForms.Guna2Panel pRight;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblDate;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblStaffName;
         private Guna.UI2.WinForms.Guna2DataGridView gvProducts;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaThuoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenThuoc;
@@ -678,18 +699,23 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private Guna.UI2.WinForms.Guna2Panel pPayment;
         private Guna.UI2.WinForms.Guna2TextBox txtTotal;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTotalCaption;
         private Guna.UI2.WinForms.Guna2Panel pCash;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblCashGiven;
         private Guna.UI2.WinForms.Guna2ComboBox cboPaymentMethod;
         private Guna.UI2.WinForms.Guna2Panel pBank;
         private System.Windows.Forms.PictureBox pbQr;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2TextBox txtChange;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblChange;
         private Guna.UI2.WinForms.Guna2TextBox txtCashGiven;
         private Guna.UI2.WinForms.Guna2Button btnCancel;
         private Guna.UI2.WinForms.Guna2Button btnPay;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblPaymentMethod;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblPaymentMethod;
+        private System.Windows.Forms.Label lblTotalCaption;
+        private System.Windows.Forms.Label lblChange;
+        private System.Windows.Forms.Label lblCashGiven;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblStaffCaption;
+        private System.Windows.Forms.Label lblStaffName;
+        private System.Windows.Forms.Label lblDate;
     }
 }

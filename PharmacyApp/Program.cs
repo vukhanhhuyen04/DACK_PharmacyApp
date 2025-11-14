@@ -1,26 +1,35 @@
-﻿using System;
+﻿using PharmacyApp.Forms;
+using System;
 using System.Windows.Forms;
 
 namespace PharmacyApp
 {
     internal static class Program
     {
-        // Kết nối SQL dùng chung (nếu cần)
-        public static readonly string ConnStr =
-    @"Data Source=.\SQLEXPRESS;Initial Catalog=pharma;User ID=sa;Password=12345;Encrypt=False;";
-
+        // Chuỗi kết nối dùng chung
+        public static string ConnStr = "";
 
         [STAThread]
         static void Main()
         {
 #if NET5_0_OR_GREATER
-    Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
+            Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 #endif
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PharmacyApp.Forms.FrmLogin());
+
+            // 1) Mở form cấu hình trước
+            using (var cfgForm = new FrmConfig())
+            {
+                if (cfgForm.ShowDialog() != DialogResult.OK)
+                {
+                    // Người dùng Cancel → thoát luôn
+                    return;
+                }
+            }
+
+            // 2) Sau khi config OK → mở Login
+            Application.Run(new FrmLogin());
         }
-
-
     }
 }

@@ -57,11 +57,15 @@
     <Compile Include="Auth\AuthService.cs" />
     <Compile Include="Auth\IUserContext.cs" />
     <Compile Include="Auth\UserContext.cs" />
+    <Compile Include="DbConfig.cs" />
     <Compile Include="Forms\FrmAdminDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmAdminDashboard.Designer.cs">
       <DependentUpon>FrmAdminDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmConfig.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmForgotPass.cs">
       <SubType>Form</SubType>
