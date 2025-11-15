@@ -121,6 +121,12 @@
     <Compile Include="UserControls\UC_Profile.Designer.cs">
       <DependentUpon>UC_Profile.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UC_Receipt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_Receipt.Designer.cs">
+      <DependentUpon>UC_Receipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UC_Report.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_Profile.resx">
       <DependentUpon>UC_Profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Receipt.resx">
+      <DependentUpon>UC_Receipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_Report.resx">
       <DependentUpon>UC_Report.cs</DependentUpon>

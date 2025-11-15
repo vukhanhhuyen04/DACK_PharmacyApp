@@ -15,6 +15,17 @@ namespace PharmacyApp.UserControls
         public UC_Warehouse()
         {
             InitializeComponent();
+            // ví dụ sau này:
+            // btnAdd.Click += BtnAdd_Click;
+            // btnEdit.Click += BtnEdit_Click;
+            // btnDelete.Click += BtnDelete_Click;
+
+            // dgvWarehouse.AutoGenerateColumns = false; // nếu bạn bind bằng DataSource
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

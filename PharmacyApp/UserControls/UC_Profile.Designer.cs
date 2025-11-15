@@ -327,7 +327,7 @@
             this.dtpLicenseExpire.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpLicenseExpire.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpLicenseExpire.Name = "dtpLicenseExpire";
-            this.dtpLicenseExpire.Size = new System.Drawing.Size(160, 30);
+            this.dtpLicenseExpire.Size = new System.Drawing.Size(187, 30);
             this.dtpLicenseExpire.TabIndex = 21;
             this.dtpLicenseExpire.Value = new System.DateTime(2025, 11, 15, 10, 17, 36, 487);
             // 
@@ -353,7 +353,7 @@
             this.dtpLicenseIssue.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpLicenseIssue.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpLicenseIssue.Name = "dtpLicenseIssue";
-            this.dtpLicenseIssue.Size = new System.Drawing.Size(160, 30);
+            this.dtpLicenseIssue.Size = new System.Drawing.Size(187, 30);
             this.dtpLicenseIssue.TabIndex = 19;
             this.dtpLicenseIssue.Value = new System.DateTime(2025, 11, 15, 10, 17, 36, 487);
             // 
@@ -610,7 +610,7 @@
             this.dtpBirthDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpBirthDate.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpBirthDate.Name = "dtpBirthDate";
-            this.dtpBirthDate.Size = new System.Drawing.Size(180, 30);
+            this.dtpBirthDate.Size = new System.Drawing.Size(192, 30);
             this.dtpBirthDate.TabIndex = 6;
             this.dtpBirthDate.Value = new System.DateTime(2025, 11, 15, 10, 17, 36, 487);
             // 
