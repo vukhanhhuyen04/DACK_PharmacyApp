@@ -127,5 +127,11 @@ namespace PharmacyApp.Forms
         {
             LoadPage(new UC_POS());
         }
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_Profile());
+
+        }
     }
 }
