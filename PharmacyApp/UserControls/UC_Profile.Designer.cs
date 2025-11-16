@@ -500,6 +500,7 @@
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblAddress.ForeColor = System.Drawing.Color.Black;
             this.lblAddress.Location = new System.Drawing.Point(10, 210);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(58, 20);
@@ -531,6 +532,7 @@
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblEmail.ForeColor = System.Drawing.Color.Black;
             this.lblEmail.Location = new System.Drawing.Point(10, 170);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(49, 20);
@@ -563,6 +565,7 @@
             // 
             this.lblPhone.AutoSize = true;
             this.lblPhone.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblPhone.ForeColor = System.Drawing.Color.Black;
             this.lblPhone.Location = new System.Drawing.Point(10, 130);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(100, 20);
@@ -594,6 +597,7 @@
             // 
             this.lblGender.AutoSize = true;
             this.lblGender.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblGender.ForeColor = System.Drawing.Color.Black;
             this.lblGender.Location = new System.Drawing.Point(10, 90);
             this.lblGender.Name = "lblGender";
             this.lblGender.Size = new System.Drawing.Size(68, 20);
@@ -605,6 +609,7 @@
             this.dtpBirthDate.Checked = true;
             this.dtpBirthDate.FillColor = System.Drawing.Color.MediumSpringGreen;
             this.dtpBirthDate.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpBirthDate.ForeColor = System.Drawing.Color.Black;
             this.dtpBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpBirthDate.Location = new System.Drawing.Point(120, 48);
             this.dtpBirthDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
@@ -618,6 +623,7 @@
             // 
             this.lblBirthDate.AutoSize = true;
             this.lblBirthDate.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblBirthDate.ForeColor = System.Drawing.Color.Black;
             this.lblBirthDate.Location = new System.Drawing.Point(10, 50);
             this.lblBirthDate.Name = "lblBirthDate";
             this.lblBirthDate.Size = new System.Drawing.Size(77, 20);
@@ -650,6 +656,7 @@
             // 
             this.lblFullName.AutoSize = true;
             this.lblFullName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullName.ForeColor = System.Drawing.Color.Black;
             this.lblFullName.Location = new System.Drawing.Point(10, 10);
             this.lblFullName.Name = "lblFullName";
             this.lblFullName.Size = new System.Drawing.Size(76, 20);
@@ -740,7 +747,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(99)))), ((int)(((byte)(167)))));
             this.lblTitle.Location = new System.Drawing.Point(20, 10);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(283, 40);
+            this.lblTitle.Size = new System.Drawing.Size(342, 40);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Thông tin cá nhân";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
