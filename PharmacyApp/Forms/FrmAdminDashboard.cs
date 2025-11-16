@@ -134,33 +134,5 @@ namespace PharmacyApp.Forms
 
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            // Xác nhận đăng xuất
-            var result = MessageBox.Show(
-                "Bạn có chắc muốn đăng xuất?",
-                "Đăng xuất",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
-
-            if (result != DialogResult.Yes)
-                return;
-
-            // 1) Ẩn dashboard
-            this.Hide();
-
-            // 2) Mở lại form Login
-            using (var login = new FrmLogin())
-            {
-                login.StartPosition = FormStartPosition.CenterScreen;
-
-                // Khi Login đóng → đóng luôn Dashboard → thoát app
-                login.FormClosed += (s, args) => this.Close();
-
-                login.ShowDialog();
-            }
-        }
-
     }
 }

@@ -31,5 +31,10 @@ namespace PharmacyApp.UserControls
         {
 
         }
+
+        private void txtSDt_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
