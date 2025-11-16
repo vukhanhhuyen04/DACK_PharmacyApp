@@ -151,7 +151,6 @@ namespace PharmacyApp.Forms
                         "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                // ✅ Modal dialog: báo OK cho FrmLogin và đóng Register
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -161,6 +160,7 @@ namespace PharmacyApp.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         //protected override void OnShown(EventArgs e)
         //{
@@ -173,6 +173,18 @@ namespace PharmacyApp.Forms
         private void guna2Shapes1_Click(object sender, EventArgs e)
         {
 
+        }
+        private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (var f = new FrmRegister())
+            {
+                var result = f.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    MessageBox.Show("Bạn đã đăng ký thành công, hãy đăng nhập lại nhé!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         private void guna2Shapes2_Click(object sender, EventArgs e)
@@ -205,9 +217,6 @@ namespace PharmacyApp.Forms
 
         }
 
-        private void btnSignUp_Click_1(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
