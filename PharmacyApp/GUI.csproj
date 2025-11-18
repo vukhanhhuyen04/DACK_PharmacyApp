@@ -109,6 +109,12 @@
     <Compile Include="UserControls\UC_Dashboard.Designer.cs">
       <DependentUpon>UC_Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UC_Invoices.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_Invoices.Designer.cs">
+      <DependentUpon>UC_Invoices.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UC_POS.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\UC_Catalog.resx">
       <DependentUpon>UC_Catalog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Invoices.resx">
+      <DependentUpon>UC_Invoices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_POS.resx">
       <DependentUpon>UC_POS.cs</DependentUpon>

@@ -688,7 +688,7 @@
             this.txtStaffCode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtStaffCode.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtStaffCode.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtStaffCode.Location = new System.Drawing.Point(100, 200);
+            this.txtStaffCode.Location = new System.Drawing.Point(127, 200);
             this.txtStaffCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtStaffCode.Name = "txtStaffCode";
             this.txtStaffCode.PlaceholderText = "";
