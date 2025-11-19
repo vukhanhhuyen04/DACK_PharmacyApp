@@ -23,47 +23,29 @@ namespace PharmacyApp.Forms
         private DateTime _otpExpireTime;    // Thời gian hết hạn OTP
         private int _userId;                // ID user trong database
         private string _userEmail;          // Email của user
+        private bool _otpVerified = false;   // Đã xác thực OTP hay chưa
 
         public FrmForgotPass()
         {
             InitializeComponent();
+            //lblNewPass.Visible = false;
+            // lblConfirmPass.Visible = false;
+            txtNew.Visible = false;
+            txtConfirm.Visible = false;
+            btnSave.Visible = false;
 
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // 1) Kiểm tra đã gửi OTP chưa
-            if (string.IsNullOrEmpty(_otpCode) || _userId == 0)
+            // Không cho lưu nếu chưa xác thực OTP
+            if (!_otpVerified)
             {
-                MessageBox.Show("Vui lòng nhấn \"Gửi OTP\" trước khi đổi mật khẩu.",
+                MessageBox.Show("Vui lòng xác nhận OTP trước khi đổi mật khẩu.",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 2) Kiểm tra OTP
-            string otpInput = txtOtp.Text.Trim();
-            if (string.IsNullOrEmpty(otpInput))
-            {
-                MessageBox.Show("Vui lòng nhập mã OTP.", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (DateTime.Now > _otpExpireTime)
-            {
-                MessageBox.Show("Mã OTP đã hết hạn. Vui lòng yêu cầu mã mới.",
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!string.Equals(otpInput, _otpCode))
-            {
-                MessageBox.Show("Mã OTP không đúng.", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // 3) Kiểm tra mật khẩu mới
             string newPass = txtNew.Text.Trim();
             string confirm = txtConfirm.Text.Trim();
 
@@ -88,7 +70,6 @@ namespace PharmacyApp.Forms
                 return;
             }
 
-            // 4) Cập nhật mật khẩu trong database
             try
             {
                 using (SqlConnection conn = new SqlConnection(Program.ConnStr))
@@ -102,7 +83,6 @@ namespace PharmacyApp.Forms
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        // Nếu sau này bạn dùng hash thì đổi newPass -> HashPassword(newPass)
                         cmd.Parameters.AddWithValue("@Password", newPass);
                         cmd.Parameters.AddWithValue("@UserID", _userId);
 
@@ -129,6 +109,7 @@ namespace PharmacyApp.Forms
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -163,8 +144,10 @@ namespace PharmacyApp.Forms
 
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
-
+            this.Close();
         }
+
+
 
 
 
@@ -225,11 +208,16 @@ namespace PharmacyApp.Forms
 
                 MessageBox.Show("Đã gửi mã OTP tới email của bạn. Mã có hiệu lực trong 5 phút.",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                _otpVerified = false;
                 txtOtp.Enabled = true;
                 txtNew.Enabled = true;
                 txtConfirm.Enabled = true;
                 txtOtp.Focus();
+                //  lblNewPass.Visible = false;
+                //   lblConfirmPass.Visible = false;
+                txtNew.Visible = false;
+                txtConfirm.Visible = false;
+                btnSave.Visible = false;
             }
             catch (Exception ex)
             {
@@ -262,6 +250,54 @@ namespace PharmacyApp.Forms
 
             // ✅ CHỈ GỬI 1 LẦN RỒI THOI
             smtp.Send(mail);
+        }
+        private void btnVerifyOtp_Click(object sender, EventArgs e)
+        {
+            // 1) Kiểm tra đã gửi OTP chưa
+            if (string.IsNullOrEmpty(_otpCode) || _userId == 0)
+            {
+                MessageBox.Show("Vui lòng nhấn \"Gửi OTP\" trước.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2) Kiểm tra OTP
+            string otpInput = txtOtp.Text.Trim();
+            if (string.IsNullOrEmpty(otpInput))
+            {
+                MessageBox.Show("Vui lòng nhập mã OTP.", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (DateTime.Now > _otpExpireTime)
+            {
+                MessageBox.Show("Mã OTP đã hết hạn. Vui lòng yêu cầu mã mới.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!string.Equals(otpInput, _otpCode))
+            {
+                MessageBox.Show("Mã OTP không đúng.", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 3) OTP hợp lệ → cho đổi mật khẩu
+            _otpVerified = true;
+
+            MessageBox.Show("Xác thực OTP thành công. Hãy nhập mật khẩu mới.",
+                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Hiện phần nhập mật khẩu mới
+            //lblNewPass.Visible = true;
+            // lblConfirmPass.Visible = true;
+            txtNew.Visible = true;
+            txtConfirm.Visible = true;
+            btnSave.Visible = true;
+            btnVerifyOtp.Visible = false;
+            txtNew.Focus();
         }
 
 

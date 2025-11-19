@@ -18,6 +18,10 @@
             this.components = new System.ComponentModel.Container();
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.card = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnSave = new Guna.UI2.WinForms.Guna2Button();
+            this.txtConfirm = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtNew = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtOtp = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblBrandCare = new System.Windows.Forms.Label();
             this.lblBrand = new System.Windows.Forms.Label();
             this.txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
@@ -28,10 +32,7 @@
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
             this.btnClose = new Guna.UI2.WinForms.Guna2ControlBox();
-            this.txtOtp = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtNew = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtConfirm = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnSave = new Guna.UI2.WinForms.Guna2Button();
+            this.btnVerifyOtp = new Guna.UI2.WinForms.Guna2Button();
             this.card.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +47,7 @@
             this.card.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.card.BackColor = System.Drawing.Color.Transparent;
             this.card.BorderRadius = 12;
+            this.card.Controls.Add(this.btnVerifyOtp);
             this.card.Controls.Add(this.btnSave);
             this.card.Controls.Add(this.txtConfirm);
             this.card.Controls.Add(this.txtNew);
@@ -60,8 +62,65 @@
             this.card.Name = "card";
             this.card.ShadowDecoration.Enabled = true;
             this.card.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 6, 0, 12);
-            this.card.Size = new System.Drawing.Size(560, 442);
+            this.card.Size = new System.Drawing.Size(560, 342);
             this.card.TabIndex = 3;
+            // 
+            // btnSave
+            // 
+            this.btnSave.BorderRadius = 6;
+            this.btnSave.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10.8F);
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(296, 262);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(187, 40);
+            this.btnSave.TabIndex = 59;
+            this.btnSave.Text = "Lưu mật khẩu mới";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // txtConfirm
+            // 
+            this.txtConfirm.BorderRadius = 6;
+            this.txtConfirm.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtConfirm.DefaultText = "";
+            this.txtConfirm.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtConfirm.Location = new System.Drawing.Point(78, 196);
+            this.txtConfirm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtConfirm.Name = "txtConfirm";
+            this.txtConfirm.PasswordChar = '●';
+            this.txtConfirm.PlaceholderText = "Nhập lại mật khẩu mới";
+            this.txtConfirm.SelectedText = "";
+            this.txtConfirm.Size = new System.Drawing.Size(405, 48);
+            this.txtConfirm.TabIndex = 58;
+            // 
+            // txtNew
+            // 
+            this.txtNew.BorderRadius = 6;
+            this.txtNew.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtNew.DefaultText = "";
+            this.txtNew.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtNew.Location = new System.Drawing.Point(78, 140);
+            this.txtNew.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtNew.Name = "txtNew";
+            this.txtNew.PasswordChar = '●';
+            this.txtNew.PlaceholderText = "Mật khẩu mới";
+            this.txtNew.SelectedText = "";
+            this.txtNew.Size = new System.Drawing.Size(405, 48);
+            this.txtNew.TabIndex = 57;
+            // 
+            // txtOtp
+            // 
+            this.txtOtp.BorderRadius = 6;
+            this.txtOtp.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtOtp.DefaultText = "";
+            this.txtOtp.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtOtp.Location = new System.Drawing.Point(78, 140);
+            this.txtOtp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtOtp.Name = "txtOtp";
+            this.txtOtp.PlaceholderText = "Nhập mã OTP";
+            this.txtOtp.SelectedText = "";
+            this.txtOtp.Size = new System.Drawing.Size(405, 48);
+            this.txtOtp.TabIndex = 56;
             // 
             // lblBrandCare
             // 
@@ -91,7 +150,7 @@
             this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtUsername.DefaultText = "";
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtUsername.Location = new System.Drawing.Point(80, 116);
+            this.txtUsername.Location = new System.Drawing.Point(78, 84);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.PlaceholderText = "Email";
@@ -106,7 +165,7 @@
             this.btnSendOtp.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
             this.btnSendOtp.Font = new System.Drawing.Font("Segoe UI", 10.8F);
             this.btnSendOtp.ForeColor = System.Drawing.Color.White;
-            this.btnSendOtp.Location = new System.Drawing.Point(379, 372);
+            this.btnSendOtp.Location = new System.Drawing.Point(377, 262);
             this.btnSendOtp.Name = "btnSendOtp";
             this.btnSendOtp.Size = new System.Drawing.Size(106, 40);
             this.btnSendOtp.TabIndex = 4;
@@ -119,7 +178,7 @@
             this.btnCancel.FillColor = System.Drawing.Color.Gainsboro;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10.8F);
             this.btnCancel.ForeColor = System.Drawing.Color.DimGray;
-            this.btnCancel.Location = new System.Drawing.Point(80, 372);
+            this.btnCancel.Location = new System.Drawing.Point(78, 262);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 40);
             this.btnCancel.TabIndex = 5;
@@ -128,7 +187,7 @@
             // 
             // shapeTop2
             // 
-            this.shapeTop2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.shapeTop2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.shapeTop2.BorderThickness = 0;
             this.shapeTop2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(99)))), ((int)(((byte)(167)))));
@@ -152,7 +211,7 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.AutoSize = false;
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
@@ -191,62 +250,18 @@
             this.btnClose.Size = new System.Drawing.Size(35, 30);
             this.btnClose.TabIndex = 13;
             // 
-            // txtOtp
+            // btnVerifyOtp
             // 
-            this.txtOtp.BorderRadius = 6;
-            this.txtOtp.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtOtp.DefaultText = "";
-            this.txtOtp.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtOtp.Location = new System.Drawing.Point(80, 172);
-            this.txtOtp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtOtp.Name = "txtOtp";
-            this.txtOtp.PlaceholderText = "Nhập mã OTP";
-            this.txtOtp.SelectedText = "";
-            this.txtOtp.Size = new System.Drawing.Size(405, 48);
-            this.txtOtp.TabIndex = 56;
-            // 
-            // txtNew
-            // 
-            this.txtNew.BorderRadius = 6;
-            this.txtNew.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtNew.DefaultText = "";
-            this.txtNew.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtNew.Location = new System.Drawing.Point(80, 228);
-            this.txtNew.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtNew.Name = "txtNew";
-            this.txtNew.PasswordChar = '●';
-            this.txtNew.PlaceholderText = "Mật khẩu mới";
-            this.txtNew.SelectedText = "";
-            this.txtNew.Size = new System.Drawing.Size(405, 48);
-            this.txtNew.TabIndex = 57;
-            // 
-            // txtConfirm
-            // 
-            this.txtConfirm.BorderRadius = 6;
-            this.txtConfirm.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtConfirm.DefaultText = "";
-            this.txtConfirm.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtConfirm.Location = new System.Drawing.Point(80, 284);
-            this.txtConfirm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtConfirm.Name = "txtConfirm";
-            this.txtConfirm.PasswordChar = '●';
-            this.txtConfirm.PlaceholderText = "Nhập lại mật khẩu mới";
-            this.txtConfirm.SelectedText = "";
-            this.txtConfirm.Size = new System.Drawing.Size(405, 48);
-            this.txtConfirm.TabIndex = 58;
-            // 
-            // btnSave
-            // 
-            this.btnSave.BorderRadius = 6;
-            this.btnSave.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10.8F);
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(225, 372);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(106, 40);
-            this.btnSave.TabIndex = 59;
-            this.btnSave.Text = "Lưu mật khẩu mới";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnVerifyOtp.BorderRadius = 6;
+            this.btnVerifyOtp.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
+            this.btnVerifyOtp.Font = new System.Drawing.Font("Segoe UI", 10.8F);
+            this.btnVerifyOtp.ForeColor = System.Drawing.Color.White;
+            this.btnVerifyOtp.Location = new System.Drawing.Point(188, 262);
+            this.btnVerifyOtp.Name = "btnVerifyOtp";
+            this.btnVerifyOtp.Size = new System.Drawing.Size(184, 40);
+            this.btnVerifyOtp.TabIndex = 60;
+            this.btnVerifyOtp.Text = "Xác nhận OTP";
+            this.btnVerifyOtp.Click += new System.EventHandler(this.btnVerifyOtp_Click);
             // 
             // FrmForgotPass
             // 
@@ -288,5 +303,6 @@
         private Guna.UI2.WinForms.Guna2TextBox txtConfirm;
         private Guna.UI2.WinForms.Guna2TextBox txtNew;
         private Guna.UI2.WinForms.Guna2TextBox txtOtp;
+        private Guna.UI2.WinForms.Guna2Button btnVerifyOtp;
     }
 }
