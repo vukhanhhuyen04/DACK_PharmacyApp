@@ -133,6 +133,38 @@ namespace PharmacyApp.Forms
             LoadPage(new UC_Profile());
 
         }
+        private void btnInvoices_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_Invoices());
+        }
+
+        private void btnInvoices_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Bạn có chắc chắn muốn đăng xuất không?",
+                "Xác nhận",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                // Ẩn dashboard hiện tại
+                this.Hide();
+
+                // Mở lại form đăng nhập
+                FrmLogin frmLogin = new FrmLogin();
+                frmLogin.Show();
+
+                // Đóng dashboard khi logout hoàn tất
+                this.Close();
+            }
+        }
 
     }
 }
