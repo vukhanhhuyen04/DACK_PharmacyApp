@@ -214,6 +214,7 @@
             this.txtNew.Location = new System.Drawing.Point(80, 228);
             this.txtNew.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNew.Name = "txtNew";
+            this.txtNew.PasswordChar = '●';
             this.txtNew.PlaceholderText = "Mật khẩu mới";
             this.txtNew.SelectedText = "";
             this.txtNew.Size = new System.Drawing.Size(405, 48);
@@ -228,6 +229,7 @@
             this.txtConfirm.Location = new System.Drawing.Point(80, 284);
             this.txtConfirm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtConfirm.Name = "txtConfirm";
+            this.txtConfirm.PasswordChar = '●';
             this.txtConfirm.PlaceholderText = "Nhập lại mật khẩu mới";
             this.txtConfirm.SelectedText = "";
             this.txtConfirm.Size = new System.Drawing.Size(405, 48);
@@ -244,6 +246,7 @@
             this.btnSave.Size = new System.Drawing.Size(106, 40);
             this.btnSave.TabIndex = 59;
             this.btnSave.Text = "Lưu mật khẩu mới";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // FrmForgotPass
             // 

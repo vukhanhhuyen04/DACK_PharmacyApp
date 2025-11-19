@@ -32,8 +32,104 @@ namespace PharmacyApp.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // 1) Kiểm tra đã gửi OTP chưa
+            if (string.IsNullOrEmpty(_otpCode) || _userId == 0)
+            {
+                MessageBox.Show("Vui lòng nhấn \"Gửi OTP\" trước khi đổi mật khẩu.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            // 2) Kiểm tra OTP
+            string otpInput = txtOtp.Text.Trim();
+            if (string.IsNullOrEmpty(otpInput))
+            {
+                MessageBox.Show("Vui lòng nhập mã OTP.", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (DateTime.Now > _otpExpireTime)
+            {
+                MessageBox.Show("Mã OTP đã hết hạn. Vui lòng yêu cầu mã mới.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!string.Equals(otpInput, _otpCode))
+            {
+                MessageBox.Show("Mã OTP không đúng.", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 3) Kiểm tra mật khẩu mới
+            string newPass = txtNew.Text.Trim();
+            string confirm = txtConfirm.Text.Trim();
+
+            if (string.IsNullOrEmpty(newPass))
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu mới.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (newPass.Length < 6)
+            {
+                MessageBox.Show("Mật khẩu phải có ít nhất 6 ký tự.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!string.Equals(newPass, confirm))
+            {
+                MessageBox.Show("Mật khẩu xác nhận không khớp.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 4) Cập nhật mật khẩu trong database
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Program.ConnStr))
+                {
+                    conn.Open();
+
+                    string sql = @"
+                UPDATE Users
+                SET Password = @Password
+                WHERE UserID = @UserID";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        // Nếu sau này bạn dùng hash thì đổi newPass -> HashPassword(newPass)
+                        cmd.Parameters.AddWithValue("@Password", newPass);
+                        cmd.Parameters.AddWithValue("@UserID", _userId);
+
+                        int rows = cmd.ExecuteNonQuery();
+                        if (rows > 0)
+                        {
+                            MessageBox.Show("Đổi mật khẩu thành công. Hãy đăng nhập lại với mật khẩu mới.",
+                                "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không thể cập nhật mật khẩu. Vui lòng thử lại.",
+                                "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi cập nhật mật khẩu: " + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -147,12 +243,12 @@ namespace PharmacyApp.Forms
             // 👉 THAY BẰNG GMAIL CỦA BẠN
             string fromEmail = "hangthianhthu0048@gmail.com";
 
-            // 👉 THAY BẰNG APP PASSWORD 16 KÝ TỰ (KHÔNG PHẢI MẬT KHẨU ĐĂNG NHẬP)
+            // 👉 APP PASSWORD 16 KÝ TỰ (KHÔNG PHẢI MẬT KHẨU LOGIN)
             string fromPass = "pswc jvgu blwx yldx".Replace(" ", "");
 
             var mail = new MailMessage();
             mail.From = new MailAddress(fromEmail, "EternaMed"); // tên hiển thị
-            mail.To.Add(toEmail);                                  // email người nhận
+            mail.To.Add(toEmail);                                // email người nhận
             mail.Subject = "Mã OTP đặt lại mật khẩu";
             mail.Body =
                 $"Mã OTP của bạn là: {otpCode}\n\n" +
@@ -161,28 +257,13 @@ namespace PharmacyApp.Forms
             // Cấu hình SMTP cho Gmail
             var smtp = new SmtpClient("smtp.gmail.com", 587);
             smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential(fromEmail, fromPass);
 
-            // Gửi mail
+            // ✅ CHỈ GỬI 1 LẦN RỒI THOI
             smtp.Send(mail);
-            // 1) Tạo OTP
-            var rnd = new Random();
-            _otpCode = rnd.Next(100000, 999999).ToString();   // 6 số
-            _otpExpireTime = DateTime.Now.AddMinutes(5);      // hết hạn sau 5 phút
-
-            // 2) Gửi email
-            SendOtpEmail(_userEmail, _otpCode);
-            try
-            {
-                SendOtpEmail(_userEmail, _otpCode);
-                MessageBox.Show("Đã gửi mã OTP tới email của bạn.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi gửi email: " + ex.Message);
-            }
-
         }
+
 
 
     }
