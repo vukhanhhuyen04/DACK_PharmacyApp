@@ -36,6 +36,9 @@ namespace PharmacyApp.UserControls
             lstCustomerSuggest.DoubleClick += lstCustomerSuggest_DoubleClick;
             lstCustomerSuggest.KeyDown += lstCustomerSuggest_KeyDown;
         }
+        private int _lastInvoiceId;     // lưu lại mã HD vừa tạo (nếu muốn hiển thị)
+        private string _lastInvoiceCode // nếu muốn kiểu HD000001
+            => "HD" + _lastInvoiceId.ToString("D6");
         private void txtCustomerPhone_TextChanged(object sender, EventArgs e)
         {
             ShowCustomerSuggest(txtCustomerPhone.Text);
@@ -271,6 +274,9 @@ namespace PharmacyApp.UserControls
             try
             {
                 _currentInvoiceId = SaveInvoiceToDatabase(status);
+                MessageBox.Show(
+    $"Đã lưu hóa đơn.\nMã hóa đơn: {_lastInvoiceCode}\nTrạng thái: {status}",
+    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -339,7 +345,7 @@ SELECT SCOPE_IDENTITY();", conn, tran);
                         cmdInv.Parameters.AddWithValue("@Status", status);   // <-- thêm
 
                         int invoiceId = Convert.ToInt32(cmdInv.ExecuteScalar());
-
+                        _lastInvoiceId = invoiceId;
                         // chi tiết + trừ kho giữ nguyên như bạn đang làm
                         foreach (ListViewItem item in lvCart.Items)
                         {
