@@ -18,16 +18,20 @@
             this.components = new System.ComponentModel.Container();
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.card = new Guna.UI2.WinForms.Guna2Panel();
-            this.txtOld = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnSave = new Guna.UI2.WinForms.Guna2Button();
+            this.lblBrandCare = new System.Windows.Forms.Label();
+            this.lblBrand = new System.Windows.Forms.Label();
+            this.txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnSendOtp = new Guna.UI2.WinForms.Guna2Button();
             this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
             this.shapeTop2 = new Guna.UI2.WinForms.Guna2Shapes();
             this.sepTitle = new Guna.UI2.WinForms.Guna2Separator();
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
             this.btnClose = new Guna.UI2.WinForms.Guna2ControlBox();
-            this.lblBrand = new System.Windows.Forms.Label();
-            this.lblBrandCare = new System.Windows.Forms.Label();
+            this.txtOtp = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtNew = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtConfirm = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnSave = new Guna.UI2.WinForms.Guna2Button();
             this.card.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,45 +46,72 @@
             this.card.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.card.BackColor = System.Drawing.Color.Transparent;
             this.card.BorderRadius = 12;
+            this.card.Controls.Add(this.btnSave);
+            this.card.Controls.Add(this.txtConfirm);
+            this.card.Controls.Add(this.txtNew);
+            this.card.Controls.Add(this.txtOtp);
             this.card.Controls.Add(this.lblBrandCare);
             this.card.Controls.Add(this.lblBrand);
-            this.card.Controls.Add(this.txtOld);
-            this.card.Controls.Add(this.btnSave);
+            this.card.Controls.Add(this.txtUsername);
+            this.card.Controls.Add(this.btnSendOtp);
             this.card.Controls.Add(this.btnCancel);
             this.card.FillColor = System.Drawing.Color.WhiteSmoke;
             this.card.Location = new System.Drawing.Point(192, 253);
             this.card.Name = "card";
             this.card.ShadowDecoration.Enabled = true;
             this.card.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 6, 0, 12);
-            this.card.Size = new System.Drawing.Size(560, 303);
+            this.card.Size = new System.Drawing.Size(560, 442);
             this.card.TabIndex = 3;
             // 
-            // txtOld
+            // lblBrandCare
             // 
-            this.txtOld.BorderRadius = 6;
-            this.txtOld.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtOld.DefaultText = "";
-            this.txtOld.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtOld.Location = new System.Drawing.Point(80, 116);
-            this.txtOld.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtOld.Name = "txtOld";
-            this.txtOld.PlaceholderText = "Email";
-            this.txtOld.SelectedText = "";
-            this.txtOld.Size = new System.Drawing.Size(405, 48);
-            this.txtOld.TabIndex = 1;
-            this.txtOld.TextChanged += new System.EventHandler(this.txtOld_TextChanged);
+            this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold);
+            this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
+            this.lblBrandCare.Location = new System.Drawing.Point(289, 21);
+            this.lblBrandCare.Name = "lblBrandCare";
+            this.lblBrandCare.Size = new System.Drawing.Size(129, 50);
+            this.lblBrandCare.TabIndex = 55;
+            this.lblBrandCare.Text = "Med";
             // 
-            // btnSave
+            // lblBrand
             // 
-            this.btnSave.BorderRadius = 6;
-            this.btnSave.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10.8F);
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(305, 207);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(180, 40);
-            this.btnSave.TabIndex = 4;
-            this.btnSave.Text = "Gửi OTP";
+            this.lblBrand.AutoSize = true;
+            this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold);
+            this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
+            this.lblBrand.Location = new System.Drawing.Point(154, 21);
+            this.lblBrand.Name = "lblBrand";
+            this.lblBrand.Size = new System.Drawing.Size(129, 50);
+            this.lblBrand.TabIndex = 54;
+            this.lblBrand.Text = "Eterna";
+            this.lblBrand.Click += new System.EventHandler(this.lblBrand_Click);
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.BorderRadius = 6;
+            this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtUsername.DefaultText = "";
+            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtUsername.Location = new System.Drawing.Point(80, 116);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.PlaceholderText = "Email";
+            this.txtUsername.SelectedText = "";
+            this.txtUsername.Size = new System.Drawing.Size(405, 48);
+            this.txtUsername.TabIndex = 1;
+            this.txtUsername.TextChanged += new System.EventHandler(this.txtOld_TextChanged);
+            // 
+            // btnSendOtp
+            // 
+            this.btnSendOtp.BorderRadius = 6;
+            this.btnSendOtp.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
+            this.btnSendOtp.Font = new System.Drawing.Font("Segoe UI", 10.8F);
+            this.btnSendOtp.ForeColor = System.Drawing.Color.White;
+            this.btnSendOtp.Location = new System.Drawing.Point(379, 372);
+            this.btnSendOtp.Name = "btnSendOtp";
+            this.btnSendOtp.Size = new System.Drawing.Size(106, 40);
+            this.btnSendOtp.TabIndex = 4;
+            this.btnSendOtp.Text = "Gửi OTP";
+            this.btnSendOtp.Click += new System.EventHandler(this.btnSendOtp_Click);
             // 
             // btnCancel
             // 
@@ -88,7 +119,7 @@
             this.btnCancel.FillColor = System.Drawing.Color.Gainsboro;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10.8F);
             this.btnCancel.ForeColor = System.Drawing.Color.DimGray;
-            this.btnCancel.Location = new System.Drawing.Point(80, 207);
+            this.btnCancel.Location = new System.Drawing.Point(80, 372);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 40);
             this.btnCancel.TabIndex = 5;
@@ -160,27 +191,59 @@
             this.btnClose.Size = new System.Drawing.Size(35, 30);
             this.btnClose.TabIndex = 13;
             // 
-            // lblBrand
+            // txtOtp
             // 
-            this.lblBrand.AutoSize = true;
-            this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold);
-            this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
-            this.lblBrand.Location = new System.Drawing.Point(154, 21);
-            this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(129, 50);
-            this.lblBrand.TabIndex = 54;
-            this.lblBrand.Text = "Eterna";
-            this.lblBrand.Click += new System.EventHandler(this.lblBrand_Click);
+            this.txtOtp.BorderRadius = 6;
+            this.txtOtp.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtOtp.DefaultText = "";
+            this.txtOtp.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtOtp.Location = new System.Drawing.Point(80, 172);
+            this.txtOtp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtOtp.Name = "txtOtp";
+            this.txtOtp.PlaceholderText = "Nhập mã OTP";
+            this.txtOtp.SelectedText = "";
+            this.txtOtp.Size = new System.Drawing.Size(405, 48);
+            this.txtOtp.TabIndex = 56;
             // 
-            // lblBrandCare
+            // txtNew
             // 
-            this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold);
-            this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.lblBrandCare.Location = new System.Drawing.Point(289, 21);
-            this.lblBrandCare.Name = "lblBrandCare";
-            this.lblBrandCare.Size = new System.Drawing.Size(129, 50);
-            this.lblBrandCare.TabIndex = 55;
-            this.lblBrandCare.Text = "Med";
+            this.txtNew.BorderRadius = 6;
+            this.txtNew.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtNew.DefaultText = "";
+            this.txtNew.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtNew.Location = new System.Drawing.Point(80, 228);
+            this.txtNew.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtNew.Name = "txtNew";
+            this.txtNew.PlaceholderText = "Mật khẩu mới";
+            this.txtNew.SelectedText = "";
+            this.txtNew.Size = new System.Drawing.Size(405, 48);
+            this.txtNew.TabIndex = 57;
+            // 
+            // txtConfirm
+            // 
+            this.txtConfirm.BorderRadius = 6;
+            this.txtConfirm.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtConfirm.DefaultText = "";
+            this.txtConfirm.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtConfirm.Location = new System.Drawing.Point(80, 284);
+            this.txtConfirm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtConfirm.Name = "txtConfirm";
+            this.txtConfirm.PlaceholderText = "Nhập lại mật khẩu mới";
+            this.txtConfirm.SelectedText = "";
+            this.txtConfirm.Size = new System.Drawing.Size(405, 48);
+            this.txtConfirm.TabIndex = 58;
+            // 
+            // btnSave
+            // 
+            this.btnSave.BorderRadius = 6;
+            this.btnSave.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10.8F);
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(225, 372);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(106, 40);
+            this.btnSave.TabIndex = 59;
+            this.btnSave.Text = "Lưu mật khẩu mới";
             // 
             // FrmForgotPass
             // 
@@ -209,8 +272,8 @@
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
         private Guna.UI2.WinForms.Guna2Shapes shapeTop2;
         private Guna.UI2.WinForms.Guna2Panel card;
-        private Guna.UI2.WinForms.Guna2TextBox txtOld;
-        private Guna.UI2.WinForms.Guna2Button btnSave;
+        private Guna.UI2.WinForms.Guna2TextBox txtUsername;
+        private Guna.UI2.WinForms.Guna2Button btnSendOtp;
         private Guna.UI2.WinForms.Guna2Button btnCancel;
         private Guna.UI2.WinForms.Guna2Separator sepTitle;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTitle;
@@ -218,5 +281,9 @@
         private Guna.UI2.WinForms.Guna2ControlBox btnClose;
         private System.Windows.Forms.Label lblBrand;
         private System.Windows.Forms.Label lblBrandCare;
+        private Guna.UI2.WinForms.Guna2Button btnSave;
+        private Guna.UI2.WinForms.Guna2TextBox txtConfirm;
+        private Guna.UI2.WinForms.Guna2TextBox txtNew;
+        private Guna.UI2.WinForms.Guna2TextBox txtOtp;
     }
 }
