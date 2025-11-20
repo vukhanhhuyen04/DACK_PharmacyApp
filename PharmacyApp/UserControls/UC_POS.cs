@@ -171,7 +171,7 @@ namespace PharmacyApp.UserControls
                 pBank.Visible = true;
 
                 // Nếu có file QR sẵn thì load:
-                // pbQr.Image = Image.FromFile("qr_bank.png");
+                pbQr.Image = Properties.Resources.qr_bank1;
             }
         }
 
@@ -307,10 +307,21 @@ namespace PharmacyApp.UserControls
         {
             string customerName = txtCustomerName.Text.Trim();
             string symptom = txtSymptoms.Text.Trim();
-            string paymentMethod = cboPaymentMethod.SelectedItem.ToString();
+            string paymentMethod = cboPaymentMethod.SelectedItem?.ToString() ?? "";
 
-            decimal.TryParse(txtCashGiven.Text, out decimal cashGiven);
-            decimal.TryParse(txtChange.Text.Replace(".", "").Replace(",", ""), out decimal changeAmount);
+            // Chỉ dùng tiền khách đưa / tiền thối cho TIỀN MẶT
+            decimal cashGiven = 0m;
+            decimal changeAmount = 0m;
+
+            if (paymentMethod.StartsWith("Tiền mặt"))
+            {
+                decimal.TryParse(txtCashGiven.Text, out cashGiven);
+                decimal.TryParse(
+                    txtChange.Text.Replace(".", "").Replace(",", ""),
+                    out changeAmount
+                );
+            }
+
             int? customerId = GetOrCreateCustomerId();
 
             using (var conn = new SqlConnection(Program.ConnStr))
@@ -320,70 +331,96 @@ namespace PharmacyApp.UserControls
                 {
                     try
                     {
-                        var cmdInv = new SqlCommand(@"
+                        string sql = @"
 INSERT INTO Invoices
     (CreatedAt, CustomerId, CustomerName, Symptom, TotalAmount,
      PaymentMethod, CashGiven, ChangeAmount, Status)
 VALUES
     (@CreatedAt, @CustomerId, @CustomerName, @Symptom, @TotalAmount,
      @PaymentMethod, @CashGiven, @ChangeAmount, @Status);
-SELECT SCOPE_IDENTITY();", conn, tran);
+SELECT CAST(SCOPE_IDENTITY() AS int);";
 
-
-                        cmdInv.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
-                        cmdInv.Parameters.AddWithValue("@CustomerId",
-    (object)customerId ?? DBNull.Value);
-
-                        cmdInv.Parameters.AddWithValue("@CustomerName",
-                            string.IsNullOrEmpty(customerName) ? (object)DBNull.Value : customerName);
-                        cmdInv.Parameters.AddWithValue("@Symptom",
-                            string.IsNullOrEmpty(symptom) ? (object)DBNull.Value : symptom);
-                        cmdInv.Parameters.AddWithValue("@TotalAmount", _totalAmount);
-                        cmdInv.Parameters.AddWithValue("@PaymentMethod", paymentMethod);
-                        cmdInv.Parameters.AddWithValue("@CashGiven", cashGiven);
-                        cmdInv.Parameters.AddWithValue("@ChangeAmount", changeAmount);
-                        cmdInv.Parameters.AddWithValue("@Status", status);   // <-- thêm
-
-                        int invoiceId = Convert.ToInt32(cmdInv.ExecuteScalar());
-                        _lastInvoiceId = invoiceId;
-                        // chi tiết + trừ kho giữ nguyên như bạn đang làm
-                        foreach (ListViewItem item in lvCart.Items)
+                        using (var cmdInv = new SqlCommand(sql, conn, tran))
                         {
-                            int productId = int.Parse(item.SubItems[5].Text);  // ProductId hidden
+                            cmdInv.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
+                            cmdInv.Parameters.AddWithValue("@CustomerId",
+                                (object)customerId ?? DBNull.Value);
 
-                            int qty = int.Parse(item.SubItems[2].Text);
-                            decimal unitPrice = decimal.Parse(item.SubItems[3].Text,
-                                System.Globalization.NumberStyles.Any,
-                                System.Globalization.CultureInfo.CurrentCulture);
-                            decimal lineTotal = decimal.Parse(item.SubItems[4].Text,
-                                System.Globalization.NumberStyles.Any,
-                                System.Globalization.CultureInfo.CurrentCulture);
+                            cmdInv.Parameters.AddWithValue("@CustomerName",
+                                string.IsNullOrEmpty(customerName)
+                                    ? (object)DBNull.Value
+                                    : customerName);
 
-                            var cmdDet = new SqlCommand(@"
+                            cmdInv.Parameters.AddWithValue("@Symptom",
+                                string.IsNullOrEmpty(symptom)
+                                    ? (object)DBNull.Value
+                                    : symptom);
+
+                            cmdInv.Parameters.AddWithValue("@TotalAmount", _totalAmount);
+                            cmdInv.Parameters.AddWithValue("@PaymentMethod", paymentMethod);
+
+                            // 🔹 Chỉ add một lần duy nhất, không trùng tên
+                            if (paymentMethod.StartsWith("Tiền mặt"))
+                            {
+                                cmdInv.Parameters.AddWithValue("@CashGiven", cashGiven);
+                                cmdInv.Parameters.AddWithValue("@ChangeAmount", changeAmount);
+                            }
+                            else
+                            {
+                                cmdInv.Parameters.AddWithValue("@CashGiven", DBNull.Value);
+                                cmdInv.Parameters.AddWithValue("@ChangeAmount", DBNull.Value);
+                            }
+
+                            cmdInv.Parameters.AddWithValue("@Status", status);
+
+                            int invoiceId = (int)cmdInv.ExecuteScalar();
+                            _lastInvoiceId = invoiceId;
+
+                            // ===== Insert chi tiết hóa đơn & trừ kho =====
+                            foreach (ListViewItem item in lvCart.Items)
+                            {
+                                int productId = int.Parse(item.SubItems[5].Text);  // ProductId hidden
+                                int qty = int.Parse(item.SubItems[2].Text);
+
+                                decimal unitPrice = decimal.Parse(
+                                    item.SubItems[3].Text,
+                                    System.Globalization.NumberStyles.Any,
+                                    System.Globalization.CultureInfo.CurrentCulture);
+
+                                decimal lineTotal = decimal.Parse(
+                                    item.SubItems[4].Text,
+                                    System.Globalization.NumberStyles.Any,
+                                    System.Globalization.CultureInfo.CurrentCulture);
+
+                                using (var cmdDet = new SqlCommand(@"
 INSERT INTO InvoiceDetails
     (InvoiceId, ProductId, Quantity, UnitPrice, LineTotal)
 VALUES
     (@InvoiceId, @ProductId, @Quantity, @UnitPrice, @LineTotal);",
-                                conn, tran);
+                                    conn, tran))
+                                {
+                                    cmdDet.Parameters.AddWithValue("@InvoiceId", invoiceId);
+                                    cmdDet.Parameters.AddWithValue("@ProductId", productId);
+                                    cmdDet.Parameters.AddWithValue("@Quantity", qty);
+                                    cmdDet.Parameters.AddWithValue("@UnitPrice", unitPrice);
+                                    cmdDet.Parameters.AddWithValue("@LineTotal", lineTotal);
+                                    cmdDet.ExecuteNonQuery();
+                                }
 
-                            cmdDet.Parameters.AddWithValue("@InvoiceId", invoiceId);
-                            cmdDet.Parameters.AddWithValue("@ProductId", productId);
-                            cmdDet.Parameters.AddWithValue("@Quantity", qty);
-                            cmdDet.Parameters.AddWithValue("@UnitPrice", unitPrice);
-                            cmdDet.Parameters.AddWithValue("@LineTotal", lineTotal);
-                            cmdDet.ExecuteNonQuery();
+                                using (var cmdStock = new SqlCommand(@"
+UPDATE Products 
+SET StockQuantity = StockQuantity - @qty
+WHERE ProductId = @pid;", conn, tran))
+                                {
+                                    cmdStock.Parameters.AddWithValue("@qty", qty);
+                                    cmdStock.Parameters.AddWithValue("@pid", productId);
+                                    cmdStock.ExecuteNonQuery();
+                                }
+                            }
 
-                            var cmdStock = new SqlCommand(@"
-UPDATE Products SET StockQuantity = StockQuantity - @qty
-WHERE ProductId = @pid", conn, tran);
-
-                            cmdStock.Parameters.AddWithValue("@qty", qty);
-                            cmdStock.Parameters.AddWithValue("@pid", productId);
-                            cmdStock.ExecuteNonQuery();
+                            tran.Commit();
+                            return invoiceId;
                         }
-
-                        tran.Commit();
-                        return invoiceId;
                     }
                     catch
                     {
@@ -393,6 +430,7 @@ WHERE ProductId = @pid", conn, tran);
                 }
             }
         }
+
 
 
 
@@ -724,17 +762,52 @@ SELECT SCOPE_IDENTITY();";
 
         private void btnPaid_Click(object sender, EventArgs e)
         {
+            string paymentText = cboPaymentMethod.SelectedItem?.ToString() ?? "";
+
+            // ✅ Nếu CHƯA có hóa đơn nào lưu (_currentInvoiceId == null)
             if (_currentInvoiceId == null)
             {
-                MessageBox.Show("Chưa có hóa đơn nào để cập nhật.", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Trường hợp thanh toán bằng QR:
+                if (paymentText.StartsWith("Ngân hàng"))
+                {
+                    try
+                    {
+                        // Lưu thẳng 1 hóa đơn mới với trạng thái Paid
+                        _currentInvoiceId = SaveInvoiceToDatabase("Paid");
+
+                        MessageBox.Show(
+                            $"Đã lưu hóa đơn (QR). Mã: {_currentInvoiceId}",
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        ClearCurrentForm();  // nếu muốn tạo đơn mới luôn
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lưu hóa đơn thất bại:\n" + ex.Message,
+                            "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    // Tiền mặt mà chưa bấm Thanh toán
+                    MessageBox.Show(
+                        "Với thanh toán tiền mặt, hãy bấm nút 'Thanh toán' để lưu hóa đơn.",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 return;
             }
 
-            if (!decimal.TryParse(txtCashGiven.Text, out decimal cash))
-                cash = 0;
-            if (!decimal.TryParse(txtChange.Text.Replace(".", "").Replace(",", ""), out decimal change))
-                change = 0;
+            // ✅ Nếu ĐÃ có hóa đơn (_currentInvoiceId != null) → thường là hóa đơn QR trạng thái Pending
+            // hoặc bạn muốn cập nhật lại tiền mặt lần 2.
+            decimal cash = 0;
+            decimal change = 0;
+
+            decimal.TryParse(txtCashGiven.Text, out cash);
+            decimal.TryParse(
+                txtChange.Text.Replace(".", "").Replace(",", ""),
+                out change
+            );
 
             using (var conn = new SqlConnection(Program.ConnStr))
             {
@@ -758,7 +831,11 @@ WHERE InvoiceId = @Id";
 
             MessageBox.Show("Đã cập nhật trạng thái hóa đơn thành 'Paid'.",
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Nếu sau khi Paid bạn muốn clear luôn:
+            ClearCurrentForm();
         }
+
 
         private void btnPrintInvoice_Click(object sender, EventArgs e)
         {

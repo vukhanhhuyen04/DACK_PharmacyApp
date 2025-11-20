@@ -52,12 +52,14 @@
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlDetails = new Guna.UI2.WinForms.Guna2Panel();
             this.dgvDetails = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.lblDetailsTitle = new System.Windows.Forms.Label();
             this.colDrugCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDrugName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblDetailsTitle = new System.Windows.Forms.Label();
+            this.btnMarkPaid = new Guna.UI2.WinForms.Guna2Button();
+            this.btnCancelInvoice = new Guna.UI2.WinForms.Guna2Button();
             this.pnlHeader.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
@@ -329,8 +331,9 @@
             this.pnlDetails.Location = new System.Drawing.Point(0, 395);
             this.pnlDetails.Name = "pnlDetails";
             this.pnlDetails.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlDetails.Size = new System.Drawing.Size(1333, 218);
+            this.pnlDetails.Size = new System.Drawing.Size(1333, 435);
             this.pnlDetails.TabIndex = 4;
+            this.pnlDetails.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDetails_Paint);
             // 
             // dgvDetails
             // 
@@ -371,7 +374,7 @@
             this.dgvDetails.RowHeadersVisible = false;
             this.dgvDetails.RowHeadersWidth = 51;
             this.dgvDetails.RowTemplate.Height = 35;
-            this.dgvDetails.Size = new System.Drawing.Size(1313, 170);
+            this.dgvDetails.Size = new System.Drawing.Size(1313, 387);
             this.dgvDetails.TabIndex = 6;
             this.dgvDetails.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvDetails.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -394,18 +397,7 @@
             this.dgvDetails.ThemeStyle.RowsStyle.Height = 35;
             this.dgvDetails.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDetails.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // lblDetailsTitle
-            // 
-            this.lblDetailsTitle.AutoSize = true;
-            this.lblDetailsTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDetailsTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetailsTitle.ForeColor = System.Drawing.Color.Black;
-            this.lblDetailsTitle.Location = new System.Drawing.Point(10, 10);
-            this.lblDetailsTitle.Name = "lblDetailsTitle";
-            this.lblDetailsTitle.Size = new System.Drawing.Size(166, 28);
-            this.lblDetailsTitle.TabIndex = 5;
-            this.lblDetailsTitle.Text = "Chi tiết hóa đơn";
+            this.dgvDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetails_CellContentClick);
             // 
             // colDrugCode
             // 
@@ -451,16 +443,66 @@
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             // 
+            // lblDetailsTitle
+            // 
+            this.lblDetailsTitle.AutoSize = true;
+            this.lblDetailsTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblDetailsTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetailsTitle.ForeColor = System.Drawing.Color.Black;
+            this.lblDetailsTitle.Location = new System.Drawing.Point(10, 10);
+            this.lblDetailsTitle.Name = "lblDetailsTitle";
+            this.lblDetailsTitle.Size = new System.Drawing.Size(166, 28);
+            this.lblDetailsTitle.TabIndex = 5;
+            this.lblDetailsTitle.Text = "Chi tiết hóa đơn";
+            // 
+            // btnMarkPaid
+            // 
+            this.btnMarkPaid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMarkPaid.BorderRadius = 6;
+            this.btnMarkPaid.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnMarkPaid.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnMarkPaid.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnMarkPaid.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnMarkPaid.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(60)))), ((int)(((byte)(143)))));
+            this.btnMarkPaid.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMarkPaid.ForeColor = System.Drawing.Color.White;
+            this.btnMarkPaid.Location = new System.Drawing.Point(980, 845);
+            this.btnMarkPaid.Name = "btnMarkPaid";
+            this.btnMarkPaid.Size = new System.Drawing.Size(169, 36);
+            this.btnMarkPaid.TabIndex = 6;
+            this.btnMarkPaid.Text = "Đã thanh toán";
+            this.btnMarkPaid.Click += new System.EventHandler(this.btnMarkPaid_Click);
+            // 
+            // btnCancelInvoice
+            // 
+            this.btnCancelInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelInvoice.BorderRadius = 6;
+            this.btnCancelInvoice.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancelInvoice.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancelInvoice.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnCancelInvoice.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnCancelInvoice.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(60)))), ((int)(((byte)(143)))));
+            this.btnCancelInvoice.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelInvoice.ForeColor = System.Drawing.Color.White;
+            this.btnCancelInvoice.Location = new System.Drawing.Point(1170, 845);
+            this.btnCancelInvoice.Name = "btnCancelInvoice";
+            this.btnCancelInvoice.Size = new System.Drawing.Size(153, 36);
+            this.btnCancelInvoice.TabIndex = 7;
+            this.btnCancelInvoice.Text = "Hủy hóa đơn";
+            this.btnCancelInvoice.Click += new System.EventHandler(this.btnCancelInvoice_Click);
+            // 
             // UC_Invoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnCancelInvoice);
+            this.Controls.Add(this.btnMarkPaid);
             this.Controls.Add(this.pnlDetails);
             this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.pnlFilter);
             this.Controls.Add(this.pnlHeader);
             this.Name = "UC_Invoices";
-            this.Size = new System.Drawing.Size(1333, 621);
+            this.Size = new System.Drawing.Size(1333, 893);
             this.Load += new System.EventHandler(this.UC_Invoices_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
@@ -500,5 +542,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnitPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
+        private Guna.UI2.WinForms.Guna2Button btnMarkPaid;
+        private Guna.UI2.WinForms.Guna2Button btnCancelInvoice;
     }
 }

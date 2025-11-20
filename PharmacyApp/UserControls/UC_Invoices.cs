@@ -12,6 +12,7 @@ namespace PharmacyApp.UserControls
             InitializeComponent();
             dgvInvoices.SelectionChanged += dgvInvoices_SelectionChanged;
 
+
         }
 
         private void UC_Invoices_Load(object sender, EventArgs e)
@@ -172,5 +173,160 @@ namespace PharmacyApp.UserControls
                 e.Handled = true;
             }
         }
+
+        private void dgvDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void pnlDetails_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        private void btnMarkPaid_Click(object sender, EventArgs e)
+        {
+            if (dgvInvoices.CurrentRow == null)
+            {
+                MessageBox.Show("Vui lòng chọn một hóa đơn.", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Lấy dòng dữ liệu gốc (DataRowView) đang bind với dòng hiện tại
+            var rowView = dgvInvoices.CurrentRow.DataBoundItem as DataRowView;
+            if (rowView == null) return;
+
+            int invoiceId = Convert.ToInt32(rowView["InvoiceId"]);
+            string status = rowView["Status"]?.ToString() ?? "";
+
+            if (status == "Paid")
+            {
+                MessageBox.Show("Hóa đơn này đã ở trạng thái 'Paid'.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (status == "Canceled")
+            {
+                MessageBox.Show("Hóa đơn đã bị hủy, không thể chuyển sang 'Paid'.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var confirm = MessageBox.Show(
+                "Xác nhận đã nhận đủ tiền và chuyển hóa đơn sang trạng thái 'Paid'?",
+                "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
+            // Cập nhật DB
+            using (var conn = new SqlConnection(Program.ConnStr))
+            using (var cmd = new SqlCommand(@"
+        UPDATE Invoices
+        SET Status = 'Paid'
+        WHERE InvoiceId = @Id;", conn))
+            {
+                cmd.Parameters.AddWithValue("@Id", invoiceId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            // Cập nhật lại DataGridView hiện tại (khỏi load lại toàn bộ)
+            rowView["Status"] = "Paid";
+            rowView.EndEdit();
+            dgvInvoices.Refresh();
+
+            MessageBox.Show("Đã cập nhật hóa đơn sang trạng thái 'Paid'.",
+                "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnCancelInvoice_Click(object sender, EventArgs e)
+        {
+            if (dgvInvoices.CurrentRow == null)
+            {
+                MessageBox.Show("Vui lòng chọn một hóa đơn.", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var rowView = dgvInvoices.CurrentRow.DataBoundItem as DataRowView;
+            if (rowView == null) return;
+
+            int invoiceId = Convert.ToInt32(rowView["InvoiceId"]);
+            string status = rowView["Status"]?.ToString() ?? "";
+
+            if (status == "Canceled")
+            {
+                MessageBox.Show("Hóa đơn này đã bị hủy trước đó.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Tuỳ bạn: cho phép hủy cả Pending & Paid hay chỉ Pending
+            if (status == "Paid")
+            {
+                var warn = MessageBox.Show(
+                    "Hóa đơn đang ở trạng thái 'Paid'. Bạn có chắc muốn hủy và trả lại tồn kho?",
+                    "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (warn != DialogResult.Yes) return;
+            }
+            else
+            {
+                var confirm = MessageBox.Show(
+                    "Hủy hóa đơn này và trả lại tồn kho?",
+                    "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (confirm != DialogResult.Yes) return;
+            }
+
+            using (var conn = new SqlConnection(Program.ConnStr))
+            {
+                conn.Open();
+                using (var tran = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Trả lại tồn kho cho tất cả sản phẩm trong hóa đơn
+                        using (var cmdStock = new SqlCommand(@"
+UPDATE P
+SET P.StockQuantity = P.StockQuantity + D.Quantity
+FROM Products P
+JOIN InvoiceDetails D ON P.ProductId = D.ProductId
+WHERE D.InvoiceId = @Id;", conn, tran))
+                        {
+                            cmdStock.Parameters.AddWithValue("@Id", invoiceId);
+                            cmdStock.ExecuteNonQuery();
+                        }
+
+                        // 2. Đánh dấu hóa đơn là Canceled
+                        using (var cmdInv = new SqlCommand(@"
+UPDATE Invoices
+SET Status = 'Canceled'
+WHERE InvoiceId = @Id;", conn, tran))
+                        {
+                            cmdInv.Parameters.AddWithValue("@Id", invoiceId);
+                            cmdInv.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                    }
+                    catch
+                    {
+                        tran.Rollback();
+                        throw;
+                    }
+                }
+            }
+
+            // Cập nhật lại trên grid
+            rowView["Status"] = "Canceled";
+            rowView.EndEdit();
+            dgvInvoices.Refresh();
+
+            MessageBox.Show("Đã hủy hóa đơn và trả lại tồn kho.",
+                "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     }
 }
