@@ -86,6 +86,12 @@
     <Compile Include="Forms\FrmLogin.Designer.cs">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmProductAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmProductAdd.Designer.cs">
+      <DependentUpon>FrmProductAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmRegister.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,12 @@
     </Compile>
     <Compile Include="UserControls\UC_POS.Designer.cs">
       <DependentUpon>UC_POS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UC_ProductCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_ProductCard.Designer.cs">
+      <DependentUpon>UC_ProductCard.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UC_Profile.cs">
       <SubType>UserControl</SubType>
@@ -164,6 +176,9 @@
     <EmbeddedResource Include="Forms\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmProductAdd.resx">
+      <DependentUpon>FrmProductAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmRegister.resx">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_POS.resx">
       <DependentUpon>UC_POS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_ProductCard.resx">
+      <DependentUpon>UC_ProductCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_Profile.resx">
       <DependentUpon>UC_Profile.cs</DependentUpon>

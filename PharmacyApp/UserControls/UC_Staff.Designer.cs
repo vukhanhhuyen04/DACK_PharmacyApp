@@ -44,9 +44,7 @@
             this.btnEdit = new Guna.UI2.WinForms.Guna2Button();
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.btnToggleStatus = new Guna.UI2.WinForms.Guna2Button();
             this.btnTim = new Guna.UI2.WinForms.Guna2Button();
-            this.txtTrangthai = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.swTrangThai = new Guna.UI2.WinForms.Guna2ToggleSwitch();
             this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2TextBox4 = new Guna.UI2.WinForms.Guna2TextBox();
@@ -109,7 +107,6 @@
             this.guna2Panel2.Controls.Add(this.guna2TextBox5);
             this.guna2Panel2.Controls.Add(this.label1);
             this.guna2Panel2.Controls.Add(this.flowLayoutPanel1);
-            this.guna2Panel2.Controls.Add(this.txtTrangthai);
             this.guna2Panel2.Controls.Add(this.swTrangThai);
             this.guna2Panel2.Controls.Add(this.guna2ComboBox1);
             this.guna2Panel2.Controls.Add(this.guna2TextBox4);
@@ -157,8 +154,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F);
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(21, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 23);
@@ -172,7 +170,6 @@
             this.flowLayoutPanel1.Controls.Add(this.btnEdit);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Controls.Add(this.guna2Button1);
-            this.flowLayoutPanel1.Controls.Add(this.btnToggleStatus);
             this.flowLayoutPanel1.Controls.Add(this.btnTim);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 661);
@@ -245,22 +242,6 @@
             this.guna2Button1.Text = "Hủy";
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
-            // btnToggleStatus
-            // 
-            this.btnToggleStatus.BorderRadius = 6;
-            this.btnToggleStatus.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnToggleStatus.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnToggleStatus.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnToggleStatus.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnToggleStatus.FillColor = System.Drawing.Color.Orange;
-            this.btnToggleStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnToggleStatus.ForeColor = System.Drawing.Color.White;
-            this.btnToggleStatus.Location = new System.Drawing.Point(136, 45);
-            this.btnToggleStatus.Name = "btnToggleStatus";
-            this.btnToggleStatus.Size = new System.Drawing.Size(127, 36);
-            this.btnToggleStatus.TabIndex = 3;
-            this.btnToggleStatus.Text = "Đổi trạng thái";
-            // 
             // btnTim
             // 
             this.btnTim.BorderRadius = 6;
@@ -271,35 +252,21 @@
             this.btnTim.FillColor = System.Drawing.Color.Blue;
             this.btnTim.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnTim.ForeColor = System.Drawing.Color.White;
-            this.btnTim.Location = new System.Drawing.Point(269, 45);
+            this.btnTim.Location = new System.Drawing.Point(136, 45);
             this.btnTim.Name = "btnTim";
             this.btnTim.Size = new System.Drawing.Size(127, 36);
             this.btnTim.TabIndex = 5;
             this.btnTim.Text = "Tìm";
             // 
-            // txtTrangthai
-            // 
-            this.txtTrangthai.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTrangthai.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.txtTrangthai.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTrangthai.Location = new System.Drawing.Point(249, 565);
-            this.txtTrangthai.Name = "txtTrangthai";
-            this.txtTrangthai.Size = new System.Drawing.Size(70, 22);
-            this.txtTrangthai.TabIndex = 20;
-            this.txtTrangthai.Text = "Trạng thái";
-            // 
             // swTrangThai
             // 
-            this.swTrangThai.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.swTrangThai.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.swTrangThai.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.swTrangThai.CheckedState.InnerBorderColor = System.Drawing.Color.White;
             this.swTrangThai.CheckedState.InnerColor = System.Drawing.Color.White;
             this.swTrangThai.Location = new System.Drawing.Point(171, 551);
             this.swTrangThai.Name = "swTrangThai";
-            this.swTrangThai.Size = new System.Drawing.Size(215, 45);
+            this.swTrangThai.Size = new System.Drawing.Size(70, 45);
             this.swTrangThai.TabIndex = 19;
             this.swTrangThai.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.swTrangThai.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -450,8 +417,9 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label7.BackColor = System.Drawing.Color.White;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10.2F);
+            this.label7.ForeColor = System.Drawing.Color.Black;
             this.label7.Location = new System.Drawing.Point(21, 564);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(87, 23);
@@ -461,8 +429,9 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10.2F);
+            this.label6.ForeColor = System.Drawing.Color.Black;
             this.label6.Location = new System.Drawing.Point(21, 440);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(115, 23);
@@ -472,8 +441,9 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F);
+            this.label5.ForeColor = System.Drawing.Color.Black;
             this.label5.Location = new System.Drawing.Point(21, 504);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 23);
@@ -483,8 +453,9 @@
             // txtSDt
             // 
             this.txtSDt.AutoSize = true;
-            this.txtSDt.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtSDt.BackColor = System.Drawing.Color.White;
             this.txtSDt.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSDt.ForeColor = System.Drawing.Color.Black;
             this.txtSDt.Location = new System.Drawing.Point(21, 368);
             this.txtSDt.Name = "txtSDt";
             this.txtSDt.Size = new System.Drawing.Size(40, 23);
@@ -495,8 +466,9 @@
             // txtGioiTinh
             // 
             this.txtGioiTinh.AutoSize = true;
-            this.txtGioiTinh.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtGioiTinh.BackColor = System.Drawing.Color.White;
             this.txtGioiTinh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGioiTinh.ForeColor = System.Drawing.Color.Black;
             this.txtGioiTinh.Location = new System.Drawing.Point(21, 230);
             this.txtGioiTinh.Name = "txtGioiTinh";
             this.txtGioiTinh.Size = new System.Drawing.Size(75, 23);
@@ -506,8 +478,9 @@
             // txtHoTen
             // 
             this.txtHoTen.AutoSize = true;
-            this.txtHoTen.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtHoTen.BackColor = System.Drawing.Color.White;
             this.txtHoTen.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHoTen.ForeColor = System.Drawing.Color.Black;
             this.txtHoTen.Location = new System.Drawing.Point(21, 162);
             this.txtHoTen.Name = "txtHoTen";
             this.txtHoTen.Size = new System.Drawing.Size(62, 23);
@@ -517,8 +490,9 @@
             // txtEmail
             // 
             this.txtEmail.AutoSize = true;
-            this.txtEmail.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtEmail.BackColor = System.Drawing.Color.White;
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.ForeColor = System.Drawing.Color.Black;
             this.txtEmail.Location = new System.Drawing.Point(21, 296);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(51, 23);
@@ -529,13 +503,15 @@
             // 
             this.txtMaNV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMaNV.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.txtMaNV.BackColor = System.Drawing.Color.White;
             this.txtMaNV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaNV.ForeColor = System.Drawing.Color.Black;
             this.txtMaNV.Location = new System.Drawing.Point(21, 94);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(119, 29);
             this.txtMaNV.TabIndex = 3;
             this.txtMaNV.Text = "Mã nhân viên";
+            this.txtMaNV.Click += new System.EventHandler(this.txtMaNV_Click);
             // 
             // guna2DataGridView2
             // 
@@ -719,7 +695,6 @@
         private System.Windows.Forms.Label txtHoTen;
         private System.Windows.Forms.Label txtEmail;
         private System.Windows.Forms.Label txtMaNV;
-        private Guna.UI2.WinForms.Guna2HtmlLabel txtTrangthai;
         private Guna.UI2.WinForms.Guna2ToggleSwitch swTrangThai;
         private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox4;
@@ -730,7 +705,6 @@
         private Guna.UI2.WinForms.Guna2Button btnEdit;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button btnSave;
-        private Guna.UI2.WinForms.Guna2Button btnToggleStatus;
         private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView2;
         private Guna.UI2.WinForms.Guna2Button btnTim;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox5;

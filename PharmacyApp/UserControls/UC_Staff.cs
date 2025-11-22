@@ -36,5 +36,10 @@ namespace PharmacyApp.UserControls
         {
 
         }
+
+        private void txtMaNV_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -26,7 +26,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNote;
         private Guna.UI2.WinForms.Guna2TextBox txtNote;
 
-        private Guna.UI2.WinForms.Guna2DataGridView dgvLines;
+        private Guna.UI2.WinForms.Guna2DataGridView dgvReceiptList;
 
         private Guna.UI2.WinForms.Guna2Panel footerPanel;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTotal;
@@ -65,23 +65,24 @@
             this.dtpDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.lblNote = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtNote = new Guna.UI2.WinForms.Guna2TextBox();
-            this.dgvLines = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.dgvReceiptList = new Guna.UI2.WinForms.Guna2DataGridView();
             this.footerPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.lblTotal = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
             this.btnBack = new Guna.UI2.WinForms.Guna2Button();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLineTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExpiredDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRowNote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.headerPanel.SuspendLayout();
             this.infoPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReceiptList)).BeginInit();
             this.footerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -251,29 +252,30 @@
             this.txtNote.Size = new System.Drawing.Size(836, 28);
             this.txtNote.TabIndex = 9;
             // 
-            // dgvLines
+            // dgvReceiptList
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
-            this.dgvLines.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvLines.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvReceiptList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvReceiptList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvLines.ColumnHeadersHeight = 30;
-            this.dgvLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9});
+            this.dgvReceiptList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvReceiptList.ColumnHeadersHeight = 30;
+            this.dgvReceiptList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colProductCode,
+            this.colProductId,
+            this.colProductName,
+            this.colBarcode,
+            this.colQuantity,
+            this.colUnitPrice,
+            this.colLineTotal,
+            this.colBatchNo,
+            this.colExpiredDate,
+            this.colRowNote});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -281,37 +283,37 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLines.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvLines.Location = new System.Drawing.Point(24, 210);
-            this.dgvLines.Name = "dgvLines";
-            this.dgvLines.RowHeadersVisible = false;
-            this.dgvLines.RowHeadersWidth = 51;
-            this.dgvLines.RowTemplate.Height = 32;
-            this.dgvLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvLines.Size = new System.Drawing.Size(952, 360);
-            this.dgvLines.TabIndex = 0;
-            this.dgvLines.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvLines.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.dgvLines.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.dgvLines.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.dgvLines.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.dgvLines.ThemeStyle.BackColor = System.Drawing.Color.White;
-            this.dgvLines.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvLines.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.dgvLines.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvLines.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvLines.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.dgvLines.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvLines.ThemeStyle.HeaderStyle.Height = 30;
-            this.dgvLines.ThemeStyle.ReadOnly = false;
-            this.dgvLines.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvLines.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvLines.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvLines.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvLines.ThemeStyle.RowsStyle.Height = 32;
-            this.dgvLines.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvLines.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvReceiptList.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvReceiptList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvReceiptList.Location = new System.Drawing.Point(24, 210);
+            this.dgvReceiptList.Name = "dgvReceiptList";
+            this.dgvReceiptList.RowHeadersVisible = false;
+            this.dgvReceiptList.RowHeadersWidth = 51;
+            this.dgvReceiptList.RowTemplate.Height = 32;
+            this.dgvReceiptList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvReceiptList.Size = new System.Drawing.Size(952, 360);
+            this.dgvReceiptList.TabIndex = 0;
+            this.dgvReceiptList.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgvReceiptList.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.dgvReceiptList.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.dgvReceiptList.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.dgvReceiptList.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.dgvReceiptList.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.dgvReceiptList.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvReceiptList.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.dgvReceiptList.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvReceiptList.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvReceiptList.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.dgvReceiptList.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvReceiptList.ThemeStyle.HeaderStyle.Height = 30;
+            this.dgvReceiptList.ThemeStyle.ReadOnly = false;
+            this.dgvReceiptList.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgvReceiptList.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvReceiptList.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvReceiptList.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvReceiptList.ThemeStyle.RowsStyle.Height = 32;
+            this.dgvReceiptList.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvReceiptList.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
             // footerPanel
             // 
@@ -362,74 +364,82 @@
             this.btnBack.TabIndex = 2;
             this.btnBack.Text = "Quay lại";
             // 
-            // dataGridViewTextBoxColumn1
+            // colProductCode
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Mã SP";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.colProductCode.HeaderText = "Mã SP";
+            this.colProductCode.MinimumWidth = 6;
+            this.colProductCode.Name = "colProductCode";
             // 
-            // dataGridViewTextBoxColumn2
+            // colProductId
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Tên thuốc";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.colProductId.HeaderText = "ProductId";
+            this.colProductId.MinimumWidth = 6;
+            this.colProductId.Name = "colProductId";
+            this.colProductId.Visible = false;
             // 
-            // dataGridViewTextBoxColumn3
+            // colProductName
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Barcode";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.colProductName.HeaderText = "Tên thuốc";
+            this.colProductName.MinimumWidth = 6;
+            this.colProductName.Name = "colProductName";
             // 
-            // dataGridViewTextBoxColumn4
+            // colBarcode
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "SL";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.colBarcode.HeaderText = "Barcode";
+            this.colBarcode.MinimumWidth = 6;
+            this.colBarcode.Name = "colBarcode";
             // 
-            // dataGridViewTextBoxColumn5
+            // colQuantity
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Đơn giá";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.colQuantity.HeaderText = "SL";
+            this.colQuantity.MinimumWidth = 6;
+            this.colQuantity.Name = "colQuantity";
             // 
-            // dataGridViewTextBoxColumn6
+            // colUnitPrice
             // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Thành tiền";
-            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.colUnitPrice.HeaderText = "Đơn giá";
+            this.colUnitPrice.MinimumWidth = 6;
+            this.colUnitPrice.Name = "colUnitPrice";
             // 
-            // dataGridViewTextBoxColumn7
+            // colLineTotal
             // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Số lô";
-            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.colLineTotal.HeaderText = "Thành tiền";
+            this.colLineTotal.MinimumWidth = 6;
+            this.colLineTotal.Name = "colLineTotal";
             // 
-            // dataGridViewTextBoxColumn8
+            // colBatchNo
             // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Hạn dùng";
-            this.dataGridViewTextBoxColumn8.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.colBatchNo.HeaderText = "Số lô";
+            this.colBatchNo.MinimumWidth = 6;
+            this.colBatchNo.Name = "colBatchNo";
             // 
-            // dataGridViewTextBoxColumn9
+            // colExpiredDate
             // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Ghi chú";
-            this.dataGridViewTextBoxColumn9.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.colExpiredDate.HeaderText = "Hạn dùng";
+            this.colExpiredDate.MinimumWidth = 6;
+            this.colExpiredDate.Name = "colExpiredDate";
+            // 
+            // colRowNote
+            // 
+            this.colRowNote.HeaderText = "Ghi chú";
+            this.colRowNote.MinimumWidth = 6;
+            this.colRowNote.Name = "colRowNote";
             // 
             // UC_Receipt
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
-            this.Controls.Add(this.dgvLines);
+            this.Controls.Add(this.dgvReceiptList);
             this.Controls.Add(this.footerPanel);
             this.Controls.Add(this.infoPanel);
             this.Controls.Add(this.headerPanel);
             this.Name = "UC_Receipt";
             this.Size = new System.Drawing.Size(1000, 650);
+            this.Load += new System.EventHandler(this.UC_Receipt_Load);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
             this.infoPanel.ResumeLayout(false);
             this.infoPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReceiptList)).EndInit();
             this.footerPanel.ResumeLayout(false);
             this.footerPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -438,14 +448,15 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProductCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProductId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLineTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExpiredDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRowNote;
     }
 }
