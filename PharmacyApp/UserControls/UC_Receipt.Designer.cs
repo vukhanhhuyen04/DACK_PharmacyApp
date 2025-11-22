@@ -12,7 +12,6 @@
 
         private Guna.UI2.WinForms.Guna2Panel infoPanel;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblSupplier;
-        private Guna.UI2.WinForms.Guna2ComboBox cboSupplier;
 
         private Guna.UI2.WinForms.Guna2HtmlLabel lblWarehouse;
         private Guna.UI2.WinForms.Guna2ComboBox cboWarehouse;
@@ -51,12 +50,13 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.headerPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.infoPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.txtSupplier = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblSupplier = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.cboSupplier = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblWarehouse = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.cboWarehouse = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblVoucher = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -67,18 +67,24 @@
             this.txtNote = new Guna.UI2.WinForms.Guna2TextBox();
             this.dgvReceiptList = new Guna.UI2.WinForms.Guna2DataGridView();
             this.footerPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.BtnAddRow = new Guna.UI2.WinForms.Guna2Button();
+            this.btnDeleteRow = new Guna.UI2.WinForms.Guna2Button();
+            this.btnLuu = new Guna.UI2.WinForms.Guna2Button();
             this.lblTotal = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
             this.btnBack = new Guna.UI2.WinForms.Guna2Button();
             this.colProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnitName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLineTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExpiredDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStockAfter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRowNote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.headerPanel.SuspendLayout();
             this.infoPanel.SuspendLayout();
@@ -112,8 +118,8 @@
             // 
             // infoPanel
             // 
+            this.infoPanel.Controls.Add(this.txtSupplier);
             this.infoPanel.Controls.Add(this.lblSupplier);
-            this.infoPanel.Controls.Add(this.cboSupplier);
             this.infoPanel.Controls.Add(this.lblWarehouse);
             this.infoPanel.Controls.Add(this.cboWarehouse);
             this.infoPanel.Controls.Add(this.lblVoucher);
@@ -130,6 +136,20 @@
             this.infoPanel.Size = new System.Drawing.Size(1000, 148);
             this.infoPanel.TabIndex = 2;
             // 
+            // txtSupplier
+            // 
+            this.txtSupplier.BorderRadius = 6;
+            this.txtSupplier.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSupplier.DefaultText = "";
+            this.txtSupplier.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtSupplier.Location = new System.Drawing.Point(24, 42);
+            this.txtSupplier.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtSupplier.Name = "txtSupplier";
+            this.txtSupplier.PlaceholderText = "";
+            this.txtSupplier.SelectedText = "";
+            this.txtSupplier.Size = new System.Drawing.Size(256, 36);
+            this.txtSupplier.TabIndex = 10;
+            // 
             // lblSupplier
             // 
             this.lblSupplier.BackColor = System.Drawing.Color.Transparent;
@@ -139,21 +159,6 @@
             this.lblSupplier.Size = new System.Drawing.Size(94, 22);
             this.lblSupplier.TabIndex = 0;
             this.lblSupplier.Text = "Nhà cung cấp";
-            // 
-            // cboSupplier
-            // 
-            this.cboSupplier.BackColor = System.Drawing.Color.Transparent;
-            this.cboSupplier.BorderRadius = 6;
-            this.cboSupplier.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSupplier.FocusedColor = System.Drawing.Color.Empty;
-            this.cboSupplier.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboSupplier.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cboSupplier.ItemHeight = 30;
-            this.cboSupplier.Location = new System.Drawing.Point(24, 42);
-            this.cboSupplier.Name = "cboSupplier";
-            this.cboSupplier.Size = new System.Drawing.Size(250, 36);
-            this.cboSupplier.TabIndex = 1;
             // 
             // lblWarehouse
             // 
@@ -175,6 +180,8 @@
             this.cboWarehouse.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboWarehouse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboWarehouse.ItemHeight = 30;
+            this.cboWarehouse.Items.AddRange(new object[] {
+            "Kho chính"});
             this.cboWarehouse.Location = new System.Drawing.Point(300, 42);
             this.cboWarehouse.Name = "cboWarehouse";
             this.cboWarehouse.Size = new System.Drawing.Size(220, 36);
@@ -244,7 +251,7 @@
             this.txtNote.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtNote.DefaultText = "";
             this.txtNote.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtNote.Location = new System.Drawing.Point(24, 104);
+            this.txtNote.Location = new System.Drawing.Point(24, 108);
             this.txtNote.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNote.Name = "txtNote";
             this.txtNote.PlaceholderText = "Thông tin thêm về phiếu nhập...";
@@ -254,6 +261,7 @@
             // 
             // dgvReceiptList
             // 
+            this.dgvReceiptList.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
             this.dgvReceiptList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvReceiptList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -269,23 +277,27 @@
             this.colProductCode,
             this.colProductId,
             this.colProductName,
+            this.colUnitName,
             this.colBarcode,
             this.colQuantity,
             this.colUnitPrice,
+            this.colSalePrice,
             this.colLineTotal,
             this.colBatchNo,
             this.colExpiredDate,
+            this.colStockAfter,
             this.colRowNote});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReceiptList.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReceiptList.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvReceiptList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvReceiptList.Location = new System.Drawing.Point(24, 210);
+            this.dgvReceiptList.MultiSelect = false;
             this.dgvReceiptList.Name = "dgvReceiptList";
             this.dgvReceiptList.RowHeadersVisible = false;
             this.dgvReceiptList.RowHeadersWidth = 51;
@@ -317,6 +329,9 @@
             // 
             // footerPanel
             // 
+            this.footerPanel.Controls.Add(this.BtnAddRow);
+            this.footerPanel.Controls.Add(this.btnDeleteRow);
+            this.footerPanel.Controls.Add(this.btnLuu);
             this.footerPanel.Controls.Add(this.lblTotal);
             this.footerPanel.Controls.Add(this.btnSave);
             this.footerPanel.Controls.Add(this.btnBack);
@@ -327,6 +342,59 @@
             this.footerPanel.Padding = new System.Windows.Forms.Padding(20, 8, 20, 8);
             this.footerPanel.Size = new System.Drawing.Size(1000, 64);
             this.footerPanel.TabIndex = 1;
+            this.footerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.footerPanel_Paint);
+            // 
+            // BtnAddRow
+            // 
+            this.BtnAddRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnAddRow.BorderRadius = 6;
+            this.BtnAddRow.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.BtnAddRow.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.BtnAddRow.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.BtnAddRow.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.BtnAddRow.FillColor = System.Drawing.Color.Blue;
+            this.BtnAddRow.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BtnAddRow.ForeColor = System.Drawing.Color.White;
+            this.BtnAddRow.Location = new System.Drawing.Point(635, 11);
+            this.BtnAddRow.Name = "BtnAddRow";
+            this.BtnAddRow.Size = new System.Drawing.Size(110, 36);
+            this.BtnAddRow.TabIndex = 11;
+            this.BtnAddRow.Text = "Thêm";
+            // 
+            // btnDeleteRow
+            // 
+            this.btnDeleteRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteRow.BorderRadius = 6;
+            this.btnDeleteRow.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDeleteRow.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDeleteRow.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDeleteRow.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDeleteRow.FillColor = System.Drawing.Color.Blue;
+            this.btnDeleteRow.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnDeleteRow.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteRow.Location = new System.Drawing.Point(751, 11);
+            this.btnDeleteRow.Name = "btnDeleteRow";
+            this.btnDeleteRow.Size = new System.Drawing.Size(110, 36);
+            this.btnDeleteRow.TabIndex = 10;
+            this.btnDeleteRow.Text = "Xóa";
+            // 
+            // btnLuu
+            // 
+            this.btnLuu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLuu.BorderRadius = 6;
+            this.btnLuu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLuu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLuu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLuu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLuu.FillColor = System.Drawing.Color.Blue;
+            this.btnLuu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnLuu.ForeColor = System.Drawing.Color.White;
+            this.btnLuu.Location = new System.Drawing.Point(867, 11);
+            this.btnLuu.Name = "btnLuu";
+            this.btnLuu.Size = new System.Drawing.Size(110, 36);
+            this.btnLuu.TabIndex = 9;
+            this.btnLuu.Text = "Lưu";
+            this.btnLuu.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // lblTotal
             // 
@@ -383,8 +451,16 @@
             this.colProductName.MinimumWidth = 6;
             this.colProductName.Name = "colProductName";
             // 
+            // colUnitName
+            // 
+            this.colUnitName.DataPropertyName = "UnitName";
+            this.colUnitName.HeaderText = "Đơn vị tính";
+            this.colUnitName.MinimumWidth = 6;
+            this.colUnitName.Name = "colUnitName";
+            // 
             // colBarcode
             // 
+            this.colBarcode.DataPropertyName = "Barcode";
             this.colBarcode.HeaderText = "Barcode";
             this.colBarcode.MinimumWidth = 6;
             this.colBarcode.Name = "colBarcode";
@@ -401,11 +477,21 @@
             this.colUnitPrice.MinimumWidth = 6;
             this.colUnitPrice.Name = "colUnitPrice";
             // 
+            // colSalePrice
+            // 
+            dataGridViewCellStyle3.Format = "#,0";
+            this.colSalePrice.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colSalePrice.FillWeight = 160F;
+            this.colSalePrice.HeaderText = "Giá bán dự kiến";
+            this.colSalePrice.MinimumWidth = 6;
+            this.colSalePrice.Name = "colSalePrice";
+            // 
             // colLineTotal
             // 
             this.colLineTotal.HeaderText = "Thành tiền";
             this.colLineTotal.MinimumWidth = 6;
             this.colLineTotal.Name = "colLineTotal";
+            this.colLineTotal.ReadOnly = true;
             // 
             // colBatchNo
             // 
@@ -415,9 +501,18 @@
             // 
             // colExpiredDate
             // 
+            this.colExpiredDate.DataPropertyName = "ExpiredDate";
             this.colExpiredDate.HeaderText = "Hạn dùng";
             this.colExpiredDate.MinimumWidth = 6;
             this.colExpiredDate.Name = "colExpiredDate";
+            // 
+            // colStockAfter
+            // 
+            this.colStockAfter.FillWeight = 140F;
+            this.colStockAfter.HeaderText = "Tồn sau nhập";
+            this.colStockAfter.MinimumWidth = 6;
+            this.colStockAfter.Name = "colStockAfter";
+            this.colStockAfter.ReadOnly = true;
             // 
             // colRowNote
             // 
@@ -447,16 +542,22 @@
         }
 
         #endregion
-
+        private Guna.UI2.WinForms.Guna2Button btnLuu;
+        private Guna.UI2.WinForms.Guna2Button BtnAddRow;
+        private Guna.UI2.WinForms.Guna2Button btnDeleteRow;
+        private Guna.UI2.WinForms.Guna2TextBox txtSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnitPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSalePrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLineTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colExpiredDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStockAfter;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRowNote;
     }
 }

@@ -17,21 +17,8 @@
         private Guna.UI2.WinForms.Guna2Panel cardExpired;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblExpired;
         private Guna.UI2.WinForms.Guna2Panel infoPanel;
-
-        // ⬇️ Thanh button thao tác
-        private Guna.UI2.WinForms.Guna2Button btnAdd;
         private Guna.UI2.WinForms.Guna2Button btnEdit;
         private Guna.UI2.WinForms.Guna2Button btnDelete;
-
-        // ⬇️ Các cột DataGridView
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaSP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTenSP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNhaCungCap;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaNCC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSoLuongTon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colViTri;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHanDung;
 
         protected override void Dispose(bool disposing)
         {
@@ -58,10 +45,11 @@
             this.lblTotalProducts = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.cboLocation = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.btnAdd = new Guna.UI2.WinForms.Guna2Button();
             this.btnEdit = new Guna.UI2.WinForms.Guna2Button();
             this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
             this.dgvWarehouse = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.btnTim = new Guna.UI2.WinForms.Guna2Button();
+            this.btnAddReceipt = new Guna.UI2.WinForms.Guna2Button();
             this.colMaSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,8 +58,9 @@
             this.colSoLuongTon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colViTri = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHanDung = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnTim = new Guna.UI2.WinForms.Guna2Button();
-            this.btnAddReceipt = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.headerPanel.SuspendLayout();
             this.infoPanel.SuspendLayout();
             this.cardExpired.SuspendLayout();
@@ -121,6 +110,7 @@
             // 
             this.cardExpired.BackColor = System.Drawing.Color.Transparent;
             this.cardExpired.BorderRadius = 10;
+            this.cardExpired.Controls.Add(this.guna2HtmlLabel3);
             this.cardExpired.Controls.Add(this.lblExpired);
             this.cardExpired.FillColor = System.Drawing.Color.White;
             this.cardExpired.Location = new System.Drawing.Point(464, 15);
@@ -134,7 +124,7 @@
             // 
             this.lblExpired.BackColor = System.Drawing.Color.Transparent;
             this.lblExpired.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblExpired.Location = new System.Drawing.Point(16, 16);
+            this.lblExpired.Location = new System.Drawing.Point(59, 47);
             this.lblExpired.Name = "lblExpired";
             this.lblExpired.Size = new System.Drawing.Size(82, 25);
             this.lblExpired.TabIndex = 0;
@@ -144,6 +134,7 @@
             // 
             this.cardLowStock.BackColor = System.Drawing.Color.Transparent;
             this.cardLowStock.BorderRadius = 10;
+            this.cardLowStock.Controls.Add(this.guna2HtmlLabel2);
             this.cardLowStock.Controls.Add(this.lblLowStock);
             this.cardLowStock.FillColor = System.Drawing.Color.White;
             this.cardLowStock.Location = new System.Drawing.Point(244, 15);
@@ -157,7 +148,7 @@
             // 
             this.lblLowStock.BackColor = System.Drawing.Color.Transparent;
             this.lblLowStock.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblLowStock.Location = new System.Drawing.Point(16, 16);
+            this.lblLowStock.Location = new System.Drawing.Point(39, 47);
             this.lblLowStock.Name = "lblLowStock";
             this.lblLowStock.Size = new System.Drawing.Size(123, 25);
             this.lblLowStock.TabIndex = 0;
@@ -167,6 +158,7 @@
             // 
             this.cardTotalItems.BackColor = System.Drawing.Color.Transparent;
             this.cardTotalItems.BorderRadius = 10;
+            this.cardTotalItems.Controls.Add(this.guna2HtmlLabel1);
             this.cardTotalItems.Controls.Add(this.lblTotalProducts);
             this.cardTotalItems.FillColor = System.Drawing.Color.White;
             this.cardTotalItems.Location = new System.Drawing.Point(24, 15);
@@ -180,7 +172,7 @@
             // 
             this.lblTotalProducts.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalProducts.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblTotalProducts.Location = new System.Drawing.Point(16, 16);
+            this.lblTotalProducts.Location = new System.Drawing.Point(31, 47);
             this.lblTotalProducts.Name = "lblTotalProducts";
             this.lblTotalProducts.Size = new System.Drawing.Size(139, 25);
             this.lblTotalProducts.TabIndex = 0;
@@ -224,23 +216,9 @@
             this.cboLocation.TabIndex = 3;
             this.cboLocation.SelectedIndexChanged += new System.EventHandler(this.cboLocation_SelectedIndexChanged);
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.BorderRadius = 8;
-            this.btnAdd.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
-            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(889, 172);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(110, 36);
-            this.btnAdd.TabIndex = 4;
-            this.btnAdd.Text = "Thêm";
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
             // btnEdit
             // 
-            this.btnEdit.Anchor = this.btnAdd.Anchor;
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.BorderRadius = 8;
             this.btnEdit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9.5F);
@@ -253,7 +231,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Anchor = this.btnAdd.Anchor;
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.BorderRadius = 8;
             this.btnDelete.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(98)))), ((int)(((byte)(98)))));
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9.5F);
@@ -332,9 +310,40 @@
             this.dgvWarehouse.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvWarehouse.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // btnTim
+            // 
+            this.btnTim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTim.BorderRadius = 6;
+            this.btnTim.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnTim.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnTim.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnTim.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnTim.FillColor = System.Drawing.Color.Blue;
+            this.btnTim.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnTim.ForeColor = System.Drawing.Color.White;
+            this.btnTim.Location = new System.Drawing.Point(773, 172);
+            this.btnTim.Name = "btnTim";
+            this.btnTim.Size = new System.Drawing.Size(110, 36);
+            this.btnTim.TabIndex = 8;
+            this.btnTim.Text = "Tìm";
+            // 
+            // btnAddReceipt
+            // 
+            this.btnAddReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddReceipt.BorderRadius = 8;
+            this.btnAddReceipt.FillColor = System.Drawing.Color.DodgerBlue;
+            this.btnAddReceipt.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.btnAddReceipt.ForeColor = System.Drawing.Color.White;
+            this.btnAddReceipt.Location = new System.Drawing.Point(889, 172);
+            this.btnAddReceipt.Name = "btnAddReceipt";
+            this.btnAddReceipt.Size = new System.Drawing.Size(110, 36);
+            this.btnAddReceipt.TabIndex = 9;
+            this.btnAddReceipt.Text = "Nhập";
+            this.btnAddReceipt.Click += new System.EventHandler(this.btnAddReceipt_Click);
+            // 
             // colMaSP
             // 
-            this.colMaSP.DataPropertyName = "MaSP";
+            this.colMaSP.DataPropertyName = "ProductCode";
             this.colMaSP.HeaderText = "Mã SP";
             this.colMaSP.MinimumWidth = 6;
             this.colMaSP.Name = "colMaSP";
@@ -350,7 +359,7 @@
             // 
             // colTenSP
             // 
-            this.colTenSP.DataPropertyName = "TenSP";
+            this.colTenSP.DataPropertyName = "ProductName";
             this.colTenSP.HeaderText = "Tên thuốc";
             this.colTenSP.MinimumWidth = 6;
             this.colTenSP.Name = "colTenSP";
@@ -358,7 +367,7 @@
             // 
             // colNhaCungCap
             // 
-            this.colNhaCungCap.DataPropertyName = "TenNCC";
+            this.colNhaCungCap.DataPropertyName = "SupplierName";
             this.colNhaCungCap.HeaderText = "Nhà cung cấp";
             this.colNhaCungCap.MinimumWidth = 6;
             this.colNhaCungCap.Name = "colNhaCungCap";
@@ -366,7 +375,7 @@
             // 
             // colMaNCC
             // 
-            this.colMaNCC.DataPropertyName = "MaNCC";
+            this.colMaNCC.DataPropertyName = "SupplierCode";
             this.colMaNCC.HeaderText = "Mã NCC";
             this.colMaNCC.MinimumWidth = 6;
             this.colMaNCC.Name = "colMaNCC";
@@ -374,7 +383,7 @@
             // 
             // colSoLuongTon
             // 
-            this.colSoLuongTon.DataPropertyName = "SoLuongTon";
+            this.colSoLuongTon.DataPropertyName = "StockQuantity";
             this.colSoLuongTon.HeaderText = "Số lượng tồn";
             this.colSoLuongTon.MinimumWidth = 6;
             this.colSoLuongTon.Name = "colSoLuongTon";
@@ -382,7 +391,7 @@
             // 
             // colViTri
             // 
-            this.colViTri.DataPropertyName = "ViTri";
+            this.colViTri.DataPropertyName = "LocationName";
             this.colViTri.HeaderText = "Vị trí";
             this.colViTri.MinimumWidth = 6;
             this.colViTri.Name = "colViTri";
@@ -390,42 +399,41 @@
             // 
             // colHanDung
             // 
-            this.colHanDung.DataPropertyName = "HanDung";
+            this.colHanDung.DataPropertyName = "ExpiredDate";
             this.colHanDung.HeaderText = "Hạn dùng";
             this.colHanDung.MinimumWidth = 6;
             this.colHanDung.Name = "colHanDung";
             this.colHanDung.ReadOnly = true;
             // 
-            // btnTim
+            // guna2HtmlLabel1
             // 
-            this.btnTim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTim.BorderRadius = 6;
-            this.btnTim.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTim.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTim.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTim.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTim.FillColor = System.Drawing.Color.Blue;
-            this.btnTim.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnTim.ForeColor = System.Drawing.Color.White;
-            this.btnTim.Location = new System.Drawing.Point(657, 172);
-            this.btnTim.Name = "btnTim";
-            this.btnTim.Size = new System.Drawing.Size(110, 36);
-            this.btnTim.TabIndex = 8;
-            this.btnTim.Text = "Tìm";
+            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(38, 16);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(125, 25);
+            this.guna2HtmlLabel1.TabIndex = 1;
+            this.guna2HtmlLabel1.Text = "Tổng mặt hàng: ";
             // 
-            // btnAddReceipt
+            // guna2HtmlLabel2
             // 
-            this.btnAddReceipt.Anchor = this.btnAdd.Anchor;
-            this.btnAddReceipt.BorderRadius = 8;
-            this.btnAddReceipt.FillColor = System.Drawing.Color.DodgerBlue;
-            this.btnAddReceipt.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnAddReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnAddReceipt.Location = new System.Drawing.Point(773, 172);
-            this.btnAddReceipt.Name = "btnAddReceipt";
-            this.btnAddReceipt.Size = new System.Drawing.Size(110, 36);
-            this.btnAddReceipt.TabIndex = 9;
-            this.btnAddReceipt.Text = "Nhập";
-            this.btnAddReceipt.Click += new System.EventHandler(this.btnAddReceipt_Click);
+            this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(46, 16);
+            this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(109, 25);
+            this.guna2HtmlLabel2.TabIndex = 1;
+            this.guna2HtmlLabel2.Text = "Sắp hết hàng: ";
+            // 
+            // guna2HtmlLabel3
+            // 
+            this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(66, 16);
+            this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(68, 25);
+            this.guna2HtmlLabel3.TabIndex = 1;
+            this.guna2HtmlLabel3.Text = "Hết hạn: ";
             // 
             // UC_Warehouse
             // 
@@ -435,7 +443,6 @@
             this.Controls.Add(this.dgvWarehouse);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.cboLocation);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.infoPanel);
@@ -460,5 +467,16 @@
 
         private Guna.UI2.WinForms.Guna2Button btnTim;
         private Guna.UI2.WinForms.Guna2Button btnAddReceipt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaSP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTenSP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNhaCungCap;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaNCC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSoLuongTon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colViTri;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHanDung;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }

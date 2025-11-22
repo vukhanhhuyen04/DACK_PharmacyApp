@@ -22,7 +22,7 @@ namespace PharmacyApp.UserControls
             // btnEdit.Click += BtnEdit_Click;
             // btnDelete.Click += BtnDelete_Click;
 
-            // dgvWarehouse.AutoGenerateColumns = false; // nếu bạn bind bằng DataSource
+             dgvWarehouse.AutoGenerateColumns = false; // nếu bạn bind bằng DataSource
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -51,44 +51,24 @@ namespace PharmacyApp.UserControls
         private void LoadWarehouse(string keyword = null)
         {
             using (var conn = new SqlConnection(Program.ConnStr))
-            using (var cmd = new SqlCommand())
+            using (var da = new SqlDataAdapter(@"
+        SELECT 
+            p.ProductCode,                        -- Mã SP
+            p.Barcode,                            -- Barcode
+            p.ProductName,                        -- Tên thuốc
+            s.SupplierName,                       -- Nhà cung cấp
+            s.SupplierId AS SupplierCode,         -- Mã NCC (nếu cần)
+            p.StockQuantity,                      -- Số lượng tồn
+            N'Kho chính' AS LocationName,         -- Vị trí (kho chính)
+            p.ExpiredDate                         -- Hạn dùng
+        FROM Products p
+        LEFT JOIN Suppliers s 
+            ON p.SupplierId = s.SupplierId
+        ORDER BY p.ProductName", conn))
             {
-                cmd.Connection = conn;
-
-                string sql = @"
-SELECT 
-    P.ProductId,
-    P.ProductCode,
-    P.ProductName,
-    P.Unit,
-    P.UnitPrice,
-    P.StockQuantity,
-    P.Manufacturer,
-    P.ExpiredDate,
-    S.SupplierName
-FROM Products P
-LEFT JOIN Suppliers S ON S.SupplierId = P.SupplierId
-WHERE 1 = 1";
-
-                if (!string.IsNullOrWhiteSpace(keyword))
-                {
-                    sql += @"
-AND (
-        P.ProductCode LIKE @kw OR
-        P.ProductName LIKE @kw OR
-        S.SupplierName LIKE @kw
-    )";
-                    cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
-                }
-
-                cmd.CommandText = sql;
-
                 DataTable dt = new DataTable();
-                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                {
-                    da.Fill(dt);
-                }
-
+                da.Fill(dt);
+                dgvWarehouse.AutoGenerateColumns = false;     // RẤT QUAN TRỌNG
                 dgvWarehouse.DataSource = dt;
             }
         }
