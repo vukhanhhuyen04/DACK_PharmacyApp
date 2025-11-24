@@ -18,6 +18,7 @@
             this.components = new System.ComponentModel.Container();
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.card = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnVerifyOtp = new Guna.UI2.WinForms.Guna2Button();
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
             this.txtConfirm = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtNew = new Guna.UI2.WinForms.Guna2TextBox();
@@ -32,7 +33,6 @@
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
             this.btnClose = new Guna.UI2.WinForms.Guna2ControlBox();
-            this.btnVerifyOtp = new Guna.UI2.WinForms.Guna2Button();
             this.card.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +64,19 @@
             this.card.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 6, 0, 12);
             this.card.Size = new System.Drawing.Size(560, 342);
             this.card.TabIndex = 3;
+            // 
+            // btnVerifyOtp
+            // 
+            this.btnVerifyOtp.BorderRadius = 6;
+            this.btnVerifyOtp.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
+            this.btnVerifyOtp.Font = new System.Drawing.Font("Segoe UI", 10.8F);
+            this.btnVerifyOtp.ForeColor = System.Drawing.Color.White;
+            this.btnVerifyOtp.Location = new System.Drawing.Point(188, 262);
+            this.btnVerifyOtp.Name = "btnVerifyOtp";
+            this.btnVerifyOtp.Size = new System.Drawing.Size(184, 40);
+            this.btnVerifyOtp.TabIndex = 60;
+            this.btnVerifyOtp.Text = "Xác nhận OTP";
+            this.btnVerifyOtp.Click += new System.EventHandler(this.btnVerifyOtp_Click);
             // 
             // btnSave
             // 
@@ -126,9 +139,9 @@
             // 
             this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold);
             this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.lblBrandCare.Location = new System.Drawing.Point(289, 21);
+            this.lblBrandCare.Location = new System.Drawing.Point(269, 21);
             this.lblBrandCare.Name = "lblBrandCare";
-            this.lblBrandCare.Size = new System.Drawing.Size(129, 50);
+            this.lblBrandCare.Size = new System.Drawing.Size(103, 50);
             this.lblBrandCare.TabIndex = 55;
             this.lblBrandCare.Text = "Med";
             // 
@@ -187,7 +200,7 @@
             // 
             // shapeTop2
             // 
-            this.shapeTop2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.shapeTop2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.shapeTop2.BorderThickness = 0;
             this.shapeTop2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(99)))), ((int)(((byte)(167)))));
@@ -211,7 +224,7 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.AutoSize = false;
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
@@ -249,19 +262,6 @@
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(35, 30);
             this.btnClose.TabIndex = 13;
-            // 
-            // btnVerifyOtp
-            // 
-            this.btnVerifyOtp.BorderRadius = 6;
-            this.btnVerifyOtp.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
-            this.btnVerifyOtp.Font = new System.Drawing.Font("Segoe UI", 10.8F);
-            this.btnVerifyOtp.ForeColor = System.Drawing.Color.White;
-            this.btnVerifyOtp.Location = new System.Drawing.Point(188, 262);
-            this.btnVerifyOtp.Name = "btnVerifyOtp";
-            this.btnVerifyOtp.Size = new System.Drawing.Size(184, 40);
-            this.btnVerifyOtp.TabIndex = 60;
-            this.btnVerifyOtp.Text = "Xác nhận OTP";
-            this.btnVerifyOtp.Click += new System.EventHandler(this.btnVerifyOtp_Click);
             // 
             // FrmForgotPass
             // 

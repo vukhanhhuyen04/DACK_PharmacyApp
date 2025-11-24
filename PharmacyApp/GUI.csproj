@@ -195,6 +195,9 @@
     <EmbeddedResource Include="UserControls\UC_Catalog.resx">
       <DependentUpon>UC_Catalog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Dashboard.resx">
+      <DependentUpon>UC_Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_Invoices.resx">
       <DependentUpon>UC_Invoices.cs</DependentUpon>
     </EmbeddedResource>

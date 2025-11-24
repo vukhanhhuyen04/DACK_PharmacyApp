@@ -28,20 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pTop = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblBrandCare = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblBrand = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
-            this.lblApp = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
+            this.lblApp = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.pSide = new Guna.UI2.WinForms.Guna2Panel();
             this.btnInvoices = new Guna.UI2.WinForms.Guna2Button();
             this.btnPOS = new Guna.UI2.WinForms.Guna2Button();
@@ -50,6 +49,17 @@
             this.btnRevenue = new Guna.UI2.WinForms.Guna2Button();
             this.btnUsers = new Guna.UI2.WinForms.Guna2Button();
             this.btnCatalog = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel13 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.pContent = new Guna.UI2.WinForms.Guna2Panel();
             this.row2 = new System.Windows.Forms.TableLayoutPanel();
             this.cardSales = new Guna.UI2.WinForms.Guna2Panel();
@@ -100,13 +110,12 @@
             // 
             // pTop
             // 
-            this.pTop.Controls.Add(this.lblBrandCare);
             this.pTop.Controls.Add(this.lblBrand);
             this.pTop.Controls.Add(this.lblUserName);
             this.pTop.Controls.Add(this.btnLogout);
-            this.pTop.Controls.Add(this.lblApp);
             this.pTop.Controls.Add(this.btnSearch);
             this.pTop.Controls.Add(this.txtSearch);
+            this.pTop.Controls.Add(this.lblApp);
             this.pTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pTop.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
             this.pTop.Location = new System.Drawing.Point(0, 0);
@@ -114,29 +123,21 @@
             this.pTop.Size = new System.Drawing.Size(1209, 69);
             this.pTop.TabIndex = 0;
             // 
-            // lblBrandCare
-            // 
-            this.lblBrandCare.BackColor = System.Drawing.Color.Transparent;
-            this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.lblBrandCare.Location = new System.Drawing.Point(121, -1);
-            this.lblBrandCare.Name = "lblBrandCare";
-            this.lblBrandCare.Size = new System.Drawing.Size(79, 52);
-            this.lblBrandCare.TabIndex = 14;
-            this.lblBrandCare.Text = "Med";
-            this.lblBrandCare.Click += new System.EventHandler(this.lblBrandCare_Click);
-            // 
             // lblBrand
             // 
+            this.lblBrand.AutoSize = false;
             this.lblBrand.BackColor = System.Drawing.Color.Transparent;
             this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
-            this.lblBrand.Location = new System.Drawing.Point(12, -1);
+            this.lblBrand.Location = new System.Drawing.Point(12, 0);
             this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(110, 52);
+            this.lblBrand.Size = new System.Drawing.Size(186, 47);
             this.lblBrand.TabIndex = 13;
-            this.lblBrand.Text = "Eterna";
+            this.lblBrand.Text = "EternaMed";
             this.lblBrand.Click += new System.EventHandler(this.lblBrand_Click);
+            this.lblBrand.MouseEnter += new System.EventHandler(this.lblBrand_MouseEnter);
+            this.lblBrand.MouseLeave += new System.EventHandler(this.lblBrand_MouseLeave);
+            this.lblBrand.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblBrand_MouseMove);
             // 
             // lblUserName
             // 
@@ -167,18 +168,6 @@
             this.btnLogout.TabIndex = 11;
             this.btnLogout.Text = "Đăng xuất";
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // lblApp
-            // 
-            this.lblApp.BackColor = System.Drawing.Color.Transparent;
-            this.lblApp.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblApp.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblApp.Location = new System.Drawing.Point(23, 44);
-            this.lblApp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lblApp.Name = "lblApp";
-            this.lblApp.Size = new System.Drawing.Size(151, 25);
-            this.lblApp.TabIndex = 8;
-            this.lblApp.Text = "Quản lý Nhà thuốc";
             // 
             // btnSearch
             // 
@@ -219,6 +208,18 @@
             this.txtSearch.SelectedText = "";
             this.txtSearch.Size = new System.Drawing.Size(360, 34);
             this.txtSearch.TabIndex = 9;
+            // 
+            // lblApp
+            // 
+            this.lblApp.BackColor = System.Drawing.Color.Transparent;
+            this.lblApp.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApp.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblApp.Location = new System.Drawing.Point(22, 48);
+            this.lblApp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lblApp.Name = "lblApp";
+            this.lblApp.Size = new System.Drawing.Size(151, 25);
+            this.lblApp.TabIndex = 8;
+            this.lblApp.Text = "Quản lý Nhà thuốc";
             // 
             // pSide
             // 
@@ -383,6 +384,131 @@
             this.btnCatalog.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnCatalog.Click += new System.EventHandler(this.btnCatalog_Click);
             // 
+            // guna2HtmlLabel1
+            // 
+            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.Black;
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(12, 12);
+            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(168, 27);
+            this.guna2HtmlLabel1.TabIndex = 13;
+            this.guna2HtmlLabel1.Text = "Doanh số bán hàng";
+            // 
+            // guna2HtmlLabel2
+            // 
+            this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.Black;
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(12, 12);
+            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(169, 27);
+            this.guna2HtmlLabel2.TabIndex = 14;
+            this.guna2HtmlLabel2.Text = "Sản phẩm bán chạy";
+            // 
+            // guna2HtmlLabel4
+            // 
+            this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(141, 7);
+            this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(41, 47);
+            this.guna2HtmlLabel4.TabIndex = 2;
+            this.guna2HtmlLabel4.Text = "12";
+            // 
+            // guna2HtmlLabel5
+            // 
+            this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel5.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel5.Location = new System.Drawing.Point(28, 11);
+            this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
+            this.guna2HtmlLabel5.Size = new System.Drawing.Size(154, 19);
+            this.guna2HtmlLabel5.TabIndex = 1;
+            this.guna2HtmlLabel5.Text = "Thống Kê Tổng Thu Nhập";
+            this.guna2HtmlLabel5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // guna2HtmlLabel7
+            // 
+            this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel7.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel7.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.guna2HtmlLabel7.Location = new System.Drawing.Point(138, 8);
+            this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
+            this.guna2HtmlLabel7.Size = new System.Drawing.Size(41, 47);
+            this.guna2HtmlLabel7.TabIndex = 2;
+            this.guna2HtmlLabel7.Text = "12";
+            // 
+            // guna2HtmlLabel8
+            // 
+            this.guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel8.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel8.Location = new System.Drawing.Point(26, 11);
+            this.guna2HtmlLabel8.Name = "guna2HtmlLabel8";
+            this.guna2HtmlLabel8.Size = new System.Drawing.Size(161, 19);
+            this.guna2HtmlLabel8.TabIndex = 1;
+            this.guna2HtmlLabel8.Text = "Thống Kê Tổng Số Dược Sĩ";
+            this.guna2HtmlLabel8.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // guna2HtmlLabel10
+            // 
+            this.guna2HtmlLabel10.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel10.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel10.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.guna2HtmlLabel10.Location = new System.Drawing.Point(129, 7);
+            this.guna2HtmlLabel10.Name = "guna2HtmlLabel10";
+            this.guna2HtmlLabel10.Size = new System.Drawing.Size(41, 47);
+            this.guna2HtmlLabel10.TabIndex = 2;
+            this.guna2HtmlLabel10.Text = "12";
+            // 
+            // guna2HtmlLabel11
+            // 
+            this.guna2HtmlLabel11.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel11.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel11.Location = new System.Drawing.Point(-1, 11);
+            this.guna2HtmlLabel11.Name = "guna2HtmlLabel11";
+            this.guna2HtmlLabel11.Size = new System.Drawing.Size(215, 19);
+            this.guna2HtmlLabel11.TabIndex = 1;
+            this.guna2HtmlLabel11.Text = "Thống Kê Số Đơn Hàng Trong Ngày";
+            this.guna2HtmlLabel11.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // guna2HtmlLabel12
+            // 
+            this.guna2HtmlLabel12.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel12.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel12.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.guna2HtmlLabel12.Location = new System.Drawing.Point(136, 11);
+            this.guna2HtmlLabel12.Name = "guna2HtmlLabel12";
+            this.guna2HtmlLabel12.Size = new System.Drawing.Size(41, 47);
+            this.guna2HtmlLabel12.TabIndex = 2;
+            this.guna2HtmlLabel12.Text = "12";
+            // 
+            // guna2HtmlLabel13
+            // 
+            this.guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel13.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel13.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.guna2HtmlLabel13.Location = new System.Drawing.Point(17, 3);
+            this.guna2HtmlLabel13.Name = "guna2HtmlLabel13";
+            this.guna2HtmlLabel13.Size = new System.Drawing.Size(3, 2);
+            this.guna2HtmlLabel13.TabIndex = 1;
+            this.guna2HtmlLabel13.Text = null;
+            // 
+            // guna2HtmlLabel14
+            // 
+            this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel14.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel14.Location = new System.Drawing.Point(1, 11);
+            this.guna2HtmlLabel14.Name = "guna2HtmlLabel14";
+            this.guna2HtmlLabel14.Size = new System.Drawing.Size(211, 19);
+            this.guna2HtmlLabel14.TabIndex = 1;
+            this.guna2HtmlLabel14.Text = "Thống Kê Dược Sĩ Đang Hoạt Động";
+            this.guna2HtmlLabel14.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // pContent
             // 
             this.pContent.AutoSize = true;
@@ -395,8 +521,7 @@
             this.pContent.Name = "pContent";
             this.pContent.Padding = new System.Windows.Forms.Padding(18);
             this.pContent.Size = new System.Drawing.Size(1009, 484);
-            this.pContent.TabIndex = 2;
-            this.pContent.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
+            this.pContent.TabIndex = 4;
             // 
             // row2
             // 
@@ -432,17 +557,17 @@
             // 
             // chartSales
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartSales.ChartAreas.Add(chartArea1);
+            chartArea11.Name = "ChartArea1";
+            this.chartSales.ChartAreas.Add(chartArea11);
             this.chartSales.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartSales.Legends.Add(legend1);
+            legend11.Name = "Legend1";
+            this.chartSales.Legends.Add(legend11);
             this.chartSales.Location = new System.Drawing.Point(12, 39);
             this.chartSales.Name = "chartSales";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Sales";
-            this.chartSales.Series.Add(series1);
+            series11.ChartArea = "ChartArea1";
+            series11.Legend = "Legend1";
+            series11.Name = "Sales";
+            this.chartSales.Series.Add(series11);
             this.chartSales.Size = new System.Drawing.Size(446, 277);
             this.chartSales.TabIndex = 14;
             this.chartSales.Text = "chart1";
@@ -456,7 +581,7 @@
             this.lblSalesTitle.Location = new System.Drawing.Point(12, 12);
             this.lblSalesTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblSalesTitle.Name = "lblSalesTitle";
-            this.lblSalesTitle.Size = new System.Drawing.Size(168, 27);
+            this.lblSalesTitle.Size = new System.Drawing.Size(446, 27);
             this.lblSalesTitle.TabIndex = 13;
             this.lblSalesTitle.Text = "Doanh số bán hàng";
             // 
@@ -477,30 +602,30 @@
             // 
             // gvTopProducts
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.gvTopProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvTopProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.White;
+            this.gvTopProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvTopProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle32;
             this.gvTopProducts.ColumnHeadersHeight = 18;
             this.gvTopProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.gvTopProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvTopProducts.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle33.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvTopProducts.DefaultCellStyle = dataGridViewCellStyle33;
             this.gvTopProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvTopProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gvTopProducts.Location = new System.Drawing.Point(12, 39);
@@ -561,7 +686,7 @@
             this.lblTopTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTopTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblTopTitle.Name = "lblTopTitle";
-            this.lblTopTitle.Size = new System.Drawing.Size(169, 27);
+            this.lblTopTitle.Size = new System.Drawing.Size(457, 27);
             this.lblTopTitle.TabIndex = 14;
             this.lblTopTitle.Text = "Sản phẩm bán chạy";
             // 
@@ -623,7 +748,6 @@
             this.value4.Size = new System.Drawing.Size(41, 47);
             this.value4.TabIndex = 2;
             this.value4.Text = "12";
-            this.value4.Click += new System.EventHandler(this.value4_Click);
             // 
             // guna2HtmlLabel9
             // 
@@ -853,39 +977,50 @@
         private Guna.UI2.WinForms.Guna2Button btnInventory;
         private Guna.UI2.WinForms.Guna2Button btnRevenue;
         private Guna.UI2.WinForms.Guna2Button btnUsers;
-        private Guna.UI2.WinForms.Guna2Panel pContent;
-        private System.Windows.Forms.TableLayoutPanel row1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel cap1;
-        private Guna.UI2.WinForms.Guna2Panel cardMetric1;
-        private Guna.UI2.WinForms.Guna2Panel inner1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel title1;
-        private Guna.UI2.WinForms.Guna2Panel cardMetric4;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel6;
-        private Guna.UI2.WinForms.Guna2HtmlLabel value4;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
-        private Guna.UI2.WinForms.Guna2Panel cardMetric3;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
-        private Guna.UI2.WinForms.Guna2HtmlLabel value3;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
-        private Guna.UI2.WinForms.Guna2Panel cardMetric2;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel value2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
-        private Guna.UI2.WinForms.Guna2HtmlLabel value1;
-        private System.Windows.Forms.TableLayoutPanel row2;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblUserName;
+        private Guna.UI2.WinForms.Guna2Button btnPOS;
+        private Guna.UI2.WinForms.Guna2Button btnInvoices;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel10;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel11;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
+        private Guna.UI2.WinForms.Guna2Panel pContent;
+        private System.Windows.Forms.TableLayoutPanel row2;
         private Guna.UI2.WinForms.Guna2Panel cardSales;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblSalesTitle;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartSales;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblSalesTitle;
         private Guna.UI2.WinForms.Guna2Panel cardTopProducts;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTopTitle;
         private Guna.UI2.WinForms.Guna2DataGridView gvTopProducts;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTopTitle;
+        private System.Windows.Forms.TableLayoutPanel row1;
+        private Guna.UI2.WinForms.Guna2Panel cardMetric4;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel6;
+        private Guna.UI2.WinForms.Guna2HtmlLabel value4;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
+        private Guna.UI2.WinForms.Guna2Panel cardMetric2;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel value2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
+        private Guna.UI2.WinForms.Guna2Panel cardMetric3;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
+        private Guna.UI2.WinForms.Guna2HtmlLabel value3;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
+        private Guna.UI2.WinForms.Guna2Panel cardMetric1;
+        private Guna.UI2.WinForms.Guna2Panel inner1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel value1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel title1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel cap1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblBrand;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblBrandCare;
-        private Guna.UI2.WinForms.Guna2Button btnPOS;
-        private Guna.UI2.WinForms.Guna2Button btnInvoices;
+        //private System.Windows.Forms.Label lblBrand;
     }
 }
