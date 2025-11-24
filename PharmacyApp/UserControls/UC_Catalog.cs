@@ -45,6 +45,7 @@ namespace PharmacyApp.UserControls
                 };
 
                 flpProducts.Controls.Add(card);
+
             }
         }
     
