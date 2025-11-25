@@ -23,6 +23,7 @@ namespace PharmacyApp.UserControls
             // btnDelete.Click += BtnDelete_Click;
 
              dgvWarehouse.AutoGenerateColumns = false; // nếu bạn bind bằng DataSource
+            this.Load += UC_Warehouse_Load;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -64,6 +65,7 @@ namespace PharmacyApp.UserControls
         FROM Products p
         LEFT JOIN Suppliers s 
             ON p.SupplierId = s.SupplierId
+WHERE p.IsActive = 1  
         ORDER BY p.ProductName", conn))
             {
                 DataTable dt = new DataTable();
@@ -193,6 +195,17 @@ FROM Products", conn))
                     LoadWarehouse(txtSearch.Text);
                 }
             }
+        }
+
+        private void UC_Warehouse_Load(object sender, EventArgs e)
+        {
+            LoadStats();
+            LoadWarehouse();          // 🔴 Lần đầu mở Kho là có dữ liệu luôn
+        }
+        public void RefreshWarehouse()
+        {
+            LoadStats();
+            LoadWarehouse(txtSearch.Text);
         }
 
     }

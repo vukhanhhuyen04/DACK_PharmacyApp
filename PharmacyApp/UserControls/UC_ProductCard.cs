@@ -24,7 +24,7 @@ namespace PharmacyApp.UserControls
             label3.Click += Card_Click;
 
             guna2Button1.Click += BtnEdit_Click;   // nút ✎
-            guna2Button2.Click += BtnDelete_Click; // nút 🗑
+            //guna2Button2.Click += BtnDelete_Click; // nút 🗑
         }
 
         // ========================
@@ -96,5 +96,11 @@ namespace PharmacyApp.UserControls
         {
 
         }
+        //public string BarcodeText
+        //{
+        //    get => lblBarcode.Text;
+        //    set => lblBarcode.Text = value;
+        //}
+
     }
 }

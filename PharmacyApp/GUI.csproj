@@ -92,6 +92,12 @@
     <Compile Include="Forms\FrmProductAdd.Designer.cs">
       <DependentUpon>FrmProductAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmProductDeactivate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmProductDeactivate.Designer.cs">
+      <DependentUpon>FrmProductDeactivate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmProductDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +190,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmProductAdd.resx">
       <DependentUpon>FrmProductAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmProductDeactivate.resx">
+      <DependentUpon>FrmProductDeactivate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmProductDetail.resx">
+      <DependentUpon>FrmProductDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmRegister.resx">
       <DependentUpon>FrmRegister.cs</DependentUpon>

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 
 namespace PharmacyApp.Forms
 {
@@ -18,8 +12,8 @@ namespace PharmacyApp.Forms
         private readonly int _productId;
         private string ConnStr => Program.ConnStr;
 
-        // nếu cần giữ state riêng
-        private byte[] _currentImageBytes;
+        // lưu đường dẫn ảnh hiện tại (ImagePath trong DB)
+        private string _currentImagePath;
 
         public FrmProductDetail(int productId)
         {
@@ -34,6 +28,7 @@ namespace PharmacyApp.Forms
         }
 
         // ============== LOAD FORM ==============
+
         private void FrmProductDetail_Load(object sender, EventArgs e)
         {
             LoadCategories();
@@ -61,9 +56,9 @@ namespace PharmacyApp.Forms
         {
             using (var conn = new SqlConnection(ConnStr))
             using (var cmd = new SqlCommand(
-                @"SELECT TOP 1 ProductId, ProductName, CompanyName, Price, Barcode, CategoryId, Image
-                  FROM Products
-                  WHERE ProductId = @Id", conn))
+                @"SELECT ProductId, ProductCode, ProductName, Manufacturer, SalePrice, Barcode, ImagePath
+          FROM Products
+          WHERE ProductId = @Id", conn))
             {
                 cmd.Parameters.AddWithValue("@Id", _productId);
                 conn.Open();
@@ -79,29 +74,43 @@ namespace PharmacyApp.Forms
                     }
 
                     txtName.Text = rd["ProductName"].ToString();
-                    txtCompany.Text = rd["CompanyName"].ToString();
-                    txtPrice.Text = Convert.ToDecimal(rd["Price"]).ToString("0.##");
+                    txtCompany.Text = rd["Manufacturer"].ToString();
+                    txtPrice.Text = rd["SalePrice"] == DBNull.Value
+                                    ? "0"
+                                    : Convert.ToDecimal(rd["SalePrice"]).ToString("0.##");
                     txtBarcode.Text = rd["Barcode"].ToString();
 
-                    if (rd["CategoryId"] != DBNull.Value)
-                        cboCategory.SelectedValue = (int)rd["CategoryId"];
+                    _currentImagePath = rd["ImagePath"] == DBNull.Value
+                                        ? null
+                                        : rd["ImagePath"].ToString();
 
-                    if (rd["Image"] != DBNull.Value)
+                    if (!string.IsNullOrWhiteSpace(_currentImagePath) && File.Exists(_currentImagePath))
                     {
-                        _currentImageBytes = (byte[])rd["Image"];
-                        picImage.Image = BytesToImage(_currentImageBytes);
+                        try { picImage.Image = Image.FromFile(_currentImagePath); }
+                        catch { picImage.Image = null; }
                     }
                     else
                     {
-                        _currentImageBytes = null;
-                        picImage.Image = null; // hoặc ảnh default nếu có
-                        // picImage.Image = Properties.Resources.demo_medicine;
+                        picImage.Image = null;
                     }
+                }
+
+                // nếu bạn có bảng ProductCategories thì load CategoryId ở đây,
+                // còn chưa làm thì có thể bỏ đoạn dưới
+                using (var cmdCat = new SqlCommand(
+                    "SELECT TOP 1 CategoryId FROM ProductCategories WHERE ProductId = @Id", conn))
+                {
+                    cmdCat.Parameters.AddWithValue("@Id", _productId);
+                    var catIdObj = cmdCat.ExecuteScalar();
+                    if (catIdObj != null && catIdObj != DBNull.Value)
+                        cboCategory.SelectedValue = Convert.ToInt32(catIdObj);
                 }
             }
         }
 
+
         // ============== EDIT MODE ==============
+
         private void SetEditMode(bool editing)
         {
             txtName.ReadOnly = !editing;
@@ -123,45 +132,27 @@ namespace PharmacyApp.Forms
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            // load lại dữ liệu cũ từ DB
             LoadProduct();
             SetEditMode(false);
         }
 
         // ============== ẢNH ==============
+
         private void BtnBrowseImage_Click(object sender, EventArgs e)
         {
             using (var ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Ảnh|*.png;*.jpg;*.jpeg;*.bmp";
-
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
+                    _currentImagePath = ofd.FileName;      // lưu đường dẫn
                     picImage.Image = Image.FromFile(ofd.FileName);
                 }
             }
         }
 
-        private Image BytesToImage(byte[] bytes)
-        {
-            if (bytes == null || bytes.Length == 0) return null;
-            using (var ms = new MemoryStream(bytes))
-            {
-                return Image.FromStream(ms);
-            }
-        }
-
-        private byte[] ImageToBytes(Image img)
-        {
-            if (img == null) return null;
-            using (var ms = new MemoryStream())
-            {
-                img.Save(ms, img.RawFormat);
-                return ms.ToArray();
-            }
-        }
-
         // ============== SAVE ==============
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (!ValidateInput())
@@ -169,49 +160,72 @@ namespace PharmacyApp.Forms
 
             decimal price = decimal.Parse(txtPrice.Text.Trim());
             int categoryId = (int)cboCategory.SelectedValue;
-            byte[] imgBytes = ImageToBytes(picImage.Image);
 
             using (var conn = new SqlConnection(ConnStr))
-            using (var cmd = new SqlCommand(
-                @"UPDATE Products SET
-                        ProductName = @Name,
-                        CompanyName = @Company,
-                        Price       = @Price,
-                        Barcode     = @Barcode,
-                        CategoryId  = @CategoryId,
-                        Image       = @Image
-                  WHERE ProductId = @Id", conn))
             {
-                cmd.Parameters.AddWithValue("@Id", _productId);
-                cmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
-                cmd.Parameters.AddWithValue("@Company", txtCompany.Text.Trim());
-                cmd.Parameters.AddWithValue("@Price", price);
-                cmd.Parameters.AddWithValue("@Barcode", txtBarcode.Text.Trim());
-                cmd.Parameters.AddWithValue("@CategoryId", categoryId);
-
-                if (imgBytes == null)
-                    cmd.Parameters.Add("@Image", SqlDbType.VarBinary).Value = DBNull.Value;
-                else
-                    cmd.Parameters.Add("@Image", SqlDbType.VarBinary).Value = imgBytes;
-
-                try
+                conn.Open();
+                using (var tran = conn.BeginTransaction())
                 {
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        // 1. UPDATE bảng Products
+                        using (var cmd = new SqlCommand(
+                            @"UPDATE Products SET
+                            ProductName = @Name,
+                            Manufacturer = @Manufacturer,
+                            SalePrice    = @SalePrice,
+                            Barcode      = @Barcode,
+                            ImagePath    = @ImagePath
+                      WHERE ProductId = @Id", conn, tran))
+                        {
+                            cmd.Parameters.AddWithValue("@Id", _productId);
+                            cmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
+                            cmd.Parameters.AddWithValue("@Manufacturer", txtCompany.Text.Trim());
+                            cmd.Parameters.AddWithValue("@SalePrice", price);
+                            cmd.Parameters.AddWithValue("@Barcode", txtBarcode.Text.Trim());
 
-                    MessageBox.Show("Cập nhật sản phẩm thành công!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (string.IsNullOrWhiteSpace(_currentImagePath))
+                                cmd.Parameters.AddWithValue("@ImagePath", DBNull.Value);
+                            else
+                                cmd.Parameters.AddWithValue("@ImagePath", _currentImagePath);
 
-                    SetEditMode(false);
-                    this.DialogResult = DialogResult.OK; // để UC_Catalog reload nếu muốn
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("Lỗi khi cập nhật sản phẩm:\n" + ex.Message,
-                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // 2. (nếu dùng ProductCategories) cập nhật danh mục chính
+                        using (var cmdDel = new SqlCommand(
+                            "DELETE FROM ProductCategories WHERE ProductId = @Id", conn, tran))
+                        {
+                            cmdDel.Parameters.AddWithValue("@Id", _productId);
+                            cmdDel.ExecuteNonQuery();
+                        }
+
+                        using (var cmdIns = new SqlCommand(
+                            "INSERT INTO ProductCategories(ProductId, CategoryId) VALUES(@PId, @CId)", conn, tran))
+                        {
+                            cmdIns.Parameters.AddWithValue("@PId", _productId);
+                            cmdIns.Parameters.AddWithValue("@CId", categoryId);
+                            cmdIns.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+
+                        MessageBox.Show("Cập nhật sản phẩm thành công!", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        SetEditMode(false);
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    catch (SqlException ex)
+                    {
+                        tran.Rollback();
+                        MessageBox.Show("Lỗi khi cập nhật sản phẩm:\n" + ex.Message,
+                            "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
+
 
         private bool ValidateInput()
         {

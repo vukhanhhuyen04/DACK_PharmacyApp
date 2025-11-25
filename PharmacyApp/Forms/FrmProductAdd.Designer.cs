@@ -78,7 +78,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(882, 503);
             this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // txtMoTa
             // 
@@ -97,7 +96,6 @@
             this.txtMoTa.Multiline = true;
             this.txtMoTa.Name = "txtMoTa";
             this.txtMoTa.PlaceholderText = "";
-            this.txtMoTa.ReadOnly = true;
             this.txtMoTa.SelectedText = "";
             this.txtMoTa.Size = new System.Drawing.Size(611, 43);
             this.txtMoTa.TabIndex = 17;
@@ -150,7 +148,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(611, 406);
             this.tableLayoutPanel2.TabIndex = 0;
-            this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
             // txtSoLo
             // 
@@ -168,7 +165,6 @@
             this.txtSoLo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSoLo.Name = "txtSoLo";
             this.txtSoLo.PlaceholderText = "";
-            this.txtSoLo.ReadOnly = true;
             this.txtSoLo.SelectedText = "";
             this.txtSoLo.Size = new System.Drawing.Size(300, 48);
             this.txtSoLo.TabIndex = 15;
@@ -189,11 +185,9 @@
             this.txtGiaNhap.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtGiaNhap.Name = "txtGiaNhap";
             this.txtGiaNhap.PlaceholderText = "";
-            this.txtGiaNhap.ReadOnly = true;
             this.txtGiaNhap.SelectedText = "";
             this.txtGiaNhap.Size = new System.Drawing.Size(300, 42);
             this.txtGiaNhap.TabIndex = 14;
-            this.txtGiaNhap.TextChanged += new System.EventHandler(this.txtGiaNhap_TextChanged);
             // 
             // txtGiaBan
             // 
@@ -211,7 +205,6 @@
             this.txtGiaBan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtGiaBan.Name = "txtGiaBan";
             this.txtGiaBan.PlaceholderText = "";
-            this.txtGiaBan.ReadOnly = true;
             this.txtGiaBan.SelectedText = "";
             this.txtGiaBan.Size = new System.Drawing.Size(300, 42);
             this.txtGiaBan.TabIndex = 13;
@@ -232,11 +225,9 @@
             this.txtTenThuoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTenThuoc.Name = "txtTenThuoc";
             this.txtTenThuoc.PlaceholderText = "";
-            this.txtTenThuoc.ReadOnly = true;
             this.txtTenThuoc.SelectedText = "";
             this.txtTenThuoc.Size = new System.Drawing.Size(300, 42);
             this.txtTenThuoc.TabIndex = 10;
-            this.txtTenThuoc.Leave += new System.EventHandler(this.txtTenThuoc_Leave);
             // 
             // txtBarcode
             // 
@@ -284,7 +275,6 @@
             this.txtMaSP.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMaSP.Name = "txtMaSP";
             this.txtMaSP.PlaceholderText = "";
-            this.txtMaSP.ReadOnly = true;
             this.txtMaSP.SelectedText = "";
             this.txtMaSP.Size = new System.Drawing.Size(300, 42);
             this.txtMaSP.TabIndex = 1;
@@ -349,7 +339,6 @@
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Size = new System.Drawing.Size(300, 36);
             this.cboCategory.TabIndex = 11;
-            this.cboCategory.SelectedIndexChanged += new System.EventHandler(this.cboCategory_SelectedIndexChanged);
             // 
             // dtpExpireDate
             // 
@@ -373,7 +362,6 @@
             this.label8.Size = new System.Drawing.Size(43, 20);
             this.label8.TabIndex = 8;
             this.label8.Text = "Số lô";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label1
             // 
@@ -420,7 +408,6 @@
             this.btnCancel.Size = new System.Drawing.Size(120, 40);
             this.btnCancel.TabIndex = 20;
             this.btnCancel.Text = "Hủy";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnBrowseImage
             // 
@@ -436,7 +423,6 @@
             this.btnBrowseImage.Size = new System.Drawing.Size(140, 36);
             this.btnBrowseImage.TabIndex = 1;
             this.btnBrowseImage.Text = "Chọn hình";
-            this.btnBrowseImage.Click += new System.EventHandler(this.btnBrowseImage_Click);
             // 
             // picImage
             // 
@@ -463,7 +449,6 @@
             this.btnSave.Size = new System.Drawing.Size(120, 40);
             this.btnSave.TabIndex = 19;
             this.btnSave.Text = "Lưu";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // FrmProductAdd
             // 

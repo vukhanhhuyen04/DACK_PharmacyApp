@@ -484,9 +484,10 @@ WHERE ProductId = @pid;", conn, tran))
             {
                 conn.Open();
                 string sql = @"
-            SELECT ProductId, ProductCode, ProductName, UnitPrice, StockQuantity
-            FROM Products
-            WHERE ProductCode = @code";
+    SELECT ProductId, ProductCode, ProductName, UnitPrice, StockQuantity
+    FROM Products
+    WHERE ProductCode = @code
+      AND IsActive = 1";   // 🔴 chỉ lấy thuốc đang kinh doanh
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -510,6 +511,7 @@ WHERE ProductId = @pid;", conn, tran))
             }
             return null;
         }
+
         public class CustomerDto
         {
             public int CustomerId { get; set; }
@@ -550,7 +552,8 @@ WHERE ProductId = @pid;", conn, tran))
                 conn.Open();
                 string sql = @"
 SELECT ProductId, ProductCode, ProductName, Unit, UnitPrice, StockQuantity
-FROM Products";
+FROM Products
+WHERE IsActive = 1";   // 🔴 chỉ lấy thuốc đang kinh doanh
 
                 using (var da = new SqlDataAdapter(sql, conn))
                 {
@@ -560,6 +563,7 @@ FROM Products";
                 }
             }
         }
+
         private void lvCart_DoubleClick(object sender, EventArgs e)
         {
             if (lvCart.SelectedItems.Count == 0) return;

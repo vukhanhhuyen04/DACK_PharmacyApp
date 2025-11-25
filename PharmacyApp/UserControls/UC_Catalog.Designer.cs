@@ -21,6 +21,7 @@
             this.btnRefresh = new Guna.UI2.WinForms.Guna2Button();
             this.btnFind = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.chkShowInactive = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
@@ -46,7 +47,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "🔎 Tìm thuốc...";
             this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(579, 40);
+            this.txtSearch.Size = new System.Drawing.Size(475, 40);
             this.txtSearch.TabIndex = 0;
             // 
             // btnAdd
@@ -55,7 +56,7 @@
             this.btnAdd.FillColor = System.Drawing.Color.MediumSeaGreen;
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(902, 11);
+            this.btnAdd.Location = new System.Drawing.Point(1031, 14);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(110, 40);
             this.btnAdd.TabIndex = 1;
@@ -68,11 +69,12 @@
             this.btnRefresh.FillColor = System.Drawing.Color.DodgerBlue;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(1018, 11);
+            this.btnRefresh.Location = new System.Drawing.Point(1147, 14);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(101, 40);
             this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Làm mới";
+            this.btnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
             // 
             // btnFind
             // 
@@ -80,7 +82,7 @@
             this.btnFind.FillColor = System.Drawing.Color.SkyBlue;
             this.btnFind.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnFind.ForeColor = System.Drawing.Color.White;
-            this.btnFind.Location = new System.Drawing.Point(797, 11);
+            this.btnFind.Location = new System.Drawing.Point(926, 14);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(99, 40);
             this.btnFind.TabIndex = 4;
@@ -88,6 +90,7 @@
             // 
             // guna2Panel1
             // 
+            this.guna2Panel1.Controls.Add(this.chkShowInactive);
             this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.btnRefresh);
             this.guna2Panel1.Controls.Add(this.btnAdd);
@@ -99,6 +102,16 @@
             this.guna2Panel1.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.guna2Panel1.Size = new System.Drawing.Size(1263, 70);
             this.guna2Panel1.TabIndex = 5;
+            // 
+            // chkShowInactive
+            // 
+            this.chkShowInactive.AutoSize = true;
+            this.chkShowInactive.Location = new System.Drawing.Point(693, 31);
+            this.chkShowInactive.Name = "chkShowInactive";
+            this.chkShowInactive.Size = new System.Drawing.Size(227, 20);
+            this.chkShowInactive.TabIndex = 5;
+            this.chkShowInactive.Text = "Hiện sản phẩm ngưng kinh doanh";
+            this.chkShowInactive.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -266,5 +279,6 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button6;
         private Guna.UI2.WinForms.Guna2Button guna2Button7;
         private System.Windows.Forms.FlowLayoutPanel flpProducts;
+        private System.Windows.Forms.CheckBox chkShowInactive;
     }
 }
