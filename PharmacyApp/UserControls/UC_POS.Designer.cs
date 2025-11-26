@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pRoot = new Guna.UI2.WinForms.Guna2Panel();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.pLeft = new Guna.UI2.WinForms.Guna2Panel();
@@ -42,9 +42,16 @@
             this.colGiaBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTonKho = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cboCategory = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.cboCategoryPOS = new Guna.UI2.WinForms.Guna2ComboBox();
             this.pRight = new Guna.UI2.WinForms.Guna2Panel();
             this.pPayment = new Guna.UI2.WinForms.Guna2Panel();
+            this.txtSymptoms = new Guna.UI2.WinForms.Guna2TextBox();
+            this.lblSymptoms = new System.Windows.Forms.Label();
+            this.txtCustomerPhone = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lstCustomerSuggest = new System.Windows.Forms.ListBox();
+            this.lblCustomerName = new System.Windows.Forms.Label();
+            this.txtCustomerName = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnPrintInvoice = new Guna.UI2.WinForms.Guna2Button();
             this.btnPaid = new Guna.UI2.WinForms.Guna2Button();
             this.lblPaymentMethod = new System.Windows.Forms.Label();
@@ -74,13 +81,6 @@
             this.lblStaffCaption = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtSearchProduct = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtCustomerName = new Guna.UI2.WinForms.Guna2TextBox();
-            this.lblCustomerName = new System.Windows.Forms.Label();
-            this.lstCustomerSuggest = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCustomerPhone = new Guna.UI2.WinForms.Guna2TextBox();
-            this.lblSymptoms = new System.Windows.Forms.Label();
-            this.txtSymptoms = new Guna.UI2.WinForms.Guna2TextBox();
             this.pRoot.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.pLeft.SuspendLayout();
@@ -125,7 +125,7 @@
             this.pLeft.BorderRadius = 8;
             this.pLeft.Controls.Add(this.label1);
             this.pLeft.Controls.Add(this.gvProducts);
-            this.pLeft.Controls.Add(this.cboCategory);
+            this.pLeft.Controls.Add(this.cboCategoryPOS);
             this.pLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pLeft.FillColor = System.Drawing.Color.White;
             this.pLeft.Location = new System.Drawing.Point(3, 3);
@@ -149,16 +149,16 @@
             // 
             // gvProducts
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.gvProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.gvProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.gvProducts.ColumnHeadersHeight = 18;
             this.gvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.gvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -168,14 +168,14 @@
             this.colGiaBan,
             this.colTonKho,
             this.colProductId});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvProducts.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvProducts.DefaultCellStyle = dataGridViewCellStyle6;
             this.gvProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gvProducts.Location = new System.Drawing.Point(0, 60);
@@ -257,27 +257,27 @@
             this.colProductId.ReadOnly = true;
             this.colProductId.Visible = false;
             // 
-            // cboCategory
+            // cboCategoryPOS
             // 
-            this.cboCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboCategory.BackColor = System.Drawing.Color.Transparent;
-            this.cboCategory.BorderRadius = 6;
-            this.cboCategory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCategory.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboCategory.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboCategory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cboCategory.ItemHeight = 30;
-            this.cboCategory.Items.AddRange(new object[] {
+            this.cboCategoryPOS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboCategoryPOS.BackColor = System.Drawing.Color.Transparent;
+            this.cboCategoryPOS.BorderRadius = 6;
+            this.cboCategoryPOS.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboCategoryPOS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCategoryPOS.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboCategoryPOS.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboCategoryPOS.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboCategoryPOS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cboCategoryPOS.ItemHeight = 30;
+            this.cboCategoryPOS.Items.AddRange(new object[] {
             "Tất cả",
             "Giảm đau",
             "Hạ sốt",
             "Vitamin"});
-            this.cboCategory.Location = new System.Drawing.Point(189, 12);
-            this.cboCategory.Name = "cboCategory";
-            this.cboCategory.Size = new System.Drawing.Size(200, 36);
-            this.cboCategory.TabIndex = 0;
+            this.cboCategoryPOS.Location = new System.Drawing.Point(189, 12);
+            this.cboCategoryPOS.Name = "cboCategoryPOS";
+            this.cboCategoryPOS.Size = new System.Drawing.Size(200, 36);
+            this.cboCategoryPOS.TabIndex = 0;
             // 
             // pRight
             // 
@@ -315,6 +315,115 @@
             this.pPayment.Name = "pPayment";
             this.pPayment.Size = new System.Drawing.Size(600, 601);
             this.pPayment.TabIndex = 4;
+            // 
+            // txtSymptoms
+            // 
+            this.txtSymptoms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSymptoms.BorderRadius = 6;
+            this.txtSymptoms.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSymptoms.DefaultText = "";
+            this.txtSymptoms.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtSymptoms.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtSymptoms.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSymptoms.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSymptoms.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtSymptoms.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtSymptoms.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtSymptoms.Location = new System.Drawing.Point(323, 103);
+            this.txtSymptoms.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtSymptoms.Name = "txtSymptoms";
+            this.txtSymptoms.PlaceholderText = "";
+            this.txtSymptoms.SelectedText = "";
+            this.txtSymptoms.Size = new System.Drawing.Size(232, 41);
+            this.txtSymptoms.TabIndex = 24;
+            // 
+            // lblSymptoms
+            // 
+            this.lblSymptoms.AutoSize = true;
+            this.lblSymptoms.BackColor = System.Drawing.Color.White;
+            this.lblSymptoms.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSymptoms.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblSymptoms.Location = new System.Drawing.Point(24, 110);
+            this.lblSymptoms.Name = "lblSymptoms";
+            this.lblSymptoms.Size = new System.Drawing.Size(129, 28);
+            this.lblSymptoms.TabIndex = 23;
+            this.lblSymptoms.Text = "Triệu chứng:";
+            // 
+            // txtCustomerPhone
+            // 
+            this.txtCustomerPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCustomerPhone.BorderRadius = 6;
+            this.txtCustomerPhone.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtCustomerPhone.DefaultText = "";
+            this.txtCustomerPhone.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtCustomerPhone.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtCustomerPhone.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCustomerPhone.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCustomerPhone.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCustomerPhone.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtCustomerPhone.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCustomerPhone.Location = new System.Drawing.Point(325, 48);
+            this.txtCustomerPhone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCustomerPhone.Name = "txtCustomerPhone";
+            this.txtCustomerPhone.PlaceholderText = "";
+            this.txtCustomerPhone.SelectedText = "";
+            this.txtCustomerPhone.Size = new System.Drawing.Size(230, 41);
+            this.txtCustomerPhone.TabIndex = 22;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label3.Location = new System.Drawing.Point(24, 61);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 28);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "SĐT:";
+            // 
+            // lstCustomerSuggest
+            // 
+            this.lstCustomerSuggest.FormattingEnabled = true;
+            this.lstCustomerSuggest.ItemHeight = 16;
+            this.lstCustomerSuggest.Location = new System.Drawing.Point(324, 43);
+            this.lstCustomerSuggest.Name = "lstCustomerSuggest";
+            this.lstCustomerSuggest.Size = new System.Drawing.Size(231, 84);
+            this.lstCustomerSuggest.TabIndex = 20;
+            this.lstCustomerSuggest.Visible = false;
+            // 
+            // lblCustomerName
+            // 
+            this.lblCustomerName.AutoSize = true;
+            this.lblCustomerName.BackColor = System.Drawing.Color.White;
+            this.lblCustomerName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCustomerName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblCustomerName.Location = new System.Drawing.Point(24, 20);
+            this.lblCustomerName.Name = "lblCustomerName";
+            this.lblCustomerName.Size = new System.Drawing.Size(165, 28);
+            this.lblCustomerName.TabIndex = 19;
+            this.lblCustomerName.Text = "Tên khách hàng:";
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCustomerName.BorderRadius = 6;
+            this.txtCustomerName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtCustomerName.DefaultText = "";
+            this.txtCustomerName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtCustomerName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtCustomerName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCustomerName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCustomerName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCustomerName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtCustomerName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCustomerName.Location = new System.Drawing.Point(324, 8);
+            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.PlaceholderText = "";
+            this.txtCustomerName.SelectedText = "";
+            this.txtCustomerName.Size = new System.Drawing.Size(230, 41);
+            this.txtCustomerName.TabIndex = 18;
             // 
             // btnPrintInvoice
             // 
@@ -709,115 +818,8 @@
             this.txtSearchProduct.SelectedText = "";
             this.txtSearchProduct.Size = new System.Drawing.Size(722, 36);
             this.txtSearchProduct.TabIndex = 1;
-            // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomerName.BorderRadius = 6;
-            this.txtCustomerName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCustomerName.DefaultText = "";
-            this.txtCustomerName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtCustomerName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtCustomerName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCustomerName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCustomerName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCustomerName.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtCustomerName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCustomerName.Location = new System.Drawing.Point(324, 8);
-            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.PlaceholderText = "";
-            this.txtCustomerName.SelectedText = "";
-            this.txtCustomerName.Size = new System.Drawing.Size(230, 41);
-            this.txtCustomerName.TabIndex = 18;
-            // 
-            // lblCustomerName
-            // 
-            this.lblCustomerName.AutoSize = true;
-            this.lblCustomerName.BackColor = System.Drawing.Color.White;
-            this.lblCustomerName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomerName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblCustomerName.Location = new System.Drawing.Point(24, 20);
-            this.lblCustomerName.Name = "lblCustomerName";
-            this.lblCustomerName.Size = new System.Drawing.Size(165, 28);
-            this.lblCustomerName.TabIndex = 19;
-            this.lblCustomerName.Text = "Tên khách hàng:";
-            // 
-            // lstCustomerSuggest
-            // 
-            this.lstCustomerSuggest.FormattingEnabled = true;
-            this.lstCustomerSuggest.ItemHeight = 16;
-            this.lstCustomerSuggest.Location = new System.Drawing.Point(324, 43);
-            this.lstCustomerSuggest.Name = "lstCustomerSuggest";
-            this.lstCustomerSuggest.Size = new System.Drawing.Size(231, 84);
-            this.lstCustomerSuggest.TabIndex = 20;
-            this.lstCustomerSuggest.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.White;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(24, 61);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 28);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "SĐT:";
-            // 
-            // txtCustomerPhone
-            // 
-            this.txtCustomerPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomerPhone.BorderRadius = 6;
-            this.txtCustomerPhone.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCustomerPhone.DefaultText = "";
-            this.txtCustomerPhone.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtCustomerPhone.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtCustomerPhone.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCustomerPhone.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCustomerPhone.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCustomerPhone.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtCustomerPhone.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCustomerPhone.Location = new System.Drawing.Point(325, 48);
-            this.txtCustomerPhone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCustomerPhone.Name = "txtCustomerPhone";
-            this.txtCustomerPhone.PlaceholderText = "";
-            this.txtCustomerPhone.SelectedText = "";
-            this.txtCustomerPhone.Size = new System.Drawing.Size(230, 41);
-            this.txtCustomerPhone.TabIndex = 22;
-            // 
-            // lblSymptoms
-            // 
-            this.lblSymptoms.AutoSize = true;
-            this.lblSymptoms.BackColor = System.Drawing.Color.White;
-            this.lblSymptoms.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSymptoms.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblSymptoms.Location = new System.Drawing.Point(24, 110);
-            this.lblSymptoms.Name = "lblSymptoms";
-            this.lblSymptoms.Size = new System.Drawing.Size(129, 28);
-            this.lblSymptoms.TabIndex = 23;
-            this.lblSymptoms.Text = "Triệu chứng:";
-            // 
-            // txtSymptoms
-            // 
-            this.txtSymptoms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSymptoms.BorderRadius = 6;
-            this.txtSymptoms.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSymptoms.DefaultText = "";
-            this.txtSymptoms.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtSymptoms.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtSymptoms.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSymptoms.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSymptoms.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSymptoms.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSymptoms.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSymptoms.Location = new System.Drawing.Point(323, 103);
-            this.txtSymptoms.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtSymptoms.Name = "txtSymptoms";
-            this.txtSymptoms.PlaceholderText = "";
-            this.txtSymptoms.SelectedText = "";
-            this.txtSymptoms.Size = new System.Drawing.Size(232, 41);
-            this.txtSymptoms.TabIndex = 24;
+            this.txtSearchProduct.TextChanged += new System.EventHandler(this.txtSearchProduct_TextChanged);
+            this.txtSearchProduct.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchProduct_KeyDown);
             // 
             // UC_POS
             // 
@@ -853,7 +855,7 @@
         private Guna.UI2.WinForms.Guna2TextBox txtSearchProduct;
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private Guna.UI2.WinForms.Guna2Panel pLeft;
-        private Guna.UI2.WinForms.Guna2ComboBox cboCategory;
+        private Guna.UI2.WinForms.Guna2ComboBox cboCategoryPOS;
         private Guna.UI2.WinForms.Guna2Panel pRight;
         private Guna.UI2.WinForms.Guna2DataGridView gvProducts;
         private System.Windows.Forms.ListView lvCart;

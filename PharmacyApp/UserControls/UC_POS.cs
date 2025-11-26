@@ -36,6 +36,8 @@ namespace PharmacyApp.UserControls
             lstCustomerSuggest.DoubleClick += lstCustomerSuggest_DoubleClick;
             lstCustomerSuggest.KeyDown += lstCustomerSuggest_KeyDown;
         }
+        private int? _selectedCategoryId = null;
+
         private int _lastInvoiceId;     // lưu lại mã HD vừa tạo (nếu muốn hiển thị)
         private string _lastInvoiceCode // nếu muốn kiểu HD000001
             => "HD" + _lastInvoiceId.ToString("D6");
@@ -50,10 +52,34 @@ namespace PharmacyApp.UserControls
             {
                 lvCart.Columns.Add("ProductId", 0);
             }
-            LoadProducts();
+            
+            LoadCategoriesForPOS();
+            cboCategoryPOS.SelectedIndexChanged += cboCategoryPOS_SelectedIndexChanged;
+
+            _selectedCategoryId = null;
+            LoadProducts(null, null);
+
+           
+           
+
+           
             pCash.Visible = true;
             pBank.Visible = false;
         }
+        private void cboCategoryPOS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = (int)cboCategoryPOS.SelectedValue;
+            _selectedCategoryId = (id == 0) ? (int?)null : id;
+
+            string keyword = txtSearchProduct.Text.Trim();
+            LoadProducts(_selectedCategoryId, keyword);
+        }
+        private void txtSearchProduct_TextChanged(object sender, EventArgs e)
+        {
+            string kw = txtSearchProduct.Text.Trim();
+            LoadProducts(_selectedCategoryId, kw);
+        }
+
 
         private decimal _totalAmount = 0m;
         private int? _currentInvoiceId = null;   // mã hóa đơn hiện tại (vừa tạo / đang xử lý)
@@ -528,41 +554,76 @@ WHERE ProductId = @pid;", conn, tran))
         {
             if (e.KeyCode == Keys.Enter)
             {
-                string code = txtSearchProduct.Text.Trim();
+                e.Handled = true;
+                e.SuppressKeyPress = true;   // tránh kêu "ting"
 
-                if (string.IsNullOrEmpty(code))
+                // Nếu không có sản phẩm nào trong grid thì thôi
+                if (gvProducts.Rows.Count == 0)
                     return;
 
-                var p = GetProductByCode(code);
+                // Lấy dòng đang chọn, nếu chưa chọn thì lấy dòng đầu tiên
+                var row = gvProducts.CurrentRow ?? gvProducts.Rows[0];
 
-                if (p == null)
+                var p = new ProductDto
                 {
-                    MessageBox.Show("Không tìm thấy thuốc có mã: " + code);
-                    return;
-                }
+                    ProductId = Convert.ToInt32(row.Cells["colProductId"].Value),
+                    ProductCode = row.Cells["colMaThuoc"].Value.ToString(),
+                    ProductName = row.Cells["colTenThuoc"].Value.ToString(),
+                    UnitPrice = Convert.ToDecimal(row.Cells["colGiaBan"].Value),
+                    Stock = Convert.ToInt32(row.Cells["colTonKho"].Value)
+                };
 
                 AddToCart(p, 1);
-                txtSearchProduct.Clear();
+                txtSearchProduct.SelectAll();
             }
         }
-        private void LoadProducts()
+
+        private void LoadProducts(int? categoryId, string keyword)
         {
             using (var conn = new SqlConnection(Program.ConnStr))
+            using (var cmd = new SqlCommand())
             {
-                conn.Open();
-                string sql = @"
-SELECT ProductId, ProductCode, ProductName, Unit, UnitPrice, StockQuantity
-FROM Products
-WHERE IsActive = 1";   // 🔴 chỉ lấy thuốc đang kinh doanh
+                cmd.Connection = conn;
 
-                using (var da = new SqlDataAdapter(sql, conn))
+                cmd.CommandText = @"
+SELECT 
+    P.ProductId,
+    P.ProductCode,
+    P.ProductName,
+    P.Unit,
+    P.UnitPrice,
+    P.StockQuantity
+FROM Products P
+LEFT JOIN ProductCategories PC ON P.ProductId = PC.ProductId
+WHERE P.IsActive = 1
+AND (@CategoryId IS NULL OR PC.CategoryId = @CategoryId)
+AND (@kw IS NULL OR P.ProductCode LIKE @kw OR P.ProductName LIKE @kw)
+ORDER BY P.ProductName";
+
+                cmd.Parameters.Add("@CategoryId", SqlDbType.Int)
+                    .Value = (object)categoryId ?? DBNull.Value;
+
+                cmd.Parameters.Add("@kw", SqlDbType.NVarChar)
+                    .Value = string.IsNullOrWhiteSpace(keyword)
+                    ? (object)DBNull.Value
+                    : "%" + keyword + "%";
+
+                conn.Open();
+
+                using (var da = new SqlDataAdapter(cmd))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
+
                     gvProducts.DataSource = dt;
                 }
             }
         }
+
+
+
+
+
 
         private void lvCart_DoubleClick(object sender, EventArgs e)
         {
@@ -949,6 +1010,26 @@ WHERE InvoiceId = @Id", conn, tran);
             lstCustomerSuggest.Visible = true;
             lstCustomerSuggest.BringToFront();
         }
+        private void LoadCategoriesForPOS()
+        {
+            using (var conn = new SqlConnection(Program.ConnStr))
+            using (var cmd = new SqlCommand(
+                "SELECT CategoryId, CategoryName FROM Categories ORDER BY CategoryName", conn))
+            {
+                conn.Open();
+                var dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
 
+                // Thêm dòng "Tất cả"
+                var dtAll = dt.Clone();
+                dtAll.Rows.Add(0, "Tất cả");
+                foreach (DataRow r in dt.Rows)
+                    dtAll.ImportRow(r);
+
+                cboCategoryPOS.DataSource = dtAll;
+                cboCategoryPOS.DisplayMember = "CategoryName";
+                cboCategoryPOS.ValueMember = "CategoryId";
+            }
+        }
     }
 }

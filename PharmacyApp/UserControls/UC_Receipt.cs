@@ -10,6 +10,9 @@ namespace PharmacyApp.UserControls
         public int? EditingProductId { get; set; }
         private int _lastGeneratedNumber = 0;
         private static int _barcodeCounter = 1000000000;  // bắt đầu từ 10 số
+        private const int DEFAULT_CATEGORY_ID = 1;
+        private AutoCompleteStringCollection _productNameAutoComplete;
+        private DataTable _productTable;   // nếu muốn sau này fill thêm mã SP, đơn vị, giá...
 
         public UC_Receipt()
         {
@@ -24,6 +27,8 @@ namespace PharmacyApp.UserControls
 
             // nút Thêm dòng
             BtnAddRow.Click += BtnAddRow_Click;
+            // 🔹 AutoComplete cho tên thuốc
+            dgvReceiptList.EditingControlShowing += DgvReceiptList_EditingControlShowing;
         }
 
         // 🟢 Load nhà cung cấp
@@ -48,6 +53,58 @@ namespace PharmacyApp.UserControls
                 txtSupplier.AutoCompleteCustomSource = ac;
             }
         }
+        // 🟢 Load danh sách kho từ bảng Warehouses
+        // 🟢 Load danh sách kho từ bảng Warehouses
+        private void LoadWarehouses()
+        {
+            using (var conn = new SqlConnection(Program.ConnStr))
+            using (var da = new SqlDataAdapter(
+                "SELECT WarehouseId, WarehouseName FROM Warehouses ORDER BY WarehouseName", conn))
+            {
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cboWarehouse.DataSource = dt;
+                cboWarehouse.DisplayMember = "WarehouseName";
+                cboWarehouse.ValueMember = "WarehouseId";
+
+                // Chọn mặc định: Kho chính nếu có
+                if (dt.Rows.Count > 0)
+                {
+                    // ❌ SAI: dt.Select("WarehouseName = N'Kho chính'");
+                    // ✅ ĐÚNG:
+                    DataRow[] main = dt.Select("WarehouseName = 'Kho chính'");
+
+                    if (main.Length > 0)
+                        cboWarehouse.SelectedValue = (int)main[0]["WarehouseId"];
+                    else
+                        cboWarehouse.SelectedIndex = 0;
+                }
+            }
+        }
+
+
+        // 🔹 Gắn AutoComplete cho ô đang sửa nếu là cột Tên thuốc
+        private void DgvReceiptList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            // chỉ xử lý nếu đang sửa cột colProductName
+            if (dgvReceiptList.CurrentCell == null) return;
+
+            var col = dgvReceiptList.Columns[dgvReceiptList.CurrentCell.ColumnIndex];
+
+            if (col.Name == "colProductName" && e.Control is TextBox tb)
+            {
+                tb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                tb.AutoCompleteCustomSource = _productNameAutoComplete;
+            }
+            else if (e.Control is TextBox tb2)
+            {
+                // các cột khác tắt AutoComplete để tránh bị dính
+                tb2.AutoCompleteMode = AutoCompleteMode.None;
+                tb2.AutoCompleteSource = AutoCompleteSource.None;
+            }
+        }
 
         private string GenerateNewBarcode()
         {
@@ -57,9 +114,31 @@ namespace PharmacyApp.UserControls
         private void UC_Receipt_Load(object sender, EventArgs e)
         {
             LoadSuppliers();
+            LoadWarehouses();
+            LoadProductNames();
             dtpDate.Value = DateTime.Today;
             _lastGeneratedNumber = GetLastProductNumberFromDB();
 
+        }
+        // 🟢 Load danh sách thuốc để AutoComplete tên thuốc
+        private void LoadProductNames()
+        {
+            using (var conn = new SqlConnection(Program.ConnStr))
+            using (var da = new SqlDataAdapter(
+                "SELECT ProductId, ProductCode, ProductName FROM Products ORDER BY ProductName",
+                conn))
+            {
+                _productTable = new DataTable();
+                da.Fill(_productTable);
+
+                _productNameAutoComplete = new AutoCompleteStringCollection();
+                foreach (DataRow row in _productTable.Rows)
+                {
+                    string name = row["ProductName"].ToString();
+                    if (!string.IsNullOrWhiteSpace(name))
+                        _productNameAutoComplete.Add(name);
+                }
+            }
         }
 
         // Mỗi lần sửa SL / Đơn giá → tính lại Thành tiền & Tổng tiền
@@ -83,6 +162,25 @@ namespace PharmacyApp.UserControls
                 row.Cells["colStockAfter"].Value = qty;
 
             RecalculateTotal();
+            // ... cuối hàm DgvReceiptList_CellEndEdit
+
+            // Nếu vừa sửa cột Tên thuốc → thử điền lại Mã SP từ bảng sản phẩm
+            if (dgvReceiptList.Columns[e.ColumnIndex].Name == "colProductName"
+                && _productTable != null)
+            {
+                string name = row.Cells["colProductName"].Value?.ToString();
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    DataRow[] found = _productTable.Select(
+                        $"ProductName = '{name.Replace("'", "''")}'");
+
+                    if (found.Length > 0)
+                    {
+                        row.Cells["colProductCode"].Value = found[0]["ProductCode"].ToString();
+                    }
+                }
+            }
+
         }
 
         // 🔢 Tính lại tổng tiền
@@ -146,6 +244,55 @@ namespace PharmacyApp.UserControls
                 if (obj == null || obj == DBNull.Value) return null;
                 return Convert.ToInt32(obj);
             }
+        }
+        // 🔍 Tìm ProductId theo Mã SP hoặc Tên thuốc
+        private int? FindProductByCodeOrName(
+            SqlConnection conn,
+            SqlTransaction tran,
+            string productCode,
+            string productName,
+            out string realProductCode)
+        {
+            realProductCode = productCode;
+
+            // 1. Thử tìm theo Mã SP (nếu có)
+            if (!string.IsNullOrWhiteSpace(productCode))
+            {
+                using (var cmd = new SqlCommand(
+                    "SELECT ProductId FROM Products WHERE ProductCode = @code",
+                    conn, tran))
+                {
+                    cmd.Parameters.AddWithValue("@code", productCode.Trim());
+                    var obj = cmd.ExecuteScalar();
+                    if (obj != null && obj != DBNull.Value)
+                    {
+                        return Convert.ToInt32(obj);
+                    }
+                }
+            }
+
+            // 2. Nếu không có / không tìm thấy, thử tìm theo Tên thuốc
+            if (!string.IsNullOrWhiteSpace(productName))
+            {
+                using (var cmd = new SqlCommand(
+                    "SELECT TOP 1 ProductId, ProductCode FROM Products WHERE ProductName = @name",
+                    conn, tran))
+                {
+                    cmd.Parameters.AddWithValue("@name", productName.Trim());
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int id = Convert.ToInt32(reader["ProductId"]);
+                            realProductCode = reader["ProductCode"].ToString(); // mã thật trong DB
+                            return id;
+                        }
+                    }
+                }
+            }
+
+            // 3. Không tìm thấy
+            return null;
         }
 
         // 💾 NÚT LƯU PHIẾU NHẬP
@@ -211,9 +358,9 @@ namespace PharmacyApp.UserControls
                     int receiptId;
                     using (var cmd = new SqlCommand(@"
 INSERT INTO Receipts
-    (VoucherNumber, SupplierId, ReceiptDate, Note, TotalAmount)
+    (VoucherNumber, SupplierId, ReceiptDate, Note, TotalAmount, WarehouseId)
 VALUES
-    (@VoucherNumber, @SupplierId, @ReceiptDate, @Note, @TotalAmount);
+    (@VoucherNumber, @SupplierId, @ReceiptDate, @Note, @TotalAmount, @WarehouseId);
 SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
                     {
                         cmd.Parameters.AddWithValue("@VoucherNumber", voucherNumber);
@@ -224,8 +371,15 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
                             string.IsNullOrEmpty(note) ? (object)DBNull.Value : note);
                         cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
 
+                        // 🔹 Lấy WarehouseId từ combobox
+                        if (cboWarehouse.SelectedValue != null)
+                            cmd.Parameters.AddWithValue("@WarehouseId", cboWarehouse.SelectedValue);
+                        else
+                            cmd.Parameters.AddWithValue("@WarehouseId", DBNull.Value);
+
                         receiptId = (int)cmd.ExecuteScalar();
                     }
+
 
 
                     // 5) Insert từng dòng chi tiết + cập nhật tồn kho
@@ -289,12 +443,51 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
                                 salePrice = sp;
                         }
 
-                        // Lấy ProductId từ ProductCode (nếu sản phẩm đã tồn tại)
-                        int? productId = FindProductIdByCode(conn, tran, productCode);
+                        //// Lấy ProductId từ ProductCode (nếu sản phẩm đã tồn tại)
+                        //int? productId = FindProductIdByCode(conn, tran, productCode);
 
-                        // Nếu chưa có trong Products → tự tạo sản phẩm mới + sinh mã SP
-                        if (productId == null)
+                        //// Nếu chưa có trong Products → tự tạo sản phẩm mới + sinh mã SP
+                        //if (productId == null)
+                        //{
+                        //    if (string.IsNullOrWhiteSpace(productName))
+                        //    {
+                        //        throw new Exception("Dòng nhập kho không có Mã SP và Tên thuốc, không thể tạo mới sản phẩm.");
+                        //    }
+
+                        //    // productCode có thể đang rỗng → hàm CreateNewProduct sẽ tự GenerateProductCode
+                        //    string newCode = productCode;
+                        //    int newId = CreateNewProduct(
+                        //        conn,
+                        //        tran,
+                        //        ref newCode,    // có thể được cập nhật thành SP000xxx
+                        //        productName,
+                        //        barcode,
+                        //        unitPrice,
+                        //        salePrice,
+                        //        supplierId,
+                        //        expired,
+                        //        unitFromRow);
+
+                        //    productId = newId;
+                        //    productCode = newCode;
+
+                        //    // Cập nhật lại lên grid để bạn nhìn thấy mã sản phẩm vừa sinh
+                        //    row.Cells["colProductCode"].Value = productCode;
+                        //    row.Cells["colProductName"].Value = productName;
+                        //}
+                        // 🔍 Tìm sản phẩm theo Mã SP hoặc Tên thuốc
+                        string realProductCode;
+                        int? productId = FindProductByCodeOrName(conn, tran, productCode, productName, out realProductCode);
+
+                        // Nếu tìm được sản phẩm có sẵn → dùng luôn ProductId cũ, Mã SP cũ
+                        if (productId != null)
                         {
+                            productCode = realProductCode;                          // cập nhật lại mã SP đúng
+                            row.Cells["colProductCode"].Value = productCode;        // hiển thị lại trên grid
+                        }
+                        else
+                        {
+                            // ❗ Không có trong Products → TẠO MỚI
                             if (string.IsNullOrWhiteSpace(productName))
                             {
                                 throw new Exception("Dòng nhập kho không có Mã SP và Tên thuốc, không thể tạo mới sản phẩm.");
@@ -346,9 +539,19 @@ VALUES
                         }
 
                         // 5.2 Cập nhật tồn kho Products (và SalePrice, ExpiredDate, Barcode nếu có)
+                        // Chuẩn hóa đơn vị từ grid
+                        string unitToUpdate = null;
+                        if (dgvReceiptList.Columns.Contains("colUnit"))
+                        {
+                            var cellUnit = row.Cells["colUnit"].Value;
+                            if (cellUnit != null && !string.IsNullOrWhiteSpace(cellUnit.ToString()))
+                                unitToUpdate = cellUnit.ToString().Trim();
+                        }
+
                         using (var cmdStock = new SqlCommand(@"
 UPDATE Products
 SET StockQuantity = StockQuantity + @qty,
+    Unit          = CASE WHEN @unit IS NULL OR @unit = '' THEN Unit ELSE @unit END,
     UnitPrice      = @price,
     SalePrice      = CASE WHEN @salePrice IS NULL THEN SalePrice ELSE @salePrice END,
     ExpiredDate    = CASE WHEN @expired   IS NULL THEN ExpiredDate ELSE @expired   END,
@@ -358,6 +561,9 @@ WHERE ProductId = @pid;", conn, tran))
                             cmdStock.Parameters.AddWithValue("@qty", qty);
                             cmdStock.Parameters.AddWithValue("@price", unitPrice);
                             cmdStock.Parameters.AddWithValue("@pid", productId.Value);
+
+                            cmdStock.Parameters.AddWithValue("@unit",
+                                (object)unitToUpdate ?? DBNull.Value);
 
                             cmdStock.Parameters.AddWithValue("@salePrice",
                                 salePrice.HasValue ? (object)salePrice.Value : DBNull.Value);
@@ -370,6 +576,7 @@ WHERE ProductId = @pid;", conn, tran))
 
                             cmdStock.ExecuteNonQuery();
                         }
+
 
                     }
 
@@ -434,7 +641,7 @@ WHERE ProductId = @pid;", conn, tran))
             }
         }
 
-        // 🔹 Tạo sản phẩm mới trong bảng Products nếu chưa có
+
         // 🔹 Tạo sản phẩm mới trong bảng Products nếu chưa có
         private int CreateNewProduct(
             SqlConnection conn,
@@ -459,24 +666,22 @@ WHERE ProductId = @pid;", conn, tran))
             using (var cmd = new SqlCommand(@"
 INSERT INTO Products
     (ProductCode, ProductName, Barcode, Unit, UnitPrice, SalePrice,
-     StockQuantity, Description, Manufacturer, ExpiredDate, SupplierId)
+     StockQuantity, Description, Manufacturer, ExpiredDate, SupplierId, CategoryId, IsActive)
 VALUES
     (@ProductCode, @ProductName, @Barcode, @Unit, @UnitPrice, @SalePrice,
-     0, NULL, NULL, @ExpiredDate, @SupplierId);
+     0, NULL, NULL, @ExpiredDate, @SupplierId, @CategoryId, @IsActive);
 
 SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
             {
                 cmd.Parameters.AddWithValue("@ProductCode", productCode);
                 cmd.Parameters.AddWithValue("@ProductName", productName ?? "");
 
-                // 🔹 Lưu Barcode (có thể null)
                 cmd.Parameters.AddWithValue("@Barcode",
                     string.IsNullOrWhiteSpace(barcode) ? (object)DBNull.Value : barcode);
 
                 cmd.Parameters.AddWithValue("@Unit", unitToSave);
                 cmd.Parameters.AddWithValue("@UnitPrice", unitPrice);
 
-                // Nếu chưa nhập SalePrice → mặc định = UnitPrice * 1.2
                 decimal finalSale = salePrice.HasValue
                     ? salePrice.Value
                     : Math.Round(unitPrice * 1.2m, 0);
@@ -487,10 +692,17 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
                 cmd.Parameters.AddWithValue("@SupplierId",
                     supplierId.HasValue ? (object)supplierId.Value : DBNull.Value);
 
+                cmd.Parameters.AddWithValue("@CategoryId", DEFAULT_CATEGORY_ID);
+
+                // 🔹 Quan trọng: đánh dấu đang kinh doanh
+                cmd.Parameters.AddWithValue("@IsActive", 1);
+
                 int newId = (int)cmd.ExecuteScalar();
                 return newId;
             }
+
         }
+
 
 
         // Nút Thêm dòng: gõ tay, nhưng tự sinh mã SP
@@ -599,29 +811,44 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
 
         private void BtnDeleteRow_Click(object sender, EventArgs e)
         {
+            // Không có dòng được chọn
             if (dgvReceiptList.CurrentRow == null)
             {
-                MessageBox.Show("Hãy chọn dòng cần xóa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Hãy chọn dòng cần xóa!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            var row = dgvReceiptList.CurrentRow;
+            DataGridViewRow row = dgvReceiptList.CurrentRow;
 
+            // Không được xóa dòng mới (dòng nhập dữ liệu trống)
             if (row.IsNewRow)
                 return;
 
-            // Xác nhận trước khi xóa
-            if (MessageBox.Show("Bạn có chắc muốn xóa dòng này?",
-                "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                == DialogResult.No)
+            // Xác nhận
+            DialogResult confirm = MessageBox.Show(
+                "Bạn có chắc muốn xóa dòng này?",
+                "Xác nhận",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.No)
                 return;
 
+            // Xóa dòng
             dgvReceiptList.Rows.Remove(row);
 
-            // Tính lại tổng
+            // Tính lại tổng tiền
             RecalculateTotal();
+
+            // Nếu muốn: tự chọn dòng kế tiếp để không bị deselect
+            if (dgvReceiptList.Rows.Count > 0)
+            {
+                int idx = Math.Min(dgvReceiptList.Rows.Count - 1, row.Index);
+                dgvReceiptList.CurrentCell = dgvReceiptList.Rows[idx].Cells[0];
+            }
         }
+
         private int? FindOrCreateSupplier(string supplierName, SqlConnection conn, SqlTransaction tran)
         {
             if (string.IsNullOrWhiteSpace(supplierName))
@@ -647,6 +874,5 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
                 return newId;
             }
         }
-
     }
 }
