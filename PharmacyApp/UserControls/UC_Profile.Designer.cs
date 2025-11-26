@@ -96,7 +96,7 @@
             this.pRoot.Padding = new System.Windows.Forms.Padding(20);
             this.pRoot.Size = new System.Drawing.Size(1112, 825);
             this.pRoot.TabIndex = 0;
-            this.pRoot.Paint += new System.Windows.Forms.PaintEventHandler(this.pRoot_Paint);
+           // this.pRoot.Paint += new System.Windows.Forms.PaintEventHandler(this.pRoot_Paint);
             // 
             // btnCancel
             // 
@@ -114,7 +114,7 @@
             this.btnCancel.Size = new System.Drawing.Size(110, 36);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Hủy";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+       //     this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -153,7 +153,7 @@
             this.gbSystem.Size = new System.Drawing.Size(1069, 170);
             this.gbSystem.TabIndex = 4;
             this.gbSystem.Text = "Thông tin hệ thống";
-            this.gbSystem.Click += new System.EventHandler(this.guna2GroupBox1_Click);
+          //  this.gbSystem.Click += new System.EventHandler(this.guna2GroupBox1_Click);
             // 
             // cboStatus
             // 
@@ -183,7 +183,7 @@
             this.lblStatus.Size = new System.Drawing.Size(93, 25);
             this.lblStatus.TabIndex = 25;
             this.lblStatus.Text = "Trạng thái:";
-            this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
+          //  this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
             // 
             // cboRole
             // 
@@ -250,7 +250,7 @@
             this.lblRole.Size = new System.Drawing.Size(67, 25);
             this.lblRole.TabIndex = 18;
             this.lblRole.Text = "Vai trò:";
-            this.lblRole.Click += new System.EventHandler(this.lblRole_Click);
+         //   this.lblRole.Click += new System.EventHandler(this.lblRole_Click);
             // 
             // txtUsername
             // 
@@ -283,7 +283,7 @@
             this.lblPassword.Size = new System.Drawing.Size(90, 25);
             this.lblPassword.TabIndex = 16;
             this.lblPassword.Text = "Mật khẩu:";
-            this.lblPassword.Click += new System.EventHandler(this.lblPassword_Click);
+          //  this.lblPassword.Click += new System.EventHandler(this.lblPassword_Click);
             // 
             // lblUsername
             // 
@@ -367,7 +367,7 @@
             this.lblIssue.Size = new System.Drawing.Size(91, 25);
             this.lblIssue.TabIndex = 18;
             this.lblIssue.Text = "Ngày cấp:";
-            this.lblIssue.Click += new System.EventHandler(this.lblIssue_Click);
+     //       this.lblIssue.Click += new System.EventHandler(this.lblIssue_Click);
             // 
             // txtLicenseNo
             // 
@@ -421,7 +421,7 @@
             this.cboQualification.Name = "cboQualification";
             this.cboQualification.Size = new System.Drawing.Size(220, 36);
             this.cboQualification.TabIndex = 15;
-            this.cboQualification.SelectedIndexChanged += new System.EventHandler(this.cboQualification_SelectedIndexChanged);
+        //    this.cboQualification.SelectedIndexChanged += new System.EventHandler(this.cboQualification_SelectedIndexChanged);
             // 
             // lblQualification
             // 
@@ -433,7 +433,7 @@
             this.lblQualification.Size = new System.Drawing.Size(80, 25);
             this.lblQualification.TabIndex = 14;
             this.lblQualification.Text = "Trình độ:";
-            this.lblQualification.Click += new System.EventHandler(this.lblQualification_Click);
+         //   this.lblQualification.Click += new System.EventHandler(this.lblQualification_Click);
             // 
             // tlpTop
             // 
@@ -450,7 +450,7 @@
             this.tlpTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTop.Size = new System.Drawing.Size(1072, 275);
             this.tlpTop.TabIndex = 2;
-            this.tlpTop.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpTop_Paint);
+        //    this.tlpTop.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpTop_Paint);
             // 
             // pBasic
             // 
@@ -472,7 +472,7 @@
             this.pBasic.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.pBasic.Size = new System.Drawing.Size(745, 269);
             this.pBasic.TabIndex = 1;
-            this.pBasic.Paint += new System.Windows.Forms.PaintEventHandler(this.pBasic_Paint);
+      //      this.pBasic.Paint += new System.Windows.Forms.PaintEventHandler(this.pBasic_Paint);
             // 
             // txtAddress
             // 
@@ -538,7 +538,7 @@
             this.lblEmail.Size = new System.Drawing.Size(49, 20);
             this.lblEmail.TabIndex = 11;
             this.lblEmail.Text = "Email:";
-            this.lblEmail.Click += new System.EventHandler(this.lblEmail_Click);
+        //   this.lblEmail.Click += new System.EventHandler(this.lblEmail_Click);
             // 
             // txtPhone
             // 
@@ -571,7 +571,7 @@
             this.lblPhone.Size = new System.Drawing.Size(100, 20);
             this.lblPhone.TabIndex = 9;
             this.lblPhone.Text = "Số điện thoại:";
-            this.lblPhone.Click += new System.EventHandler(this.lblPhone_Click);
+        //    this.lblPhone.Click += new System.EventHandler(this.lblPhone_Click);
             // 
             // cboGender
             // 
@@ -591,7 +591,7 @@
             this.cboGender.Name = "cboGender";
             this.cboGender.Size = new System.Drawing.Size(120, 36);
             this.cboGender.TabIndex = 8;
-            this.cboGender.SelectedIndexChanged += new System.EventHandler(this.cboGender_SelectedIndexChanged);
+       //     this.cboGender.SelectedIndexChanged += new System.EventHandler(this.cboGender_SelectedIndexChanged);
             // 
             // lblGender
             // 
@@ -629,7 +629,7 @@
             this.lblBirthDate.Size = new System.Drawing.Size(77, 20);
             this.lblBirthDate.TabIndex = 5;
             this.lblBirthDate.Text = "Ngày sinh:";
-            this.lblBirthDate.Click += new System.EventHandler(this.lblBirthDate_Click);
+        //    this.lblBirthDate.Click += new System.EventHandler(this.lblBirthDate_Click);
             // 
             // txtFullName
             // 
@@ -751,7 +751,7 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Thông tin cá nhân";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTitle.Click += new System.EventHandler(this.label1_Click);
+      //      this.lblTitle.Click += new System.EventHandler(this.label1_Click);
             // 
             // UC_Profile
             // 

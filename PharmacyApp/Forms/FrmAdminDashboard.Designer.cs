@@ -185,7 +185,7 @@
             this.btnSearch.Size = new System.Drawing.Size(98, 34);
             this.btnSearch.TabIndex = 10;
             this.btnSearch.Text = "Tìm";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+         //   this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 

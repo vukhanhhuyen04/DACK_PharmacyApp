@@ -1,17 +1,12 @@
-﻿using PharmacyApp.UserControls;
+﻿using PharmacyApp;                 // dùng Session
+using PharmacyApp.UserControls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PharmacyApp.Forms
 {
-    // FrmAdminDashboard.cs
     public partial class FrmAdminDashboard : Form
     {
         private readonly int _userId;
@@ -19,6 +14,7 @@ namespace PharmacyApp.Forms
         private readonly string _role;
 
         private bool _isDashboardActive = true;
+
         public FrmAdminDashboard(int userId, string fullName, string role)
         {
             InitializeComponent();
@@ -26,56 +22,22 @@ namespace PharmacyApp.Forms
             _userId = userId;
             _fullName = fullName;
             _role = role;
+
+            // Brand
             lblBrand.Text =
-     "<span style='color:#69C4F6;'>Eterna</span>" +
-     "<span style='color:#36D7B7;'>Med</span>";
-
+                "<span style='color:#69C4F6;'>Eterna</span>" +
+                "<span style='color:#36D7B7;'>Med</span>";
             lblBrand.Cursor = Cursors.Hand;
-            //  lblBrandCare.Cursor = Cursors.Hand;
 
-
-
-            lblUserName.Text = fullName;   // ví dụ label trên góc phải
+            // Tên user trên góc phải
+            lblUserName.Text = fullName;
         }
-        private void lblBrand_MouseEnter(object sender, EventArgs e)
-        {
-            lblBrand.Cursor = Cursors.Hand;
-            lblBrand.ForeColor = Color.FromArgb(105, 196, 246); // xanh nhạt
-        }
-
-        private void lblBrand_MouseLeave(object sender, EventArgs e)
-        {
-            lblBrand.Cursor = Cursors.Default;
-            lblBrand.ForeColor = Color.White; // hoặc màu cũ
-        }
-
 
         private void FrmAdminDashboard_Load(object sender, EventArgs e)
         {
             ShowDashboard();
-
-
-            //_isDashboardActive = true;
-
-            //// --- Dữ liệu biểu đồ doanh số ---
-            //string[] months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun" };
-            //int[] sales = { 100, 120, 80, 160, 130, 200 };
-
-            //// Lấy series "Sales", nếu chưa có thì tạo mới
-            //var series = chartSales.Series["Sales"];
-            //if (series == null)
-            //{
-            //    series = chartSales.Series.Add("Sales");
-            //}
-
-            //series.Points.DataBindXY(months, sales);
-            //series.Color = Color.FromArgb(59, 201, 170);
-
-            //// --- Dữ liệu sản phẩm bán chạy ---
-            //gvTopProducts.Rows.Add("1", "Paracetamol 500mg", "340");
-            //gvTopProducts.Rows.Add("2", "Vitamin C 1000mg", "310");
-            //gvTopProducts.Rows.Add("3", "Panadol Extra", "280");
         }
+
         private void ShowDashboard()
         {
             pContent.Controls.Clear();
@@ -86,9 +48,6 @@ namespace PharmacyApp.Forms
             pContent.Visible = true;
             _isDashboardActive = true;
         }
-
-
-
 
         private void LoadPage(UserControl uc)
         {
@@ -102,52 +61,32 @@ namespace PharmacyApp.Forms
             _isDashboardActive = false;
         }
 
-
-        private void lblBrandCare_Click(object sender, EventArgs e)
+        // ===================== BRAND CLICK =====================
+        private void lblBrand_Click(object sender, EventArgs e)
         {
             if (_isDashboardActive)
             {
-                // Đang ở dashboard -> ẩn/hiện dashboard
-                pContent.Visible = !pContent.Visible;
+                pContent.Visible = !pContent.Visible;   // ẩn / hiện dashboard
             }
             else
             {
-                // Đang ở trang khác -> quay về dashboard
-                ShowDashboard();
+                ShowDashboard();                       // từ trang khác quay lại dashboard
             }
-
         }
 
-        private void lblApp_Click(object sender, EventArgs e)
+        private void lblBrand_MouseEnter(object sender, EventArgs e)
         {
-
+            lblBrand.Cursor = Cursors.Hand;
+            lblBrand.ForeColor = Color.FromArgb(105, 196, 246);
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void lblBrand_MouseLeave(object sender, EventArgs e)
         {
-            //string keyword = txtSearch.Text.Trim();
-
-            //if (pContent.Controls.Count == 0) return;
-
-            //var current = pContent.Controls[0];
-
-            //if (current is UC_Dashboard dash)
-            //{
-            //    dash.ApplySearch(keyword);   // gọi vào UC_Dashboard
-            //}
-            //else if (current is UC_Catalog catalog)
-            //{
-            //    catalog.ApplySearch(keyword); // nếu muốn dùng chung search cho Catalog
-            //}
-            //// ... các UC khác thì tùy bạn
+            lblBrand.Cursor = Cursors.Default;
+            lblBrand.ForeColor = Color.White;
         }
 
-
-        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        // ===================== MENU BÊN TRÁI =====================
         private void btnCatalog_Click(object sender, EventArgs e)
         {
             LoadPage(new UC_Catalog());
@@ -168,50 +107,32 @@ namespace PharmacyApp.Forms
             LoadPage(new UC_Warehouse());
         }
 
-        private void value4_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void ToggleContent()
-        {
-            pContent.Visible = !pContent.Visible;   // đổi trạng thái ẩn/hiện
-        }
-
-        private void lblBrand_Click(object sender, EventArgs e)
-        {
-            if (_isDashboardActive)
-            {
-                pContent.Visible = !pContent.Visible;
-            }
-            else
-            {
-                ShowDashboard();
-            }
-        }
-
-
-
-
         private void btnPOS_Click(object sender, EventArgs e)
         {
             LoadPage(new UC_POS());
         }
 
-        private void btnProfile_Click(object sender, EventArgs e)
-        {
-            LoadPage(new UC_Profile());
-
-        }
         private void btnInvoices_Click(object sender, EventArgs e)
         {
             LoadPage(new UC_Invoices());
         }
 
-        private void btnInvoices_Click_1(object sender, EventArgs e)
+        // ===================== PROFILE =====================
+        private void btnProfile_Click(object sender, EventArgs e)
         {
+            var uc = new UC_Profile
+            {
+                Dock = DockStyle.Fill,
+                StaffId = Session.StaffId,               // lấy StaffId từ Session
+                IsAdmin = Session.Role == "Admin"        // phân quyền
+            };
 
+            pContent.Controls.Clear();
+            pContent.Controls.Add(uc);
+            _isDashboardActive = false;
         }
 
+        // ===================== LOGOUT =====================
         private void btnLogout_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -223,37 +144,28 @@ namespace PharmacyApp.Forms
 
             if (result == DialogResult.Yes)
             {
-                // Ẩn dashboard hiện tại
-                this.Hide();
+                // Reset session
+                Session.IsLoggedIn = false;
+                Session.UserId = 0;
+                Session.StaffId = 0;
+                Session.FullName = null;
+                Session.Role = null;
 
-                // Mở lại form đăng nhập
+                this.Hide();
                 FrmLogin frmLogin = new FrmLogin();
                 frmLogin.Show();
-
-                // Đóng dashboard khi logout hoàn tất
                 this.Close();
             }
         }
 
-
-        private void guna2Panel6_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblBrand_MouseMove(object sender, MouseEventArgs e)
-        {
-            lblBrand.Cursor = Cursors.Hand;
-        }
-
-        private void lblBrandCare_MouseMove(object sender, MouseEventArgs e)
-        {
-            lblBrand.Cursor = Cursors.Hand;
-        }
-
-        private void pTop_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        // ====== Các event trống ======
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
+        private void guna2Panel6_Paint(object sender, PaintEventArgs e) { }
+        private void pTop_Paint(object sender, PaintEventArgs e) { }
+        private void value4_Click(object sender, EventArgs e) { }
+        private void lblApp_Click(object sender, EventArgs e) { }
+        private void lblBrandCare_Click(object sender, EventArgs e) { }
+        private void lblBrand_MouseMove(object sender, MouseEventArgs e) { lblBrand.Cursor = Cursors.Hand; }
+        private void lblBrandCare_MouseMove(object sender, MouseEventArgs e) { lblBrand.Cursor = Cursors.Hand; }
     }
 }

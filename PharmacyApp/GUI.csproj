@@ -110,6 +110,7 @@
     <Compile Include="Forms\FrmRegister.Designer.cs">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Session.cs" />
     <Compile Include="Models\Dtos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

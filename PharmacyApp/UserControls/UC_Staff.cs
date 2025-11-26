@@ -333,44 +333,94 @@ namespace PharmacyApp.UserControls
         // ==============================
         private void InsertStaff()
         {
+            // Bắt buộc phải có Email để tạo tài khoản
+            if (string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                MessageBox.Show("Vui lòng nhập Email để tạo tài khoản đăng nhập.", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEmail.Focus();
+                return;
+            }
+
+            string email = txtEmail.Text.Trim();
+            string fullName = txtHoTen.Text.Trim();
+            string phone = txtSDT.Text.Trim();
+            string gender = string.IsNullOrEmpty(cboGioiTinh.Text) ? null : cboGioiTinh.Text;
+            string degree = string.IsNullOrEmpty(cboBangCap.Text) ? null : cboBangCap.Text;
+            DateTime hireDate = dtNgayVaoLam.Value.Date;
+            DateTime? licenseExpire = dtLicenseExpire.Value.Date;
+            bool isActive = tglTrangThai.Checked;
+
+            string staffCode = txtMaNV.Text.Trim();
+            string defaultPassword = "12345";   // mật khẩu mặc định
+            string role = "Dược sĩ";            // role trong bảng Users
+
             using (var conn = new SqlConnection(Program.ConnStr))
             {
                 conn.Open();
 
+                // 1. Kiểm tra email đã tồn tại trong Users chưa
+                using (var checkCmd = new SqlCommand(
+                    "SELECT COUNT(*) FROM Users WHERE Email = @Email", conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@Email", email);
+                    int exists = (int)checkCmd.ExecuteScalar();
+                    if (exists > 0)
+                    {
+                        MessageBox.Show("Email này đã được sử dụng cho tài khoản khác. " +
+                                        "Vui lòng nhập email khác.",
+                            "Trùng email", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                // 2. Tạo User + Staff trong 1 lệnh
                 string sql = @"
-            INSERT INTO Staff
-            (StaffCode, FullName, Gender, Email, Phone,
-             HireDate, Degree, LicenseExpireDate, IsActive)
-            VALUES
-            (@StaffCode, @FullName, @Gender, @Email, @Phone,
-             @HireDate, @Degree, @LicenseExpireDate, @IsActive);";
+DECLARE @UserId INT;
+
+INSERT INTO Users (FullName, Email, Password, Role, CreatedAt)
+VALUES (@FullName, @Email, @Password, @Role, GETDATE());
+
+SET @UserId = SCOPE_IDENTITY();
+
+INSERT INTO Staff
+    (StaffCode, FullName, Gender, Email, Phone,
+     HireDate, Degree, LicenseExpireDate, IsActive, CreatedAt, UserId)
+VALUES
+    (@StaffCode, @FullName, @Gender, @Email, @Phone,
+     @HireDate, @Degree, @LicenseExpireDate, @IsActive, GETDATE(), @UserId);";
 
                 using (var cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@StaffCode", txtMaNV.Text.Trim());
-                    cmd.Parameters.AddWithValue("@FullName", txtHoTen.Text.Trim());
+                    // Users
+                    cmd.Parameters.AddWithValue("@FullName", fullName);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", defaultPassword);
+                    cmd.Parameters.AddWithValue("@Role", role);
+
+                    // Staff
+                    cmd.Parameters.AddWithValue("@StaffCode", staffCode);
                     cmd.Parameters.AddWithValue("@Gender",
-                        string.IsNullOrEmpty(cboGioiTinh.Text) ? (object)DBNull.Value : cboGioiTinh.Text);
-                    cmd.Parameters.AddWithValue("@Email",
-                        string.IsNullOrEmpty(txtEmail.Text) ? (object)DBNull.Value : txtEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Phone", txtSDT.Text.Trim());
-                    cmd.Parameters.AddWithValue("@HireDate", dtNgayVaoLam.Value.Date);
+                        string.IsNullOrEmpty(gender) ? (object)DBNull.Value : gender);
+                    cmd.Parameters.AddWithValue("@Phone",
+                        string.IsNullOrEmpty(phone) ? (object)DBNull.Value : phone);
+                    cmd.Parameters.AddWithValue("@HireDate", hireDate);
                     cmd.Parameters.AddWithValue("@Degree",
-                        string.IsNullOrEmpty(cboBangCap.Text) ? (object)DBNull.Value : cboBangCap.Text);
+                        string.IsNullOrEmpty(degree) ? (object)DBNull.Value : degree);
 
-                    // Hiện tại chưa có control Ngày hết hạn bằng -> cho NULL
-                    cmd.Parameters.AddWithValue("@LicenseExpireDate", dtLicenseExpire.Value);
+                    cmd.Parameters.AddWithValue("@LicenseExpireDate",
+                        licenseExpire.HasValue ? (object)licenseExpire.Value : DBNull.Value);
 
-
-                    cmd.Parameters.AddWithValue("@IsActive", tglTrangThai.Checked);
+                    cmd.Parameters.AddWithValue("@IsActive", isActive);
 
                     cmd.ExecuteNonQuery();
                 }
             }
 
-            MessageBox.Show("Thêm dược sĩ mới thành công.", "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Đã thêm dược sĩ mới và tạo tài khoản đăng nhập (mật khẩu: 12345).",
+                "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
 
         // ==============================
@@ -385,40 +435,63 @@ namespace PharmacyApp.UserControls
                 return;
             }
 
+            string email = txtEmail.Text.Trim();
+            string fullName = txtHoTen.Text.Trim();
+            string phone = txtSDT.Text.Trim();
+            string gender = string.IsNullOrEmpty(cboGioiTinh.Text) ? null : cboGioiTinh.Text;
+            string degree = string.IsNullOrEmpty(cboBangCap.Text) ? null : cboBangCap.Text;
+            DateTime hireDate = dtNgayVaoLam.Value.Date;
+            DateTime? licenseExpire = dtLicenseExpire.Value.Date;
+            bool isActive = tglTrangThai.Checked;
+
             using (var conn = new SqlConnection(Program.ConnStr))
             {
                 conn.Open();
 
                 string sql = @"
-            UPDATE Staff
-            SET FullName = @FullName,
-                Gender = @Gender,
-                Email = @Email,
-                Phone = @Phone,
-                HireDate = @HireDate,
-                Degree = @Degree,
-                LicenseExpireDate = @LicenseExpireDate,
-                IsActive = @IsActive
-            WHERE StaffId = @StaffId;";
+UPDATE s
+SET s.FullName          = @FullName,
+    s.Gender            = @Gender,
+    s.Email             = @Email,
+    s.Phone             = @Phone,
+    s.HireDate          = @HireDate,
+    s.Degree            = @Degree,
+    s.LicenseExpireDate = @LicenseExpireDate,
+    s.IsActive          = @IsActive
+FROM Staff s
+WHERE s.StaffId = @StaffId;
+
+-- Đồng bộ sang bảng Users (nếu Staff có UserId)
+UPDATE u
+SET u.FullName = @FullName,
+    u.Email    = @Email
+FROM Users u
+JOIN Staff s ON s.UserId = u.UserId
+WHERE s.StaffId = @StaffId;";
 
                 using (var cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@StaffId", _currentStaffId.Value);
-                    cmd.Parameters.AddWithValue("@FullName", txtHoTen.Text.Trim());
+                    cmd.Parameters.AddWithValue("@FullName", fullName);
+
                     cmd.Parameters.AddWithValue("@Gender",
-                        string.IsNullOrEmpty(cboGioiTinh.Text) ? (object)DBNull.Value : cboGioiTinh.Text);
+                        string.IsNullOrEmpty(gender) ? (object)DBNull.Value : gender);
+
                     cmd.Parameters.AddWithValue("@Email",
-                        string.IsNullOrEmpty(txtEmail.Text) ? (object)DBNull.Value : txtEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Phone", txtSDT.Text.Trim());
-                    cmd.Parameters.AddWithValue("@HireDate", dtNgayVaoLam.Value.Date);
+                        string.IsNullOrEmpty(email) ? (object)DBNull.Value : email);
+
+                    cmd.Parameters.AddWithValue("@Phone",
+                        string.IsNullOrEmpty(phone) ? (object)DBNull.Value : phone);
+
+                    cmd.Parameters.AddWithValue("@HireDate", hireDate);
+
                     cmd.Parameters.AddWithValue("@Degree",
-                        string.IsNullOrEmpty(cboBangCap.Text) ? (object)DBNull.Value : cboBangCap.Text);
+                        string.IsNullOrEmpty(degree) ? (object)DBNull.Value : degree);
 
-                    // Tạm thời cập nhật bằng NULL
-                    cmd.Parameters.AddWithValue("@LicenseExpireDate", dtLicenseExpire.Value);
+                    cmd.Parameters.AddWithValue("@LicenseExpireDate",
+                        licenseExpire.HasValue ? (object)licenseExpire.Value : DBNull.Value);
 
-
-                    cmd.Parameters.AddWithValue("@IsActive", tglTrangThai.Checked);
+                    cmd.Parameters.AddWithValue("@IsActive", isActive);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -427,6 +500,7 @@ namespace PharmacyApp.UserControls
             MessageBox.Show("Cập nhật thông tin dược sĩ thành công.", "Thông báo",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)

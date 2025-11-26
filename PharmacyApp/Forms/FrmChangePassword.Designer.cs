@@ -153,9 +153,9 @@
             this.btnSave.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(201)))), ((int)(((byte)(170)))));
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10.8F);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(305, 325);
+            this.btnSave.Location = new System.Drawing.Point(385, 325);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(180, 40);
+            this.btnSave.Size = new System.Drawing.Size(100, 40);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Lưu";
             // 
@@ -173,6 +173,8 @@
             // 
             // lblTitle
             // 
+            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 22.2F);
             this.lblTitle.ForeColor = System.Drawing.Color.White;

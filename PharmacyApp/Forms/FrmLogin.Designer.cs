@@ -247,7 +247,7 @@
             this.lnkForgot.BackColor = System.Drawing.Color.Transparent;
             this.lnkForgot.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnkForgot.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.lnkForgot.Location = new System.Drawing.Point(416, 526);
+            this.lnkForgot.Location = new System.Drawing.Point(269, 526);
             this.lnkForgot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lnkForgot.Name = "lnkForgot";
             this.lnkForgot.Size = new System.Drawing.Size(126, 25);

@@ -5,16 +5,16 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using PharmacyApp;
+
 namespace PharmacyApp.Forms
 {
     public partial class FrmLogin : Form
     {
-
         public FrmLogin()
         {
             InitializeComponent();
 
-            // Các thiết lập an toàn cho Designer (không dùng null-forgiving, không C# 8)
+            // Các thiết lập an toàn cho Designer
             if (lnkSignUp != null) { lnkSignUp.AutoSize = true; lnkSignUp.MaximumSize = new Size(0, 0); }
             if (lnkForgot != null) { lnkForgot.AutoSize = true; lnkForgot.MaximumSize = new Size(0, 0); }
             if (lnkHelp != null) { lnkHelp.AutoSize = true; lnkHelp.MaximumSize = new Size(0, 0); }
@@ -24,15 +24,13 @@ namespace PharmacyApp.Forms
 
             WireEvents();
 
-            // Khi mở trong Designer thì dừng tại đây để tránh lỗi preview
             if (IsInDesigner()) return;
 
-            // Canh giữa sau khi form hiện và khi resize
             this.Shown += delegate { CenterBrand(); CenterLinks(); };
             this.Resize += delegate { CenterBrand(); CenterLinks(); };
         }
 
-        // Nhận biết đang ở Design-time (C# 7.3)
+        // Nhận biết đang ở Design-time
         private bool IsInDesigner()
         {
             return DesignMode || LicenseManager.UsageMode == LicenseUsageMode.Designtime;
@@ -44,6 +42,8 @@ namespace PharmacyApp.Forms
             if (lnkForgot != null) lnkForgot.Click += lnkForgot_Click;
             if (lnkHelp != null) lnkHelp.Click += lnkHelp_Click;
             if (btnLogin != null) this.AcceptButton = btnLogin; // Enter = Login
+
+           // if (btnLogin != null) btnLogin.Click += btnLogin_Click;
         }
 
         // ---------- Căn giữa logo ----------
@@ -83,13 +83,12 @@ namespace PharmacyApp.Forms
             lnkHelp.Location = new Point(lnkForgot.Right + gap, y);
         }
 
-        // ---------- Handlers UI (an toàn cho Designer) ----------
+        // ---------- Handlers UI (stub cho Designer) ----------
         private void sepTitle_Click(object sender, EventArgs e) { }
         private void txtPassword_TextChanged(object sender, EventArgs e) { }
         private void FrmLogin_Load(object sender, EventArgs e) { }
-
-        // Designer báo thiếu: thêm stub cho sự kiện này
         private void guna2Shapes3_Click(object sender, EventArgs e) { }
+        private void chkRemember_CheckedChanged(object sender, EventArgs e) { }
 
         private void lnkSignUp_Click(object sender, EventArgs e)
         {
@@ -100,12 +99,11 @@ namespace PharmacyApp.Forms
                 var result = reg.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    // txtEmail.Text = reg.RegisteredEmail; // nếu sau này có expose property
+                    // txtEmail.Text = reg.RegisteredEmail;
                 }
             }
         }
 
-        // 👉 Sửa tại đây: mở form quên mật khẩu
         private void lnkForgot_Click(object sender, EventArgs e)
         {
             using (var forgot = new FrmForgotPass())
@@ -116,8 +114,6 @@ namespace PharmacyApp.Forms
 
                 if (result == DialogResult.OK)
                 {
-                    // Nếu sau này bạn muốn lấy email mới đặt lại để tự fill vào ô txtEmail
-                    // có thể thêm property trong FrmForgotPassword và gán tại đây.
                     // txtEmail.Text = forgot.EmailUsed;
                 }
             }
@@ -129,6 +125,7 @@ namespace PharmacyApp.Forms
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        // ==================== LOGIN ====================
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string email = txtEmail.Text.Trim();
@@ -155,19 +152,51 @@ namespace PharmacyApp.Forms
                     {
                         if (!rd.Read())
                         {
-                            // Không có bản ghi nào => sai tài khoản / mật khẩu
                             MessageBox.Show("Sai Email hoặc Mật khẩu.",
                                 "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
 
-                        int userId = rd.GetInt32(rd.GetOrdinal("UserID"));
-                        string fullName = rd.GetString(rd.GetOrdinal("FullName"));
-                        string role = rd.GetString(rd.GetOrdinal("Role"));
+                        int userId = Convert.ToInt32(rd["UserID"]);
+                        int staffId = rd["StaffID"] != DBNull.Value ? Convert.ToInt32(rd["StaffID"]) : 0;
+                        string fullName = rd["FullName"].ToString();
+                        string role = rd["Role"].ToString();
 
-                        // ✅ Đăng nhập thành công → mở Dashboard
-                        OpenDashboard(userId, fullName, role);
+                        // 🔥 Nếu đăng nhập bằng mật khẩu mặc định -> bắt buộc đổi mật khẩu
+                        if (pass == "12345")
+                        {
+                            using (var frmChange = new FrmChangePassword(userId))
+                            {
+                                var result = frmChange.ShowDialog(this);
+
+                                if (result != DialogResult.OK)
+                                {
+                                    // Người dùng không đổi mật khẩu -> không cho vào hệ thống
+                                    MessageBox.Show("Bạn cần đổi mật khẩu trước khi sử dụng hệ thống.",
+                                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return;
+                                }
+                            }
+
+                            // Sau khi đổi mật khẩu thành công, yêu cầu nhập lại mật khẩu mới
+                            MessageBox.Show("Vui lòng đăng nhập lại với mật khẩu mới.",
+                                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            txtPassword.Clear();
+                            txtPassword.Focus();
+                            return;
+                        }
+
+                        // ✅ Đăng nhập bình thường (không phải mật khẩu mặc định)
+                        Session.UserId = userId;
+                        Session.StaffId = staffId;
+                        Session.FullName = fullName;
+                        Session.Role = role;
+                        Session.IsLoggedIn = true;
+
+                        OpenDashboard();
                     }
+
                 }
             }
             catch (SqlException ex)
@@ -175,25 +204,32 @@ namespace PharmacyApp.Forms
                 MessageBox.Show("Lỗi kết nối CSDL:\n" + ex.Message,
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi không xác định:\n" + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void OpenDashboard(int userId, string fullName, string role)
+        // Mở Dashboard, đọc từ Session
+        private void OpenDashboard()
         {
-            // Ẩn form Login
             this.Hide();
 
-            // Tạo dashboard (admin/pharmacist tuỳ bạn, ví dụ admin)
-            var dash = new FrmAdminDashboard(userId, fullName, role);
+            // Nếu bạn có 2 form khác nhau cho Admin / Dược sĩ thì có thể phân nhánh ở đây
+            // VD:
+            // if (Session.Role == "Admin") ...
+            // else ...
 
-            // Khi đóng dashboard thì đóng luôn login → thoát app
-            dash.FormClosed += (s, e) => this.Close();
+            var dash = new FrmAdminDashboard(Session.UserId, Session.FullName, Session.Role);
+
+            dash.FormClosed += (s, e) =>
+            {
+                // Khi đóng dashboard thì thoát luôn app
+                this.Close();
+            };
 
             dash.Show();
-        }
-
-        private void chkRemember_CheckedChanged(object sender, EventArgs e)
-        {
-            // TODO: nhớ mật khẩu nếu bạn muốn
         }
     }
 }
