@@ -35,10 +35,10 @@ namespace PharmacyApp.UserControls
             cboQualification.Items.Clear();
             cboQualification.Items.AddRange(new object[]
             {
-        "Dược sĩ Đại học",
-        "Dược sĩ Cao đẳng",
-        "Dược sĩ Trung cấp",
-        "Dược tá"
+        "TC",
+    "CĐ",
+    "ĐH",
+    "DT"
             });
 
             if (StaffId == 0) return;
@@ -62,6 +62,7 @@ SELECT
     s.StaffCode,
     s.FullName        AS StaffName,
     s.Gender,
+    s.BirthDate,                     -- 🔹 THÊM DÒNG NÀY
     s.Email           AS StaffEmail,
     s.Phone,
     s.HireDate,
@@ -79,6 +80,7 @@ SELECT
 FROM Staff s
 LEFT JOIN Users u ON s.UserId = u.UserId
 WHERE s.StaffId = @StaffId", conn))
+
                 {
                     cmd.Parameters.AddWithValue("@StaffId", StaffId);
                     conn.Open();
@@ -87,61 +89,81 @@ WHERE s.StaffId = @StaffId", conn))
                     {
                         if (!rd.Read())
                         {
-                            MessageBox.Show("Không tìm thấy hồ sơ.", "Thông báo",
+                            MessageBox.Show("Không tìm thấy hồ sơ nhân sự.", "Thông báo",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
-                        // ===== Mã nhân sự =====
-                        txtStaffCode.Text = rd["StaffCode"]?.ToString();
-
-                        // ===== ẢNH =====
-                        _avatarPathInDb = rd["AvatarPath"]?.ToString();
-                        LoadAvatarToPictureBox(_avatarPathInDb);
-
-                        // ===== Cơ bản =====
-                        txtFullName.Text = rd["StaffName"]?.ToString();
-                        txtPhone.Text = rd["Phone"]?.ToString();
-                        txtEmail.Text = rd["StaffEmail"]?.ToString();
-                        txtAddress.Text = rd["Address"]?.ToString();
+                        // ====== Lấy UserId để đổi mật khẩu ======
                         if (rd["UserId"] != DBNull.Value)
                             _userId = Convert.ToInt32(rd["UserId"]);
                         else
                             _userId = 0;
 
+                        // ====== Avatar + Mã nhân sự ======
+                        txtStaffCode.Text = rd["StaffCode"]?.ToString();
+
+                        _avatarPathInDb = rd["AvatarPath"] as string;
+                        LoadAvatarToPictureBox(_avatarPathInDb);
+
+                        // ====== Thông tin cơ bản ======
+                        txtFullName.Text = rd["StaffName"]?.ToString();          // alias StaffName
+                                                                                 // ====== Thông tin cơ bản ======
+                        txtFullName.Text = rd["StaffName"]?.ToString();
+
+                        // 🔹 GÁN NGÀY SINH
+                        if (rd["BirthDate"] != DBNull.Value)
+                            dtpBirthDate.Value = Convert.ToDateTime(rd["BirthDate"]);
+                        else
+                            dtpBirthDate.Value = DateTime.Today;
+                        // Nếu bạn có BirthDate thì nhớ thêm s.BirthDate vào SELECT và set ở đây:
+                        // if (rd["BirthDate"] != DBNull.Value)
+                        //     dtpBirthDate.Value = Convert.ToDateTime(rd["BirthDate"]);
+
+                        string gender = rd["Gender"]?.ToString();
+                        SelectComboByText(cboGender, gender);
+
+                        txtPhone.Text = rd["Phone"]?.ToString();
+                        txtEmail.Text = rd["StaffEmail"]?.ToString();
+                        txtAddress.Text = rd["Address"]?.ToString();
+
+                        // ====== Thông tin chuyên môn ======
+                        string degree = rd["Degree"]?.ToString();
+                        SelectComboByText(cboQualification, degree);
+
+                        // Ngày vào làm
                         if (rd["HireDate"] != DBNull.Value)
-                            dtpBirthDate.Value = Convert.ToDateTime(rd["HireDate"]);
+                            dtpHireDate.Value = Convert.ToDateTime(rd["HireDate"]);
+                        else
+                            dtpHireDate.Value = DateTime.Today;
 
-                        SelectComboByText(cboGender, rd["Gender"]?.ToString());
-
-                        // ===== Chuyên môn =====
-                        SelectComboByText(cboQualification, rd["Degree"]?.ToString());
-                        txtLicenseNo.Text = rd["LicenseNo"]?.ToString();
-
-                        if (rd["LicenseIssueDate"] != DBNull.Value)
-                            dtpLicenseIssue.Value = Convert.ToDateTime(rd["LicenseIssueDate"]);
-
+                        // Ngày hết hạn chứng chỉ (nếu bạn vẫn dùng)
                         if (rd["LicenseExpireDate"] != DBNull.Value)
                             dtpLicenseExpire.Value = Convert.ToDateTime(rd["LicenseExpireDate"]);
+                        else
+                            dtpLicenseExpire.Value = DateTime.Today;
 
-                        // ===== Hệ thống =====
-                        txtUsername.Text = rd["Username"]?.ToString();
-                        txtPasswordMask.Text = string.IsNullOrWhiteSpace(txtUsername.Text) ? "" : "********";
 
-                        SelectComboByText(cboRole, rd["Role"]?.ToString());
+                        // ====== Thông tin hệ thống ======
+                        txtUsername.Text = rd["Username"]?.ToString();            // alias Username = u.Email
+                        txtPasswordMask.Text = "********";                        // luôn che
+
+                        string role = rd["Role"]?.ToString();
+                        SelectComboByText(cboRole, role);
 
                         bool isActive = rd["IsActive"] != DBNull.Value &&
                                         Convert.ToBoolean(rd["IsActive"]);
-                        cboStatus.SelectedIndex = isActive ? 0 : 1;
+                        cboStatus.SelectedIndex = isActive ? 0 : 1;               // 0: Hoạt động, 1: Ngưng
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tải thông tin:\n" + ex.Message,
+                MessageBox.Show("Lỗi khi tải thông tin cá nhân:\n" + ex.Message,
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void SelectComboByText(ComboBox cbo, string text)
         {
@@ -191,8 +213,8 @@ WHERE s.StaffId = @StaffId", conn))
             btnChangeAvatar.Enabled = canEditBasic;
 
             cboQualification.Enabled = canEditProfessional;
-            txtLicenseNo.ReadOnly = !canEditProfessional;
-            dtpLicenseIssue.Enabled = canEditProfessional;
+            //txtLicenseNo.ReadOnly = !canEditProfessional;
+           // dtpLicenseIssue.Enabled = canEditProfessional;
             dtpLicenseExpire.Enabled = canEditProfessional;
 
             txtUsername.ReadOnly = true;
@@ -217,15 +239,15 @@ SET
     Gender            = @Gender,
     Email             = @Email,
     Phone             = @Phone,
-    HireDate          = @HireDate,
+    BirthDate         = @BirthDate, 
     Degree            = @Degree,
     Address           = @Address,
-    LicenseNo         = @LicenseNo,
-    LicenseIssueDate  = @LicenseIssueDate,
+    HireDate          = @HireDate,
     LicenseExpireDate = @LicenseExpireDate,
     AvatarPath        = @AvatarPath,
     IsActive          = @IsActive
 WHERE StaffId = @StaffId;
+
 
 UPDATE u
 SET u.Role = @Role
@@ -239,17 +261,15 @@ WHERE s.StaffId = @StaffId;
                     cmd.Parameters.AddWithValue("@Gender", cboGender.Text);
                     cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
                     cmd.Parameters.AddWithValue("@Phone", txtPhone.Text.Trim());
-                    cmd.Parameters.AddWithValue("@HireDate", dtpBirthDate.Value.Date);
+                    cmd.Parameters.AddWithValue("@BirthDate", dtpBirthDate.Value.Date);
                     cmd.Parameters.AddWithValue("@Degree", cboQualification.Text);
 
                     cmd.Parameters.AddWithValue("@Address",
                         string.IsNullOrWhiteSpace(txtAddress.Text) ? (object)DBNull.Value : txtAddress.Text);
 
-                    cmd.Parameters.AddWithValue("@LicenseNo",
-                        string.IsNullOrWhiteSpace(txtLicenseNo.Text) ? (object)DBNull.Value : txtLicenseNo.Text);
-
-                    cmd.Parameters.AddWithValue("@LicenseIssueDate", dtpLicenseIssue.Value.Date);
+                    cmd.Parameters.AddWithValue("@HireDate", dtpHireDate.Value.Date);
                     cmd.Parameters.AddWithValue("@LicenseExpireDate", dtpLicenseExpire.Value.Date);
+
 
                     cmd.Parameters.AddWithValue("@AvatarPath",
                         string.IsNullOrWhiteSpace(_avatarPathInDb) ? (object)DBNull.Value : _avatarPathInDb);
@@ -339,11 +359,12 @@ WHERE s.StaffId = @StaffId;
 
                 if (result == DialogResult.OK)
                 {
-                    // đổi pass thành công, chỉ cần mask lại ô mật khẩu
+                    // Đổi xong thì vẫn giữ mask
                     txtPasswordMask.Text = "********";
                 }
             }
         }
+
 
     }
 }

@@ -85,23 +85,27 @@ namespace PharmacyApp.UserControls
                 conn.Open();
 
                 string sql = @"
-            SELECT StaffId,
-                   StaffCode,
-                   FullName,
-                   Gender,
-                   Email,
-                   Phone,
-                   HireDate,
-                   Degree,
-                   LicenseExpireDate,
-                   IsActive
-            FROM Staff
-            WHERE (@kw IS NULL
-                   OR FullName  LIKE '%' + @kw + '%'
-                   OR StaffCode LIKE '%' + @kw + '%'
-                   OR Phone     LIKE '%' + @kw + '%'
-                   OR Email     LIKE '%' + @kw + '%')
-            ORDER BY FullName";
+SELECT 
+    s.StaffId,
+    s.StaffCode,
+    s.FullName,
+    s.Gender,
+    s.BirthDate,
+    s.Email,
+    s.Phone,
+    s.HireDate,
+    s.Degree,
+    s.LicenseExpireDate,
+    u.Role,          -- 🔹 LẤY ROLE TỪ USERS
+    s.IsActive
+FROM Staff s
+LEFT JOIN Users u ON s.UserId = u.UserId
+WHERE (@kw IS NULL
+       OR s.FullName  LIKE '%' + @kw + '%'
+       OR s.StaffCode LIKE '%' + @kw + '%'
+       OR s.Phone     LIKE '%' + @kw + '%'
+       OR s.Email     LIKE '%' + @kw + '%')
+ORDER BY s.FullName";
 
                 using (var da = new SqlDataAdapter(sql, conn))
                 {
@@ -111,14 +115,16 @@ namespace PharmacyApp.UserControls
                     var dt = new DataTable();
                     da.Fill(dt);
 
-                    dgvStaff.AutoGenerateColumns = false;   // ❗ LUÔN là false
+                    dgvStaff.AutoGenerateColumns = false;
                     dgvStaff.DataSource = dt;
 
-                    // Ẩn cột Id nội bộ, chỉ cho thấy Mã nhân viên (StaffCode)
                     colStaffId.Visible = false;
                 }
             }
         }
+
+
+
 
 
         // ==============================
@@ -159,8 +165,11 @@ namespace PharmacyApp.UserControls
             txtEmail.Text = drv["Email"]?.ToString();
             txtSDT.Text = drv["Phone"]?.ToString();
 
-            if (drv["HireDate"] != DBNull.Value)
-                dtNgayVaoLam.Value = Convert.ToDateTime(drv["HireDate"]);
+            // 🔹 Ngày sinh
+            if (drv["BirthDate"] != DBNull.Value)
+                dtNgaySinh.Value = Convert.ToDateTime(drv["BirthDate"]);
+            else
+                dtNgaySinh.Value = DateTime.Today;
 
             cboBangCap.Text = drv["Degree"]?.ToString();
 
@@ -173,6 +182,12 @@ namespace PharmacyApp.UserControls
                 dtLicenseExpire.Value = Convert.ToDateTime(drv["LicenseExpireDate"]);
             else
                 dtLicenseExpire.Value = DateTime.Today;
+            if (drv.Row.Table.Columns.Contains("Role"))
+                
+
+            cboVaiTro.Text = drv["Role"]?.ToString();
+            else
+                cboVaiTro.SelectedIndex = -1;
 
         }
 
@@ -183,25 +198,22 @@ namespace PharmacyApp.UserControls
 
             bool isEditing = (mode == EditMode.Add || mode == EditMode.Edit);
 
-            // Cho phép nhập
             txtHoTen.Enabled = isEditing;
             cboGioiTinh.Enabled = isEditing;
             txtEmail.Enabled = isEditing;
             txtSDT.Enabled = isEditing;
             dtNgayVaoLam.Enabled = isEditing;
             cboBangCap.Enabled = isEditing;
-            //dtNgayHetHanBang.Enabled = isEditing;
             tglTrangThai.Enabled = isEditing;
-
-            // Mã NV thường không cho sửa khi Edit
             txtMaNV.Enabled = (mode == EditMode.Add);
+            cboVaiTro.Enabled = isEditing;   // ⭐ bật/tắt sửa vai trò
 
-            // Nút
             btnThem.Enabled = (mode == EditMode.None);
-            btnSua.Enabled = (mode == EditMode.None && dgvStaff.CurrentRow != null);
+            btnSua.Enabled = (mode == EditMode.None);   // 👈 bỏ điều kiện CurrentRow
             btnLuu.Enabled = isEditing;
             btnHuy.Enabled = isEditing;
         }
+
 
         // Khi chọn dòng khác trên grid → fill form
         private void DgvStaff_SelectionChanged(object sender, EventArgs e)
@@ -384,11 +396,12 @@ VALUES (@FullName, @Email, @Password, @Role, GETDATE());
 SET @UserId = SCOPE_IDENTITY();
 
 INSERT INTO Staff
-    (StaffCode, FullName, Gender, Email, Phone,
+    (StaffCode, FullName, Gender, BirthDate, Email, Phone,
      HireDate, Degree, LicenseExpireDate, IsActive, CreatedAt, UserId)
 VALUES
-    (@StaffCode, @FullName, @Gender, @Email, @Phone,
+    (@StaffCode, @FullName, @Gender, @BirthDate, @Email, @Phone,
      @HireDate, @Degree, @LicenseExpireDate, @IsActive, GETDATE(), @UserId);";
+
 
                 using (var cmd = new SqlCommand(sql, conn))
                 {
@@ -402,6 +415,9 @@ VALUES
                     cmd.Parameters.AddWithValue("@StaffCode", staffCode);
                     cmd.Parameters.AddWithValue("@Gender",
                         string.IsNullOrEmpty(gender) ? (object)DBNull.Value : gender);
+                    // 🔹 BirthDate
+                    cmd.Parameters.AddWithValue("@BirthDate",
+                        dtNgaySinh.Value.Date);   // hoặc cho phép NULL thì dùng toán tử ? : DBNull.Value
                     cmd.Parameters.AddWithValue("@Phone",
                         string.IsNullOrEmpty(phone) ? (object)DBNull.Value : phone);
                     cmd.Parameters.AddWithValue("@HireDate", hireDate);
@@ -454,6 +470,7 @@ SET s.FullName          = @FullName,
     s.Gender            = @Gender,
     s.Email             = @Email,
     s.Phone             = @Phone,
+    s.BirthDate         = @BirthDate,   -- 👈 THÊM DÒNG NÀY
     s.HireDate          = @HireDate,
     s.Degree            = @Degree,
     s.LicenseExpireDate = @LicenseExpireDate,
@@ -461,13 +478,14 @@ SET s.FullName          = @FullName,
 FROM Staff s
 WHERE s.StaffId = @StaffId;
 
--- Đồng bộ sang bảng Users (nếu Staff có UserId)
 UPDATE u
-SET u.FullName = @FullName,
-    u.Email    = @Email
+SET u.Role = @Role
 FROM Users u
 JOIN Staff s ON s.UserId = u.UserId
 WHERE s.StaffId = @StaffId;";
+
+
+
 
                 using (var cmd = new SqlCommand(sql, conn))
                 {
@@ -482,6 +500,11 @@ WHERE s.StaffId = @StaffId;";
 
                     cmd.Parameters.AddWithValue("@Phone",
                         string.IsNullOrEmpty(phone) ? (object)DBNull.Value : phone);
+                    cmd.Parameters.AddWithValue("@BirthDate", dtNgaySinh.Value.Date);
+
+                    cmd.Parameters.AddWithValue("@Role",
+    string.IsNullOrEmpty(cboVaiTro.Text) ? (object)DBNull.Value : cboVaiTro.Text);
+
 
                     cmd.Parameters.AddWithValue("@HireDate", hireDate);
 
@@ -638,5 +661,37 @@ WHERE s.StaffId = @StaffId;";
         {
 
         }
+        private void dgvStaff_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var row = dgvStaff.Rows[e.RowIndex];
+
+            txtMaNV.Text = row.Cells["colStaffCode"].Value?.ToString();
+            txtHoTen.Text = row.Cells["colFullName"].Value?.ToString();
+            txtEmail.Text = row.Cells["colEmail"].Value?.ToString();
+            txtSDT.Text = row.Cells["colPhone"].Value?.ToString();
+            cboGioiTinh.Text = row.Cells["colGender"].Value?.ToString();
+
+            // ====== Load Bằng cấp (Degree) ======
+            string degree = row.Cells["colDegree"].Value?.ToString();
+            cboBangCap.SelectedItem = degree;     // ⭐ Dòng bạn hỏi nằm ở đây
+
+            // ====== Ngày sinh ======
+            if (row.Cells["colBirthDate"].Value != DBNull.Value)
+                dtNgaySinh.Value = Convert.ToDateTime(row.Cells["colBirthDate"].Value);
+
+            // ====== Ngày vào làm ======
+            if (row.Cells["colHireDate"].Value != DBNull.Value)
+                dtNgayVaoLam.Value = Convert.ToDateTime(row.Cells["colHireDate"].Value);
+
+            // ====== Vai trò ======
+            cboVaiTro.SelectedItem = row.Cells["colRole"].Value?.ToString();
+
+            // ====== Trạng thái ======
+            string active = row.Cells["colActive"].Value.ToString();
+            tglTrangThai.Checked = active == "True";
+        }
+
     }
 }

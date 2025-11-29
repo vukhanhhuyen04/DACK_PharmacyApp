@@ -44,10 +44,8 @@
             this.gbProfessional = new Guna.UI2.WinForms.Guna2GroupBox();
             this.dtpLicenseExpire = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.lblExpire = new System.Windows.Forms.Label();
-            this.dtpLicenseIssue = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.lblIssue = new System.Windows.Forms.Label();
-            this.txtLicenseNo = new Guna.UI2.WinForms.Guna2TextBox();
-            this.lblLicenseNo = new System.Windows.Forms.Label();
+            this.dtpHireDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.lblHireDate = new System.Windows.Forms.Label();
             this.cboQualification = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblQualification = new System.Windows.Forms.Label();
             this.tlpTop = new System.Windows.Forms.TableLayoutPanel();
@@ -96,7 +94,6 @@
             this.pRoot.Padding = new System.Windows.Forms.Padding(20);
             this.pRoot.Size = new System.Drawing.Size(1112, 825);
             this.pRoot.TabIndex = 0;
-           // this.pRoot.Paint += new System.Windows.Forms.PaintEventHandler(this.pRoot_Paint);
             // 
             // btnCancel
             // 
@@ -114,7 +111,6 @@
             this.btnCancel.Size = new System.Drawing.Size(110, 36);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Hủy";
-       //     this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -137,8 +133,6 @@
             // 
             this.gbSystem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbSystem.Controls.Add(this.cboStatus);
-            this.gbSystem.Controls.Add(this.lblStatus);
             this.gbSystem.Controls.Add(this.cboRole);
             this.gbSystem.Controls.Add(this.btnChangePassword);
             this.gbSystem.Controls.Add(this.txtPasswordMask);
@@ -150,10 +144,9 @@
             this.gbSystem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.gbSystem.Location = new System.Drawing.Point(20, 549);
             this.gbSystem.Name = "gbSystem";
-            this.gbSystem.Size = new System.Drawing.Size(1069, 170);
+            this.gbSystem.Size = new System.Drawing.Size(1069, 201);
             this.gbSystem.TabIndex = 4;
             this.gbSystem.Text = "Thông tin hệ thống";
-          //  this.gbSystem.Click += new System.EventHandler(this.guna2GroupBox1_Click);
             // 
             // cboStatus
             // 
@@ -168,7 +161,7 @@
             this.cboStatus.Items.AddRange(new object[] {
             "Hoạt động",
             "Ngưng hoạt động"});
-            this.cboStatus.Location = new System.Drawing.Point(438, 122);
+            this.cboStatus.Location = new System.Drawing.Point(107, 133);
             this.cboStatus.Name = "cboStatus";
             this.cboStatus.Size = new System.Drawing.Size(244, 36);
             this.cboStatus.TabIndex = 26;
@@ -178,12 +171,11 @@
             this.lblStatus.AutoSize = true;
             this.lblStatus.BackColor = System.Drawing.Color.White;
             this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(340, 126);
+            this.lblStatus.Location = new System.Drawing.Point(8, 133);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(93, 25);
             this.lblStatus.TabIndex = 25;
             this.lblStatus.Text = "Trạng thái:";
-          //  this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
             // 
             // cboRole
             // 
@@ -198,7 +190,7 @@
             this.cboRole.Items.AddRange(new object[] {
             "Admin",
             "Dược sĩ"});
-            this.cboRole.Location = new System.Drawing.Point(150, 120);
+            this.cboRole.Location = new System.Drawing.Point(159, 155);
             this.cboRole.Name = "cboRole";
             this.cboRole.Size = new System.Drawing.Size(150, 36);
             this.cboRole.TabIndex = 24;
@@ -212,7 +204,7 @@
             this.btnChangePassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnChangePassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnChangePassword.ForeColor = System.Drawing.Color.White;
-            this.btnChangePassword.Location = new System.Drawing.Point(380, 79);
+            this.btnChangePassword.Location = new System.Drawing.Point(405, 100);
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(130, 30);
             this.btnChangePassword.TabIndex = 23;
@@ -230,7 +222,7 @@
             this.txtPasswordMask.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtPasswordMask.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtPasswordMask.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtPasswordMask.Location = new System.Drawing.Point(150, 80);
+            this.txtPasswordMask.Location = new System.Drawing.Point(159, 100);
             this.txtPasswordMask.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPasswordMask.Name = "txtPasswordMask";
             this.txtPasswordMask.PlaceholderText = "";
@@ -245,12 +237,11 @@
             this.lblRole.AutoSize = true;
             this.lblRole.BackColor = System.Drawing.Color.White;
             this.lblRole.ForeColor = System.Drawing.Color.Black;
-            this.lblRole.Location = new System.Drawing.Point(20, 127);
+            this.lblRole.Location = new System.Drawing.Point(20, 155);
             this.lblRole.Name = "lblRole";
             this.lblRole.Size = new System.Drawing.Size(67, 25);
             this.lblRole.TabIndex = 18;
             this.lblRole.Text = "Vai trò:";
-         //   this.lblRole.Click += new System.EventHandler(this.lblRole_Click);
             // 
             // txtUsername
             // 
@@ -264,7 +255,7 @@
             this.txtUsername.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtUsername.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtUsername.Location = new System.Drawing.Point(150, 44);
+            this.txtUsername.Location = new System.Drawing.Point(159, 50);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.PlaceholderText = "";
@@ -278,12 +269,11 @@
             this.lblPassword.AutoSize = true;
             this.lblPassword.BackColor = System.Drawing.Color.White;
             this.lblPassword.ForeColor = System.Drawing.Color.Black;
-            this.lblPassword.Location = new System.Drawing.Point(20, 85);
+            this.lblPassword.Location = new System.Drawing.Point(20, 100);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(90, 25);
             this.lblPassword.TabIndex = 16;
             this.lblPassword.Text = "Mật khẩu:";
-          //  this.lblPassword.Click += new System.EventHandler(this.lblPassword_Click);
             // 
             // lblUsername
             // 
@@ -300,19 +290,19 @@
             // 
             this.gbProfessional.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbProfessional.Controls.Add(this.cboStatus);
             this.gbProfessional.Controls.Add(this.dtpLicenseExpire);
+            this.gbProfessional.Controls.Add(this.lblStatus);
             this.gbProfessional.Controls.Add(this.lblExpire);
-            this.gbProfessional.Controls.Add(this.dtpLicenseIssue);
-            this.gbProfessional.Controls.Add(this.lblIssue);
-            this.gbProfessional.Controls.Add(this.txtLicenseNo);
-            this.gbProfessional.Controls.Add(this.lblLicenseNo);
+            this.gbProfessional.Controls.Add(this.dtpHireDate);
+            this.gbProfessional.Controls.Add(this.lblHireDate);
             this.gbProfessional.Controls.Add(this.cboQualification);
             this.gbProfessional.Controls.Add(this.lblQualification);
             this.gbProfessional.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbProfessional.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.gbProfessional.Location = new System.Drawing.Point(20, 375);
+            this.gbProfessional.Location = new System.Drawing.Point(20, 351);
             this.gbProfessional.Name = "gbProfessional";
-            this.gbProfessional.Size = new System.Drawing.Size(1072, 150);
+            this.gbProfessional.Size = new System.Drawing.Size(1072, 192);
             this.gbProfessional.TabIndex = 3;
             this.gbProfessional.Text = "Thông tin chuyên môn";
             // 
@@ -342,64 +332,31 @@
             this.lblExpire.TabIndex = 20;
             this.lblExpire.Text = "Ngày hết hạn:";
             // 
-            // dtpLicenseIssue
+            // dtpHireDate
             // 
-            this.dtpLicenseIssue.Checked = true;
-            this.dtpLicenseIssue.FillColor = System.Drawing.Color.Aqua;
-            this.dtpLicenseIssue.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpLicenseIssue.ForeColor = System.Drawing.Color.Black;
-            this.dtpLicenseIssue.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpLicenseIssue.Location = new System.Drawing.Point(677, 49);
-            this.dtpLicenseIssue.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.dtpLicenseIssue.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.dtpLicenseIssue.Name = "dtpLicenseIssue";
-            this.dtpLicenseIssue.Size = new System.Drawing.Size(187, 30);
-            this.dtpLicenseIssue.TabIndex = 19;
-            this.dtpLicenseIssue.Value = new System.DateTime(2025, 11, 15, 10, 17, 36, 487);
+            this.dtpHireDate.Checked = true;
+            this.dtpHireDate.FillColor = System.Drawing.Color.Aqua;
+            this.dtpHireDate.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpHireDate.ForeColor = System.Drawing.Color.Black;
+            this.dtpHireDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpHireDate.Location = new System.Drawing.Point(677, 49);
+            this.dtpHireDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dtpHireDate.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpHireDate.Name = "dtpHireDate";
+            this.dtpHireDate.Size = new System.Drawing.Size(187, 30);
+            this.dtpHireDate.TabIndex = 19;
+            this.dtpHireDate.Value = new System.DateTime(2025, 11, 30, 1, 31, 37, 432);
             // 
-            // lblIssue
+            // lblHireDate
             // 
-            this.lblIssue.AutoSize = true;
-            this.lblIssue.BackColor = System.Drawing.Color.White;
-            this.lblIssue.ForeColor = System.Drawing.Color.Black;
-            this.lblIssue.Location = new System.Drawing.Point(530, 48);
-            this.lblIssue.Name = "lblIssue";
-            this.lblIssue.Size = new System.Drawing.Size(91, 25);
-            this.lblIssue.TabIndex = 18;
-            this.lblIssue.Text = "Ngày cấp:";
-     //       this.lblIssue.Click += new System.EventHandler(this.lblIssue_Click);
-            // 
-            // txtLicenseNo
-            // 
-            this.txtLicenseNo.BorderRadius = 6;
-            this.txtLicenseNo.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtLicenseNo.DefaultText = "";
-            this.txtLicenseNo.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtLicenseNo.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtLicenseNo.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtLicenseNo.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtLicenseNo.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtLicenseNo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtLicenseNo.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtLicenseNo.Location = new System.Drawing.Point(257, 101);
-            this.txtLicenseNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtLicenseNo.Name = "txtLicenseNo";
-            this.txtLicenseNo.PlaceholderText = "";
-            this.txtLicenseNo.ReadOnly = true;
-            this.txtLicenseNo.SelectedText = "";
-            this.txtLicenseNo.Size = new System.Drawing.Size(220, 30);
-            this.txtLicenseNo.TabIndex = 17;
-            // 
-            // lblLicenseNo
-            // 
-            this.lblLicenseNo.AutoSize = true;
-            this.lblLicenseNo.BackColor = System.Drawing.Color.White;
-            this.lblLicenseNo.ForeColor = System.Drawing.Color.Black;
-            this.lblLicenseNo.Location = new System.Drawing.Point(20, 106);
-            this.lblLicenseNo.Name = "lblLicenseNo";
-            this.lblLicenseNo.Size = new System.Drawing.Size(208, 25);
-            this.lblLicenseNo.TabIndex = 16;
-            this.lblLicenseNo.Text = "Số chứng chỉ hành nghề:";
+            this.lblHireDate.AutoSize = true;
+            this.lblHireDate.BackColor = System.Drawing.Color.White;
+            this.lblHireDate.ForeColor = System.Drawing.Color.Black;
+            this.lblHireDate.Location = new System.Drawing.Point(530, 48);
+            this.lblHireDate.Name = "lblHireDate";
+            this.lblHireDate.Size = new System.Drawing.Size(126, 25);
+            this.lblHireDate.TabIndex = 18;
+            this.lblHireDate.Text = "Ngày vào làm:";
             // 
             // cboQualification
             // 
@@ -417,23 +374,21 @@
             "Cao đẳng",
             "Trung cấp",
             "Dược tá"});
-            this.cboQualification.Location = new System.Drawing.Point(106, 43);
+            this.cboQualification.Location = new System.Drawing.Point(107, 61);
             this.cboQualification.Name = "cboQualification";
-            this.cboQualification.Size = new System.Drawing.Size(220, 36);
+            this.cboQualification.Size = new System.Drawing.Size(244, 36);
             this.cboQualification.TabIndex = 15;
-        //    this.cboQualification.SelectedIndexChanged += new System.EventHandler(this.cboQualification_SelectedIndexChanged);
             // 
             // lblQualification
             // 
             this.lblQualification.AutoSize = true;
             this.lblQualification.BackColor = System.Drawing.Color.White;
             this.lblQualification.ForeColor = System.Drawing.Color.Black;
-            this.lblQualification.Location = new System.Drawing.Point(20, 48);
+            this.lblQualification.Location = new System.Drawing.Point(12, 61);
             this.lblQualification.Name = "lblQualification";
             this.lblQualification.Size = new System.Drawing.Size(80, 25);
             this.lblQualification.TabIndex = 14;
             this.lblQualification.Text = "Trình độ:";
-         //   this.lblQualification.Click += new System.EventHandler(this.lblQualification_Click);
             // 
             // tlpTop
             // 
@@ -450,7 +405,6 @@
             this.tlpTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTop.Size = new System.Drawing.Size(1072, 275);
             this.tlpTop.TabIndex = 2;
-        //    this.tlpTop.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpTop_Paint);
             // 
             // pBasic
             // 
@@ -472,7 +426,6 @@
             this.pBasic.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.pBasic.Size = new System.Drawing.Size(745, 269);
             this.pBasic.TabIndex = 1;
-      //      this.pBasic.Paint += new System.Windows.Forms.PaintEventHandler(this.pBasic_Paint);
             // 
             // txtAddress
             // 
@@ -486,14 +439,14 @@
             this.txtAddress.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtAddress.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtAddress.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtAddress.Location = new System.Drawing.Point(120, 208);
+            this.txtAddress.Location = new System.Drawing.Point(120, 224);
             this.txtAddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.PlaceholderText = "";
             this.txtAddress.ReadOnly = true;
             this.txtAddress.SelectedText = "";
-            this.txtAddress.Size = new System.Drawing.Size(350, 50);
+            this.txtAddress.Size = new System.Drawing.Size(428, 40);
             this.txtAddress.TabIndex = 14;
             // 
             // lblAddress
@@ -519,13 +472,13 @@
             this.txtEmail.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtEmail.Location = new System.Drawing.Point(120, 168);
+            this.txtEmail.Location = new System.Drawing.Point(120, 180);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.PlaceholderText = "";
             this.txtEmail.ReadOnly = true;
             this.txtEmail.SelectedText = "";
-            this.txtEmail.Size = new System.Drawing.Size(280, 30);
+            this.txtEmail.Size = new System.Drawing.Size(280, 36);
             this.txtEmail.TabIndex = 12;
             // 
             // lblEmail
@@ -538,7 +491,6 @@
             this.lblEmail.Size = new System.Drawing.Size(49, 20);
             this.lblEmail.TabIndex = 11;
             this.lblEmail.Text = "Email:";
-        //   this.lblEmail.Click += new System.EventHandler(this.lblEmail_Click);
             // 
             // txtPhone
             // 
@@ -552,13 +504,13 @@
             this.txtPhone.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtPhone.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtPhone.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtPhone.Location = new System.Drawing.Point(120, 128);
+            this.txtPhone.Location = new System.Drawing.Point(120, 136);
             this.txtPhone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.PlaceholderText = "";
             this.txtPhone.ReadOnly = true;
             this.txtPhone.SelectedText = "";
-            this.txtPhone.Size = new System.Drawing.Size(180, 30);
+            this.txtPhone.Size = new System.Drawing.Size(180, 36);
             this.txtPhone.TabIndex = 10;
             // 
             // lblPhone
@@ -571,7 +523,6 @@
             this.lblPhone.Size = new System.Drawing.Size(100, 20);
             this.lblPhone.TabIndex = 9;
             this.lblPhone.Text = "Số điện thoại:";
-        //    this.lblPhone.Click += new System.EventHandler(this.lblPhone_Click);
             // 
             // cboGender
             // 
@@ -585,13 +536,11 @@
             this.cboGender.ItemHeight = 30;
             this.cboGender.Items.AddRange(new object[] {
             "Nam",
-            "Nữ",
-            "Khác"});
-            this.cboGender.Location = new System.Drawing.Point(120, 88);
+            "Nữ"});
+            this.cboGender.Location = new System.Drawing.Point(120, 93);
             this.cboGender.Name = "cboGender";
             this.cboGender.Size = new System.Drawing.Size(120, 36);
             this.cboGender.TabIndex = 8;
-       //     this.cboGender.SelectedIndexChanged += new System.EventHandler(this.cboGender_SelectedIndexChanged);
             // 
             // lblGender
             // 
@@ -611,11 +560,11 @@
             this.dtpBirthDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpBirthDate.ForeColor = System.Drawing.Color.Black;
             this.dtpBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpBirthDate.Location = new System.Drawing.Point(120, 48);
+            this.dtpBirthDate.Location = new System.Drawing.Point(120, 51);
             this.dtpBirthDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpBirthDate.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpBirthDate.Name = "dtpBirthDate";
-            this.dtpBirthDate.Size = new System.Drawing.Size(192, 30);
+            this.dtpBirthDate.Size = new System.Drawing.Size(192, 36);
             this.dtpBirthDate.TabIndex = 6;
             this.dtpBirthDate.Value = new System.DateTime(2025, 11, 15, 10, 17, 36, 487);
             // 
@@ -629,7 +578,6 @@
             this.lblBirthDate.Size = new System.Drawing.Size(77, 20);
             this.lblBirthDate.TabIndex = 5;
             this.lblBirthDate.Text = "Ngày sinh:";
-        //    this.lblBirthDate.Click += new System.EventHandler(this.lblBirthDate_Click);
             // 
             // txtFullName
             // 
@@ -649,7 +597,7 @@
             this.txtFullName.PlaceholderText = "";
             this.txtFullName.ReadOnly = true;
             this.txtFullName.SelectedText = "";
-            this.txtFullName.Size = new System.Drawing.Size(280, 30);
+            this.txtFullName.Size = new System.Drawing.Size(280, 36);
             this.txtFullName.TabIndex = 4;
             // 
             // lblFullName
@@ -694,7 +642,7 @@
             this.txtStaffCode.PlaceholderText = "";
             this.txtStaffCode.ReadOnly = true;
             this.txtStaffCode.SelectedText = "";
-            this.txtStaffCode.Size = new System.Drawing.Size(120, 30);
+            this.txtStaffCode.Size = new System.Drawing.Size(120, 36);
             this.txtStaffCode.TabIndex = 3;
             // 
             // lblStaffCode
@@ -751,7 +699,6 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Thông tin cá nhân";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      //      this.lblTitle.Click += new System.EventHandler(this.label1_Click);
             // 
             // UC_Profile
             // 
@@ -801,12 +748,15 @@
         private System.Windows.Forms.Label lblAddress;
         private Guna.UI2.WinForms.Guna2GroupBox gbProfessional;
         private System.Windows.Forms.Label lblQualification;
-        private Guna.UI2.WinForms.Guna2TextBox txtLicenseNo;
-        private System.Windows.Forms.Label lblLicenseNo;
+      //  private Guna.UI2.WinForms.Guna2TextBox txtLicenseNo;
+       // private System.Windows.Forms.Label lblLicenseNo;
         private Guna.UI2.WinForms.Guna2ComboBox cboQualification;
         private System.Windows.Forms.Label lblExpire;
-        private Guna.UI2.WinForms.Guna2DateTimePicker dtpLicenseIssue;
-        private System.Windows.Forms.Label lblIssue;
+        //  private Guna.UI2.WinForms.Guna2DateTimePicker dtpLicenseIssue;
+        //  private System.Windows.Forms.Label lblIssue;
+        private System.Windows.Forms.Label lblHireDate;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtpHireDate;
+
         private Guna.UI2.WinForms.Guna2GroupBox gbSystem;
         private System.Windows.Forms.Label lblRole;
         private Guna.UI2.WinForms.Guna2TextBox txtUsername;
