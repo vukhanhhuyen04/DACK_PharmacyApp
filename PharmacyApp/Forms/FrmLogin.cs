@@ -25,7 +25,7 @@ namespace PharmacyApp.Forms
             WireEvents();
 
             if (IsInDesigner()) return;
-
+            LoadRememberedUser();
             this.Shown += delegate { CenterBrand(); CenterLinks(); };
             this.Resize += delegate { CenterBrand(); CenterLinks(); };
         }
@@ -42,8 +42,10 @@ namespace PharmacyApp.Forms
             if (lnkForgot != null) lnkForgot.Click += lnkForgot_Click;
             if (lnkHelp != null) lnkHelp.Click += lnkHelp_Click;
             if (btnLogin != null) this.AcceptButton = btnLogin; // Enter = Login
+            if (chkRemember != null)
+                chkRemember.CheckedChanged += chkRemember_CheckedChanged;
 
-           // if (btnLogin != null) btnLogin.Click += btnLogin_Click;
+            // if (btnLogin != null) btnLogin.Click += btnLogin_Click;
         }
 
         // ---------- Căn giữa logo ----------
@@ -88,7 +90,17 @@ namespace PharmacyApp.Forms
         private void txtPassword_TextChanged(object sender, EventArgs e) { }
         private void FrmLogin_Load(object sender, EventArgs e) { }
         private void guna2Shapes3_Click(object sender, EventArgs e) { }
-        private void chkRemember_CheckedChanged(object sender, EventArgs e) { }
+        private void chkRemember_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkRemember.Checked)
+            {
+                Properties.Settings.Default.RememberMe = false;
+                Properties.Settings.Default.SavedEmail = "";
+                Properties.Settings.Default.SavedPassword = "";
+                Properties.Settings.Default.Save();
+            }
+        }
+
 
         private void lnkSignUp_Click(object sender, EventArgs e)
         {
@@ -193,6 +205,25 @@ namespace PharmacyApp.Forms
                         Session.FullName = fullName;
                         Session.Role = role;
                         Session.IsLoggedIn = true;
+                        // 🔹 Lưu vào Program để chỗ khác dùng (POS, báo cáo,...)
+                        Program.CurrentStaffId = staffId;
+                        Program.CurrentStaffName = fullName;
+
+                        // ======= REMEMBER ME =======
+                        if (chkRemember.Checked)
+                        {
+                            Properties.Settings.Default.RememberMe = true;
+                            Properties.Settings.Default.SavedEmail = email;
+                            Properties.Settings.Default.SavedPassword = pass;  // Có thể mã hoá nếu muốn
+                        }
+                        else
+                        {
+                            Properties.Settings.Default.RememberMe = false;
+                            Properties.Settings.Default.SavedEmail = "";
+                            Properties.Settings.Default.SavedPassword = "";
+                        }
+
+                        Properties.Settings.Default.Save();
 
                         OpenDashboard();
                     }
@@ -216,11 +247,7 @@ namespace PharmacyApp.Forms
         {
             this.Hide();
 
-            // Nếu bạn có 2 form khác nhau cho Admin / Dược sĩ thì có thể phân nhánh ở đây
-            // VD:
-            // if (Session.Role == "Admin") ...
-            // else ...
-
+            // Dùng thông tin trong Session (hoặc Program cũng được)
             var dash = new FrmAdminDashboard(Session.UserId, Session.FullName, Session.Role);
 
             dash.FormClosed += (s, e) =>
@@ -231,5 +258,22 @@ namespace PharmacyApp.Forms
 
             dash.Show();
         }
+
+        private void LoadRememberedUser()
+        {
+            if (Properties.Settings.Default.RememberMe)
+            {
+                chkRemember.Checked = true;
+                txtEmail.Text = Properties.Settings.Default.SavedEmail;
+                txtPassword.Text = Properties.Settings.Default.SavedPassword;
+            }
+            else
+            {
+                chkRemember.Checked = false;
+                txtEmail.Clear();
+                txtPassword.Clear();
+            }
+        }
+
     }
 }

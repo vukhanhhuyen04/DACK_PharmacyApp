@@ -8,7 +8,9 @@ namespace PharmacyApp
     {
         // Chuỗi kết nối dùng chung
         public static string ConnStr = "";
-
+        // 🔹 Lưu thông tin nhân viên đang đăng nhập
+        public static int? CurrentStaffId { get; set; }
+        public static string CurrentStaffName { get; set; }
         [STAThread]
         static void Main()
         {

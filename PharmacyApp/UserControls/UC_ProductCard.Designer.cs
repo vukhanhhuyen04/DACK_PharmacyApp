@@ -75,7 +75,7 @@
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(37, 26);
             this.BtnDelete.TabIndex = 5;
-            this.BtnDelete.Text = "🗑";
+            this.BtnDelete.Text = "∅";
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // guna2Button1

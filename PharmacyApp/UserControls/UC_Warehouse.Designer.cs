@@ -51,16 +51,20 @@
             this.btnEdit = new Guna.UI2.WinForms.Guna2Button();
             this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
             this.dgvWarehouse = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.btnTim = new Guna.UI2.WinForms.Guna2Button();
+            this.btnAddReceipt = new Guna.UI2.WinForms.Guna2Button();
+            this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDonViTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGiaNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGiaBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNhaCungCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaNCC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSoLuongTon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colViTri = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHanDung = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnTim = new Guna.UI2.WinForms.Guna2Button();
-            this.btnAddReceipt = new Guna.UI2.WinForms.Guna2Button();
             this.headerPanel.SuspendLayout();
             this.infoPanel.SuspendLayout();
             this.cardExpired.SuspendLayout();
@@ -258,6 +262,7 @@
             this.btnEdit.Size = new System.Drawing.Size(110, 36);
             this.btnEdit.TabIndex = 5;
             this.btnEdit.Text = "Sửa";
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnDelete
             // 
@@ -292,9 +297,13 @@
             this.dgvWarehouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvWarehouse.ColumnHeadersHeight = 32;
             this.dgvWarehouse.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colProductId,
             this.colMaSP,
             this.colBarcode,
             this.colTenSP,
+            this.colDonViTinh,
+            this.colGiaNhap,
+            this.colGiaBan,
             this.colNhaCungCap,
             this.colMaNCC,
             this.colSoLuongTon,
@@ -308,11 +317,11 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvWarehouse.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvWarehouse.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvWarehouse.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvWarehouse.Location = new System.Drawing.Point(24, 220);
             this.dgvWarehouse.MultiSelect = false;
             this.dgvWarehouse.Name = "dgvWarehouse";
-            this.dgvWarehouse.ReadOnly = true;
             this.dgvWarehouse.RowHeadersVisible = false;
             this.dgvWarehouse.RowHeadersWidth = 51;
             this.dgvWarehouse.RowTemplate.Height = 36;
@@ -331,7 +340,7 @@
             this.dgvWarehouse.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
             this.dgvWarehouse.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvWarehouse.ThemeStyle.HeaderStyle.Height = 32;
-            this.dgvWarehouse.ThemeStyle.ReadOnly = true;
+            this.dgvWarehouse.ThemeStyle.ReadOnly = false;
             this.dgvWarehouse.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvWarehouse.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvWarehouse.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -339,70 +348,7 @@
             this.dgvWarehouse.ThemeStyle.RowsStyle.Height = 36;
             this.dgvWarehouse.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvWarehouse.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // colMaSP
-            // 
-            this.colMaSP.DataPropertyName = "ProductCode";
-            this.colMaSP.HeaderText = "Mã SP";
-            this.colMaSP.MinimumWidth = 6;
-            this.colMaSP.Name = "colMaSP";
-            this.colMaSP.ReadOnly = true;
-            // 
-            // colBarcode
-            // 
-            this.colBarcode.DataPropertyName = "Barcode";
-            this.colBarcode.HeaderText = "Barcode";
-            this.colBarcode.MinimumWidth = 6;
-            this.colBarcode.Name = "colBarcode";
-            this.colBarcode.ReadOnly = true;
-            // 
-            // colTenSP
-            // 
-            this.colTenSP.DataPropertyName = "ProductName";
-            this.colTenSP.HeaderText = "Tên thuốc";
-            this.colTenSP.MinimumWidth = 6;
-            this.colTenSP.Name = "colTenSP";
-            this.colTenSP.ReadOnly = true;
-            // 
-            // colNhaCungCap
-            // 
-            this.colNhaCungCap.DataPropertyName = "SupplierName";
-            this.colNhaCungCap.HeaderText = "Nhà cung cấp";
-            this.colNhaCungCap.MinimumWidth = 6;
-            this.colNhaCungCap.Name = "colNhaCungCap";
-            this.colNhaCungCap.ReadOnly = true;
-            // 
-            // colMaNCC
-            // 
-            this.colMaNCC.DataPropertyName = "SupplierCode";
-            this.colMaNCC.HeaderText = "Mã NCC";
-            this.colMaNCC.MinimumWidth = 6;
-            this.colMaNCC.Name = "colMaNCC";
-            this.colMaNCC.ReadOnly = true;
-            // 
-            // colSoLuongTon
-            // 
-            this.colSoLuongTon.DataPropertyName = "StockQuantity";
-            this.colSoLuongTon.HeaderText = "Số lượng tồn";
-            this.colSoLuongTon.MinimumWidth = 6;
-            this.colSoLuongTon.Name = "colSoLuongTon";
-            this.colSoLuongTon.ReadOnly = true;
-            // 
-            // colViTri
-            // 
-            this.colViTri.DataPropertyName = "LocationName";
-            this.colViTri.HeaderText = "Vị trí";
-            this.colViTri.MinimumWidth = 6;
-            this.colViTri.Name = "colViTri";
-            this.colViTri.ReadOnly = true;
-            // 
-            // colHanDung
-            // 
-            this.colHanDung.DataPropertyName = "ExpiredDate";
-            this.colHanDung.HeaderText = "Hạn dùng";
-            this.colHanDung.MinimumWidth = 6;
-            this.colHanDung.Name = "colHanDung";
-            this.colHanDung.ReadOnly = true;
+            this.dgvWarehouse.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWarehouse_CellEndEdit);
             // 
             // btnTim
             // 
@@ -434,6 +380,94 @@
             this.btnAddReceipt.TabIndex = 9;
             this.btnAddReceipt.Text = "Nhập";
             this.btnAddReceipt.Click += new System.EventHandler(this.btnAddReceipt_Click);
+            // 
+            // colProductId
+            // 
+            this.colProductId.DataPropertyName = "ProductId";
+            this.colProductId.HeaderText = "ProductId";
+            this.colProductId.MinimumWidth = 6;
+            this.colProductId.Name = "colProductId";
+            this.colProductId.ReadOnly = true;
+            this.colProductId.Visible = false;
+            // 
+            // colMaSP
+            // 
+            this.colMaSP.DataPropertyName = "ProductCode";
+            this.colMaSP.HeaderText = "Mã SP";
+            this.colMaSP.MinimumWidth = 6;
+            this.colMaSP.Name = "colMaSP";
+            this.colMaSP.ReadOnly = true;
+            // 
+            // colBarcode
+            // 
+            this.colBarcode.DataPropertyName = "Barcode";
+            this.colBarcode.HeaderText = "Barcode";
+            this.colBarcode.MinimumWidth = 6;
+            this.colBarcode.Name = "colBarcode";
+            this.colBarcode.ReadOnly = true;
+            // 
+            // colTenSP
+            // 
+            this.colTenSP.DataPropertyName = "ProductName";
+            this.colTenSP.HeaderText = "Tên thuốc";
+            this.colTenSP.MinimumWidth = 6;
+            this.colTenSP.Name = "colTenSP";
+            // 
+            // colDonViTinh
+            // 
+            this.colDonViTinh.DataPropertyName = "Unit";
+            this.colDonViTinh.HeaderText = "ĐVT";
+            this.colDonViTinh.MinimumWidth = 6;
+            this.colDonViTinh.Name = "colDonViTinh";
+            // 
+            // colGiaNhap
+            // 
+            this.colGiaNhap.DataPropertyName = "UnitPrice";
+            this.colGiaNhap.HeaderText = "Giá nhập";
+            this.colGiaNhap.MinimumWidth = 6;
+            this.colGiaNhap.Name = "colGiaNhap";
+            // 
+            // colGiaBan
+            // 
+            this.colGiaBan.DataPropertyName = "SalePrice";
+            this.colGiaBan.HeaderText = "Giá bán";
+            this.colGiaBan.MinimumWidth = 6;
+            this.colGiaBan.Name = "colGiaBan";
+            // 
+            // colNhaCungCap
+            // 
+            this.colNhaCungCap.DataPropertyName = "SupplierName";
+            this.colNhaCungCap.HeaderText = "Nhà cung cấp";
+            this.colNhaCungCap.MinimumWidth = 6;
+            this.colNhaCungCap.Name = "colNhaCungCap";
+            // 
+            // colMaNCC
+            // 
+            this.colMaNCC.DataPropertyName = "SupplierCode";
+            this.colMaNCC.HeaderText = "Mã NCC";
+            this.colMaNCC.MinimumWidth = 6;
+            this.colMaNCC.Name = "colMaNCC";
+            // 
+            // colSoLuongTon
+            // 
+            this.colSoLuongTon.DataPropertyName = "StockQuantity";
+            this.colSoLuongTon.HeaderText = "Số lượng tồn";
+            this.colSoLuongTon.MinimumWidth = 6;
+            this.colSoLuongTon.Name = "colSoLuongTon";
+            // 
+            // colViTri
+            // 
+            this.colViTri.DataPropertyName = "LocationName";
+            this.colViTri.HeaderText = "Vị trí";
+            this.colViTri.MinimumWidth = 6;
+            this.colViTri.Name = "colViTri";
+            // 
+            // colHanDung
+            // 
+            this.colHanDung.DataPropertyName = "ExpiredDate";
+            this.colHanDung.HeaderText = "Hạn dùng";
+            this.colHanDung.MinimumWidth = 6;
+            this.colHanDung.Name = "colHanDung";
             // 
             // UC_Warehouse
             // 
@@ -468,16 +502,20 @@
 
         private Guna.UI2.WinForms.Guna2Button btnTim;
         private Guna.UI2.WinForms.Guna2Button btnAddReceipt;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaSP;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenSP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDonViTinh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGiaNhap;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGiaBan;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNhaCungCap;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaNCC;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSoLuongTon;
         private System.Windows.Forms.DataGridViewTextBoxColumn colViTri;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHanDung;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }

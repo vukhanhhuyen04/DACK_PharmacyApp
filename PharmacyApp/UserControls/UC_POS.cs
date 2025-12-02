@@ -9,7 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using System.Globalization;
+using PdfFont = iTextSharp.text.Font;
 namespace PharmacyApp.UserControls
 {
     public partial class UC_POS : UserControl
@@ -254,6 +258,7 @@ namespace PharmacyApp.UserControls
         }
 
         // Nút Thanh toán
+        // Nút Thanh toán
         private void btnPay_Click(object sender, EventArgs e)
         {
             if (lvCart.Items.Count == 0)
@@ -284,7 +289,7 @@ namespace PharmacyApp.UserControls
                     return;
                 }
 
-                status = "Paid";
+                status = "Paid";   // ✅ tiền mặt: thanh toán xong là Paid luôn
             }
             else
             {
@@ -300,9 +305,23 @@ namespace PharmacyApp.UserControls
             try
             {
                 _currentInvoiceId = SaveInvoiceToDatabase(status);
+
+                // Thông báo
                 MessageBox.Show(
-    $"Đã lưu hóa đơn.\nMã hóa đơn: {_lastInvoiceCode}\nTrạng thái: {status}",
-    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    $"Đã lưu hóa đơn.\nMã hóa đơn: {_lastInvoiceCode}\nTrạng thái: {status}",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // ✅ Nếu là tiền mặt (Paid) → IN LUÔN HÓA ĐƠN
+                if (status == "Paid" && _currentInvoiceId.HasValue)
+                {
+                    PrintBillToPdf(_currentInvoiceId.Value);
+                    ClearCurrentForm();      // nếu muốn sau khi in là reset form
+                }
+                else
+                {
+                    // QR (Pending) thì giữ lại màn hình, cho user bấm nút ĐÃ THANH TOÁN sau
+                    // không clear form, không in
+                }
             }
             catch (Exception ex)
             {
@@ -311,13 +330,8 @@ namespace PharmacyApp.UserControls
                 _currentInvoiceId = null;
                 return;
             }
-
-            MessageBox.Show($"Đã lưu hóa đơn. Mã: {_currentInvoiceId} (Trạng thái: {status})",
-                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            // Nếu là tiền mặt thì có thể in luôn / reset luôn
-            // Nếu là QR (Pending) thì để cho nút Đã thanh toán / Hủy hóa đơn xử lý tiếp.
         }
+
 
 
         /// <summary>
@@ -335,7 +349,6 @@ namespace PharmacyApp.UserControls
             string symptom = txtSymptoms.Text.Trim();
             string paymentMethod = cboPaymentMethod.SelectedItem?.ToString() ?? "";
 
-            // Chỉ dùng tiền khách đưa / tiền thối cho TIỀN MẶT
             decimal cashGiven = 0m;
             decimal changeAmount = 0m;
 
@@ -350,6 +363,10 @@ namespace PharmacyApp.UserControls
 
             int? customerId = GetOrCreateCustomerId();
 
+            // 🔹 Lấy NV đang đăng nhập từ Program
+            int? staffId = Program.CurrentStaffId;
+            string staffName = Program.CurrentStaffName ?? "";
+
             using (var conn = new SqlConnection(Program.ConnStr))
             {
                 conn.Open();
@@ -360,10 +377,12 @@ namespace PharmacyApp.UserControls
                         string sql = @"
 INSERT INTO Invoices
     (CreatedAt, CustomerId, CustomerName, Symptom, TotalAmount,
-     PaymentMethod, CashGiven, ChangeAmount, Status)
+     PaymentMethod, CashGiven, ChangeAmount, Status,
+     StaffId, StaffName)
 VALUES
     (@CreatedAt, @CustomerId, @CustomerName, @Symptom, @TotalAmount,
-     @PaymentMethod, @CashGiven, @ChangeAmount, @Status);
+     @PaymentMethod, @CashGiven, @ChangeAmount, @Status,
+     @StaffId, @StaffName);
 SELECT CAST(SCOPE_IDENTITY() AS int);";
 
                         using (var cmdInv = new SqlCommand(sql, conn, tran))
@@ -371,21 +390,18 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
                             cmdInv.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
                             cmdInv.Parameters.AddWithValue("@CustomerId",
                                 (object)customerId ?? DBNull.Value);
-
                             cmdInv.Parameters.AddWithValue("@CustomerName",
                                 string.IsNullOrEmpty(customerName)
                                     ? (object)DBNull.Value
                                     : customerName);
-
                             cmdInv.Parameters.AddWithValue("@Symptom",
                                 string.IsNullOrEmpty(symptom)
                                     ? (object)DBNull.Value
                                     : symptom);
-
                             cmdInv.Parameters.AddWithValue("@TotalAmount", _totalAmount);
                             cmdInv.Parameters.AddWithValue("@PaymentMethod", paymentMethod);
 
-                            // 🔹 Chỉ add một lần duy nhất, không trùng tên
+                            // 🔹 Chỉ add 1 lần, không lặp tên tham số
                             if (paymentMethod.StartsWith("Tiền mặt"))
                             {
                                 cmdInv.Parameters.AddWithValue("@CashGiven", cashGiven);
@@ -399,13 +415,21 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
 
                             cmdInv.Parameters.AddWithValue("@Status", status);
 
+                            // 🔹 Tham số nhân viên – CHỈ add 1 lần
+                            cmdInv.Parameters.AddWithValue("@StaffId",
+                                (object)staffId ?? DBNull.Value);
+                            cmdInv.Parameters.AddWithValue("@StaffName",
+                                string.IsNullOrEmpty(staffName)
+                                    ? (object)DBNull.Value
+                                    : staffName);
+
                             int invoiceId = (int)cmdInv.ExecuteScalar();
                             _lastInvoiceId = invoiceId;
 
-                            // ===== Insert chi tiết hóa đơn & trừ kho =====
+                            // ===== Chi tiết + trừ kho như code cũ của em =====
                             foreach (ListViewItem item in lvCart.Items)
                             {
-                                int productId = int.Parse(item.SubItems[5].Text);  // ProductId hidden
+                                int productId = int.Parse(item.SubItems[5].Text);
                                 int qty = int.Parse(item.SubItems[2].Text);
 
                                 decimal unitPrice = decimal.Parse(
@@ -434,7 +458,7 @@ VALUES
                                 }
 
                                 using (var cmdStock = new SqlCommand(@"
-UPDATE Products 
+UPDATE Products
 SET StockQuantity = StockQuantity - @qty
 WHERE ProductId = @pid;", conn, tran))
                                 {
@@ -461,20 +485,10 @@ WHERE ProductId = @pid;", conn, tran))
 
 
 
-        // In hoá đơn ra PDF / máy in
-        private void PrintBillToPdf(int invoiceId)
-        {
-            // Gợi ý cấu trúc:
-            // 1. Show SaveFileDialog cho user chọn vị trí lưu (HoaDon_<invoiceId>.pdf)
-            // 2. Dùng thư viện PDF (iTextSharp / QuestPDF / FastReport...)
-            //    để in:
-            //    - Tên nhà thuốc, địa chỉ
-            //    - Mã hoá đơn, thời gian, nhân viên, phương thức thanh toán
-            //    - Duyệt lvCart.Items => in từng dòng: Mã, Tên, SL, Đơn giá, Thành tiền
-            //    - Tổng tiền, Tiền khách đưa, Tiền thối, Triệu chứng, Tên khách
-            //
-            // Khi bạn chọn thư viện cụ thể, mình có thể viết luôn code cho thư viện đó.
-        }
+
+
+
+
 
         // Các event trống (nếu bạn không dùng thì có thể xoá)
         private void lblPaymentMethod_Click(object sender, EventArgs e)
@@ -591,7 +605,7 @@ SELECT
     P.ProductCode,
     P.ProductName,
     P.Unit,
-    P.UnitPrice,
+     P.SalePrice,    
     P.StockQuantity
 FROM Products P
 LEFT JOIN ProductCategories PC ON P.ProductId = PC.ProductId
@@ -895,10 +909,17 @@ WHERE InvoiceId = @Id";
             }
 
             MessageBox.Show("Đã cập nhật trạng thái hóa đơn thành 'Paid'.",
-                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // ✅ In luôn hóa đơn sau khi khách chuyển khoản xong
+            if (_currentInvoiceId.HasValue)
+            {
+                PrintBillToPdf(_currentInvoiceId.Value);
+            }
 
             // Nếu sau khi Paid bạn muốn clear luôn:
             ClearCurrentForm();
+
         }
 
 
@@ -1031,5 +1052,172 @@ WHERE InvoiceId = @Id", conn, tran);
                 cboCategoryPOS.ValueMember = "CategoryId";
             }
         }
+        
+
+private void PrintBillToPdf(int invoiceId)
+    {
+        try
+        {
+            // 1) Chọn nơi lưu file PDF
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "Lưu hóa đơn PDF";
+            sfd.Filter = "PDF Files|*.pdf";
+            sfd.FileName = $"HoaDon_{invoiceId}.pdf";
+
+            if (sfd.ShowDialog() != DialogResult.OK)
+                return;
+
+            string path = sfd.FileName;
+
+            // 2) Tạo document PDF
+            Document doc = new Document(PageSize.A5, 30, 30, 20, 20);
+            PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
+            doc.Open();
+
+                // FONT
+                // FONT
+                string fontPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.Fonts),
+                    "times.ttf"
+                );
+                BaseFont bf = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+
+                PdfFont font16b = new PdfFont(bf, 16, PdfFont.BOLD);
+                PdfFont font12 = new PdfFont(bf, 12, PdfFont.NORMAL);
+                PdfFont font12b = new PdfFont(bf, 12, PdfFont.BOLD);
+
+
+                // -------------------------
+                //       HEADER
+                // -------------------------
+                Paragraph shopName = new Paragraph("Nhà Thuốc EternaMed", font16b);
+            shopName.Alignment = Element.ALIGN_CENTER;
+            doc.Add(shopName);
+
+            Paragraph shopAddr = new Paragraph("Địa chỉ: 2 Đường số 7, TP.HCM\nHotline: 0909-090-909\n\n", font12);
+            shopAddr.Alignment = Element.ALIGN_CENTER;
+            doc.Add(shopAddr);
+
+            doc.Add(new Paragraph($"HÓA ĐƠN BÁN HÀNG\n\n", font16b) { Alignment = Element.ALIGN_CENTER });
+
+            // -------------------------
+            //   LẤY THÔNG TIN INVOICE
+            // -------------------------
+            string sqlInv = @"
+SELECT InvoiceId, CreatedAt, CustomerName, Symptom, TotalAmount,
+       PaymentMethod, CashGiven, ChangeAmount, Status,
+       CustomerId, StaffId, StaffName
+FROM Invoices
+WHERE InvoiceId = @id";
+
+            string sqlDet = @"
+SELECT d.ProductId, p.ProductName, d.Quantity, d.UnitPrice, d.LineTotal
+FROM InvoiceDetails d
+JOIN Products p ON p.ProductId = d.ProductId
+WHERE d.InvoiceId = @id";
+
+            DataTable dtInv = new DataTable();
+            DataTable dtDet = new DataTable();
+
+            using (var conn = new SqlConnection(Program.ConnStr))
+            {
+                conn.Open();
+
+                using (var da = new SqlDataAdapter(sqlInv, conn))
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@id", invoiceId);
+                    da.Fill(dtInv);
+                }
+
+                using (var da = new SqlDataAdapter(sqlDet, conn))
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@id", invoiceId);
+                    da.Fill(dtDet);
+                }
+            }
+
+            if (dtInv.Rows.Count == 0)
+            {
+                MessageBox.Show("Không tìm thấy hóa đơn để in!");
+                return;
+            }
+
+            var inv = dtInv.Rows[0];
+
+            // -----------------------
+            //   THÔNG TIN HÓA ĐƠN
+            // -----------------------
+            doc.Add(new Paragraph($"Mã hóa đơn: HD{invoiceId:000000}", font12));
+            doc.Add(new Paragraph($"Ngày bán: {((DateTime)inv["CreatedAt"]).ToString("dd/MM/yyyy HH:mm")}", font12));
+
+            string staffName = inv["StaffName"] == DBNull.Value ? "Không rõ" : inv["StaffName"].ToString();
+            doc.Add(new Paragraph($"Nhân viên: {staffName}", font12));
+
+            doc.Add(new Paragraph($"Khách hàng: {inv["CustomerName"].ToString()}", font12));
+
+            if (inv["Symptom"] != DBNull.Value)
+                doc.Add(new Paragraph($"Triệu chứng: {inv["Symptom"]}", font12));
+
+            doc.Add(new Paragraph("\n"));
+
+            // -------------------------
+            //   BẢNG SẢN PHẨM
+            // -------------------------
+            PdfPTable table = new PdfPTable(4);
+            table.WidthPercentage = 100;
+            table.SetWidths(new float[] { 4, 1.5f, 2, 2 });
+
+            table.AddCell(new PdfPCell(new Phrase("Tên thuốc", font12b)));
+            table.AddCell(new PdfPCell(new Phrase("SL", font12b)));
+            table.AddCell(new PdfPCell(new Phrase("Đơn giá", font12b)));
+            table.AddCell(new PdfPCell(new Phrase("Thành tiền", font12b)));
+
+            foreach (DataRow row in dtDet.Rows)
+            {
+                table.AddCell(new Phrase(row["ProductName"].ToString(), font12));
+                table.AddCell(new Phrase(row["Quantity"].ToString(), font12));
+                table.AddCell(new Phrase(
+                    Convert.ToDecimal(row["UnitPrice"]).ToString("N0"), font12));
+                table.AddCell(new Phrase(
+                    Convert.ToDecimal(row["LineTotal"]).ToString("N0"), font12));
+            }
+
+            doc.Add(table);
+            doc.Add(new Paragraph("\n"));
+
+            // -------------------------
+            //   TỔNG TIỀN
+            // -------------------------
+            decimal total = Convert.ToDecimal(inv["TotalAmount"]);
+            doc.Add(new Paragraph($"Tổng tiền: {total.ToString("N0")} đ", font12b));
+
+            if (inv["CashGiven"] != DBNull.Value)
+            {
+                decimal cash = Convert.ToDecimal(inv["CashGiven"]);
+                decimal change = Convert.ToDecimal(inv["ChangeAmount"]);
+                doc.Add(new Paragraph($"Tiền khách đưa: {cash.ToString("N0")} đ", font12));
+                doc.Add(new Paragraph($"Tiền thối lại: {change.ToString("N0")} đ", font12));
+            }
+
+            doc.Add(new Paragraph($"\nPhương thức: {inv["PaymentMethod"]}", font12));
+
+            doc.Add(new Paragraph("\nCảm ơn quý khách đã mua hàng!\nChúc quý khách mau khỏe.", font12)
+            {
+                Alignment = Element.ALIGN_CENTER
+            });
+
+            doc.Close();
+
+            MessageBox.Show("Đã xuất hóa đơn PDF thành công!",
+                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Lỗi khi in hóa đơn:\n" + ex.Message,
+                "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
+
+}
 }

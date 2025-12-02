@@ -33,7 +33,7 @@ namespace PharmacyApp.UserControls
             // load tất cả sản phẩm lần đầu
             LoadProducts(null, null);
 
-            btnAdd.Click += btnAdd_Click;
+          //  btnAdd.Click += btnAdd_Click;
         }
 
         // ============= DANH MỤC (HÀNG NÚT GUNA2) =============

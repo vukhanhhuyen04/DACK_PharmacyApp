@@ -541,12 +541,33 @@ VALUES
                         // 5.2 Cập nhật tồn kho Products (và SalePrice, ExpiredDate, Barcode nếu có)
                         // Chuẩn hóa đơn vị từ grid
                         string unitToUpdate = null;
-                        if (dgvReceiptList.Columns.Contains("colUnit"))
+
+                        // CHỈ cập nhật Unit nếu sản phẩm vừa tạo mới
+                        bool isNewProduct = false;
+
+                        if (productId == null)
+                            isNewProduct = true;
+                        if (productId != null)
+                        {
+                            // Load Unit từ DB
+                            using (var cmdUnit = new SqlCommand(
+                                "SELECT Unit FROM Products WHERE ProductId = @pid", conn, tran))
+                            {
+                                cmdUnit.Parameters.AddWithValue("@pid", productId.Value);
+                                object unitObj = cmdUnit.ExecuteScalar();
+                                if (unitObj != null && unitObj != DBNull.Value)
+                                    row.Cells["colUnit"].Value = unitObj.ToString();
+                            }
+                        }
+
+                        // nếu không phải sản phẩm mới → KHÔNG update Unit
+                        if (isNewProduct && dgvReceiptList.Columns.Contains("colUnit"))
                         {
                             var cellUnit = row.Cells["colUnit"].Value;
                             if (cellUnit != null && !string.IsNullOrWhiteSpace(cellUnit.ToString()))
                                 unitToUpdate = cellUnit.ToString().Trim();
                         }
+
 
                         using (var cmdStock = new SqlCommand(@"
 UPDATE Products

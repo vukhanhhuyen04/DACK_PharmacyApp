@@ -8,14 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PharmacyApp.Forms;
 
 namespace PharmacyApp.UserControls
 {
     public partial class UC_Warehouse : UserControl
     {
+        private bool _isEditing = false;
 
         public UC_Warehouse()
         {
+
             InitializeComponent();
             // ví dụ sau này:
             // btnAdd.Click += BtnAdd_Click;
@@ -52,28 +55,59 @@ namespace PharmacyApp.UserControls
         private void LoadWarehouse(string keyword = null)
         {
             using (var conn = new SqlConnection(Program.ConnStr))
-            using (var da = new SqlDataAdapter(@"
-        SELECT 
-            p.ProductCode,                        -- Mã SP
-            p.Barcode,                            -- Barcode
-            p.ProductName,                        -- Tên thuốc
-            s.SupplierName,                       -- Nhà cung cấp
-            s.SupplierId AS SupplierCode,         -- Mã NCC (nếu cần)
-            p.StockQuantity,                      -- Số lượng tồn
-            N'Kho chính' AS LocationName,         -- Vị trí (kho chính)
-            p.ExpiredDate                         -- Hạn dùng
-        FROM Products p
-        LEFT JOIN Suppliers s 
-            ON p.SupplierId = s.SupplierId
-WHERE p.IsActive = 1  
-        ORDER BY p.ProductName", conn))
+            using (var cmd = new SqlCommand())
             {
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvWarehouse.AutoGenerateColumns = false;     // RẤT QUAN TRỌNG
-                dgvWarehouse.DataSource = dt;
+                cmd.Connection = conn;
+
+                // --- SQL chính ---
+                string sql = @"
+SELECT 
+    p.ProductId,
+    p.ProductCode,           -- Mã SP
+    p.Barcode,               -- Barcode
+    p.ProductName,           -- Tên thuốc
+    p.Unit,
+    p.UnitPrice,
+    p.SalePrice,
+    s.SupplierName,          -- Nhà cung cấp
+    s.SupplierId AS SupplierCode,
+    p.StockQuantity,         -- Số lượng tồn
+    N'Kho chính' AS LocationName,
+    p.ExpiredDate            -- Hạn dùng
+FROM Products p
+LEFT JOIN Suppliers s 
+    ON p.SupplierId = s.SupplierId
+WHERE 1 = 1";
+
+                // --- Lọc theo từ khóa (nếu có) ---
+                if (!string.IsNullOrWhiteSpace(keyword))
+                {
+                    sql += @"
+  AND (
+        p.ProductCode  LIKE @kw
+        OR p.Barcode   LIKE @kw
+        OR p.ProductName LIKE @kw
+      )";
+                    cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
+                }
+
+                sql += @"
+ORDER BY p.ProductName;";
+
+                cmd.CommandText = sql;
+
+                using (var da = new SqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    dgvWarehouse.AutoGenerateColumns = false;
+                    dgvWarehouse.DataSource = dt;
+                }
             }
         }
+
+
         private void LoadStats()
         {
             using (var conn = new SqlConnection(Program.ConnStr))
@@ -119,32 +153,50 @@ FROM Products", conn))
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvWarehouse.CurrentRow == null) return;
+            _isEditing = !_isEditing;
 
-            int productId = Convert.ToInt32(
-                dgvWarehouse.CurrentRow.Cells["colProductId"].Value);
-
-            using (var f = new Form())
+            if (_isEditing)
             {
-                f.StartPosition = FormStartPosition.CenterParent;
-                f.Text = "Sửa thông tin sản phẩm";
-                f.Size = new Size(600, 500);
-                f.MinimizeBox = false;
-                f.MaximizeBox = false;
+                btnEdit.Text = "Đang sửa...";
 
-                var uc = new UC_Receipt();
-                uc.Dock = DockStyle.Fill;
-                uc.EditingProductId = productId;   // 🔹 gán ID, KHÔNG gọi LoadProduct
+                // Cho phép sửa, nhưng chỉ một số cột
+                dgvWarehouse.ReadOnly = false;
 
-                f.Controls.Add(uc);
+                foreach (DataGridViewColumn col in dgvWarehouse.Columns)
+                    col.ReadOnly = true;   // khoá hết
 
-                if (f.ShowDialog() == DialogResult.OK)
-                {
-                    LoadStats();
-                    LoadWarehouse(txtSearch.Text);
-                }
+                // ✅ Các cột cho phép sửa (đặt đúng tên column trong Designer)
+                if (dgvWarehouse.Columns.Contains("colTenThuoc"))
+                    dgvWarehouse.Columns["colTenThuoc"].ReadOnly = false;
+
+                if (dgvWarehouse.Columns.Contains("colDonViTinh"))
+                    dgvWarehouse.Columns["colDonViTinh"].ReadOnly = false;
+
+                if (dgvWarehouse.Columns.Contains("colGiaNhap"))
+                    dgvWarehouse.Columns["colGiaNhap"].ReadOnly = false;
+
+                if (dgvWarehouse.Columns.Contains("colGiaBan"))
+                    dgvWarehouse.Columns["colGiaBan"].ReadOnly = false;
+
+                if (dgvWarehouse.Columns.Contains("colHanDung"))
+                    dgvWarehouse.Columns["colHanDung"].ReadOnly = false;
+
+                if (dgvWarehouse.Columns.Contains("colDonViTinh"))
+                    dgvWarehouse.Columns["colDonViTinh"].ReadOnly = false;
+
+                // (Nếu muốn cho sửa Nhà cung cấp thì mở thêm colNhaCungCap, nhưng phần này hơi phức tạp vì dính 2 bảng)
+                MessageBox.Show("Bạn có thể sửa trực tiếp các ô (Tên thuốc, ĐVT, Giá, HSD) trong lưới.\n" +
+                                "Rời ô là hệ thống tự lưu.",
+                                "Chế độ sửa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                btnEdit.Text = "Sửa";
+                dgvWarehouse.ReadOnly = true;
             }
         }
+
+
 
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -152,7 +204,9 @@ FROM Products", conn))
             if (dgvWarehouse.CurrentRow == null) return;
 
             int id = Convert.ToInt32(dgvWarehouse.CurrentRow.Cells["colProductId"].Value);
-            int stock = Convert.ToInt32(dgvWarehouse.CurrentRow.Cells["colStockQuantity"].Value);
+            int stock = Convert.ToInt32(
+    dgvWarehouse.CurrentRow.Cells["colSoLuongTon"].Value);
+
 
             if (stock > 0)
             {
@@ -163,12 +217,17 @@ FROM Products", conn))
             }
 
             using (var conn = new SqlConnection(Program.ConnStr))
-            using (var cmd = new SqlCommand("DELETE FROM Products WHERE ProductId=@id", conn))
+            using (var cmd = new SqlCommand(
+                "UPDATE Products SET IsActive = 0 WHERE ProductId = @id", conn))
             {
                 conn.Open();
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.ExecuteNonQuery();
             }
+
+            MessageBox.Show("Đã ngừng kinh doanh sản phẩm.",
+                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
             LoadStats();
             LoadWarehouse();
@@ -201,12 +260,99 @@ FROM Products", conn))
         {
             LoadStats();
             LoadWarehouse();          // 🔴 Lần đầu mở Kho là có dữ liệu luôn
+            dgvWarehouse.Columns["colGiaNhap"].DefaultCellStyle.Format = "N0";
+            dgvWarehouse.Columns["colGiaBan"].DefaultCellStyle.Format = "N0";
+
+            dgvWarehouse.Columns["colGiaNhap"].DefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleRight;
+            dgvWarehouse.Columns["colGiaBan"].DefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleRight;
+            // 🔒 Ban đầu chỉ xem, không sửa
+            dgvWarehouse.ReadOnly = true;
+            dgvWarehouse.AllowUserToAddRows = false;
+
         }
         public void RefreshWarehouse()
         {
             LoadStats();
             LoadWarehouse(txtSearch.Text);
         }
+
+        private void dgvWarehouse_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!_isEditing) return;
+            if (e.RowIndex < 0) return;
+
+            var row = dgvWarehouse.Rows[e.RowIndex];
+            int productId = Convert.ToInt32(row.Cells["colProductId"].Value);
+
+            string colName = dgvWarehouse.Columns[e.ColumnIndex].Name;
+            object newValue = row.Cells[e.ColumnIndex].Value ?? DBNull.Value;
+
+            string sql = null;
+
+            switch (colName)
+            {
+                case "colTenThuoc":
+                    sql = "UPDATE Products SET ProductName = @val WHERE ProductId = @id";
+                    break;
+
+                case "colDonViTinh":       // ⭐ ĐƠN VỊ TÍNH 
+                    sql = "UPDATE Products SET Unit = @val WHERE ProductId = @id";
+                    break;
+
+                case "colGiaNhap":
+                    sql = "UPDATE Products SET UnitPrice = @val WHERE ProductId = @id";
+                    if (!decimal.TryParse(Convert.ToString(newValue), out decimal giaNhap))
+                    {
+                        MessageBox.Show("Giá nhập không hợp lệ.");
+                        LoadWarehouse(txtSearch.Text);
+                        return;
+                    }
+                    newValue = giaNhap;
+                    break;
+
+                case "colGiaBan":
+                    sql = "UPDATE Products SET SalePrice = @val WHERE ProductId = @id";
+                    if (!decimal.TryParse(Convert.ToString(newValue), out decimal giaBan))
+                    {
+                        MessageBox.Show("Giá bán không hợp lệ.");
+                        LoadWarehouse(txtSearch.Text);
+                        return;
+                    }
+                    newValue = giaBan;
+                    break;
+
+                case "colHanDung":
+                    sql = "UPDATE Products SET ExpiredDate = @val WHERE ProductId = @id";
+                    if (DateTime.TryParse(newValue?.ToString(), out DateTime d))
+                        newValue = d.Date;
+                    else
+                        newValue = DBNull.Value;
+                    break;
+
+                default:
+                    return;
+            }
+
+            try
+            {
+                using (var conn = new SqlConnection(Program.ConnStr))
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", productId);
+                    cmd.Parameters.AddWithValue("@val", newValue);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu: " + ex.Message);
+                LoadWarehouse(txtSearch.Text);
+            }
+        }
+
 
     }
 }
