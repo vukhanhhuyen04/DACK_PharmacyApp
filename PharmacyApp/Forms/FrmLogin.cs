@@ -90,6 +90,7 @@ namespace PharmacyApp.Forms
         private void txtPassword_TextChanged(object sender, EventArgs e) { }
         private void FrmLogin_Load(object sender, EventArgs e) { }
         private void guna2Shapes3_Click(object sender, EventArgs e) { }
+
         private void chkRemember_CheckedChanged(object sender, EventArgs e)
         {
             if (!chkRemember.Checked)
@@ -100,7 +101,6 @@ namespace PharmacyApp.Forms
                 Properties.Settings.Default.Save();
             }
         }
-
 
         private void lnkSignUp_Click(object sender, EventArgs e)
         {
@@ -172,7 +172,22 @@ namespace PharmacyApp.Forms
                         int userId = Convert.ToInt32(rd["UserID"]);
                         int staffId = rd["StaffID"] != DBNull.Value ? Convert.ToInt32(rd["StaffID"]) : 0;
                         string fullName = rd["FullName"].ToString();
-                        string role = rd["Role"].ToString();
+
+                        // ---- ROLE GỐC TỪ DB ----
+                        string dbRole = rd["Role"]?.ToString()?.Trim();
+
+                        // ✅ CHUẨN HOÁ ROLE: chỉ còn "Admin" hoặc "Dược sĩ"
+                        string normalizedRole;
+                        if (string.Equals(dbRole, "Admin", StringComparison.OrdinalIgnoreCase) ||
+                            string.Equals(dbRole, "Quản trị viên", StringComparison.OrdinalIgnoreCase))
+                        {
+                            normalizedRole = "Admin";
+                        }
+                        else
+                        {
+                            // Mặc định tất cả role khác xem như Dược sĩ
+                            normalizedRole = "Dược sĩ";
+                        }
 
                         // 🔥 Nếu đăng nhập bằng mật khẩu mặc định -> bắt buộc đổi mật khẩu
                         if (pass == "12345")
@@ -203,8 +218,10 @@ namespace PharmacyApp.Forms
                         Session.UserId = userId;
                         Session.StaffId = staffId;
                         Session.FullName = fullName;
-                        Session.Role = role;
+                        Session.Role = normalizedRole;    // dùng role đã chuẩn hoá
                         Session.IsLoggedIn = true;
+                        // 🔹 Nạp quyền từ database vào Session.Permissions
+                        PharmacyApp.Security.PermissionService.LoadPermissionsForCurrentUser();
                         // 🔹 Lưu vào Program để chỗ khác dùng (POS, báo cáo,...)
                         Program.CurrentStaffId = staffId;
                         Program.CurrentStaffName = fullName;
@@ -225,9 +242,9 @@ namespace PharmacyApp.Forms
 
                         Properties.Settings.Default.Save();
 
+                        // chuyển sang dashboard
                         OpenDashboard();
                     }
-
                 }
             }
             catch (SqlException ex)
@@ -247,7 +264,7 @@ namespace PharmacyApp.Forms
         {
             this.Hide();
 
-            // Dùng thông tin trong Session (hoặc Program cũng được)
+            // Dùng thông tin trong Session (role đã chuẩn hoá)
             var dash = new FrmAdminDashboard(Session.UserId, Session.FullName, Session.Role);
 
             dash.FormClosed += (s, e) =>

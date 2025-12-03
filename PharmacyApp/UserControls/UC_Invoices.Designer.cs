@@ -30,10 +30,11 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new Guna.UI2.WinForms.Guna2Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlFilter = new Guna.UI2.WinForms.Guna2Panel();
@@ -44,12 +45,6 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.dtpFrom = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.dgvInvoices = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.colInvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlDetails = new Guna.UI2.WinForms.Guna2Panel();
             this.dgvDetails = new Guna.UI2.WinForms.Guna2DataGridView();
             this.colDrugCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +55,12 @@
             this.lblDetailsTitle = new System.Windows.Forms.Label();
             this.btnMarkPaid = new Guna.UI2.WinForms.Guna2Button();
             this.btnCancelInvoice = new Guna.UI2.WinForms.Guna2Button();
+            this.colInvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlHeader.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
@@ -151,7 +152,7 @@
             this.dtpTo.BorderRadius = 6;
             this.dtpTo.Checked = true;
             this.dtpTo.CustomFormat = "dd/MM/yyyy";
-            this.dtpTo.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.dtpTo.FillColor = System.Drawing.Color.PowderBlue;
             this.dtpTo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpTo.ForeColor = System.Drawing.Color.Black;
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -190,7 +191,7 @@
             this.dtpFrom.BorderRadius = 6;
             this.dtpFrom.Checked = true;
             this.dtpFrom.CustomFormat = "dd/MM/yyyy";
-            this.dtpFrom.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.dtpFrom.FillColor = System.Drawing.Color.PowderBlue;
             this.dtpFrom.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFrom.ForeColor = System.Drawing.Color.Black;
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -225,14 +226,14 @@
             this.colTotalAmount,
             this.colPaymentMethod,
             this.colStatus});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 135);
@@ -267,60 +268,6 @@
             this.dgvInvoices.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvInvoices.SelectionChanged += new System.EventHandler(this.dgvInvoices_SelectionChanged);
             // 
-            // colInvoiceID
-            // 
-            this.colInvoiceID.DataPropertyName = "InvoiceID";
-            this.colInvoiceID.FillWeight = 80F;
-            this.colInvoiceID.HeaderText = "Mã HĐ";
-            this.colInvoiceID.MinimumWidth = 6;
-            this.colInvoiceID.Name = "colInvoiceID";
-            this.colInvoiceID.ReadOnly = true;
-            // 
-            // colCreatedAt
-            // 
-            this.colCreatedAt.DataPropertyName = "CreatedAt";
-            this.colCreatedAt.FillWeight = 140F;
-            this.colCreatedAt.HeaderText = "Ngày";
-            this.colCreatedAt.MinimumWidth = 6;
-            this.colCreatedAt.Name = "colCreatedAt";
-            this.colCreatedAt.ReadOnly = true;
-            // 
-            // colCustomerName
-            // 
-            this.colCustomerName.DataPropertyName = "CustomerName";
-            this.colCustomerName.FillWeight = 180F;
-            this.colCustomerName.HeaderText = "Khách hàng";
-            this.colCustomerName.MinimumWidth = 6;
-            this.colCustomerName.Name = "colCustomerName";
-            this.colCustomerName.ReadOnly = true;
-            // 
-            // colTotalAmount
-            // 
-            this.colTotalAmount.DataPropertyName = "TotalAmount";
-            this.colTotalAmount.FillWeight = 120F;
-            this.colTotalAmount.HeaderText = "Tổng tiền";
-            this.colTotalAmount.MinimumWidth = 6;
-            this.colTotalAmount.Name = "colTotalAmount";
-            this.colTotalAmount.ReadOnly = true;
-            // 
-            // colPaymentMethod
-            // 
-            this.colPaymentMethod.DataPropertyName = "PaymentMethod";
-            this.colPaymentMethod.FillWeight = 120F;
-            this.colPaymentMethod.HeaderText = "Thanh toán";
-            this.colPaymentMethod.MinimumWidth = 6;
-            this.colPaymentMethod.Name = "colPaymentMethod";
-            this.colPaymentMethod.ReadOnly = true;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "Status";
-            this.colStatus.FillWeight = 120F;
-            this.colStatus.HeaderText = "Trạng thái";
-            this.colStatus.MinimumWidth = 6;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
             // pnlDetails
             // 
             this.pnlDetails.BackColor = System.Drawing.Color.White;
@@ -339,16 +286,16 @@
             // 
             this.dgvDetails.AllowUserToAddRows = false;
             this.dgvDetails.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvDetails.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(60)))), ((int)(((byte)(143)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvDetails.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(60)))), ((int)(((byte)(143)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvDetails.ColumnHeadersHeight = 18;
             this.dgvDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -357,14 +304,14 @@
             this.colQty,
             this.colUnitPrice,
             this.colAmount});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetails.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDetails.Location = new System.Drawing.Point(10, 38);
@@ -491,6 +438,62 @@
             this.btnCancelInvoice.Text = "Hủy hóa đơn";
             this.btnCancelInvoice.Click += new System.EventHandler(this.btnCancelInvoice_Click);
             // 
+            // colInvoiceID
+            // 
+            this.colInvoiceID.DataPropertyName = "InvoiceID";
+            this.colInvoiceID.FillWeight = 80F;
+            this.colInvoiceID.HeaderText = "Mã HĐ";
+            this.colInvoiceID.MinimumWidth = 6;
+            this.colInvoiceID.Name = "colInvoiceID";
+            this.colInvoiceID.ReadOnly = true;
+            // 
+            // colCreatedAt
+            // 
+            this.colCreatedAt.DataPropertyName = "CreatedAt";
+            dataGridViewCellStyle3.Format = "dd/MM/yyyy";
+            this.colCreatedAt.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCreatedAt.FillWeight = 140F;
+            this.colCreatedAt.HeaderText = "Ngày";
+            this.colCreatedAt.MinimumWidth = 6;
+            this.colCreatedAt.Name = "colCreatedAt";
+            this.colCreatedAt.ReadOnly = true;
+            // 
+            // colCustomerName
+            // 
+            this.colCustomerName.DataPropertyName = "CustomerName";
+            this.colCustomerName.FillWeight = 180F;
+            this.colCustomerName.HeaderText = "Khách hàng";
+            this.colCustomerName.MinimumWidth = 6;
+            this.colCustomerName.Name = "colCustomerName";
+            this.colCustomerName.ReadOnly = true;
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.DataPropertyName = "TotalAmount";
+            this.colTotalAmount.FillWeight = 120F;
+            this.colTotalAmount.HeaderText = "Tổng tiền";
+            this.colTotalAmount.MinimumWidth = 6;
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            // 
+            // colPaymentMethod
+            // 
+            this.colPaymentMethod.DataPropertyName = "PaymentMethod";
+            this.colPaymentMethod.FillWeight = 120F;
+            this.colPaymentMethod.HeaderText = "Thanh toán";
+            this.colPaymentMethod.MinimumWidth = 6;
+            this.colPaymentMethod.Name = "colPaymentMethod";
+            this.colPaymentMethod.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "Status";
+            this.colStatus.FillWeight = 120F;
+            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.MinimumWidth = 6;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            // 
             // UC_Invoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -527,12 +530,6 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpTo;
         private System.Windows.Forms.Label lblTo;
         private Guna.UI2.WinForms.Guna2DataGridView dgvInvoices;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreatedAt;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMethod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private Guna.UI2.WinForms.Guna2Panel pnlDetails;
         private Guna.UI2.WinForms.Guna2DataGridView dgvDetails;
         private System.Windows.Forms.Label lblDetailsTitle;
@@ -544,5 +541,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private Guna.UI2.WinForms.Guna2Button btnMarkPaid;
         private Guna.UI2.WinForms.Guna2Button btnCancelInvoice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreatedAt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMethod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
     }
 }

@@ -22,7 +22,15 @@ namespace PharmacyApp.Forms
 
             btnSave.Click += BtnSave_Click;
             btnCancel.Click += BtnCancel_Click;
+
+            lblBrand.BringToFront();
+            lblTitle.BringToFront();
+            guna2HtmlLabel1.Text =
+              "<span style='color:#69C4F6;'>Eterna</span>" +
+              "<span style='color:#36D7B7;'>Med</span>";
+
         }
+
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
@@ -92,6 +100,11 @@ namespace PharmacyApp.Forms
                 MessageBox.Show("Lỗi khi đổi mật khẩu:\n" + ex.Message,
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void card_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

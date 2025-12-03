@@ -1,11 +1,12 @@
-﻿using PharmacyApp.Forms;
+﻿using Guna.UI2.WinForms;
+using PharmacyApp.Forms;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
-using Guna.UI2.WinForms;
 
 namespace PharmacyApp.UserControls
 {
@@ -303,6 +304,42 @@ WHERE 1 = 1";   // dùng 1=1 để nối điều kiện dễ hơn
                                 : txtSearch.Text.Trim();
 
             LoadProducts(_selectedCategoryId, keyword);
+        }
+
+        private void f(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FlowLayoutPanel1_SizeChanged(object sender, EventArgs e)
+        {
+            // Lấy các button đang hiển thị
+            var buttons = flowLayoutPanel1.Controls
+                                          .OfType<Control>()
+                                          .Where(c => c.Visible)
+                                          .ToList();
+
+            if (buttons.Count == 0) return;
+
+            int totalWidth = flowLayoutPanel1.ClientSize.Width
+                             - flowLayoutPanel1.Padding.Left
+                             - flowLayoutPanel1.Padding.Right;
+
+            int spacing = 10; // khoảng cách giữa các nút
+            int buttonWidth = (totalWidth - spacing * (buttons.Count - 1)) / buttons.Count;
+
+            foreach (var btn in buttons)
+            {
+                btn.Width = buttonWidth;
+                btn.Margin = new Padding(0, 10, spacing, 10); // top/bottom 10, right = spacing
+            }
+
+            // Nút cuối cùng không cần margin phải
+            if (buttons.Count > 0)
+            {
+                var last = buttons[buttons.Count - 1];
+                last.Margin = new Padding(0, 10, 0, 10);
+            }
         }
 
     }

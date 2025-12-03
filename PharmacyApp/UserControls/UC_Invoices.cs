@@ -327,6 +327,8 @@ WHERE InvoiceId = @Id;", conn, tran))
             MessageBox.Show("Đã hủy hóa đơn và trả lại tồn kho.",
                 "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        
+
 
     }
 }

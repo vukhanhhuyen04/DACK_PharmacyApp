@@ -27,6 +27,8 @@ namespace PharmacyApp.UserControls
 
              dgvWarehouse.AutoGenerateColumns = false; // nếu bạn bind bằng DataSource
             this.Load += UC_Warehouse_Load;
+            btnTim.Click += BtnTim_Click;
+            txtSearch.KeyDown += TxtSearch_KeyDown;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -350,6 +352,28 @@ FROM Products", conn))
             {
                 MessageBox.Show("Lỗi khi lưu: " + ex.Message);
                 LoadWarehouse(txtSearch.Text);
+            }
+        }
+        private void BtnTim_Click(object sender, EventArgs e)
+        {
+            string keyword = txtSearch.Text.Trim();
+
+            // Nếu ô tìm kiếm trống → load lại toàn bộ kho
+            if (string.IsNullOrEmpty(keyword))
+            {
+                LoadWarehouse();          // không truyền keyword → lấy toàn bộ
+            }
+            else
+            {
+                LoadWarehouse(keyword);   // lọc theo mã, barcode, tên thuốc
+            }
+        }
+        private void TxtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;    // chặn tiếng “bíp”/xuống dòng
+                BtnTim_Click(sender, e);      // gọi lại nút Tìm
             }
         }
 

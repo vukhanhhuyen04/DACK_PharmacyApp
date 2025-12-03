@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using PharmacyApp;
+using PharmacyApp.Security;   // ⬅ QUAN TRỌNG
 
 namespace PharmacyApp.UserControls
-
 {
     public partial class UC_Staff : UserControl
     {
-        
         // ==============================
         //       BIẾN TRẠNG THÁI
         // ==============================
@@ -24,36 +21,86 @@ namespace PharmacyApp.UserControls
             Add,
             Edit
         }
+
         private EditMode _mode = EditMode.None;
         private int? _currentStaffId = null;  // khóa chính trong bảng Staff
+
         public UC_Staff()
         {
             InitializeComponent();
-            // Gán event ở đây cho dễ quản lý
-            this.Load += UC_Staff_Load;
-            btnXoa.Click += BtnXoa_Click;
 
+            this.Load += UC_Staff_Load;
+
+            btnXoa.Click += BtnXoa_Click;
             btnThem.Click += BtnThem_Click;
             btnSua.Click += BtnSua_Click;
             btnLuu.Click += BtnLuu_Click;
             btnHuy.Click += BtnHuy_Click;
-            btnTim.Click += BtnTim_Click;
+            //btnTim.Click += BtnTim_Click;
+
             dgvStaff.CellFormatting += DgvStaff_CellFormatting;
+            dgvStaff.SelectionChanged += DgvStaff_SelectionChanged;
+            dgvStaff.CellClick += dgvStaff_CellClick;
+
             tglTrangThai.CheckedChanged += TglTrangThai_CheckedChanged;
 
-            dgvStaff.SelectionChanged += DgvStaff_SelectionChanged;
-            // ⭐ Tìm nhanh
             txtTimNhanh.TextChanged += TxtTimNhanh_TextChanged;
             txtTimNhanh.KeyDown += TxtTimNhanh_KeyDown;
         }
+
+        // helper permission
+        private bool CanView => PermissionService.Has(PermissionService.STAFF_VIEW);
+        private bool CanEdit => PermissionService.Has(PermissionService.STAFF_EDIT);
+        private bool CanDelete => PermissionService.Has(PermissionService.STAFF_DELETE);
+
         // ==============================
         //       LOAD FORM
         // ==============================
         private void UC_Staff_Load(object sender, EventArgs e)
         {
-            
+            if (!CanView)
+            {
+                MessageBox.Show("Bạn không có quyền xem danh sách nhân viên.", "Phân quyền",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Enabled = false;
+                return;
+            }
+
             LoadStaffList();
             SetFormMode(EditMode.None);
+            ApplyPermissions();
+        }
+
+        private void ApplyPermissions()
+        {
+            // Cho xem grid và tìm kiếm nếu có STAFF_VIEW
+            dgvStaff.Enabled = CanView;
+            txtTimNhanh.Enabled = CanView;
+            //btnTim.Enabled = CanView;
+
+            // Nút thêm/sửa/lưu/hủy tuỳ theo STAFF_EDIT
+            btnThem.Enabled = CanEdit;
+            btnSua.Enabled = CanEdit;
+            btnLuu.Enabled = CanEdit;
+            btnHuy.Enabled = CanEdit;
+
+            // Xóa cần STAFF_DELETE
+            btnXoa.Enabled = CanDelete;
+
+            // Ô nhập dữ liệu: chỉ cho nhập nếu có quyền sửa
+            bool canEditFields = CanEdit;
+
+            txtHoTen.Enabled = canEditFields;
+            cboGioiTinh.Enabled = canEditFields;
+            txtEmail.Enabled = canEditFields;
+            txtSDT.Enabled = canEditFields;
+            dtNgayVaoLam.Enabled = canEditFields;
+            dtNgaySinh.Enabled = canEditFields;
+            cboBangCap.Enabled = canEditFields;
+            dtLicenseExpire.Enabled = canEditFields;
+            tglTrangThai.Enabled = canEditFields;
+            txtMaNV.Enabled = false; // mã NV luôn tự sinh
+            cboVaiTro.Enabled = canEditFields;
         }
 
         private void DgvStaff_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -68,14 +115,11 @@ namespace PharmacyApp.UserControls
                 }
             }
         }
+
         private void TglTrangThai_CheckedChanged(object sender, EventArgs e)
         {
             lblStatusText.Text = tglTrangThai.Checked ? "Hoạt động" : "Không hoạt động";
         }
-
-
-
-
 
         // Hàm load danh sách dược sĩ
         private void LoadStaffList(string keyword = null)
@@ -96,7 +140,7 @@ SELECT
     s.HireDate,
     s.Degree,
     s.LicenseExpireDate,
-    u.Role,          -- 🔹 LẤY ROLE TỪ USERS
+    u.Role,
     s.IsActive
 FROM Staff s
 LEFT JOIN Users u ON s.UserId = u.UserId
@@ -123,10 +167,6 @@ ORDER BY s.FullName";
             }
         }
 
-
-
-
-
         // ==============================
         //       HỖ TRỢ FORM
         // ==============================
@@ -138,23 +178,20 @@ ORDER BY s.FullName";
             txtEmail.Text = "";
             txtSDT.Text = "";
             dtNgayVaoLam.Value = DateTime.Today;
+            dtNgaySinh.Value = DateTime.Today;
             cboBangCap.SelectedIndex = -1;
-            //dtNgayHetHanBang.Value = DateTime.Today;
-            tglTrangThai.Checked = true; // mặc định hoạt động
+            tglTrangThai.Checked = true;
 
             _currentStaffId = null;
         }
 
         private void FillFormFromRow(DataGridViewRow row)
         {
-
             if (row == null) return;
 
-            // Lấy object gốc đang bind (DataRowView)
             var drv = row.DataBoundItem as DataRowView;
             if (drv == null) return;
 
-            // Đọc từ DataTable theo tên cột trong bảng Staff
             _currentStaffId = drv["StaffId"] != DBNull.Value
                 ? Convert.ToInt32(drv["StaffId"])
                 : (int?)null;
@@ -165,7 +202,6 @@ ORDER BY s.FullName";
             txtEmail.Text = drv["Email"]?.ToString();
             txtSDT.Text = drv["Phone"]?.ToString();
 
-            // 🔹 Ngày sinh
             if (drv["BirthDate"] != DBNull.Value)
                 dtNgaySinh.Value = Convert.ToDateTime(drv["BirthDate"]);
             else
@@ -173,27 +209,31 @@ ORDER BY s.FullName";
 
             cboBangCap.Text = drv["Degree"]?.ToString();
 
-            // Trạng thái
-            lblStatusText.Text = tglTrangThai.Checked ? "Hoạt động" : "Không hoạt động";
-
             tglTrangThai.Checked = drv["IsActive"] != DBNull.Value
                 && Convert.ToBoolean(drv["IsActive"]);
+            lblStatusText.Text = tglTrangThai.Checked ? "Hoạt động" : "Không hoạt động";
+
             if (drv["LicenseExpireDate"] != DBNull.Value)
                 dtLicenseExpire.Value = Convert.ToDateTime(drv["LicenseExpireDate"]);
             else
                 dtLicenseExpire.Value = DateTime.Today;
-            if (drv.Row.Table.Columns.Contains("Role"))
-                
 
-            cboVaiTro.Text = drv["Role"]?.ToString();
+            if (drv.Row.Table.Columns.Contains("Role"))
+                cboVaiTro.Text = drv["Role"]?.ToString();
             else
                 cboVaiTro.SelectedIndex = -1;
-
         }
-
 
         private void SetFormMode(EditMode mode)
         {
+            // Nếu không có quyền sửa -> luôn ở chế độ xem
+            if (!CanEdit)
+            {
+                _mode = EditMode.None;
+                ApplyPermissions();
+                return;
+            }
+
             _mode = mode;
 
             bool isEditing = (mode == EditMode.Add || mode == EditMode.Edit);
@@ -203,19 +243,20 @@ ORDER BY s.FullName";
             txtEmail.Enabled = isEditing;
             txtSDT.Enabled = isEditing;
             dtNgayVaoLam.Enabled = isEditing;
+            dtNgaySinh.Enabled = isEditing;
             cboBangCap.Enabled = isEditing;
+            dtLicenseExpire.Enabled = isEditing;
             tglTrangThai.Enabled = isEditing;
             txtMaNV.Enabled = (mode == EditMode.Add);
-            cboVaiTro.Enabled = isEditing;   // ⭐ bật/tắt sửa vai trò
+            cboVaiTro.Enabled = isEditing;
 
-            btnThem.Enabled = (mode == EditMode.None);
-            btnSua.Enabled = (mode == EditMode.None);   // 👈 bỏ điều kiện CurrentRow
-            btnLuu.Enabled = isEditing;
-            btnHuy.Enabled = isEditing;
+            btnThem.Enabled = (mode == EditMode.None) && CanEdit;
+            btnSua.Enabled = (mode == EditMode.None) && CanEdit;
+            btnLuu.Enabled = isEditing && CanEdit;
+            btnHuy.Enabled = isEditing && CanEdit;
+            btnXoa.Enabled = CanDelete;
         }
 
-
-        // Khi chọn dòng khác trên grid → fill form
         private void DgvStaff_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvStaff.CurrentRow == null)
@@ -224,26 +265,35 @@ ORDER BY s.FullName";
             FillFormFromRow(dgvStaff.CurrentRow);
         }
 
-
         // ==============================
         //       CÁC NÚT CHỨC NĂNG
         // ==============================
         private void BtnThem_Click(object sender, EventArgs e)
         {
-            ClearForm();
+            if (!CanEdit)
+            {
+                MessageBox.Show("Bạn không có quyền thêm nhân viên.", "Phân quyền",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            txtMaNV.Text = GenerateNewStaffCode();  // ⭐ tự sinh DSxxx
+            ClearForm();
+            txtMaNV.Text = GenerateNewStaffCode();
             txtMaNV.Enabled = false;
 
             tglTrangThai.Checked = true;
             SetFormMode(EditMode.Add);
         }
 
-
-
-
         private void BtnSua_Click(object sender, EventArgs e)
         {
+            if (!CanEdit)
+            {
+                MessageBox.Show("Bạn không có quyền sửa thông tin nhân viên.", "Phân quyền",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (dgvStaff.CurrentRow == null)
             {
                 MessageBox.Show("Vui lòng chọn một dược sĩ để sửa.", "Thông báo",
@@ -257,7 +307,6 @@ ORDER BY s.FullName";
 
         private void BtnHuy_Click(object sender, EventArgs e)
         {
-            // Khôi phục lại dữ liệu từ dòng đang chọn
             if (dgvStaff.CurrentRow != null)
                 FillFormFromRow(dgvStaff.CurrentRow);
             else
@@ -269,29 +318,30 @@ ORDER BY s.FullName";
         private void BtnTim_Click(object sender, EventArgs e)
         {
             string kw = txtTimNhanh.Text.Trim();
-            // nếu trống thì load tất cả
             if (string.IsNullOrWhiteSpace(kw))
                 LoadStaffList(null);
             else
                 LoadStaffList(kw);
         }
 
-
         // ==============================
         //       LƯU (THÊM / SỬA)
         // ==============================
         private void BtnLuu_Click(object sender, EventArgs e)
         {
+            if (!CanEdit)
+            {
+                MessageBox.Show("Bạn không có quyền lưu thay đổi.", "Phân quyền",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (!ValidateForm()) return;
 
             if (_mode == EditMode.Add)
-            {
                 InsertStaff();
-            }
             else if (_mode == EditMode.Edit)
-            {
                 UpdateStaff();
-            }
 
             LoadStaffList();
             SetFormMode(EditMode.None);
@@ -307,37 +357,30 @@ ORDER BY s.FullName";
                 MessageBox.Show("Họ tên không được để trống.", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtHoTen.Focus();
-                return false;
             }
-
-            if (string.IsNullOrWhiteSpace(txtSDT.Text))
+            else if (string.IsNullOrWhiteSpace(txtSDT.Text))
             {
                 MessageBox.Show("Số điện thoại không được để trống.", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSDT.Focus();
-                return false;
             }
-
-            // Ví dụ kiểm tra độ dài / chỉ số
-            if (!txtSDT.Text.All(char.IsDigit))
+            else if (!txtSDT.Text.All(char.IsDigit))
             {
                 MessageBox.Show("Số điện thoại chỉ được chứa chữ số.", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSDT.Focus();
-                return false;
             }
-
-            if (dtNgayVaoLam.Value.Date > DateTime.Today)
+            else if (dtNgayVaoLam.Value.Date > DateTime.Today)
             {
                 MessageBox.Show("Ngày vào làm không được lớn hơn ngày hiện tại.", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dtNgayVaoLam.Focus();
-                return false;
             }
-
-            // Có thể thêm validate Email ở đây nếu cần
-
-            return true;
+            else
+            {
+                return true;
+            }
+            return false;
         }
 
         // ==============================
@@ -345,7 +388,6 @@ ORDER BY s.FullName";
         // ==============================
         private void InsertStaff()
         {
-            // Bắt buộc phải có Email để tạo tài khoản
             if (string.IsNullOrWhiteSpace(txtEmail.Text))
             {
                 MessageBox.Show("Vui lòng nhập Email để tạo tài khoản đăng nhập.", "Lỗi",
@@ -364,14 +406,16 @@ ORDER BY s.FullName";
             bool isActive = tglTrangThai.Checked;
 
             string staffCode = txtMaNV.Text.Trim();
-            string defaultPassword = "12345";   // mật khẩu mặc định
-            string role = "Dược sĩ";            // role trong bảng Users
+            string defaultPassword = "12345";
+            // string role = "Dược sĩ";
+            string role = string.IsNullOrEmpty(cboVaiTro.Text)
+                            ? "Dược sĩ"        // nếu bạn không chọn gì thì mặc định Dược sĩ
+                            : cboVaiTro.Text.Trim();
 
             using (var conn = new SqlConnection(Program.ConnStr))
             {
                 conn.Open();
 
-                // 1. Kiểm tra email đã tồn tại trong Users chưa
                 using (var checkCmd = new SqlCommand(
                     "SELECT COUNT(*) FROM Users WHERE Email = @Email", conn))
                 {
@@ -386,12 +430,17 @@ ORDER BY s.FullName";
                     }
                 }
 
-                // 2. Tạo User + Staff trong 1 lệnh
                 string sql = @"
 DECLARE @UserId INT;
+DECLARE @RoleId INT;
 
-INSERT INTO Users (FullName, Email, Password, Role, CreatedAt)
-VALUES (@FullName, @Email, @Password, @Role, GETDATE());
+-- Lấy RoleId theo vai trò được chọn
+SELECT @RoleId = RoleID
+FROM Roles
+WHERE RoleName = @Role;
+
+INSERT INTO Users (FullName, Email, Password, Role, RoleId, CreatedAt)
+VALUES (@FullName, @Email, @Password, @Role, @RoleId, GETDATE());
 
 SET @UserId = SCOPE_IDENTITY();
 
@@ -403,30 +452,25 @@ VALUES
      @HireDate, @Degree, @LicenseExpireDate, @IsActive, GETDATE(), @UserId);";
 
 
+
                 using (var cmd = new SqlCommand(sql, conn))
                 {
-                    // Users
                     cmd.Parameters.AddWithValue("@FullName", fullName);
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@Password", defaultPassword);
                     cmd.Parameters.AddWithValue("@Role", role);
 
-                    // Staff
                     cmd.Parameters.AddWithValue("@StaffCode", staffCode);
                     cmd.Parameters.AddWithValue("@Gender",
                         string.IsNullOrEmpty(gender) ? (object)DBNull.Value : gender);
-                    // 🔹 BirthDate
-                    cmd.Parameters.AddWithValue("@BirthDate",
-                        dtNgaySinh.Value.Date);   // hoặc cho phép NULL thì dùng toán tử ? : DBNull.Value
+                    cmd.Parameters.AddWithValue("@BirthDate", dtNgaySinh.Value.Date);
                     cmd.Parameters.AddWithValue("@Phone",
                         string.IsNullOrEmpty(phone) ? (object)DBNull.Value : phone);
                     cmd.Parameters.AddWithValue("@HireDate", hireDate);
                     cmd.Parameters.AddWithValue("@Degree",
                         string.IsNullOrEmpty(degree) ? (object)DBNull.Value : degree);
-
                     cmd.Parameters.AddWithValue("@LicenseExpireDate",
                         licenseExpire.HasValue ? (object)licenseExpire.Value : DBNull.Value);
-
                     cmd.Parameters.AddWithValue("@IsActive", isActive);
 
                     cmd.ExecuteNonQuery();
@@ -436,8 +480,6 @@ VALUES
             MessageBox.Show("Đã thêm dược sĩ mới và tạo tài khoản đăng nhập (mật khẩu: 12345).",
                 "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-
 
         // ==============================
         //       CẬP NHẬT DB
@@ -470,7 +512,7 @@ SET s.FullName          = @FullName,
     s.Gender            = @Gender,
     s.Email             = @Email,
     s.Phone             = @Phone,
-    s.BirthDate         = @BirthDate,   -- 👈 THÊM DÒNG NÀY
+    s.BirthDate         = @BirthDate,
     s.HireDate          = @HireDate,
     s.Degree            = @Degree,
     s.LicenseExpireDate = @LicenseExpireDate,
@@ -478,42 +520,37 @@ SET s.FullName          = @FullName,
 FROM Staff s
 WHERE s.StaffId = @StaffId;
 
+-- Cập nhật cả Role (text) và RoleID cho Users
 UPDATE u
-SET u.Role = @Role
+SET u.Role   = @Role,
+    u.RoleID = (
+        SELECT RoleID
+        FROM Roles
+        WHERE RoleName = @Role
+    )
 FROM Users u
 JOIN Staff s ON s.UserId = u.UserId
 WHERE s.StaffId = @StaffId;";
-
-
 
 
                 using (var cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@StaffId", _currentStaffId.Value);
                     cmd.Parameters.AddWithValue("@FullName", fullName);
-
                     cmd.Parameters.AddWithValue("@Gender",
                         string.IsNullOrEmpty(gender) ? (object)DBNull.Value : gender);
-
                     cmd.Parameters.AddWithValue("@Email",
                         string.IsNullOrEmpty(email) ? (object)DBNull.Value : email);
-
                     cmd.Parameters.AddWithValue("@Phone",
                         string.IsNullOrEmpty(phone) ? (object)DBNull.Value : phone);
                     cmd.Parameters.AddWithValue("@BirthDate", dtNgaySinh.Value.Date);
-
                     cmd.Parameters.AddWithValue("@Role",
-    string.IsNullOrEmpty(cboVaiTro.Text) ? (object)DBNull.Value : cboVaiTro.Text);
-
-
+                        string.IsNullOrEmpty(cboVaiTro.Text) ? (object)DBNull.Value : cboVaiTro.Text);
                     cmd.Parameters.AddWithValue("@HireDate", hireDate);
-
                     cmd.Parameters.AddWithValue("@Degree",
                         string.IsNullOrEmpty(degree) ? (object)DBNull.Value : degree);
-
                     cmd.Parameters.AddWithValue("@LicenseExpireDate",
                         licenseExpire.HasValue ? (object)licenseExpire.Value : DBNull.Value);
-
                     cmd.Parameters.AddWithValue("@IsActive", isActive);
 
                     cmd.ExecuteNonQuery();
@@ -524,32 +561,6 @@ WHERE s.StaffId = @StaffId;";
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void guna2HtmlLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtSDt_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMaNV_Click(object sender, EventArgs e)
-        {
-
-        }
         private string GenerateNewStaffCode()
         {
             using (var conn = new SqlConnection(Program.ConnStr))
@@ -565,29 +576,19 @@ WHERE s.StaffId = @StaffId;";
                 using (var cmd = new SqlCommand(sql, conn))
                 {
                     var result = cmd.ExecuteScalar();
-
-                    // Nếu chưa có ai trong bảng Staff → bắt đầu từ DS001
                     if (result == null || result == DBNull.Value)
                         return "DS001";
 
-                    string lastCode = result.ToString();   // ví dụ: "DS012"
-
-                    // Tách phần số (bỏ 2 ký tự 'D','S')
-                    int number = 0;
+                    string lastCode = result.ToString();
+                    int number;
                     if (!int.TryParse(lastCode.Substring(2), out number))
-                    {
-                        // Nếu parse lỗi thì cũng quay về DS001 cho chắc
                         return "DS001";
-                    }
 
-                    number++; // tăng lên 1
-
-                    // Ghép lại dạng DS + 3 số
-                    return "DS" + number.ToString("000");   // DS013
+                    number++;
+                    return "DS" + number.ToString("000");
                 }
             }
         }
-
 
         // Gõ tới đâu lọc tới đó
         private void TxtTimNhanh_TextChanged(object sender, EventArgs e)
@@ -606,8 +607,16 @@ WHERE s.StaffId = @StaffId;";
                 BtnTim_Click(sender, EventArgs.Empty);
             }
         }
+
         private void BtnXoa_Click(object sender, EventArgs e)
         {
+            if (!CanDelete)
+            {
+                MessageBox.Show("Bạn không có quyền xóa nhân viên.", "Phân quyền",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (dgvStaff.CurrentRow == null)
             {
                 MessageBox.Show("Vui lòng chọn nhân viên cần xóa.", "Thông báo",
@@ -615,7 +624,6 @@ WHERE s.StaffId = @StaffId;";
                 return;
             }
 
-            // Lấy StaffId hiện tại
             var drv = dgvStaff.CurrentRow.DataBoundItem as DataRowView;
             if (drv == null || drv["StaffId"] == DBNull.Value)
             {
@@ -649,7 +657,6 @@ WHERE s.StaffId = @StaffId;";
             MessageBox.Show("Đã xóa nhân viên.", "Thông báo",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // refresh lại danh sách & form
             LoadStaffList(string.IsNullOrWhiteSpace(txtTimNhanh.Text)
                 ? null
                 : txtTimNhanh.Text.Trim());
@@ -657,10 +664,6 @@ WHERE s.StaffId = @StaffId;";
             SetFormMode(EditMode.None);
         }
 
-        private void txtTimNhanh_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
         private void dgvStaff_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -673,25 +676,19 @@ WHERE s.StaffId = @StaffId;";
             txtSDT.Text = row.Cells["colPhone"].Value?.ToString();
             cboGioiTinh.Text = row.Cells["colGender"].Value?.ToString();
 
-            // ====== Load Bằng cấp (Degree) ======
             string degree = row.Cells["colDegree"].Value?.ToString();
-            cboBangCap.SelectedItem = degree;     // ⭐ Dòng bạn hỏi nằm ở đây
+            cboBangCap.SelectedItem = degree;
 
-            // ====== Ngày sinh ======
             if (row.Cells["colBirthDate"].Value != DBNull.Value)
                 dtNgaySinh.Value = Convert.ToDateTime(row.Cells["colBirthDate"].Value);
 
-            // ====== Ngày vào làm ======
             if (row.Cells["colHireDate"].Value != DBNull.Value)
                 dtNgayVaoLam.Value = Convert.ToDateTime(row.Cells["colHireDate"].Value);
 
-            // ====== Vai trò ======
             cboVaiTro.SelectedItem = row.Cells["colRole"].Value?.ToString();
 
-            // ====== Trạng thái ======
             string active = row.Cells["colActive"].Value.ToString();
             tglTrangThai.Checked = active == "True";
         }
-
     }
 }

@@ -31,9 +31,9 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.headerPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.infoPanel = new Guna.UI2.WinForms.Guna2Panel();
@@ -51,8 +51,6 @@
             this.btnEdit = new Guna.UI2.WinForms.Guna2Button();
             this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
             this.dgvWarehouse = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.btnTim = new Guna.UI2.WinForms.Guna2Button();
-            this.btnAddReceipt = new Guna.UI2.WinForms.Guna2Button();
             this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +63,8 @@
             this.colSoLuongTon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colViTri = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHanDung = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnTim = new Guna.UI2.WinForms.Guna2Button();
+            this.btnAddReceipt = new Guna.UI2.WinForms.Guna2Button();
             this.headerPanel.SuspendLayout();
             this.infoPanel.SuspendLayout();
             this.cardExpired.SuspendLayout();
@@ -93,9 +93,9 @@
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(71)))), ((int)(((byte)(109)))));
             this.lblTitle.Location = new System.Drawing.Point(24, 8);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(121, 39);
+            this.lblTitle.Size = new System.Drawing.Size(60, 39);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Kho hàng";
+            this.lblTitle.Text = "KHO";
             // 
             // infoPanel
             // 
@@ -225,7 +225,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "Tìm theo mã, barcode, tên thuốc...";
             this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(374, 36);
+            this.txtSearch.Size = new System.Drawing.Size(726, 36);
             this.txtSearch.TabIndex = 2;
             // 
             // cboLocation
@@ -248,6 +248,7 @@
             this.cboLocation.Name = "cboLocation";
             this.cboLocation.Size = new System.Drawing.Size(200, 36);
             this.cboLocation.TabIndex = 3;
+            this.cboLocation.Visible = false;
             this.cboLocation.SelectedIndexChanged += new System.EventHandler(this.cboLocation_SelectedIndexChanged);
             // 
             // btnEdit
@@ -282,19 +283,19 @@
             // 
             this.dgvWarehouse.AllowUserToAddRows = false;
             this.dgvWarehouse.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvWarehouse.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            this.dgvWarehouse.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvWarehouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWarehouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvWarehouse.ColumnHeadersHeight = 32;
             this.dgvWarehouse.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colProductId,
@@ -309,14 +310,14 @@
             this.colSoLuongTon,
             this.colViTri,
             this.colHanDung});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvWarehouse.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvWarehouse.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvWarehouse.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvWarehouse.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvWarehouse.Location = new System.Drawing.Point(24, 220);
@@ -349,37 +350,6 @@
             this.dgvWarehouse.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvWarehouse.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvWarehouse.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWarehouse_CellEndEdit);
-            // 
-            // btnTim
-            // 
-            this.btnTim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTim.BorderRadius = 6;
-            this.btnTim.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTim.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTim.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTim.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTim.FillColor = System.Drawing.Color.Blue;
-            this.btnTim.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnTim.ForeColor = System.Drawing.Color.White;
-            this.btnTim.Location = new System.Drawing.Point(773, 172);
-            this.btnTim.Name = "btnTim";
-            this.btnTim.Size = new System.Drawing.Size(110, 36);
-            this.btnTim.TabIndex = 8;
-            this.btnTim.Text = "Tìm";
-            // 
-            // btnAddReceipt
-            // 
-            this.btnAddReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddReceipt.BorderRadius = 8;
-            this.btnAddReceipt.FillColor = System.Drawing.Color.DodgerBlue;
-            this.btnAddReceipt.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnAddReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnAddReceipt.Location = new System.Drawing.Point(889, 172);
-            this.btnAddReceipt.Name = "btnAddReceipt";
-            this.btnAddReceipt.Size = new System.Drawing.Size(110, 36);
-            this.btnAddReceipt.TabIndex = 9;
-            this.btnAddReceipt.Text = "Nhập";
-            this.btnAddReceipt.Click += new System.EventHandler(this.btnAddReceipt_Click);
             // 
             // colProductId
             // 
@@ -468,6 +438,37 @@
             this.colHanDung.HeaderText = "Hạn dùng";
             this.colHanDung.MinimumWidth = 6;
             this.colHanDung.Name = "colHanDung";
+            // 
+            // btnTim
+            // 
+            this.btnTim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTim.BorderRadius = 6;
+            this.btnTim.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnTim.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnTim.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnTim.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnTim.FillColor = System.Drawing.Color.Blue;
+            this.btnTim.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnTim.ForeColor = System.Drawing.Color.White;
+            this.btnTim.Location = new System.Drawing.Point(773, 172);
+            this.btnTim.Name = "btnTim";
+            this.btnTim.Size = new System.Drawing.Size(110, 36);
+            this.btnTim.TabIndex = 8;
+            this.btnTim.Text = "Tìm";
+            // 
+            // btnAddReceipt
+            // 
+            this.btnAddReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddReceipt.BorderRadius = 8;
+            this.btnAddReceipt.FillColor = System.Drawing.Color.DodgerBlue;
+            this.btnAddReceipt.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.btnAddReceipt.ForeColor = System.Drawing.Color.White;
+            this.btnAddReceipt.Location = new System.Drawing.Point(889, 172);
+            this.btnAddReceipt.Name = "btnAddReceipt";
+            this.btnAddReceipt.Size = new System.Drawing.Size(110, 36);
+            this.btnAddReceipt.TabIndex = 9;
+            this.btnAddReceipt.Text = "Nhập";
+            this.btnAddReceipt.Click += new System.EventHandler(this.btnAddReceipt_Click);
             // 
             // UC_Warehouse
             // 

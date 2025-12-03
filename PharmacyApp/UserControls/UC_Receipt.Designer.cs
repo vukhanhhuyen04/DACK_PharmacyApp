@@ -48,10 +48,10 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             this.headerPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.infoPanel = new Guna.UI2.WinForms.Guna2Panel();
@@ -66,10 +66,17 @@
             this.lblNote = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtNote = new Guna.UI2.WinForms.Guna2TextBox();
             this.dgvReceiptList = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.footerPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.BtnAddRow = new Guna.UI2.WinForms.Guna2Button();
+            this.btnDeleteRow = new Guna.UI2.WinForms.Guna2Button();
+            this.btnLuu = new Guna.UI2.WinForms.Guna2Button();
+            this.lblTotal = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnSave = new Guna.UI2.WinForms.Guna2Button();
+            this.btnBack = new Guna.UI2.WinForms.Guna2Button();
             this.colProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnitName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,13 +86,6 @@
             this.colExpiredDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStockAfter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRowNote = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.footerPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.BtnAddRow = new Guna.UI2.WinForms.Guna2Button();
-            this.btnDeleteRow = new Guna.UI2.WinForms.Guna2Button();
-            this.btnLuu = new Guna.UI2.WinForms.Guna2Button();
-            this.lblTotal = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.btnSave = new Guna.UI2.WinForms.Guna2Button();
-            this.btnBack = new Guna.UI2.WinForms.Guna2Button();
             this.headerPanel.SuspendLayout();
             this.infoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReceiptList)).BeginInit();
@@ -112,9 +112,9 @@
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(71)))), ((int)(((byte)(109)))));
             this.lblTitle.Location = new System.Drawing.Point(24, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(216, 43);
+            this.lblTitle.Size = new System.Drawing.Size(251, 43);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Phiếu nhập kho";
+            this.lblTitle.Text = "PHIẾU NHẬP KHO";
             // 
             // infoPanel
             // 
@@ -225,6 +225,8 @@
             // 
             this.dtpDate.BorderRadius = 6;
             this.dtpDate.Checked = true;
+            this.dtpDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpDate.FillColor = System.Drawing.Color.PowderBlue;
             this.dtpDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDate.Location = new System.Drawing.Point(720, 42);
@@ -262,22 +264,22 @@
             // dgvReceiptList
             // 
             this.dgvReceiptList.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
-            this.dgvReceiptList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
+            this.dgvReceiptList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvReceiptList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvReceiptList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvReceiptList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.dgvReceiptList.ColumnHeadersHeight = 30;
             this.dgvReceiptList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colProductCode,
             this.colProductId,
             this.colProductName,
-            this.colUnitName,
+            this.colUnit,
             this.colBarcode,
             this.colQuantity,
             this.colUnitPrice,
@@ -287,14 +289,14 @@
             this.colExpiredDate,
             this.colStockAfter,
             this.colRowNote});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReceiptList.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReceiptList.DefaultCellStyle = dataGridViewCellStyle20;
             this.dgvReceiptList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvReceiptList.Location = new System.Drawing.Point(24, 210);
             this.dgvReceiptList.MultiSelect = false;
@@ -326,94 +328,6 @@
             this.dgvReceiptList.ThemeStyle.RowsStyle.Height = 32;
             this.dgvReceiptList.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvReceiptList.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // colProductCode
-            // 
-            this.colProductCode.HeaderText = "Mã SP";
-            this.colProductCode.MinimumWidth = 6;
-            this.colProductCode.Name = "colProductCode";
-            // 
-            // colProductId
-            // 
-            this.colProductId.HeaderText = "ProductId";
-            this.colProductId.MinimumWidth = 6;
-            this.colProductId.Name = "colProductId";
-            this.colProductId.Visible = false;
-            // 
-            // colProductName
-            // 
-            this.colProductName.HeaderText = "Tên thuốc";
-            this.colProductName.MinimumWidth = 6;
-            this.colProductName.Name = "colProductName";
-            // 
-            // colUnitName
-            // 
-            this.colUnitName.DataPropertyName = "UnitName";
-            this.colUnitName.HeaderText = "Đơn vị tính";
-            this.colUnitName.MinimumWidth = 6;
-            this.colUnitName.Name = "colUnitName";
-            // 
-            // colBarcode
-            // 
-            this.colBarcode.DataPropertyName = "Barcode";
-            this.colBarcode.HeaderText = "Barcode";
-            this.colBarcode.MinimumWidth = 6;
-            this.colBarcode.Name = "colBarcode";
-            // 
-            // colQuantity
-            // 
-            this.colQuantity.HeaderText = "SL";
-            this.colQuantity.MinimumWidth = 6;
-            this.colQuantity.Name = "colQuantity";
-            // 
-            // colUnitPrice
-            // 
-            this.colUnitPrice.HeaderText = "Đơn giá";
-            this.colUnitPrice.MinimumWidth = 6;
-            this.colUnitPrice.Name = "colUnitPrice";
-            // 
-            // colSalePrice
-            // 
-            dataGridViewCellStyle7.Format = "#,0";
-            this.colSalePrice.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colSalePrice.FillWeight = 160F;
-            this.colSalePrice.HeaderText = "Giá bán dự kiến";
-            this.colSalePrice.MinimumWidth = 6;
-            this.colSalePrice.Name = "colSalePrice";
-            // 
-            // colLineTotal
-            // 
-            this.colLineTotal.HeaderText = "Thành tiền";
-            this.colLineTotal.MinimumWidth = 6;
-            this.colLineTotal.Name = "colLineTotal";
-            this.colLineTotal.ReadOnly = true;
-            // 
-            // colBatchNo
-            // 
-            this.colBatchNo.HeaderText = "Số lô";
-            this.colBatchNo.MinimumWidth = 6;
-            this.colBatchNo.Name = "colBatchNo";
-            // 
-            // colExpiredDate
-            // 
-            this.colExpiredDate.DataPropertyName = "ExpiredDate";
-            this.colExpiredDate.HeaderText = "Hạn dùng";
-            this.colExpiredDate.MinimumWidth = 6;
-            this.colExpiredDate.Name = "colExpiredDate";
-            // 
-            // colStockAfter
-            // 
-            this.colStockAfter.FillWeight = 140F;
-            this.colStockAfter.HeaderText = "Tồn sau nhập";
-            this.colStockAfter.MinimumWidth = 6;
-            this.colStockAfter.Name = "colStockAfter";
-            this.colStockAfter.ReadOnly = true;
-            // 
-            // colRowNote
-            // 
-            this.colRowNote.HeaderText = "Ghi chú";
-            this.colRowNote.MinimumWidth = 6;
-            this.colRowNote.Name = "colRowNote";
             // 
             // footerPanel
             // 
@@ -521,6 +435,94 @@
             this.btnBack.TabIndex = 2;
             this.btnBack.Text = "Quay lại";
             // 
+            // colProductCode
+            // 
+            this.colProductCode.HeaderText = "Mã SP";
+            this.colProductCode.MinimumWidth = 6;
+            this.colProductCode.Name = "colProductCode";
+            // 
+            // colProductId
+            // 
+            this.colProductId.HeaderText = "ProductId";
+            this.colProductId.MinimumWidth = 6;
+            this.colProductId.Name = "colProductId";
+            this.colProductId.Visible = false;
+            // 
+            // colProductName
+            // 
+            this.colProductName.HeaderText = "Tên thuốc";
+            this.colProductName.MinimumWidth = 6;
+            this.colProductName.Name = "colProductName";
+            // 
+            // colUnit
+            // 
+            this.colUnit.DataPropertyName = "UnitName";
+            this.colUnit.HeaderText = "Đơn vị tính";
+            this.colUnit.MinimumWidth = 6;
+            this.colUnit.Name = "colUnit";
+            // 
+            // colBarcode
+            // 
+            this.colBarcode.DataPropertyName = "Barcode";
+            this.colBarcode.HeaderText = "Barcode";
+            this.colBarcode.MinimumWidth = 6;
+            this.colBarcode.Name = "colBarcode";
+            // 
+            // colQuantity
+            // 
+            this.colQuantity.HeaderText = "SL";
+            this.colQuantity.MinimumWidth = 6;
+            this.colQuantity.Name = "colQuantity";
+            // 
+            // colUnitPrice
+            // 
+            this.colUnitPrice.HeaderText = "Đơn giá";
+            this.colUnitPrice.MinimumWidth = 6;
+            this.colUnitPrice.Name = "colUnitPrice";
+            // 
+            // colSalePrice
+            // 
+            dataGridViewCellStyle19.Format = "#,0";
+            this.colSalePrice.DefaultCellStyle = dataGridViewCellStyle19;
+            this.colSalePrice.FillWeight = 160F;
+            this.colSalePrice.HeaderText = "Giá bán dự kiến";
+            this.colSalePrice.MinimumWidth = 6;
+            this.colSalePrice.Name = "colSalePrice";
+            // 
+            // colLineTotal
+            // 
+            this.colLineTotal.HeaderText = "Thành tiền";
+            this.colLineTotal.MinimumWidth = 6;
+            this.colLineTotal.Name = "colLineTotal";
+            this.colLineTotal.ReadOnly = true;
+            // 
+            // colBatchNo
+            // 
+            this.colBatchNo.HeaderText = "Số lô";
+            this.colBatchNo.MinimumWidth = 6;
+            this.colBatchNo.Name = "colBatchNo";
+            // 
+            // colExpiredDate
+            // 
+            this.colExpiredDate.DataPropertyName = "ExpiredDate";
+            this.colExpiredDate.HeaderText = "Hạn dùng";
+            this.colExpiredDate.MinimumWidth = 6;
+            this.colExpiredDate.Name = "colExpiredDate";
+            // 
+            // colStockAfter
+            // 
+            this.colStockAfter.FillWeight = 140F;
+            this.colStockAfter.HeaderText = "Tồn sau nhập";
+            this.colStockAfter.MinimumWidth = 6;
+            this.colStockAfter.Name = "colStockAfter";
+            this.colStockAfter.ReadOnly = true;
+            // 
+            // colRowNote
+            // 
+            this.colRowNote.HeaderText = "Ghi chú";
+            this.colRowNote.MinimumWidth = 6;
+            this.colRowNote.Name = "colRowNote";
+            // 
             // UC_Receipt
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
@@ -550,7 +552,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnitPrice;

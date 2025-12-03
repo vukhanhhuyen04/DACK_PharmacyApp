@@ -900,15 +900,25 @@ WHERE InvoiceId = @Id";
 
                 using (var cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@CashGiven", cash);
-                    cmd.Parameters.AddWithValue("@ChangeAmount", change);
-                    cmd.Parameters.AddWithValue("@Id", _currentInvoiceId.Value);
+                    if (paymentText.StartsWith("Tiền mặt"))
+                    {
+                        cmd.Parameters.AddWithValue("@CashGiven", (object)cash);
+                        cmd.Parameters.AddWithValue("@ChangeAmount", (object)change);
+                    }
+                    else
+                    {
+                        // ✅ QR: không lưu tiền mặt
+                        cmd.Parameters.AddWithValue("@CashGiven", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@ChangeAmount", DBNull.Value);
+                    }
 
+                    cmd.Parameters.AddWithValue("@Id", _currentInvoiceId.Value);
                     cmd.ExecuteNonQuery();
                 }
             }
 
-            MessageBox.Show("Đã cập nhật trạng thái hóa đơn thành 'Paid'.",
+
+            MessageBox.Show("Đã cập nhật trạng thái hóa đơn thành 'Đã thanh toán'.",
      "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // ✅ In luôn hóa đơn sau khi khách chuyển khoản xong
@@ -1185,28 +1195,42 @@ WHERE d.InvoiceId = @id";
             doc.Add(table);
             doc.Add(new Paragraph("\n"));
 
-            // -------------------------
-            //   TỔNG TIỀN
-            // -------------------------
-            decimal total = Convert.ToDecimal(inv["TotalAmount"]);
-            doc.Add(new Paragraph($"Tổng tiền: {total.ToString("N0")} đ", font12b));
+                // -------------------------
+                //   TỔNG TIỀN & THANH TOÁN
+                // -------------------------
+                decimal total = Convert.ToDecimal(inv["TotalAmount"]);
+                doc.Add(new Paragraph($"Tổng tiền: {total.ToString("N0")} đ", font12b));
 
-            if (inv["CashGiven"] != DBNull.Value)
-            {
-                decimal cash = Convert.ToDecimal(inv["CashGiven"]);
-                decimal change = Convert.ToDecimal(inv["ChangeAmount"]);
-                doc.Add(new Paragraph($"Tiền khách đưa: {cash.ToString("N0")} đ", font12));
-                doc.Add(new Paragraph($"Tiền thối lại: {change.ToString("N0")} đ", font12));
-            }
+                // Lấy phương thức thanh toán
+                string paymentMethod = inv["PaymentMethod"] == DBNull.Value
+                    ? ""
+                    : inv["PaymentMethod"].ToString();
 
-            doc.Add(new Paragraph($"\nPhương thức: {inv["PaymentMethod"]}", font12));
+                // ✅ Chỉ in tiền khách đưa / tiền thối nếu là TIỀN MẶT
+                if (paymentMethod.StartsWith("Tiền mặt") && inv["CashGiven"] != DBNull.Value)
+                {
+                    decimal cash = Convert.ToDecimal(inv["CashGiven"]);
+                    decimal change = Convert.ToDecimal(inv["ChangeAmount"]);
 
-            doc.Add(new Paragraph("\nCảm ơn quý khách đã mua hàng!\nChúc quý khách mau khỏe.", font12)
-            {
-                Alignment = Element.ALIGN_CENTER
-            });
+                    doc.Add(new Paragraph($"Tiền khách đưa: {cash.ToString("N0")} đ", font12));
+                    doc.Add(new Paragraph($"Tiền thối lại: {change.ToString("N0")} đ", font12));
+                }
+                else if (paymentMethod.StartsWith("Ngân hàng"))
+                {
+                    // OPTIONAL: thêm dòng xác nhận QR cho đẹp
+                    doc.Add(new Paragraph($"Đã thanh toán qua Ngân hàng (QR)", font12));
+                }
 
-            doc.Close();
+                // In phương thức thanh toán
+                doc.Add(new Paragraph($"\nPhương thức: {paymentMethod}", font12));
+
+                doc.Add(new Paragraph("\nCảm ơn quý khách đã mua hàng!\nChúc quý khách mau khỏe.", font12)
+                {
+                    Alignment = Element.ALIGN_CENTER
+                });
+
+
+                doc.Close();
 
             MessageBox.Show("Đã xuất hóa đơn PDF thành công!",
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

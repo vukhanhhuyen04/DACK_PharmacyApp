@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace PharmacyApp.UserControls
@@ -13,7 +14,22 @@ namespace PharmacyApp.UserControls
         private const int DEFAULT_CATEGORY_ID = 1;
         private AutoCompleteStringCollection _productNameAutoComplete;
         private DataTable _productTable;   // nếu muốn sau này fill thêm mã SP, đơn vị, giá...
+        private decimal ParseMoney(object cellValue)
+        {
+            if (cellValue == null) return 0m;
 
+            var s = cellValue.ToString().Trim();
+            if (string.IsNullOrEmpty(s)) return 0m;
+
+            // Bỏ dấu . và , dùng để ngăn cách hàng nghìn
+            s = s.Replace(".", "").Replace(",", "");
+
+            decimal value;
+            if (!decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out value))
+                value = 0m;
+
+            return value;
+        }
         public UC_Receipt()
         {
             InitializeComponent();
@@ -29,6 +45,7 @@ namespace PharmacyApp.UserControls
             BtnAddRow.Click += BtnAddRow_Click;
             // 🔹 AutoComplete cho tên thuốc
             dgvReceiptList.EditingControlShowing += DgvReceiptList_EditingControlShowing;
+
         }
 
         // 🟢 Load nhà cung cấp
@@ -149,10 +166,10 @@ namespace PharmacyApp.UserControls
             if (row.IsNewRow) return;
 
             int qty = 0;
-            decimal unitPrice = 0;
+            int.TryParse(row.Cells["colQuantity"].Value?.ToString(), out qty);
 
-            int.TryParse(row.Cells["colQuantity"].Value == null ? null : row.Cells["colQuantity"].Value.ToString(), out qty);
-            decimal.TryParse(row.Cells["colUnitPrice"].Value == null ? null : row.Cells["colUnitPrice"].Value.ToString(), out unitPrice);
+            // dùng hàm ParseMoney mới
+            decimal unitPrice = ParseMoney(row.Cells["colUnitPrice"].Value);
 
             decimal total = qty * unitPrice;
             row.Cells["colLineTotal"].Value = total;
@@ -336,12 +353,9 @@ namespace PharmacyApp.UserControls
             foreach (DataGridViewRow row in dgvReceiptList.Rows)
             {
                 if (row.IsNewRow) continue;
-                if (row.Cells["colLineTotal"].Value == null) continue;
-
-                decimal val;
-                if (decimal.TryParse(row.Cells["colLineTotal"].Value.ToString(), out val))
-                    totalAmount += val;
+                totalAmount += ParseMoney(row.Cells["colLineTotal"].Value);
             }
+
 
             using (var conn = new SqlConnection(Program.ConnStr))
             {
@@ -408,12 +422,10 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
                             continue;
 
                         int qty = 0;
-                        decimal unitPrice = 0m;
-                        decimal lineTotal = 0m;
+                        int.TryParse(row.Cells["colQuantity"].Value?.ToString(), out qty);
 
-                        int.TryParse(row.Cells["colQuantity"].Value == null ? null : row.Cells["colQuantity"].Value.ToString(), out qty);
-                        decimal.TryParse(row.Cells["colUnitPrice"].Value == null ? null : row.Cells["colUnitPrice"].Value.ToString(), out unitPrice);
-                        decimal.TryParse(row.Cells["colLineTotal"].Value == null ? null : row.Cells["colLineTotal"].Value.ToString(), out lineTotal);
+                        decimal unitPrice = ParseMoney(row.Cells["colUnitPrice"].Value);
+                        decimal lineTotal = ParseMoney(row.Cells["colLineTotal"].Value);
 
                         string batchNo = row.Cells["colBatchNo"].Value == null ? null : row.Cells["colBatchNo"].Value.ToString();
                         string rowNote = row.Cells["colRowNote"].Value == null ? null : row.Cells["colRowNote"].Value.ToString();
@@ -438,10 +450,9 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
                         if (dgvReceiptList.Columns.Contains("colSalePrice") &&
                             row.Cells["colSalePrice"].Value != null)
                         {
-                            decimal sp;
-                            if (decimal.TryParse(row.Cells["colSalePrice"].Value.ToString(), out sp))
-                                salePrice = sp;
+                            salePrice = ParseMoney(row.Cells["colSalePrice"].Value);
                         }
+
 
                         //// Lấy ProductId từ ProductCode (nếu sản phẩm đã tồn tại)
                         //int? productId = FindProductIdByCode(conn, tran, productCode);

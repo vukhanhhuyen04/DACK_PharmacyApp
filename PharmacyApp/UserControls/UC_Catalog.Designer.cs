@@ -42,12 +42,12 @@
             this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSearch.DefaultText = "";
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSearch.Location = new System.Drawing.Point(212, 14);
+            this.txtSearch.Location = new System.Drawing.Point(248, 14);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "🔎 Tìm thuốc...";
             this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(475, 40);
+            this.txtSearch.Size = new System.Drawing.Size(439, 40);
             this.txtSearch.TabIndex = 0;
             // 
             // btnAdd
@@ -117,11 +117,12 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(15, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 31);
+            this.label1.Size = new System.Drawing.Size(227, 31);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Danh mục thuốc";
+            this.label1.Text = "DANH MỤC THUỐC";
             // 
             // flowLayoutPanel1
             // 
@@ -137,13 +138,12 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 70);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1263, 80);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1263, 60);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // guna2Button1
             // 
             this.guna2Button1.BorderRadius = 20;
-            this.guna2Button1.DefaultAutoSize = true;
             this.guna2Button1.FillColor = System.Drawing.Color.Teal;
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
@@ -157,7 +157,6 @@
             // guna2Button2
             // 
             this.guna2Button2.BorderRadius = 20;
-            this.guna2Button2.DefaultAutoSize = true;
             this.guna2Button2.FillColor = System.Drawing.Color.Teal;
             this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button2.ForeColor = System.Drawing.Color.White;
@@ -172,7 +171,6 @@
             // guna2Button3
             // 
             this.guna2Button3.BorderRadius = 20;
-            this.guna2Button3.DefaultAutoSize = true;
             this.guna2Button3.FillColor = System.Drawing.Color.Teal;
             this.guna2Button3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button3.ForeColor = System.Drawing.Color.White;
@@ -186,7 +184,6 @@
             // guna2Button4
             // 
             this.guna2Button4.BorderRadius = 20;
-            this.guna2Button4.DefaultAutoSize = true;
             this.guna2Button4.FillColor = System.Drawing.Color.Teal;
             this.guna2Button4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button4.ForeColor = System.Drawing.Color.White;
@@ -200,7 +197,6 @@
             // guna2Button5
             // 
             this.guna2Button5.BorderRadius = 20;
-            this.guna2Button5.DefaultAutoSize = true;
             this.guna2Button5.FillColor = System.Drawing.Color.Teal;
             this.guna2Button5.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button5.ForeColor = System.Drawing.Color.White;
@@ -215,7 +211,6 @@
             // guna2Button6
             // 
             this.guna2Button6.BorderRadius = 20;
-            this.guna2Button6.DefaultAutoSize = true;
             this.guna2Button6.FillColor = System.Drawing.Color.Teal;
             this.guna2Button6.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button6.ForeColor = System.Drawing.Color.White;
@@ -229,7 +224,6 @@
             // guna2Button7
             // 
             this.guna2Button7.BorderRadius = 20;
-            this.guna2Button7.DefaultAutoSize = true;
             this.guna2Button7.FillColor = System.Drawing.Color.Teal;
             this.guna2Button7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button7.ForeColor = System.Drawing.Color.White;
@@ -239,16 +233,17 @@
             this.guna2Button7.Size = new System.Drawing.Size(189, 31);
             this.guna2Button7.TabIndex = 11;
             this.guna2Button7.Text = "+ (nút thêm danh mục)";
+            this.guna2Button7.Visible = false;
             this.guna2Button7.Click += new System.EventHandler(this.guna2Button7_Click);
             // 
             // flpProducts
             // 
             this.flpProducts.AutoScroll = true;
             this.flpProducts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpProducts.Location = new System.Drawing.Point(0, 150);
+            this.flpProducts.Location = new System.Drawing.Point(0, 130);
             this.flpProducts.Name = "flpProducts";
             this.flpProducts.Padding = new System.Windows.Forms.Padding(10);
-            this.flpProducts.Size = new System.Drawing.Size(1263, 761);
+            this.flpProducts.Size = new System.Drawing.Size(1263, 781);
             this.flpProducts.TabIndex = 7;
             // 
             // UC_Catalog
@@ -262,7 +257,6 @@
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

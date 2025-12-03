@@ -1,4 +1,6 @@
-﻿namespace PharmacyApp.Forms
+﻿using System.Drawing;
+
+namespace PharmacyApp.Forms
 {
     partial class FrmChangePassword
     {
@@ -20,16 +22,16 @@
             this.btnMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
             this.btnClose = new Guna.UI2.WinForms.Guna2ControlBox();
             this.card = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblBrandCare = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblBrand = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtOld = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtNew = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtConfirm = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
             this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
-            this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblBrand = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.shapeTop2 = new Guna.UI2.WinForms.Guna2Shapes();
             this.sepTitle = new Guna.UI2.WinForms.Guna2Separator();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.card.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,8 +67,7 @@
             this.card.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.card.BackColor = System.Drawing.Color.Transparent;
             this.card.BorderRadius = 12;
-            this.card.Controls.Add(this.lblBrandCare);
-            this.card.Controls.Add(this.lblBrand);
+            this.card.Controls.Add(this.guna2HtmlLabel1);
             this.card.Controls.Add(this.txtOld);
             this.card.Controls.Add(this.txtNew);
             this.card.Controls.Add(this.txtConfirm);
@@ -79,28 +80,7 @@
             this.card.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 6, 0, 12);
             this.card.Size = new System.Drawing.Size(560, 412);
             this.card.TabIndex = 3;
-            // 
-            // lblBrandCare
-            // 
-            this.lblBrandCare.BackColor = System.Drawing.Color.Transparent;
-            this.lblBrandCare.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold);
-            this.lblBrandCare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(215)))), ((int)(((byte)(183)))));
-            this.lblBrandCare.Location = new System.Drawing.Point(295, 21);
-            this.lblBrandCare.Name = "lblBrandCare";
-            this.lblBrandCare.Size = new System.Drawing.Size(79, 52);
-            this.lblBrandCare.TabIndex = 51;
-            this.lblBrandCare.Text = "Med";
-            // 
-            // lblBrand
-            // 
-            this.lblBrand.BackColor = System.Drawing.Color.Transparent;
-            this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold);
-            this.lblBrand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
-            this.lblBrand.Location = new System.Drawing.Point(186, 21);
-            this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(110, 52);
-            this.lblBrand.TabIndex = 50;
-            this.lblBrand.Text = "Eterna";
+            this.card.Paint += new System.Windows.Forms.PaintEventHandler(this.card_Paint);
             // 
             // txtOld
             // 
@@ -171,18 +151,32 @@
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Hủy";
             // 
+            // lblBrand
+            // 
+            this.lblBrand.AutoSize = false;
+            this.lblBrand.BackColor = System.Drawing.Color.Transparent;
+            this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold);
+            this.lblBrand.Location = new System.Drawing.Point(180, 22);
+            this.lblBrand.Name = "lblBrand";
+            this.lblBrand.Size = new System.Drawing.Size(3, 2);
+            this.lblBrand.TabIndex = 50;
+            this.lblBrand.Text = "<font color=\'#69C4F6\'>Eterna</font><font color=\'#36D7B7\'>Med</font>";
+            this.lblBrand.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lblTitle
             // 
             this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTitle.AutoSize = true;
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 22.2F);
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(285, 74);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(223, 52);
+            this.lblTitle.Size = new System.Drawing.Size(242, 50);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Đổi mật khẩu";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // shapeTop2
             // 
@@ -208,6 +202,18 @@
             this.sepTitle.Size = new System.Drawing.Size(300, 2);
             this.sepTitle.TabIndex = 5;
             // 
+            // guna2HtmlLabel1
+            // 
+            this.guna2HtmlLabel1.AutoSize = false;
+            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(196)))), ((int)(((byte)(246)))));
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(189, 17);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(312, 78);
+            this.guna2HtmlLabel1.TabIndex = 14;
+            this.guna2HtmlLabel1.Text = "EternaMed";
+            // 
             // FrmChangePassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -217,6 +223,7 @@
             this.Controls.Add(this.sepTitle);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnMinimize);
+            this.Controls.Add(this.lblBrand);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.card);
             this.Controls.Add(this.shapeTop2);
@@ -225,7 +232,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmChangePassword";
             this.card.ResumeLayout(false);
-            this.card.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,14 +244,14 @@
         private Guna.UI2.WinForms.Guna2ControlBox btnMinimize;
         private Guna.UI2.WinForms.Guna2ControlBox btnClose;
         private Guna.UI2.WinForms.Guna2Panel card;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTitle;
+        private System.Windows.Forms.Label lblTitle;
         private Guna.UI2.WinForms.Guna2TextBox txtOld;
         private Guna.UI2.WinForms.Guna2TextBox txtNew;
         private Guna.UI2.WinForms.Guna2TextBox txtConfirm;
         private Guna.UI2.WinForms.Guna2Button btnSave;
         private Guna.UI2.WinForms.Guna2Button btnCancel;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblBrand;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblBrandCare;
         private Guna.UI2.WinForms.Guna2Separator sepTitle;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }

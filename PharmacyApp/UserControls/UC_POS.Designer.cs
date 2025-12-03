@@ -28,14 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pRoot = new Guna.UI2.WinForms.Guna2Panel();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.pLeft = new Guna.UI2.WinForms.Guna2Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.gvProducts = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.colMaThuoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTenThuoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDonVi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGiaBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTonKho = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cboCategoryPOS = new Guna.UI2.WinForms.Guna2ComboBox();
             this.pRight = new Guna.UI2.WinForms.Guna2Panel();
             this.pPayment = new Guna.UI2.WinForms.Guna2Panel();
@@ -75,12 +81,6 @@
             this.lblStaffCaption = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtSearchProduct = new Guna.UI2.WinForms.Guna2TextBox();
-            this.colMaThuoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTenThuoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDonVi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGiaBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTonKho = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pRoot.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.pLeft.SuspendLayout();
@@ -149,16 +149,16 @@
             // 
             // gvProducts
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            this.gvProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.White;
+            this.gvProducts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.gvProducts.ColumnHeadersHeight = 18;
             this.gvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.gvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -168,14 +168,14 @@
             this.colGiaBan,
             this.colTonKho,
             this.colProductId});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvProducts.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvProducts.DefaultCellStyle = dataGridViewCellStyle21;
             this.gvProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvProducts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gvProducts.Location = new System.Drawing.Point(0, 60);
@@ -208,9 +208,59 @@
             this.gvProducts.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gvProducts.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // colMaThuoc
+            // 
+            this.colMaThuoc.DataPropertyName = "ProductCode";
+            this.colMaThuoc.HeaderText = "Mã thuốc";
+            this.colMaThuoc.MinimumWidth = 6;
+            this.colMaThuoc.Name = "colMaThuoc";
+            this.colMaThuoc.ReadOnly = true;
+            // 
+            // colTenThuoc
+            // 
+            this.colTenThuoc.DataPropertyName = "ProductName";
+            this.colTenThuoc.HeaderText = "Tên thuốc";
+            this.colTenThuoc.MinimumWidth = 6;
+            this.colTenThuoc.Name = "colTenThuoc";
+            this.colTenThuoc.ReadOnly = true;
+            // 
+            // colDonVi
+            // 
+            this.colDonVi.DataPropertyName = "Unit";
+            this.colDonVi.HeaderText = "Đơn vị";
+            this.colDonVi.MinimumWidth = 6;
+            this.colDonVi.Name = "colDonVi";
+            this.colDonVi.ReadOnly = true;
+            // 
+            // colGiaBan
+            // 
+            this.colGiaBan.DataPropertyName = "SalePrice";
+            this.colGiaBan.HeaderText = "Giá bán";
+            this.colGiaBan.MinimumWidth = 6;
+            this.colGiaBan.Name = "colGiaBan";
+            this.colGiaBan.ReadOnly = true;
+            // 
+            // colTonKho
+            // 
+            this.colTonKho.DataPropertyName = "StockQuantity";
+            this.colTonKho.HeaderText = "Tồn Kho";
+            this.colTonKho.MinimumWidth = 6;
+            this.colTonKho.Name = "colTonKho";
+            this.colTonKho.ReadOnly = true;
+            // 
+            // colProductId
+            // 
+            this.colProductId.DataPropertyName = "ProductId";
+            this.colProductId.HeaderText = "Column1";
+            this.colProductId.MinimumWidth = 6;
+            this.colProductId.Name = "colProductId";
+            this.colProductId.ReadOnly = true;
+            this.colProductId.Visible = false;
+            // 
             // cboCategoryPOS
             // 
-            this.cboCategoryPOS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboCategoryPOS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cboCategoryPOS.BackColor = System.Drawing.Color.Transparent;
             this.cboCategoryPOS.BorderRadius = 6;
             this.cboCategoryPOS.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -227,7 +277,7 @@
             "Vitamin"});
             this.cboCategoryPOS.Location = new System.Drawing.Point(189, 12);
             this.cboCategoryPOS.Name = "cboCategoryPOS";
-            this.cboCategoryPOS.Size = new System.Drawing.Size(200, 36);
+            this.cboCategoryPOS.Size = new System.Drawing.Size(266, 36);
             this.cboCategoryPOS.TabIndex = 0;
             // 
             // pRight
@@ -709,6 +759,7 @@
             this.lblDate.Size = new System.Drawing.Size(95, 20);
             this.lblDate.TabIndex = 8;
             this.lblDate.Text = "11/11/2025";
+            this.lblDate.Visible = false;
             // 
             // lblStaffName
             // 
@@ -722,6 +773,7 @@
             this.lblStaffName.Size = new System.Drawing.Size(79, 20);
             this.lblStaffName.TabIndex = 7;
             this.lblStaffName.Text = "Nguyễn A";
+            this.lblStaffName.Visible = false;
             // 
             // lblStaffCaption
             // 
@@ -735,6 +787,7 @@
             this.lblStaffCaption.Size = new System.Drawing.Size(84, 20);
             this.lblStaffCaption.TabIndex = 6;
             this.lblStaffCaption.Text = "Nhân viên:";
+            this.lblStaffCaption.Visible = false;
             this.lblStaffCaption.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblTitle
@@ -745,9 +798,9 @@
             this.lblTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblTitle.Location = new System.Drawing.Point(20, 16);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(223, 38);
+            this.lblTitle.Size = new System.Drawing.Size(250, 38);
             this.lblTitle.TabIndex = 3;
-            this.lblTitle.Text = "Bán hàng (POS)";
+            this.lblTitle.Text = "BÁN HÀNG (POS)";
             // 
             // txtSearchProduct
             // 
@@ -772,55 +825,6 @@
             this.txtSearchProduct.TabIndex = 1;
             this.txtSearchProduct.TextChanged += new System.EventHandler(this.txtSearchProduct_TextChanged);
             this.txtSearchProduct.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchProduct_KeyDown);
-            // 
-            // colMaThuoc
-            // 
-            this.colMaThuoc.DataPropertyName = "ProductCode";
-            this.colMaThuoc.HeaderText = "Mã thuốc";
-            this.colMaThuoc.MinimumWidth = 6;
-            this.colMaThuoc.Name = "colMaThuoc";
-            this.colMaThuoc.ReadOnly = true;
-            // 
-            // colTenThuoc
-            // 
-            this.colTenThuoc.DataPropertyName = "ProductName";
-            this.colTenThuoc.HeaderText = "Tên thuốc";
-            this.colTenThuoc.MinimumWidth = 6;
-            this.colTenThuoc.Name = "colTenThuoc";
-            this.colTenThuoc.ReadOnly = true;
-            // 
-            // colDonVi
-            // 
-            this.colDonVi.DataPropertyName = "Unit";
-            this.colDonVi.HeaderText = "Đơn vị";
-            this.colDonVi.MinimumWidth = 6;
-            this.colDonVi.Name = "colDonVi";
-            this.colDonVi.ReadOnly = true;
-            // 
-            // colGiaBan
-            // 
-            this.colGiaBan.DataPropertyName = "SalePrice";
-            this.colGiaBan.HeaderText = "Giá bán";
-            this.colGiaBan.MinimumWidth = 6;
-            this.colGiaBan.Name = "colGiaBan";
-            this.colGiaBan.ReadOnly = true;
-            // 
-            // colTonKho
-            // 
-            this.colTonKho.DataPropertyName = "StockQuantity";
-            this.colTonKho.HeaderText = "Tồn Kho";
-            this.colTonKho.MinimumWidth = 6;
-            this.colTonKho.Name = "colTonKho";
-            this.colTonKho.ReadOnly = true;
-            // 
-            // colProductId
-            // 
-            this.colProductId.DataPropertyName = "ProductId";
-            this.colProductId.HeaderText = "Column1";
-            this.colProductId.MinimumWidth = 6;
-            this.colProductId.Name = "colProductId";
-            this.colProductId.ReadOnly = true;
-            this.colProductId.Visible = false;
             // 
             // UC_POS
             // 

@@ -125,13 +125,27 @@
     <Compile Include="Forms\FrmRegister.Designer.cs">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmSearchResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmSearchResults.Designer.cs">
+      <DependentUpon>FrmSearchResults.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\DBHelper.cs" />
+    <Compile Include="Helpers\ISearchable.cs" />
     <Compile Include="Helpers\Session.cs" />
     <Compile Include="Models\Dtos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\BasePermissionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Security\CurrentUser.cs" />
+    <Compile Include="Security\IUserContext.cs" />
     <Compile Include="Security\PermissionGuard.cs" />
     <Compile Include="Security\PermissionService.cs" />
+    <Compile Include="Security\UserContext.cs" />
+    <Compile Include="Security\UserRole.cs" />
     <Compile Include="Services\InvoiceService.cs" />
     <Compile Include="UserControls\UC_Catalog.cs">
       <SubType>UserControl</SubType>
