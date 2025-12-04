@@ -56,11 +56,12 @@
             this.btnAdd.FillColor = System.Drawing.Color.MediumSeaGreen;
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(1031, 14);
+            this.btnAdd.Location = new System.Drawing.Point(915, 13);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(110, 40);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Thêm thuốc";
+            this.btnAdd.Visible = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnRefresh
@@ -82,7 +83,7 @@
             this.btnFind.FillColor = System.Drawing.Color.SkyBlue;
             this.btnFind.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnFind.ForeColor = System.Drawing.Color.White;
-            this.btnFind.Location = new System.Drawing.Point(926, 14);
+            this.btnFind.Location = new System.Drawing.Point(1031, 14);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(99, 40);
             this.btnFind.TabIndex = 4;
