@@ -31,10 +31,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new Guna.UI2.WinForms.Guna2Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlFilter = new Guna.UI2.WinForms.Guna2Panel();
@@ -45,6 +45,12 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.dtpFrom = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.dgvInvoices = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.colInvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlDetails = new Guna.UI2.WinForms.Guna2Panel();
             this.dgvDetails = new Guna.UI2.WinForms.Guna2DataGridView();
             this.colDrugCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,12 +61,6 @@
             this.lblDetailsTitle = new System.Windows.Forms.Label();
             this.btnMarkPaid = new Guna.UI2.WinForms.Guna2Button();
             this.btnCancelInvoice = new Guna.UI2.WinForms.Guna2Button();
-            this.colInvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlHeader.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
@@ -160,7 +160,7 @@
             this.dtpTo.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpTo.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(147, 30);
+            this.dtpTo.Size = new System.Drawing.Size(171, 30);
             this.dtpTo.TabIndex = 3;
             this.dtpTo.Value = new System.DateTime(2025, 11, 18, 14, 49, 51, 847);
             // 
@@ -199,7 +199,7 @@
             this.dtpFrom.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpFrom.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(154, 30);
+            this.dtpFrom.Size = new System.Drawing.Size(171, 30);
             this.dtpFrom.TabIndex = 0;
             this.dtpFrom.Value = new System.DateTime(2025, 11, 18, 14, 49, 51, 847);
             // 
@@ -267,6 +267,62 @@
             this.dgvInvoices.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvInvoices.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvInvoices.SelectionChanged += new System.EventHandler(this.dgvInvoices_SelectionChanged);
+            // 
+            // colInvoiceID
+            // 
+            this.colInvoiceID.DataPropertyName = "InvoiceID";
+            this.colInvoiceID.FillWeight = 80F;
+            this.colInvoiceID.HeaderText = "Mã HĐ";
+            this.colInvoiceID.MinimumWidth = 6;
+            this.colInvoiceID.Name = "colInvoiceID";
+            this.colInvoiceID.ReadOnly = true;
+            // 
+            // colCreatedAt
+            // 
+            this.colCreatedAt.DataPropertyName = "CreatedAt";
+            dataGridViewCellStyle3.Format = "dd/MM/yyyy";
+            this.colCreatedAt.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCreatedAt.FillWeight = 140F;
+            this.colCreatedAt.HeaderText = "Ngày";
+            this.colCreatedAt.MinimumWidth = 6;
+            this.colCreatedAt.Name = "colCreatedAt";
+            this.colCreatedAt.ReadOnly = true;
+            // 
+            // colCustomerName
+            // 
+            this.colCustomerName.DataPropertyName = "CustomerName";
+            this.colCustomerName.FillWeight = 180F;
+            this.colCustomerName.HeaderText = "Khách hàng";
+            this.colCustomerName.MinimumWidth = 6;
+            this.colCustomerName.Name = "colCustomerName";
+            this.colCustomerName.ReadOnly = true;
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.DataPropertyName = "TotalAmount";
+            this.colTotalAmount.FillWeight = 120F;
+            this.colTotalAmount.HeaderText = "Tổng tiền";
+            this.colTotalAmount.MinimumWidth = 6;
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            // 
+            // colPaymentMethod
+            // 
+            this.colPaymentMethod.DataPropertyName = "PaymentMethod";
+            this.colPaymentMethod.FillWeight = 120F;
+            this.colPaymentMethod.HeaderText = "Thanh toán";
+            this.colPaymentMethod.MinimumWidth = 6;
+            this.colPaymentMethod.Name = "colPaymentMethod";
+            this.colPaymentMethod.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "Status";
+            this.colStatus.FillWeight = 120F;
+            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.MinimumWidth = 6;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
             // 
             // pnlDetails
             // 
@@ -437,62 +493,6 @@
             this.btnCancelInvoice.TabIndex = 7;
             this.btnCancelInvoice.Text = "Hủy hóa đơn";
             this.btnCancelInvoice.Click += new System.EventHandler(this.btnCancelInvoice_Click);
-            // 
-            // colInvoiceID
-            // 
-            this.colInvoiceID.DataPropertyName = "InvoiceID";
-            this.colInvoiceID.FillWeight = 80F;
-            this.colInvoiceID.HeaderText = "Mã HĐ";
-            this.colInvoiceID.MinimumWidth = 6;
-            this.colInvoiceID.Name = "colInvoiceID";
-            this.colInvoiceID.ReadOnly = true;
-            // 
-            // colCreatedAt
-            // 
-            this.colCreatedAt.DataPropertyName = "CreatedAt";
-            dataGridViewCellStyle3.Format = "dd/MM/yyyy";
-            this.colCreatedAt.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colCreatedAt.FillWeight = 140F;
-            this.colCreatedAt.HeaderText = "Ngày";
-            this.colCreatedAt.MinimumWidth = 6;
-            this.colCreatedAt.Name = "colCreatedAt";
-            this.colCreatedAt.ReadOnly = true;
-            // 
-            // colCustomerName
-            // 
-            this.colCustomerName.DataPropertyName = "CustomerName";
-            this.colCustomerName.FillWeight = 180F;
-            this.colCustomerName.HeaderText = "Khách hàng";
-            this.colCustomerName.MinimumWidth = 6;
-            this.colCustomerName.Name = "colCustomerName";
-            this.colCustomerName.ReadOnly = true;
-            // 
-            // colTotalAmount
-            // 
-            this.colTotalAmount.DataPropertyName = "TotalAmount";
-            this.colTotalAmount.FillWeight = 120F;
-            this.colTotalAmount.HeaderText = "Tổng tiền";
-            this.colTotalAmount.MinimumWidth = 6;
-            this.colTotalAmount.Name = "colTotalAmount";
-            this.colTotalAmount.ReadOnly = true;
-            // 
-            // colPaymentMethod
-            // 
-            this.colPaymentMethod.DataPropertyName = "PaymentMethod";
-            this.colPaymentMethod.FillWeight = 120F;
-            this.colPaymentMethod.HeaderText = "Thanh toán";
-            this.colPaymentMethod.MinimumWidth = 6;
-            this.colPaymentMethod.Name = "colPaymentMethod";
-            this.colPaymentMethod.ReadOnly = true;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "Status";
-            this.colStatus.FillWeight = 120F;
-            this.colStatus.HeaderText = "Trạng thái";
-            this.colStatus.MinimumWidth = 6;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
             // 
             // UC_Invoices
             // 

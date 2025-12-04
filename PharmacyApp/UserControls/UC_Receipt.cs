@@ -587,8 +587,11 @@ SET StockQuantity = StockQuantity + @qty,
     UnitPrice      = @price,
     SalePrice      = CASE WHEN @salePrice IS NULL THEN SalePrice ELSE @salePrice END,
     ExpiredDate    = CASE WHEN @expired   IS NULL THEN ExpiredDate ELSE @expired   END,
-    Barcode        = CASE WHEN @barcode   IS NULL THEN Barcode     ELSE @barcode   END
+    Barcode        = CASE WHEN @barcode   IS NULL THEN Barcode     ELSE @barcode   END,
+    -- 🔹 NHẬP KHO LẠI → TỰ ĐỘNG MỞ KINH DOANH
+    IsActive       = 1
 WHERE ProductId = @pid;", conn, tran))
+
                         {
                             cmdStock.Parameters.AddWithValue("@qty", qty);
                             cmdStock.Parameters.AddWithValue("@price", unitPrice);
@@ -676,16 +679,16 @@ WHERE ProductId = @pid;", conn, tran))
 
         // 🔹 Tạo sản phẩm mới trong bảng Products nếu chưa có
         private int CreateNewProduct(
-            SqlConnection conn,
-            SqlTransaction tran,
-            ref string productCode,
-            string productName,
-            string barcode,          // 🔹 THÊM THAM SỐ NÀY
-            decimal unitPrice,
-            decimal? salePrice,
-            int? supplierId,
-            DateTime? expired,
-            string unitFromRow)
+    SqlConnection conn,
+    SqlTransaction tran,
+    ref string productCode,
+    string productName,
+    string barcode,
+    decimal unitPrice,
+    decimal? salePrice,
+    int? supplierId,
+    DateTime? expired,
+    string unitFromRow)
         {
             // Nếu chưa có mã SP thì tự sinh
             if (string.IsNullOrWhiteSpace(productCode))
@@ -701,7 +704,10 @@ INSERT INTO Products
      StockQuantity, Description, Manufacturer, ExpiredDate, SupplierId, CategoryId, IsActive)
 VALUES
     (@ProductCode, @ProductName, @Barcode, @Unit, @UnitPrice, @SalePrice,
-     0, NULL, NULL, @ExpiredDate, @SupplierId, @CategoryId, @IsActive);
+     0, NULL,
+     -- 🔹 LẤY TÊN NHÀ CUNG CẤP LÀM Manufacturer
+     (SELECT SupplierName FROM Suppliers WHERE SupplierId = @SupplierId),
+     @ExpiredDate, @SupplierId, @CategoryId, @IsActive);
 
 SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
             {
@@ -721,19 +727,18 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tran))
 
                 cmd.Parameters.AddWithValue("@ExpiredDate",
                     expired.HasValue ? (object)expired.Value : DBNull.Value);
+
                 cmd.Parameters.AddWithValue("@SupplierId",
                     supplierId.HasValue ? (object)supplierId.Value : DBNull.Value);
 
                 cmd.Parameters.AddWithValue("@CategoryId", DEFAULT_CATEGORY_ID);
-
-                // 🔹 Quan trọng: đánh dấu đang kinh doanh
                 cmd.Parameters.AddWithValue("@IsActive", 1);
 
                 int newId = (int)cmd.ExecuteScalar();
                 return newId;
             }
-
         }
+
 
 
 

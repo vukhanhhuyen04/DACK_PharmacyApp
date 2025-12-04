@@ -477,6 +477,7 @@
             // cboMonth
             // 
             this.cboMonth.BackColor = System.Drawing.Color.Transparent;
+            this.cboMonth.BorderRadius = 6;
             this.cboMonth.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMonth.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -505,6 +506,7 @@
             // cboPeriod
             // 
             this.cboPeriod.BackColor = System.Drawing.Color.Transparent;
+            this.cboPeriod.BorderRadius = 6;
             this.cboPeriod.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPeriod.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
