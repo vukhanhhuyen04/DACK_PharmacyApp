@@ -45,6 +45,7 @@ namespace PharmacyApp.Forms
             if (chkRemember != null)
                 chkRemember.CheckedChanged += chkRemember_CheckedChanged;
 
+            // nếu bạn không gán trong Designer thì có thể bật lên:
             // if (btnLogin != null) btnLogin.Click += btnLogin_Click;
         }
 
@@ -160,6 +161,13 @@ namespace PharmacyApp.Forms
                     cmd.Parameters.AddWithValue("@Password", pass);
 
                     conn.Open();
+
+                    int userId;
+                    int staffId;
+                    string fullName;
+                    string dbRole;
+
+                    // Đọc thông tin cơ bản từ SP
                     using (var rd = cmd.ExecuteReader())
                     {
                         if (!rd.Read())
@@ -169,82 +177,110 @@ namespace PharmacyApp.Forms
                             return;
                         }
 
-                        int userId = Convert.ToInt32(rd["UserID"]);
-                        int staffId = rd["StaffID"] != DBNull.Value ? Convert.ToInt32(rd["StaffID"]) : 0;
-                        string fullName = rd["FullName"].ToString();
-
-                        // ---- ROLE GỐC TỪ DB ----
-                        string dbRole = rd["Role"]?.ToString()?.Trim();
-
-                        // ✅ CHUẨN HOÁ ROLE: chỉ còn "Admin" hoặc "Dược sĩ"
-                        string normalizedRole;
-                        if (string.Equals(dbRole, "Admin", StringComparison.OrdinalIgnoreCase) ||
-                            string.Equals(dbRole, "Quản trị viên", StringComparison.OrdinalIgnoreCase))
-                        {
-                            normalizedRole = "Admin";
-                        }
-                        else
-                        {
-                            // Mặc định tất cả role khác xem như Dược sĩ
-                            normalizedRole = "Dược sĩ";
-                        }
-
-                        // 🔥 Nếu đăng nhập bằng mật khẩu mặc định -> bắt buộc đổi mật khẩu
-                        if (pass == "12345")
-                        {
-                            using (var frmChange = new FrmChangePassword(userId))
-                            {
-                                var result = frmChange.ShowDialog(this);
-
-                                if (result != DialogResult.OK)
-                                {
-                                    // Người dùng không đổi mật khẩu -> không cho vào hệ thống
-                                    MessageBox.Show("Bạn cần đổi mật khẩu trước khi sử dụng hệ thống.",
-                                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    return;
-                                }
-                            }
-
-                            // Sau khi đổi mật khẩu thành công, yêu cầu nhập lại mật khẩu mới
-                            MessageBox.Show("Vui lòng đăng nhập lại với mật khẩu mới.",
-                                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            txtPassword.Clear();
-                            txtPassword.Focus();
-                            return;
-                        }
-
-                        // ✅ Đăng nhập bình thường (không phải mật khẩu mặc định)
-                        Session.UserId = userId;
-                        Session.StaffId = staffId;
-                        Session.FullName = fullName;
-                        Session.Role = normalizedRole;    // dùng role đã chuẩn hoá
-                        Session.IsLoggedIn = true;
-                        // 🔹 Nạp quyền từ database vào Session.Permissions
-                        PharmacyApp.Security.PermissionService.LoadPermissionsForCurrentUser();
-                        // 🔹 Lưu vào Program để chỗ khác dùng (POS, báo cáo,...)
-                        Program.CurrentStaffId = staffId;
-                        Program.CurrentStaffName = fullName;
-
-                        // ======= REMEMBER ME =======
-                        if (chkRemember.Checked)
-                        {
-                            Properties.Settings.Default.RememberMe = true;
-                            Properties.Settings.Default.SavedEmail = email;
-                            Properties.Settings.Default.SavedPassword = pass;  // Có thể mã hoá nếu muốn
-                        }
-                        else
-                        {
-                            Properties.Settings.Default.RememberMe = false;
-                            Properties.Settings.Default.SavedEmail = "";
-                            Properties.Settings.Default.SavedPassword = "";
-                        }
-
-                        Properties.Settings.Default.Save();
-
-                        // chuyển sang dashboard
-                        OpenDashboard();
+                        userId = Convert.ToInt32(rd["UserID"]);
+                        staffId = rd["StaffID"] != DBNull.Value ? Convert.ToInt32(rd["StaffID"]) : 0;
+                        fullName = rd["FullName"].ToString();
+                        dbRole = rd["Role"]?.ToString()?.Trim();
                     }
+
+                    // 🔒 KIỂM TRA TRẠNG THÁI HOẠT ĐỘNG (IsActive trong Staff)
+                    bool isActive = true;   // mặc định cho các tài khoản không thuộc Staff (ví dụ Admin hệ thống)
+
+                    if (staffId != 0)
+                    {
+                        using (var cmdActive = new SqlCommand(
+                            "SELECT ISNULL(IsActive, 1) FROM Staff WHERE StaffId = @StaffId", conn))
+                        {
+                            cmdActive.Parameters.AddWithValue("@StaffId", staffId);
+                            var objActive = cmdActive.ExecuteScalar();
+                            isActive = objActive != null
+                                       && objActive != DBNull.Value
+                                       && Convert.ToBoolean(objActive);
+                        }
+                    }
+
+                    if (!isActive)
+                    {
+                        MessageBox.Show(
+                            "Tài khoản này đã được đánh dấu là 'Không hoạt động'.\n" +
+                            "Bạn không thể đăng nhập. Vui lòng liên hệ quản trị viên.",
+                            "Tài khoản bị khóa",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // ---- ROLE GỐC TỪ DB ----
+                    // ✅ CHUẨN HOÁ ROLE: chỉ còn "Admin" hoặc "Dược sĩ"
+                    string normalizedRole;
+                    if (string.Equals(dbRole, "Admin", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(dbRole, "Quản trị viên", StringComparison.OrdinalIgnoreCase))
+                    {
+                        normalizedRole = "Admin";
+                    }
+                    else
+                    {
+                        // Mặc định tất cả role khác xem như Dược sĩ
+                        normalizedRole = "Dược sĩ";
+                    }
+
+                    // 🔥 Nếu đăng nhập bằng mật khẩu mặc định -> bắt buộc đổi mật khẩu
+                    if (pass == "12345")
+                    {
+                        using (var frmChange = new FrmChangePassword(userId))
+                        {
+                            var result = frmChange.ShowDialog(this);
+
+                            if (result != DialogResult.OK)
+                            {
+                                // Người dùng không đổi mật khẩu -> không cho vào hệ thống
+                                MessageBox.Show("Bạn cần đổi mật khẩu trước khi sử dụng hệ thống.",
+                                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
+                        }
+
+                        // Sau khi đổi mật khẩu thành công, yêu cầu nhập lại mật khẩu mới
+                        MessageBox.Show("Vui lòng đăng nhập lại với mật khẩu mới.",
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        txtPassword.Clear();
+                        txtPassword.Focus();
+                        return;
+                    }
+
+                    // ✅ Đăng nhập bình thường (không phải mật khẩu mặc định, và đang Hoạt động)
+                    Session.UserId = userId;
+                    Session.StaffId = staffId;
+                    Session.FullName = fullName;
+                    Session.Role = normalizedRole;    // dùng role đã chuẩn hoá
+                    Session.IsLoggedIn = true;
+
+                    // 🔹 Nạp quyền từ database vào Session.Permissions
+                    PharmacyApp.Security.PermissionService.LoadPermissionsForCurrentUser();
+
+                    // 🔹 Lưu vào Program để chỗ khác dùng (POS, báo cáo,...)
+                    Program.CurrentStaffId = staffId;
+                    Program.CurrentStaffName = fullName;
+
+                    // ======= REMEMBER ME =======
+                    if (chkRemember.Checked)
+                    {
+                        Properties.Settings.Default.RememberMe = true;
+                        Properties.Settings.Default.SavedEmail = email;
+                        Properties.Settings.Default.SavedPassword = pass;  // Có thể mã hoá nếu muốn
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.RememberMe = false;
+                        Properties.Settings.Default.SavedEmail = "";
+                        Properties.Settings.Default.SavedPassword = "";
+                    }
+
+                    Properties.Settings.Default.Save();
+
+                    // chuyển sang dashboard
+                    OpenDashboard();
                 }
             }
             catch (SqlException ex)
