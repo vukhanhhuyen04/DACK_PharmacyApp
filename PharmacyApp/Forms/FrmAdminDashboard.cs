@@ -50,7 +50,21 @@ namespace PharmacyApp.Forms
         private void FrmAdminDashboard_Load(object sender, EventArgs e)
         {
             ApplyRoleUI();     // Ẩn menu theo quyền DB
-            ShowDashboard();   // Load Dashboard
+
+            // ⬅ CHẶN DƯỢC SĨ XEM DASHBOARD
+            if (_role == "Admin")
+            {
+                ShowDashboard();   // Chỉ Admin mới load Dashboard
+            }
+            else
+            {
+                // Dược sĩ: vào thẳng POS (hoặc Catalog tùy bạn)
+                LoadPage(new UC_POS(), PermissionService.INVOICE_CREATE);
+                _isDashboardActive = false;
+
+                // Không cho hover/click brand nhảy về Dashboard
+                lblBrand.Cursor = Cursors.Default;
+            }
         }
 
         private void ApplyRoleUI()
@@ -73,6 +87,16 @@ namespace PharmacyApp.Forms
 
         private void ShowDashboard()
         {
+            // ⬅ Thêm bảo vệ cho chắc: nếu có call nhầm từ nơi khác
+            if (_role != "Admin")
+            {
+                MessageBox.Show("Chỉ Admin mới được xem Dashboard.",
+                    "Phân quyền",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             pContent.Visible = true;
             pContent.Controls.Clear();
 
@@ -119,6 +143,10 @@ namespace PharmacyApp.Forms
         // ===================== BRAND CLICK =====================
         private void lblBrand_Click(object sender, EventArgs e)
         {
+            // ⬅ Dược sĩ bấm brand sẽ không làm gì
+            if (_role != "Admin")
+                return;
+
             if (_isDashboardActive)
             {
                 pContent.Visible = !pContent.Visible;   // ẩn / hiện dashboard
@@ -131,14 +159,25 @@ namespace PharmacyApp.Forms
 
         private void lblBrand_MouseEnter(object sender, EventArgs e)
         {
-            lblBrand.Cursor = Cursors.Hand;
-            lblBrand.ForeColor = Color.FromArgb(105, 196, 246);
+            // ⬅ Chỉ Admin mới được thấy hover kiểu link
+            if (_role == "Admin")
+            {
+                lblBrand.Cursor = Cursors.Hand;
+                lblBrand.ForeColor = Color.FromArgb(105, 196, 246);
+            }
+            else
+            {
+                lblBrand.Cursor = Cursors.Default;
+            }
         }
 
         private void lblBrand_MouseLeave(object sender, EventArgs e)
         {
-            lblBrand.Cursor = Cursors.Default;
-            lblBrand.ForeColor = Color.White;
+            if (_role == "Admin")
+            {
+                lblBrand.Cursor = Cursors.Default;
+                lblBrand.ForeColor = Color.White;
+            }
         }
 
         // ===================== MENU BÊN TRÁI =====================
